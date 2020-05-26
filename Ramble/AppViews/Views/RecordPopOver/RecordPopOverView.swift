@@ -1,0 +1,62 @@
+//
+//  RecordPopOverView.swift
+//  Ramble
+//
+//  Created by Peter Keating on 4/23/20.
+//  Copyright © 2020 Peter Keating. All rights reserved.
+//
+
+import SwiftUI
+
+struct RecordPopOverView: View {
+
+    @ObservedObject var audioRecorder: AudioRecorder
+
+    var body: some View {
+    
+        VStack{
+            Handle()
+            
+            Spacer().frame(height: 5)
+            
+            if audioRecorder.recording == false {
+                Button(action: {print(self.audioRecorder.startRecording())}) {
+                    Image(systemName: "circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 60, height: 60)
+                        .clipped()
+                        .foregroundColor(.red)
+                }
+            } else {
+                Button(action: {self.audioRecorder.stopRecording()}) {
+                    Image(systemName: "stop.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 60, height: 60)
+                        .clipped()
+                        .foregroundColor(.red)
+                }
+            }
+                        
+            Divider()
+            
+            Text("Record View Two")
+            
+            Divider()
+            
+            Text("Record View Three")
+            
+            Spacer()
+            
+        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .background(Color.gray.opacity(0.14))
+    }
+}
+
+struct RecordPopOverView_Previews: PreviewProvider {
+static var previews: some View {
+    RecordPopOverView(audioRecorder: AudioRecorder())
+    }
+}
+
