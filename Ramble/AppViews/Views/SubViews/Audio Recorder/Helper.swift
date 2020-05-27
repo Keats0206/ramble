@@ -6,6 +6,9 @@
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
 
+
+// We have file path already, this function helps us grab the date the file was created
+
 import Foundation
 
 func getCreationDate(for file: URL) -> Date {

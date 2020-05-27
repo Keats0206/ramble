@@ -11,5 +11,7 @@ target 'Ramble' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
 	pod 'PRTween', '~> 0.1'
+	pod 'Firebase/Storage'
+
 
 end

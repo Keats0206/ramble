@@ -26,6 +26,7 @@ struct FeedView : View {
                                rambleCellTop(id: i.tagId, userimage: i.userimage, msg: i.msg, length: i.length, date: i.date, like: i.like, comments: i.comments, echos: i.echos, streamurl: i.streamurl)
                                    }
                                }
+                
                     }.padding(.bottom, 15)
         }
     }

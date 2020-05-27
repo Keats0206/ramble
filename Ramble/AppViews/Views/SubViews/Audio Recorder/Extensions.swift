@@ -6,6 +6,8 @@
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
 
+// Converting dat from recording to a more useable string
+
 import Foundation
 
 extension Date

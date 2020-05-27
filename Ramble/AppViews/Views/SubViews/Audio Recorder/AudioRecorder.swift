@@ -10,13 +10,14 @@ import Foundation
 import AVFoundation
 import SwiftUI
 import Combine
+import FirebaseStorage
 
 class AudioRecorder: NSObject,ObservableObject {
     
     override init() {
         super.init()
         
-        fetchRecordings()
+        sortLatestRecordings()
     }
     
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
@@ -54,8 +55,6 @@ class AudioRecorder: NSObject,ObservableObject {
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
         
-        
-        
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record()
@@ -72,42 +71,81 @@ class AudioRecorder: NSObject,ObservableObject {
         audioRecorder.stop()
         
         recording = false
+        
+        sortThenUpload()
     }
     
-    func fetchRecordings() {
+    // Store url on firebase
+    
+    func sortLatestRecordings(){
+        
         recordings.removeAll()
+                
+            let fileManager = FileManager.default
 
-        let fileManager = FileManager.default
-        let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-        for audio in directoryContents {
-            let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
-            recordings.append(recording)
-        }
+            let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
-        recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
+            let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
 
-        objectWillChange.send(self)
-    }
-    
-    func uploadRecording(urlsToUpload: [URL]) {
+            for audio in directoryContents {
+                let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
+                recordings.append(recording)
 
-        for url in urlsToUpload {
-            print(url)
-            }
-        }
-    
-    func deleteRecording(urlsToDelete: [URL]) {
+        //  Sort the recordings array by the creation date of its items and eventually update all observing views
 
-        for url in urlsToDelete {
-            print(url)
-            do {
-               try FileManager.default.removeItem(at: url)
-            } catch {
-                print("File could not be deleted!")
-            }
-        }
+            recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
 
-        fetchRecordings()
+            objectWillChange.send(self)
         }
     }
+    
+    // Upload to firestore function
+    
+    func uploadLatestRecording() {
+        
+        let localFile = recordings[0].fileURL
+        
+        let rambUUID = UUID().uuidString
+        
+        let storageRef = Storage.storage().reference(forURL: "gs://ramb-ecce1.appspot.com")
+        
+        let rambsRef = storageRef.child("rambs").child("ramb" + rambUUID)
+        
+        rambsRef.putFile(from: localFile, metadata: nil)
+        
+    }
+    
+    func sortThenUpload() {
+        
+        sortLatestRecordings()
+                
+        uploadLatestRecording()
+        
+    }
+    
+    
+
+                
+// Fetch that item from cloud storage
+    
+//          1. Function to call firebase and get file
+    
+//          2. Function to also update feed to make sure items are in order
+    
+//          2. If succesfull, delete that recording locally
+    
+    
+//      Function to add a delete button to the recordings
+        
+//    func deleteRecording(urlsToDelete: [URL]) {
+//
+//        for url in urlsToDelete {
+//            print(url)
+//            do {
+//               try FileManager.default.removeItem(at: url)
+//            } catch {
+//                print("File could not be deleted!")
+//            }
+//        }
+        
+        }
