@@ -23,7 +23,7 @@ struct FeedView : View {
                 VStack(alignment: .leading){
 
                     ForEach(observedData.datas){i in
-                               rambleCellTop(id: i.tagId, userimage: i.userimage, msg: i.msg, length: i.length, date: i.date, like: i.like, comments: i.comments, echos: i.echos, streamurl: i.streamurl)
+                        rambleCellTop(id: i.tagId, userimage: i.userimage, title: i.title, length: i.length, date: i.date, applause: i.applause, stream: i.stream)
                                    }
                                }
                 

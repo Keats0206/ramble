@@ -10,12 +10,7 @@ import SwiftUI
 import UIKit
 
 struct HomeView: View {
-//
-//    init() {
-//    // For navigation bar background color
-//        UINavigationBar.appearance().backgroundColor = .clear
-//       }
-    
+            
     var body: some View {
 
         NavigationView {
@@ -24,10 +19,10 @@ struct HomeView: View {
                 
                 FeedView()
                 
-                SlideOverCard {
-                    PlayerViewPopOver()
-                }
-                }
+//                SlideOverCard {
+//                    RecordPopOverView(audioRecorder: AudioRecorder())
+//                }
+            }
         }
     }
 }

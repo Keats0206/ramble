@@ -13,7 +13,6 @@ struct AppView: View {
     init() {
         UITabBar.appearance().backgroundColor = UIColor.gray
 //        UITabBar.appearance().isTranslucent = false
-
     }
     
     var body: some View {
@@ -33,12 +32,6 @@ struct AppView: View {
                     Image(systemName: "dot.radiowaves.left.and.right")
 
                 }.tag(1)
-
-//                CreateView().tabItem {
-//
-//                    Image(systemName: "ear")
-//
-//                }.tag(3)
             
             }.accentColor(.red)
         }

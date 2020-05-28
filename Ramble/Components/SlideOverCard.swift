@@ -70,9 +70,9 @@ struct SlideOverCard<Content: View> : View {
 //}
 
 enum CardPosition: Double {
-    case top = 0.92
-    case middle = 0.41
-    case bottom = 0.25
+    case top = 0.41
+    case middle = 0.405
+    case bottom = 0.20
     
     var offset: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -104,5 +104,11 @@ enum DragState {
         case .dragging:
             return true
         }
+    }
+}
+
+struct SlideOverCard_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

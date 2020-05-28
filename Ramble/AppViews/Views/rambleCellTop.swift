@@ -12,17 +12,19 @@ import SDWebImageSwiftUI
 
 struct rambleCellTop : View {
     
+    @ObservedObject var audioPlayer = AudioPlayer()
+    
     var id = ""
+    var name = ""
     var userimage = ""
-    var msg = ""
+    var title = ""
     var length = ""
     var date = ""
-    var like = ""
-    var comments = ""
-    var echos = ""
-    var streamurl = ""
+    var time = ""
+    var applause = ""
+    var stream = ""
     var tagId = ""
-    
+        
     var body: some View {
         
         VStack{
@@ -45,8 +47,11 @@ struct rambleCellTop : View {
                 Spacer().frame(width: 10)
                 
                 VStack(alignment: .leading){
-                        Text(id).font(.body).fontWeight(.heavy)
-                    Text(msg).font(.subheadline).fontWeight(.regular).multilineTextAlignment(TextAlignment.leading)
+                        
+                    Text(id).font(.body).fontWeight(.heavy)
+                    
+                    Text(title).font(.subheadline).fontWeight(.regular).multilineTextAlignment(TextAlignment.leading)
+                    
                     Spacer()
                     
                     }
@@ -72,13 +77,27 @@ struct rambleCellTop : View {
                     Spacer().frame(width: 10)
                     
                     VStack(alignment: .leading){
-                        Button(action:  {
-                            }) {
-                                Image("Play-button")
-                                    .foregroundColor(.red)
-                                    .padding(.trailing, 20)
-                        }
                         
+                        if audioPlayer.isPlaying == false {
+                            
+                            Button(action: {
+                                self.audioPlayer.startPlayback(audio: URL(string: self.stream)!)
+                            }) {
+                                Image(systemName: "play.circle")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                            }
+                        } else {
+                            
+                            Button(action: {
+                                self.audioPlayer.stopPlayback()
+                            }) {
+                                Image(systemName: "stop.fill")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                            }
+                        }
+
                         Text(length)
                     }
             

@@ -11,6 +11,7 @@ import SwiftUI
 struct RecordPopOverView: View {
 
     @ObservedObject var audioRecorder: AudioRecorder
+    @State var rambtitle = ""
 
     var body: some View {
     
@@ -18,6 +19,18 @@ struct RecordPopOverView: View {
             Handle()
             
             Spacer().frame(height: 5)
+            
+            TextField("Enter username...", text: $rambtitle)
+                .padding()
+                .frame(width: nil, height: nil, alignment: .center)
+            
+            Text("0:07")
+            
+            Spacer().frame(height: 10)
+            
+            Text("Audio vizualizer")
+        
+            Spacer().frame(height: 10)
             
             if audioRecorder.recording == false {
                 Button(action: {print(self.audioRecorder.startRecording())}) {
@@ -39,14 +52,6 @@ struct RecordPopOverView: View {
                 }
             }
                         
-            Divider()
-            
-            Text("Record View Two")
-            
-            Divider()
-            
-            Text("Record View Three")
-            
             Spacer()
             
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

@@ -18,9 +18,7 @@ struct ProfileView: View {
             ZStack(){
                 
                 ProfileHeader()
-                
-                RecorderView(audioRecorder: AudioRecorder())
-                
+                                
                 SlideOverCard {
                     RecordPopOverView(audioRecorder: AudioRecorder())
                     

@@ -12,16 +12,16 @@ import Firebase
 struct datatype : Identifiable {
 
     var id : String
+    var name : String
     var userimage : String
-    var msg : String
+    var title : String
     var length : String
     var date : String
-    var like : String
-    var comments: String
-    var echos : String
-    var streamurl : String
+    var time : String
+    var applause : String
+    var stream : String
     var tagId : String
-
+    
 }
 
 class getData : ObservableObject {
@@ -32,7 +32,7 @@ class getData : ObservableObject {
 
             let db = Firestore.firestore()
 
-                db.collection("rambles").addSnapshotListener { (snap, err) in
+                db.collection("rambs").addSnapshotListener { (snap, err) in
 
                 if err != nil {
 
@@ -43,22 +43,22 @@ class getData : ObservableObject {
                 for i in snap!.documentChanges{
 
                     if i.type == .added{
-
+                        
                         let id = i.document.documentID
+                        let name = i.document.get("name") as! String
                         let userimage = i.document.get("userimage") as! String
-                        let msg = i.document.get("msg") as! String
+                        let title = i.document.get("title") as! String
                         let length = i.document.get("length") as! String
                         let date = i.document.get("date") as! String
-                        let like = i.document.get("like") as! String
-                        let comments = i.document.get("comments") as! String
-                        let echos = i.document.get("echos") as! String
-                        let streamurl = i.document.get("streamurl") as! String
+                        let time = i.document.get("time") as! String
+                        let applause = i.document.get("applause") as! String
+                        let stream = i.document.get("stream") as! String
                         let tagId = i.document.get("id") as! String
 
                         print("hello world")
 
                         DispatchQueue.main.async {
-                            self.datas.append(datatype(id: id, userimage: userimage, msg: msg, length: length, date: date, like: like, comments: comments, echos: echos, streamurl: streamurl, tagId: tagId))
+                            self.datas.append(datatype(id: id, name: name, userimage: userimage, title: title, length: length, date: date, time: time, applause: applause, stream: stream, tagId: tagId))
                         }
                     }
                 }
