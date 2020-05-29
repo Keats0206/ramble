@@ -15,7 +15,7 @@ struct RecordPopOverView: View {
 
     var body: some View {
     
-        VStack{
+        VStack {
             Handle()
             
             Spacer().frame(height: 5)
@@ -51,6 +51,23 @@ struct RecordPopOverView: View {
                         .foregroundColor(.red)
                 }
             }
+            
+            HStack {
+                Button(action: {self.audioRecorder.postRamb()}) {
+                    Image(systemName: "plus.square")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        
+                }
+                
+                Spacer().frame(width: 120)
+                
+                Button(action: {print("delete function")}) {
+                    Image(systemName: "trash")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                }
+            }.padding()
                         
             Spacer()
             

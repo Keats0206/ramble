@@ -10,22 +10,23 @@ import Foundation
 import Firebase
 import SwiftUI
 import Combine
+import AVKit
 import AVFoundation
 
-class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
-
+class AudioPlayer: AVPlayer, ObservableObject {
+    
     let objectWillChange = PassthroughSubject<AudioPlayer, Never>()
     
     var isPlaying = false {
-        didSet {
-            objectWillChange.send(self)
+            didSet {
+                objectWillChange.send(self)
+            }
         }
-    }
     
-    var audioPlayer: AVAudioPlayer!
-    
-    func startPlayback (audio: URL) {
-                
+    var audioPlayer = AVPlayer()
+
+    func startPlayback(audio: URL) {
+        
         let playbackSession = AVAudioSession.sharedInstance()
         
         do {
@@ -35,24 +36,23 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
         
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audio)
-            audioPlayer.delegate = self
+            audioPlayer = try AVPlayer(url: audio)
             audioPlayer.play()
             isPlaying = true
+            
         } catch {
             print("Playback failed.")
-        }
     }
+}
     
     func stopPlayback() {
-        audioPlayer.stop()
+        audioPlayer.pause()
         isPlaying = false
     }
-        
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    
+    func audioPlayerDidFinishPlaying(_ player: AVPlayer, successfully flag: Bool) {
         if flag {
             isPlaying = false
         }
     }
-    
 }

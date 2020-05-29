@@ -22,14 +22,19 @@ class AudioRecorder: NSObject,ObservableObject {
     }
     
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
+    
     var audioRecorder: AVAudioRecorder!
+    
     var recordings = [Recording]()
+    
     var recording = false {
         didSet {
             objectWillChange.send(self)
         }
     }
    
+    var strmURL = ""
+    
     // Starting recording locally
     
     func startRecording() {
@@ -44,10 +49,10 @@ class AudioRecorder: NSObject,ObservableObject {
         
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
-        let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).wav")
-        
+        let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+                
         let settings = [
-            AVFormatIDKey: Int(kAudioFormatLinearPCM),
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
@@ -101,7 +106,7 @@ class AudioRecorder: NSObject,ObservableObject {
     // Upload to firestore function and get streaming url :)
     
     func uploadLatestRecording() {
-        
+            
         let localFile = recordings[0].fileURL
         let rambUUID = UUID().uuidString
         let storageRef = Storage.storage().reference(forURL: "gs://ramb-ecce1.appspot.com")
@@ -120,7 +125,7 @@ class AudioRecorder: NSObject,ObservableObject {
                             })
                         }
                     })
-                }
+            }
     
     func sortThenUpload() {
         
@@ -130,8 +135,46 @@ class AudioRecorder: NSObject,ObservableObject {
         
     }
     
-    // post ramb including streaming URL to database
+    func postRamb() {
+                
+        let db = Firestore.firestore()
+        
+            db.collection("rambs").document().setData(
+                ["name":"Pete",
+                 "id":"@pete",
+                 "userimage": "https://media-exp1.licdn.com/dms/image/C5603AQGbHL6OVW4A8A/profile-displayphoto-shrink_400_400/0?e=1596067200&v=beta&t=K0rDOMqlkKiL8xnxktJaVUDO_H8ct2bXqV4E_AVXQ2Y",
+                 "title":"this a second test audio post",
+                 "length":"59s",
+                 "applause":"0",
+                 "stream": "stream",
+                 "time":"12:04:68",
+                 "date":"5/27/19"
+                ])
+            { (err) in
+                
+                if err != nil{
+                    
+                    print((err?.localizedDescription)!)
+                    
+                    return
+                }
+            print("success")
+        }
+    }
+}
+        
+//        1. User types in input field with a name
     
+//        2. If user bails on post, show alert. If yes - call delete recording function from local & cloud. If no, return to before alert.
+        
+//        3. User hits POST button - create Ram in data base with user, uid, post title, rambUUID, downloadURL, claps array, location!
+        
+//        4. Call function that refreshes feed.
+        
+        func deleteRamb() {
+            print("deletePastRamb")
+        }
+
 //    func postRamb() {
 //
 //        let db = Firestore.firestore()
@@ -155,8 +198,7 @@ class AudioRecorder: NSObject,ObservableObject {
 //                print("ramb uploaded")
 //            }
 //    }
-}
-    
+
     // CreateRamb
     
     // 1. User types in input field with a name

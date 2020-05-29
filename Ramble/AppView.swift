@@ -21,13 +21,13 @@ struct AppView: View {
 
             TabView {
 
-                ProfileView(audioRecorder: AudioRecorder()).tabItem {
+                ProfileView().tabItem {
 
                     Image(systemName: "person").resizable()
 
                 }.tag(0)
 
-                HomeView().tabItem {
+                HomeView(audioRecorder: AudioRecorder()).tabItem {
 
                     Image(systemName: "dot.radiowaves.left.and.right")
 

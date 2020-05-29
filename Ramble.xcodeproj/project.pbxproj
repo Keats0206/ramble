@@ -199,9 +199,9 @@
 		406FAD3024521EB100223873 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				402F54C2244F9ACC00FD899F /* FeedView.swift */,
 				406FAD332453596D00223873 /* RecordPopOver */,
 				406FAD342453597800223873 /* PlayerPopOver */,
-				402F54C2244F9ACC00FD899F /* FeedView.swift */,
 				406FAD2E2452154C00223873 /* ProfileHeader.swift */,
 				402F54CC244F9FFD00FD899F /* rambleCellTop.swift */,
 				402F54CE244FA8D100FD899F /* SubViews */,

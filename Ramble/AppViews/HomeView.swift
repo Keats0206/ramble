@@ -10,6 +10,8 @@ import SwiftUI
 import UIKit
 
 struct HomeView: View {
+    
+    @ObservedObject var audioRecorder: AudioRecorder
             
     var body: some View {
 
@@ -19,9 +21,9 @@ struct HomeView: View {
                 
                 FeedView()
                 
-//                SlideOverCard {
-//                    RecordPopOverView(audioRecorder: AudioRecorder())
-//                }
+                SlideOverCard {
+                    RecordPopOverView(audioRecorder: AudioRecorder())
+                }
             }
         }
     }
@@ -29,6 +31,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(audioRecorder: AudioRecorder())
     }
 }

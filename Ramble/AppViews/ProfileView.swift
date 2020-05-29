@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var audioRecorder: AudioRecorder
-    
     var body: some View {
 
         NavigationView {
@@ -19,10 +17,6 @@ struct ProfileView: View {
                 
                 ProfileHeader()
                                 
-                SlideOverCard {
-                    RecordPopOverView(audioRecorder: AudioRecorder())
-                    
-                }
             }
         }
     }
@@ -30,7 +24,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(audioRecorder: AudioRecorder())
+        ProfileView()
     }
 }
 
