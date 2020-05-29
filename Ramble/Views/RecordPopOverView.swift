@@ -53,7 +53,9 @@ struct RecordPopOverView: View {
             }
             
             HStack {
-                Button(action: {self.audioRecorder.postRamb()}) {
+                Button(action: {
+                    self.audioRecorder.postRamb(title: self.rambtitle)                    
+                }) {
                     Image(systemName: "plus.square")
                         .resizable()
                         .frame(width: 30, height: 30)

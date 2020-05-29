@@ -135,7 +135,7 @@ class AudioRecorder: NSObject,ObservableObject {
         
     }
     
-    func postRamb() {
+    func postRamb(title: String) {
                 
         let db = Firestore.firestore()
         
@@ -143,7 +143,7 @@ class AudioRecorder: NSObject,ObservableObject {
                 ["name":"Pete",
                  "id":"@pete",
                  "userimage": "https://media-exp1.licdn.com/dms/image/C5603AQGbHL6OVW4A8A/profile-displayphoto-shrink_400_400/0?e=1596067200&v=beta&t=K0rDOMqlkKiL8xnxktJaVUDO_H8ct2bXqV4E_AVXQ2Y",
-                 "title":"title",
+                 "title":"\(title)",
                  "length":"59s",
                  "applause":"0",
                  "stream": "stream",

@@ -24,14 +24,12 @@ struct FeedView : View {
 
                     ForEach(observedData.datas){i in
                         rambleCellTop(id: i.tagId, userimage: i.userimage, title: i.title, length: i.length, date: i.date, applause: i.applause, stream: i.stream)
-                                   }
-                               }
-                }.padding(.bottom, 15)
+                    }
+                }
+            }.padding(.bottom, 15)
         }
     }
 }
-                            
-
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {

@@ -13,7 +13,6 @@ enum AlertIntent {
 }
 
 struct InlineAlert : View {
-    
     var title: String
     var subtitle: String?
     var intent: AlertIntent = .info
