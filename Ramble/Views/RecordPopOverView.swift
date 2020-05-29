@@ -77,8 +77,7 @@ struct RecordPopOverView: View {
 }
 
 struct RecordPopOverView_Previews: PreviewProvider {
-static var previews: some View {
-    RecordPopOverView(audioRecorder: AudioRecorder())
-    }
+    static var previews: some View {
+        RecordPopOverView(audioRecorder: AudioRecorder())
+        }
 }
-

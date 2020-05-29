@@ -14,9 +14,8 @@ struct ProfileView: View {
         NavigationView {
             
             ZStack(){
-                
+
                 ProfileHeader()
-                                
             }
         }
     }
