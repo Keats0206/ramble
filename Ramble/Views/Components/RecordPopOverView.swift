@@ -11,25 +11,31 @@ import SwiftUI
 struct RecordPopOverView: View {
 
     @ObservedObject var audioRecorder: AudioRecorder
-    @State var rambtitle = ""
+    
+    @State var rambtitle = "Enter A Ramb Title Here"
 
     var body: some View {
     
         VStack {
+            
             Handle()
             
             Spacer().frame(height: 5)
             
-            TextField("Enter username...", text: $rambtitle)
-                .padding()
-                .frame(width: nil, height: nil, alignment: .center)
+            HStack {
+                
+                Spacer()
+                
+                TextField("Enter A Ramble Title", text: $rambtitle)
+                
+                Spacer()
+                
+            }
             
             Text("0:07")
             
             Spacer().frame(height: 10)
-            
-            Text("Audio vizualizer")
-        
+                    
             Spacer().frame(height: 10)
             
             if audioRecorder.recording == false {
@@ -59,7 +65,6 @@ struct RecordPopOverView: View {
                     Image(systemName: "plus.square")
                         .resizable()
                         .frame(width: 30, height: 30)
-                        
                 }
                 
                 Spacer().frame(width: 120)
@@ -70,7 +75,7 @@ struct RecordPopOverView: View {
                         .frame(width: 30, height: 30)
                 }
             }.padding()
-                        
+            
             Spacer()
             
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -81,5 +86,5 @@ struct RecordPopOverView: View {
 struct RecordPopOverView_Previews: PreviewProvider {
     static var previews: some View {
         RecordPopOverView(audioRecorder: AudioRecorder())
-        }
+    }
 }

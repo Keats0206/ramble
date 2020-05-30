@@ -54,8 +54,8 @@ class getData : ObservableObject {
                         let applause = i.document.get("applause") as! String
                         let stream = i.document.get("stream") as! String
                         let tagId = i.document.get("id") as! String
-
-                        print("hello world")
+                        
+                        print("Hello World")
 
                         DispatchQueue.main.async {
                             self.datas.append(datatype(id: id, name: name, userimage: userimage, title: title, length: length, date: date, time: time, applause: applause, stream: stream, tagId: tagId))

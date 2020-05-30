@@ -36,7 +36,7 @@ class AudioPlayer: AVPlayer, ObservableObject {
         }
         
         do {
-            audioPlayer = try AVPlayer(url: audio)
+            audioPlayer = AVPlayer(url: audio)
             audioPlayer.play()
             isPlaying = true
             

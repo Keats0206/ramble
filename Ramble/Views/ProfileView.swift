@@ -10,13 +10,13 @@ import SwiftUI
 struct ProfileView: View {
     
     var body: some View {
-
+          
         NavigationView {
             
             ZStack(){
-
                 ProfileHeader()
-            }
+                
+            }.navigationBarTitle("Ramble",displayMode: .inline)
         }
     }
 }
@@ -26,10 +26,3 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
     }
 }
-
-
-        
-        
-        
-        
-        

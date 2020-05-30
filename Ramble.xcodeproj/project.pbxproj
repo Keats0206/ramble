@@ -13,13 +13,14 @@
 		402F549A244F91AA00FD899F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5499244F91AA00FD899F /* Preview Assets.xcassets */; };
 		402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402F549B244F91AA00FD899F /* LaunchScreen.storyboard */; };
 		402F54C1244F9AA100FD899F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C0244F9AA100FD899F /* ProfileView.swift */; };
-		402F54C3244F9ACC00FD899F /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C2244F9ACC00FD899F /* FeedView.swift */; };
+		402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C2244F9ACC00FD899F /* RambFeed.swift */; };
 		402F54C6244F9CEB00FD899F /* getData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C5244F9CEB00FD899F /* getData.swift */; };
 		402F54C8244F9E4E00FD899F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */; };
 		402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 402F54CA244F9FD000FD899F /* SDWebImageSwiftUI */; };
-		402F54CD244F9FFD00FD899F /* rambleCellTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54CC244F9FFD00FD899F /* rambleCellTop.swift */; };
+		402F54CD244F9FFD00FD899F /* rambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54CC244F9FFD00FD899F /* rambCell.swift */; };
 		402F54D6244FAD2A00FD899F /* Jimi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 402F54D5244FAD2A00FD899F /* Jimi.mp3 */; };
 		402F54D8244FAD2F00FD899F /* Love.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 402F54D7244FAD2F00FD899F /* Love.mp3 */; };
+		403821032481EABC006289FC /* crowdApplause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403821022481EABC006289FC /* crowdApplause.swift */; };
 		406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */; };
 		406FAD03244FF0EB00223873 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD02244FF0EB00223873 /* AudioPlayer.swift */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
@@ -35,7 +36,7 @@
 		406FAD2B2451E3B100223873 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2A2451E3B100223873 /* Handle.swift */; };
 		406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2C2451F0C800223873 /* RecordPopOverView.swift */; };
 		406FAD2F2452154C00223873 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2E2452154C00223873 /* ProfileHeader.swift */; };
-		406FAD32245232DA00223873 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD31245232DA00223873 /* HomeView.swift */; };
+		406FAD32245232DA00223873 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD31245232DA00223873 /* FeedView.swift */; };
 		F5A41F29894D926097147655 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E07BDBEC51EC0111AD31B80 /* Pods_Ramble.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,12 +51,13 @@
 		402F549C244F91AA00FD899F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		402F549E244F91AA00FD899F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		402F54C0244F9AA100FD899F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		402F54C2244F9ACC00FD899F /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		402F54C2244F9ACC00FD899F /* RambFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambFeed.swift; sourceTree = "<group>"; };
 		402F54C5244F9CEB00FD899F /* getData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getData.swift; sourceTree = "<group>"; };
 		402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		402F54CC244F9FFD00FD899F /* rambleCellTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rambleCellTop.swift; sourceTree = "<group>"; };
+		402F54CC244F9FFD00FD899F /* rambCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rambCell.swift; sourceTree = "<group>"; };
 		402F54D5244FAD2A00FD899F /* Jimi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jimi.mp3; sourceTree = "<group>"; };
 		402F54D7244FAD2F00FD899F /* Love.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Love.mp3; sourceTree = "<group>"; };
+		403821022481EABC006289FC /* crowdApplause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = crowdApplause.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
 		406FAD02244FF0EB00223873 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		406FAD2A2451E3B100223873 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		406FAD2C2451F0C800223873 /* RecordPopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopOverView.swift; sourceTree = "<group>"; };
 		406FAD2E2452154C00223873 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
-		406FAD31245232DA00223873 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		406FAD31245232DA00223873 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		BC86D9216CC9A5AB25868047 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,13 +124,11 @@
 				402F5490244F91A900FD899F /* AppDelegate.swift */,
 				402F5492244F91A900FD899F /* SceneDelegate.swift */,
 				406FAD1A2450D02300223873 /* InlineAlert.swift */,
-				406FAD1E2450D6D200223873 /* AuthView.swift */,
 				406FAD162450B55200223873 /* ContentView.swift */,
 				406FAD122450ABF300223873 /* SessionStore.swift */,
-				406FAD202450D7FA00223873 /* AppView.swift */,
-				402F54C5244F9CEB00FD899F /* getData.swift */,
+				406FAD1E2450D6D200223873 /* AuthView.swift */,
 				406FAD3024521EB100223873 /* Views */,
-				406FAD352453599000223873 /* Components */,
+				403820FD24819C00006289FC /* Utils */,
 				402F5496244F91AA00FD899F /* Assets.xcassets */,
 				402F549B244F91AA00FD899F /* LaunchScreen.storyboard */,
 				402F549E244F91AA00FD899F /* Info.plist */,
@@ -156,26 +156,28 @@
 			path = AudioSamples;
 			sourceTree = "<group>";
 		};
-		402F54DC244FD11000FD899F /* Audio Recorder */ = {
+		403820FD24819C00006289FC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				406FAD02244FF0EB00223873 /* AudioPlayer.swift */,
-				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
+				406FAD282451E38D00223873 /* SlideOverCard.swift */,
+				403821022481EABC006289FC /* crowdApplause.swift */,
+				402F54C5244F9CEB00FD899F /* getData.swift */,
 				406FAD06244FF13100223873 /* Extensions.swift */,
 				406FAD08244FF15D00223873 /* Helper.swift */,
 				406FAD0A244FF17600223873 /* RecordingDataModel.swift */,
+				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
+				406FAD02244FF0EB00223873 /* AudioPlayer.swift */,
 			);
-			path = "Audio Recorder";
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		406FAD3024521EB100223873 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				406FAD202450D7FA00223873 /* AppView.swift */,
 				402F54C0244F9AA100FD899F /* ProfileView.swift */,
-				406FAD31245232DA00223873 /* HomeView.swift */,
-				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
-				402F54C2244F9ACC00FD899F /* FeedView.swift */,
-				402F54CC244F9FFD00FD899F /* rambleCellTop.swift */,
+				406FAD31245232DA00223873 /* FeedView.swift */,
+				406FAD352453599000223873 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,10 +185,11 @@
 		406FAD352453599000223873 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				406FAD282451E38D00223873 /* SlideOverCard.swift */,
-				406FAD2A2451E3B100223873 /* Handle.swift */,
+				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
+				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
+				402F54CC244F9FFD00FD899F /* rambCell.swift */,
 				406FAD2E2452154C00223873 /* ProfileHeader.swift */,
-				402F54DC244FD11000FD899F /* Audio Recorder */,
+				406FAD2A2451E3B100223873 /* Handle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -323,21 +326,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				406FAD32245232DA00223873 /* HomeView.swift in Sources */,
+				406FAD32245232DA00223873 /* FeedView.swift in Sources */,
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
 				402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */,
 				406FAD212450D7FA00223873 /* AppView.swift in Sources */,
 				402F54C1244F9AA100FD899F /* ProfileView.swift in Sources */,
-				402F54CD244F9FFD00FD899F /* rambleCellTop.swift in Sources */,
+				402F54CD244F9FFD00FD899F /* rambCell.swift in Sources */,
 				402F54C6244F9CEB00FD899F /* getData.swift in Sources */,
 				406FAD292451E38D00223873 /* SlideOverCard.swift in Sources */,
 				406FAD09244FF15D00223873 /* Helper.swift in Sources */,
+				403821032481EABC006289FC /* crowdApplause.swift in Sources */,
 				406FAD2B2451E3B100223873 /* Handle.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingDataModel.swift in Sources */,
 				406FAD1B2450D02300223873 /* InlineAlert.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
-				402F54C3244F9ACC00FD899F /* FeedView.swift in Sources */,
+				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				406FAD2F2452154C00223873 /* ProfileHeader.swift in Sources */,
 				406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */,
 				406FAD07244FF13100223873 /* Extensions.swift in Sources */,

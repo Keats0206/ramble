@@ -9,10 +9,13 @@
 import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
+import Firebase
 
-struct rambleCellTop : View {
+struct rambCell : View {
     
     @ObservedObject var audioPlayer = AudioPlayer()
+    
+    @State var applauseActive = false
     
     var id = ""
     var name = ""
@@ -60,19 +63,39 @@ struct rambleCellTop : View {
                 
                     VStack{
                         
-                        Spacer()
+                        if applauseActive {
         
-                        Button(action:  {
+                            Button(action:  {
+                                
+                                crowdApplause(applauseActive: self.applauseActive, applause: self.applause, tagId: self.tagId)
+                                
+                                self.applauseActive.toggle()
+                                
+                            }) {
+                                
+                                Image("Heart").resizable().frame(width: 20, height: 20)
                             
-                        }) {
+                            }.foregroundColor(.red)
+                            .buttonStyle(BorderlessButtonStyle())
                             
-                            Image("Heart").resizable().frame(width: 20, height: 20)
+                            } else {
+
+                                Button(action:  {
+                                    
+                                    crowdApplause(applauseActive: self.applauseActive, applause: self.applause, tagId: self.tagId)
+                                    self.applauseActive.toggle()
+                
+                                }) {
+                                    
+                                    Image("Heart").resizable().frame(width: 20, height: 20)
+                                
+                                }.foregroundColor(.black)
+                                .buttonStyle(BorderlessButtonStyle())
+                            }
                         
-                        }.foregroundColor(.red)
-                        
-                        Spacer()
-                    
-                    }
+                        Text(applause)
+        
+                }
                 
                     Spacer().frame(width: 10)
                     
@@ -86,7 +109,7 @@ struct rambleCellTop : View {
                                 Image(systemName: "play.circle")
                                     .resizable()
                                     .frame(width: 50, height: 50)
-                            }
+                            }.buttonStyle(BorderlessButtonStyle())
                         } else {
                             
                             Button(action: {
@@ -95,7 +118,7 @@ struct rambleCellTop : View {
                                 Image(systemName: "stop.fill")
                                     .resizable()
                                     .frame(width: 50, height: 50)
-                            }
+                            }.buttonStyle(BorderlessButtonStyle())
                         }
 
                         Text(length)
@@ -108,7 +131,7 @@ struct rambleCellTop : View {
 }
 
 
-struct rambleCellTop_Previews: PreviewProvider {
+struct rambCell_Previews: PreviewProvider {
     static var previews: some View {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }

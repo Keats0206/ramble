@@ -77,7 +77,5 @@ class User {
         self.uid = uid
         self.email = email
         self.displayName = displayName
-        }
-
     }
-
+}

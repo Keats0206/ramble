@@ -76,7 +76,6 @@ struct SignInView : View {
                         Text("Create Account")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
-                        
                     }
                 }
             }
@@ -175,14 +174,12 @@ var body : some View {
                 Spacer()
         
                     Text("Thanks for joining Ramble. By joining, you are agreeing to our terms of use, which can be found on our website ramble.com").font(.system(size: 14)).foregroundColor(.black)
-                            
             }
         }
     }
 }
 
 struct AuthView : View {
-    
     var body : some View {
         NavigationView {
             SignInView()

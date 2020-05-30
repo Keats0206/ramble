@@ -71,8 +71,8 @@ struct SlideOverCard<Content: View> : View {
 
 enum CardPosition: Double {
     case top = 0.55
-    case middle = 0.50
-    case bottom = 0.15
+    case middle = 0.5
+    case bottom = 0.2
     
     var offset: CGFloat {
         let screenHeight = UIScreen.main.bounds.height

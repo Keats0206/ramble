@@ -1,38 +1,48 @@
 //
-//  FeedView.swift
+//  HomeView.swift
 //  Ramble
 //
-//  Created by Peter Keating on 4/21/20.
+//  Created by Peter Keating on 4/23/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
 
 import SwiftUI
-import Firebase
-import SDWebImageSwiftUI
+import UIKit
 
-struct FeedView : View {
-
-    @ObservedObject var observedData = getData()
-
+struct FeedView: View {
+    
+    @ObservedObject var audioRecorder: AudioRecorder
+    
+    var userimage = ""
+            
     var body: some View {
-
-        VStack{
-                        
-            ScrollView(.vertical, showsIndicators: false){
-
-                VStack(alignment: .leading){
-
-                    ForEach(observedData.datas){i in
-                        rambleCellTop(id: i.tagId, userimage: i.userimage, title: i.title, length: i.length, date: i.date, applause: i.applause, stream: i.stream)
-                    }
+        
+        NavigationView{
+            
+            ZStack(){
+                
+                RambFeed()
+                
+                SlideOverCard {
+                    
+                    RecordPopOverView(audioRecorder: AudioRecorder())
+                    
                 }
-            }.padding(.bottom, 15)
+                
+            }.navigationBarTitle("Ramble",displayMode: .inline)
+            .navigationBarItems(leading:
+            
+                Image(userimage).resizable().frame(width: 35, height: 35).clipShape(Circle()).onTapGesture {
+                    
+                    print("slide out menu ....")
+                }
+            )
         }
     }
 }
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView()
+        FeedView(audioRecorder: AudioRecorder())
     }
 }
