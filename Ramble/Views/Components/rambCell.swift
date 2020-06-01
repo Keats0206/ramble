@@ -14,7 +14,6 @@ import Firebase
 struct rambCell : View {
     
     @ObservedObject var audioPlayer = AudioPlayer()
-    
     @State var applauseActive = false
     
     var id = ""
@@ -27,6 +26,7 @@ struct rambCell : View {
     var applause = ""
     var stream = ""
     var tagId = ""
+    var docId = ""
         
     var body: some View {
         
@@ -67,7 +67,7 @@ struct rambCell : View {
         
                             Button(action:  {
                                 
-                                crowdApplause(applauseActive: self.applauseActive, applause: self.applause, tagId: self.tagId)
+                                crowdApplause(applauseActive: self.applauseActive, applause: self.applause, id: self.docId)
                                 
                                 self.applauseActive.toggle()
                                 
@@ -82,11 +82,11 @@ struct rambCell : View {
 
                                 Button(action:  {
                                     
-                                    crowdApplause(applauseActive: self.applauseActive, applause: self.applause, tagId: self.tagId)
+                                    crowdApplause(applauseActive: self.applauseActive, applause: self.applause, id: self.docId)
                                     self.applauseActive.toggle()
                 
                                 }) {
-                                    
+                
                                     Image("Heart").resizable().frame(width: 20, height: 20)
                                 
                                 }.foregroundColor(.black)

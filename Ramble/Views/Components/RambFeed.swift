@@ -18,7 +18,7 @@ struct RambFeed : View {
         ZStack {
             List {
                 ForEach(observedData.datas){i in
-                        rambCell(id: i.tagId, userimage: i.userimage, title: i.title, length: i.length, date: i.date, applause: i.applause, stream: i.stream)
+                    rambCell(id: i.tagId, userimage: i.userimage, title: i.title, length: i.length, date: i.date, applause: i.applause, stream: i.stream, docId: i.id)
                 }
             }.padding(.bottom, 15)
         }

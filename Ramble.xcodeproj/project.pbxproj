@@ -186,8 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
-				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				402F54CC244F9FFD00FD899F /* rambCell.swift */,
+				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				406FAD2E2452154C00223873 /* ProfileHeader.swift */,
 				406FAD2A2451E3B100223873 /* Handle.swift */,
 			);

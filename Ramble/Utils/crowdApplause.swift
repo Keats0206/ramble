@@ -9,26 +9,20 @@
 import Foundation
 import Firebase
 
-func crowdApplause(applauseActive: Bool,applause: String, tagId: String) {
-
+func crowdApplause(applauseActive: Bool,applause: String, id: String) {
+    
     let db = Firestore.firestore()
-
      //     Convert applause string to a number
-    
             var applauseInt = Int(applause)!
-    
     //      If applause state is false then add 1
-                     
                  if applauseActive {
                     applauseInt -= 1
                 } else {
                     applauseInt += 1
                 }
-    
             let applauseStr = String(applauseInt)
-    
-            let rambRef = db.collection("rambs").document("oktRTdtlbuN8VoYlfMhr")
-
+            print(id)
+            let rambRef = db.collection("rambs").document("\(id)")
             rambRef.updateData([
                 "applause": "\(applauseStr)"
             ]) { err in
@@ -38,9 +32,7 @@ func crowdApplause(applauseActive: Bool,applause: String, tagId: String) {
                     print("Document successfully updated")
                 }
             }
-        
 //        update datee in the VIEW. It's all working perfectly except the data in the view is not updating after the fucntions run...
-    
     return
 }
 
