@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Firebase
 
 func crowdApplause(applauseActive: Bool,applause: String, id: String) {
@@ -21,7 +22,6 @@ func crowdApplause(applauseActive: Bool,applause: String, id: String) {
                     applauseInt += 1
                 }
             let applauseStr = String(applauseInt)
-            print(id)
             let rambRef = db.collection("rambs").document("\(id)")
             rambRef.updateData([
                 "applause": "\(applauseStr)"
@@ -32,7 +32,6 @@ func crowdApplause(applauseActive: Bool,applause: String, id: String) {
                     print("Document successfully updated")
                 }
             }
-//        update datee in the VIEW. It's all working perfectly except the data in the view is not updating after the fucntions run...
     return
 }
 

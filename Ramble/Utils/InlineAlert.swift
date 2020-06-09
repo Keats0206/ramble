@@ -20,21 +20,15 @@ struct InlineAlert : View {
     var body: some View {
 
         HStack(alignment: .top) {
-               
                 Image(systemName: "exclamationmark.triangle.fill")
                     .padding(.vertical)
                     .foregroundColor(Color.white)
-            
                 VStack(alignment: .leading) {
                     Text(self.title)
-
                     if (self.subtitle != nil) {
                         Text(self.subtitle!)
-
                     }
-
                 }.padding(.leading)
-            
             }
                 .padding()
                 .background(Color.red)

@@ -10,7 +10,6 @@ import UIKit
 
 struct AppView: View {
     
-    
     var body: some View {
         
         ZStack{

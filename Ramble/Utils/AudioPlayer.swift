@@ -40,10 +40,9 @@ class AudioPlayer: AVPlayer, ObservableObject {
             audioPlayer.play()
             isPlaying = true
             
-        } catch {
-            print("Playback failed.")
+        }
     }
-}
+
     
     func stopPlayback() {
         audioPlayer.pause()

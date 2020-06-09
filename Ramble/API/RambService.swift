@@ -10,7 +10,7 @@ import SwiftUI
 import Firebase
 
 struct datatype : Identifiable {
-
+    
     var id : String
     var name : String
     var userimage : String
@@ -21,29 +21,20 @@ struct datatype : Identifiable {
     var applause : String
     var stream : String
     var tagId : String
-    
 }
 
 class getData : ObservableObject {
 
     @Published var datas = [datatype]()
-
         init() {
-
             let db = Firestore.firestore()
-
                 db.collection("rambs").addSnapshotListener { (snap, err) in
-
                 if err != nil {
-
                     print ((err?.localizedDescription)!)
                     return
                 }
-
                 for i in snap!.documentChanges{
-
                     if i.type == .added{
-                        
                         let id = i.document.documentID
                         let name = i.document.get("name") as! String
                         let userimage = i.document.get("userimage") as! String
@@ -55,8 +46,6 @@ class getData : ObservableObject {
                         let stream = i.document.get("stream") as! String
                         let tagId = i.document.get("id") as! String
                         
-                        print("Hello World")
-
                         DispatchQueue.main.async {
                             self.datas.append(datatype(id: id, name: name, userimage: userimage, title: title, length: length, date: date, time: time, applause: applause, stream: stream, tagId: tagId))
                         }
@@ -65,4 +54,3 @@ class getData : ObservableObject {
             }
         }
     }
-

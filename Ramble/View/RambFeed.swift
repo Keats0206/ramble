@@ -12,7 +12,7 @@ import SDWebImageSwiftUI
 struct RambFeed : View {
 
     @ObservedObject var observedData = getData()
-
+    
     var body: some View {
         
         ZStack {

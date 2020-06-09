@@ -13,7 +13,7 @@ import Combine
 import Firebase
 import FirebaseStorage
 
-class AudioRecorder: NSObject,ObservableObject {
+class AudioRecorder: NSObject, ObservableObject {
     
     override init() {
         super.init()
@@ -23,7 +23,7 @@ class AudioRecorder: NSObject,ObservableObject {
     
     var strmurl = "filed"
     var data = ""
-    
+
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
     var recordings = [Recording]()
@@ -79,27 +79,27 @@ class AudioRecorder: NSObject,ObservableObject {
     
     // store file locally and sort the latest local recordings so newest is at the top
     
-    func sortLatestRecordings(){
-        
-        recordings.removeAll()
-                
-            let fileManager = FileManager.default
+        func sortLatestRecordings(){
+            
+            recordings.removeAll()
+                    
+                let fileManager = FileManager.default
 
-            let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
-            let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+                let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
 
-            for audio in directoryContents {
-                let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
-                recordings.append(recording)
+                for audio in directoryContents {
+                    let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
+                    recordings.append(recording)
 
-        //  Sort the recordings array by the creation date of its items and eventually update all observing views
-                
-            recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
+            //  Sort the recordings array by the creation date of its items and eventually update all observing views
+                    
+                recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
 
-            objectWillChange.send(self)
+                objectWillChange.send(self)
+            }
         }
-    }
     
     // Upload to firestore function and get streaming url :)
     
@@ -128,38 +128,13 @@ class AudioRecorder: NSObject,ObservableObject {
                 })
     }
     
+    
+    
     func sortThenUpload() {
         
         sortLatestRecordings()
         
         uploadLatestRecording()
         
-    }
-    
-    func postRamb(title: String) {
-                
-        let db = Firestore.firestore()
-        
-            db.collection("rambs").document().setData(
-                ["name":"Pete",
-                 "id":"@Pete",
-                 "userimage": "https://media-exp1.licdn.com/dms/image/C5603AQGbHL6OVW4A8A/profile-displayphoto-shrink_400_400/0?e=1596067200&v=beta&t=K0rDOMqlkKiL8xnxktJaVUDO_H8ct2bXqV4E_AVXQ2Y",
-                 "title":"\(title)",
-                 "length":"59s",
-                 "applause":"0",
-                 "stream": "\(self.strmurl)",
-                 "time":"12:04:68",
-                 "date":"5/27/19"
-                ])
-            { (err) in
-                
-                if err != nil{
-                    
-                    print((err?.localizedDescription)!)
-                    
-                    return
-                }
-            print("success")
-        }
     }
 }

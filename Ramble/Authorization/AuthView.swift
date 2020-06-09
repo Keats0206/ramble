@@ -149,7 +149,6 @@ var body : some View {
                         title: "Hmm... That didn't work.",
                         subtitle: "Are you sure you don't already have an account with that email address?"
                     ).padding([.horizontal, .top])
-                   
                 }
                 
                 VStack{
