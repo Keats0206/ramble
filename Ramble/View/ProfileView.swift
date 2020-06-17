@@ -8,21 +8,42 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Binding var isShown:Bool
     
     var body: some View {
-          
-        NavigationView {
-            
-            ZStack(){
+        ZStack(){
+            VStack{
+                HStack{
+                    
+                Button(action: {
+                    self.isShown.toggle()
+                }){
+                    Image(systemName: "arrow.uturn.down.circle")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }.buttonStyle(BorderlessButtonStyle())
+                
+                Spacer()
+                
+                Spacer()
+                
+                Spacer()
+                
+                Button(action: {
+                     print("return to previous view")
+                }){
+                    Image(systemName: "gear")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }.buttonStyle(BorderlessButtonStyle())
+                }.frame(height: 20)
+                
                 ProfileHeader()
                 
-            }.navigationBarTitle("Ramble",displayMode: .inline)
+//              TODO: Replace this feed with a a view of only a user's posts!
+                
+                RambFeed()
+            }
         }
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }

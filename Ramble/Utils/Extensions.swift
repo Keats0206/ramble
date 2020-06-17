@@ -10,6 +10,8 @@
 
 import Foundation
 
+// Date formatter for recordings
+
 extension Date
 {
     func toString( dateFormat format  : String ) -> String
@@ -18,5 +20,4 @@ extension Date
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
-
 }

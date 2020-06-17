@@ -6,35 +6,25 @@
 //  Copyright © 2020 Peter Keating. All rights reserved.
 
 import SwiftUI
-import UIKit
 
 struct AppView: View {
+    @ObservedObject var audioRecorder: AudioRecorder
+    @State var recordingModal_shown = false
     
     var body: some View {
-        
-        ZStack{
-            
-            TabView {
-                
-                ProfileView().tabItem {
-                
-                    Image(systemName: "person").resizable()
-                    
-                }.tag(0)
-                
-                FeedView(audioRecorder: AudioRecorder()).tabItem {
-                
-                    Image(systemName: "dot.radiowaves.left.and.right")
-                
-                }.tag(1)
-                
-            }.accentColor(.red)
+        TabView{
+            FeedView(audioRecorder: AudioRecorder()).tabItem {
+                Image(systemName: "dot.radiowaves.left.and.right")
+                Text("Feed")
+                .tag(1)
+            }
+           
+            ActivityView().tabItem {
+                Image(systemName: "bell.circle")
+                Text("Activity")
+                .tag(2)
+            }
         }
     }
 }
 
-struct AppView_Previews : PreviewProvider {
-    static var previews: some View {
-        AppView().environmentObject(SessionStore())
-    }
-}

@@ -9,48 +9,46 @@
 import SwiftUI
 import Firebase
 
-struct datatype : Identifiable {
+struct RambService {
+    static let shared = RambService()
     
-    var id : String
-    var name : String
-    var userimage : String
-    var title : String
-    var length : String
-    var date : String
-    var time : String
-    var applause : String
-    var stream : String
-    var tagId : String
-}
-
-class getData : ObservableObject {
-
-    @Published var datas = [datatype]()
-        init() {
-            let db = Firestore.firestore()
-                db.collection("rambs").addSnapshotListener { (snap, err) in
-                if err != nil {
-                    print ((err?.localizedDescription)!)
-                    return
-                }
-                for i in snap!.documentChanges{
-                    if i.type == .added{
-                        let id = i.document.documentID
-                        let name = i.document.get("name") as! String
-                        let userimage = i.document.get("userimage") as! String
-                        let title = i.document.get("title") as! String
-                        let length = i.document.get("length") as! String
-                        let date = i.document.get("date") as! String
-                        let time = i.document.get("time") as! String
-                        let applause = i.document.get("applause") as! String
-                        let stream = i.document.get("stream") as! String
-                        let tagId = i.document.get("id") as! String
-                        
-                        DispatchQueue.main.async {
-                            self.datas.append(datatype(id: id, name: name, userimage: userimage, title: title, length: length, date: date, time: time, applause: applause, stream: stream, tagId: tagId))
-                        }
-                    }
-                }
+    func uploadRamb(caption: String, rambUrl: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        REF_RAMBS.document().setData([
+                "caption":"\(caption)",
+                "claps":"0",
+                "timestamp":Int(NSDate().timeIntervalSince1970),
+                "length":"59s",
+                "rambUrl": "\(rambUrl)",
+                "userimage": "https://media-exp1.licdn.com/dms/image/C5603AQGbHL6OVW4A8A/profile-displayphoto-shrink_400_400/0?e=1596067200&v=beta&t=K0rDOMqlkKiL8xnxktJaVUDO_H8ct2bXqV4E_AVXQ2Y",
+                "name":"@Pete",
+                "location":"location",
+                "uid": uid ])
+        { (err) in
+            if err != nil{
+                print((err?.localizedDescription)!)
+                return
             }
         }
     }
+}
+
+func handleClap(didClap: Bool, claps: String, id: String) {
+    var clapsInt = Int(claps)!
+    let idStr = String(id)
+    if didClap {
+        clapsInt -= 1
+    } else {
+        clapsInt += 1
+    }
+    let clapsStr = String(clapsInt)
+    
+    REF_RAMBS.document("\(idStr)").updateData(["claps": "\(clapsStr)"]) { err in
+        if let err = err {
+            print("Error updating document: \(err)")
+        } else {
+            print("updating this ramb \(idStr) with this number of claps \(clapsStr)")
+        }
+    }
+    return
+}

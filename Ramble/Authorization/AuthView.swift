@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct SignInView : View {
-
     @State var email: String = ""
     @State var password: String = ""
     @State var loading = false

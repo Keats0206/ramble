@@ -17,12 +17,11 @@ class AudioRecorder: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        
         sortLatestRecordings()
     }
-    
-    var strmurl = "filed"
-    var data = ""
+
+    @Published var rambUrl: String = "";
+    @Published var currentTime: Int = 0
 
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
@@ -58,9 +57,10 @@ class AudioRecorder: NSObject, ObservableObject {
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
-            audioRecorder.record()
-
+            audioRecorder.record(forDuration: 60.0)            
             recording = true
+            
+            
         } catch {
             print("Could not start recording")
         }
@@ -70,71 +70,63 @@ class AudioRecorder: NSObject, ObservableObject {
     
     func stopRecording() {
         audioRecorder.stop()
-        
         recording = false
-        
         sortThenUpload()
-        
     }
     
     // store file locally and sort the latest local recordings so newest is at the top
     
-        func sortLatestRecordings(){
+    func sortLatestRecordings(){
+        
+        recordings.removeAll()
+        
+        let fileManager = FileManager.default
+        
+        let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
+        let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+
+        for audio in directoryContents {
+            let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
+            recordings.append(recording)
             
-            recordings.removeAll()
-                    
-                let fileManager = FileManager.default
-
-                let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-
-                let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-
-                for audio in directoryContents {
-                    let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
-                    recordings.append(recording)
-
             //  Sort the recordings array by the creation date of its items and eventually update all observing views
-                    
-                recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
-
-                objectWillChange.send(self)
-            }
+            
+            recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
+            
+            objectWillChange.send(self)
         }
+    }
     
     // Upload to firestore function and get streaming url :)
     
     func uploadLatestRecording() {
-    
         let localFile = recordings[0].fileURL
         let rambUUID = UUID().uuidString
         let storageRef = Storage.storage().reference(forURL: "gs://ramb-ecce1.appspot.com")
         let rambsRef = storageRef.child("rambs").child("ramb" + rambUUID)
         
         rambsRef.putFile(from: localFile, metadata: nil
-                , completion: { (metadata, error) in
-                        if error != nil {
-                            print("error")
-                            return
-                        } else {
-                            rambsRef.downloadURL(completion: { (url, error) in
-                                
-                                print("uploading URL")
-                                
-                                return self.strmurl = (url?.absoluteString)!
-                                                                
-                                // If this was succesful should we delete the last recording stored locally...hmmm
-                            })
-                        }
-                })
+            , completion: { (metadata, error) in
+                if error != nil {
+                    print("error")
+                    return
+                } else {
+                    rambsRef.downloadURL(completion: { (url, error) in
+                        self.rambUrl = (url?.absoluteString)!
+                        print("DEBUG: set state of audio recorder to 'ready for post' now that the url is downloaded")
+                        return
+                        
+                        // If this was succesful should we delete the last recording stored locally...hmmm
+                    })
+                }
+        })
     }
     
     
     
     func sortThenUpload() {
-        
         sortLatestRecordings()
-        
         uploadLatestRecording()
-        
     }
 }

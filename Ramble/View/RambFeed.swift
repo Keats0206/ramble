@@ -10,23 +10,17 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct RambFeed : View {
-
-    @ObservedObject var observedData = getData()
+    @ObservedObject var viewModel = RambViewModel()
+    
+    init(){
+        viewModel.fetchRambs()
+    }
     
     var body: some View {
-        
-        ZStack {
-            List {
-                ForEach(observedData.datas){i in
-                    rambCell(id: i.tagId, userimage: i.userimage, title: i.title, length: i.length, date: i.date, applause: i.applause, stream: i.stream, docId: i.id)
-                }
-            }.padding(.bottom, 15)
-        }
-    }
-}
-
-struct RambFeed_Previews: PreviewProvider {
-    static var previews: some View {
-        RambFeed()
+        List{
+            ForEach(viewModel.rambs){ramb in
+                rambCell(ramb: ramb)
+            }
+        }.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
     }
 }

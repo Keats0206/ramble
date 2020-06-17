@@ -9,22 +9,19 @@
 import SwiftUI
 
 struct ProfileHeader: View {
-    
     var body: some View {
         
-        VStack(){
-            
+        VStack{
             VStack{
-                
                 Image("User-image")
                     .resizable()
                     .frame(width: 150, height: 150)
                     .cornerRadius(80, corners: [.bottomLeft, .bottomRight])
-            
+                
                 Text("@Username").font(.system(size: 25)).fontWeight(.heavy)
-
+                
                 Spacer().frame(height: 10)
-        
+                
                 Text("Listeners/Following").font(.system(size: 18))
                 
                 Spacer().frame(height: 10)
@@ -32,12 +29,9 @@ struct ProfileHeader: View {
                 Text("This is my bio where I tell you about who I am and what I do").font(.system(size: 16))
                 
                 Divider()
-                
             }
             .frame(width: 200)
             .padding(.vertical, 15)
-            
-            Spacer()
         }
     }
 }

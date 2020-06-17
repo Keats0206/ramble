@@ -1,48 +1,94 @@
 //
-//  HomeView.swift
+//  FeedView.swift
 //  Ramble
 //
-//  Created by Peter Keating on 4/23/20.
+//  Created by Peter Keating on 6/15/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
 
 import SwiftUI
-import UIKit
 
 struct FeedView: View {
-    
     @ObservedObject var audioRecorder: AudioRecorder
+    @State var recordingModal_shown = false
+    @State var profileModal_shown = false
+    @State var locationModal_shown = false
     
-    var userimage = ""
-            
+    @ObservedObject var locationManager = LocationManager()
+    
+    var userLatitude: String {
+        return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
+    }
+    
+    var userLongitude: String {
+        return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
+    }
+    
+    // UI built without navigation view...just one App view, and all popover views.
+    
     var body: some View {
-        
-        NavigationView{
-            
-            ZStack(){
+        ZStack{
+            VStack{
+                VStack{
+                    Spacer()
+                    
+                    HStack{
+                        Text("Ramble")
+                        
+                        Spacer()
+                        
+                        HStack{
+                            Text("Hot")
+                            Spacer().frame(width: 10)
+                            Text("New")
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.locationModal_shown.toggle()
+                        }){
+                            Image(systemName: "mappin.and.ellipse")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        }.buttonStyle(BorderlessButtonStyle())
+                        
+                        Button(action: {
+                            self.profileModal_shown.toggle()
+                        }){
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        }.buttonStyle(BorderlessButtonStyle())
+                        
+                        Button(action: {
+                            self.recordingModal_shown.toggle()
+                        }){
+                            Image(systemName: "mic.circle")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        }.buttonStyle(BorderlessButtonStyle())
+                    }.padding([.top, .leading, .trailing])
+                }.frame(height: 100)
                 
                 RambFeed()
                 
-                SlideOverCard {
-                    
-                    RecordPopOverView(audioRecorder: AudioRecorder())
-                    
-                }
-                
-            }.navigationBarTitle("Ramble",displayMode: .inline)
-            .navigationBarItems(leading:
+            }
             
-                Image(userimage).resizable().frame(width: 35, height: 35).clipShape(Circle()).onTapGesture {
-                    
-                    print("slide out menu ....")
-                }
-            )
+            HalfModalView(isShown: $recordingModal_shown, modalHeight: 400
+            ){
+                RecordPopOverView(audioRecorder: AudioRecorder())
+            }
+            
+            HalfModalView(isShown: $profileModal_shown
+            ){
+                ProfileView(isShown: self.$profileModal_shown)
+            }
+            
+            HalfModalView(isShown: $locationModal_shown, modalHeight: 300
+            ){
+                LocationView()
+            }
         }
-    }
-}
-
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView(audioRecorder: AudioRecorder())
     }
 }

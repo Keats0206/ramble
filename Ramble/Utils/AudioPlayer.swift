@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 import SwiftUI
 import Combine
 import AVKit
