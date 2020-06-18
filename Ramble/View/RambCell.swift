@@ -17,20 +17,18 @@ struct rambCell : View {
     var body: some View {
         
         VStack{
-        
-            HStack{
             
-                Spacer().frame(width: 10)
+            HStack{
                 
                 VStack{
-                    AnimatedImage(url: URL(string: "\(ramb.userimage)")!)
+                    AnimatedImage(url: URL(string: "\(ramb.userimage)"))
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 60, height: 60, alignment: .center)
                 }
                 
                 Spacer().frame(width: 10)
-            
+                
                 VStack(alignment: .leading){
                     HStack {
                         Text(ramb.name).font(.body).fontWeight(.heavy)
@@ -44,10 +42,9 @@ struct rambCell : View {
                 Spacer()
                 
                 HStack{
-                
+                    
                     Button(action: {
-                        print("DEBUG: handle clap")
-//                        handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
+                        RambService.shared.handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
                         self.didClap.toggle()
                     }){
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
@@ -61,7 +58,7 @@ struct rambCell : View {
                 Spacer().frame(width: 10)
                 
                 VStack(alignment: .leading){
-                
+                    
                     if audioPlayer.isPlaying == false {
                         Button(action: {
                             self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
@@ -71,7 +68,7 @@ struct rambCell : View {
                                 .frame(width: 35, height: 35)
                         }.buttonStyle(BorderlessButtonStyle())
                     } else {
-                      
+                        
                         Button(action: {
                             self.audioPlayer.stopPlayback()
                         }) {
@@ -80,11 +77,11 @@ struct rambCell : View {
                                 .frame(width: 35, height: 35)
                         }.buttonStyle(BorderlessButtonStyle())
                     }
+                    
+                    Spacer().frame(width: 10)
+                    
                 }
-                
-                Spacer().frame(width: 10)
-            
-            }
+            }.accentColor(.red)
         }
     }
 }

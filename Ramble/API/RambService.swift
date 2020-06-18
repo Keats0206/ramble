@@ -38,24 +38,26 @@ struct RambService {
             GEO_REF_RAMBS.setLocation(self.location.lastLocation!, forKey: rambID)
         }
     }
+    
+    func handleClap(didClap: Bool, claps: String, id: String) {
+        var clapsInt = Int(claps)!
+        let idStr = String(id)
+        if didClap {
+            clapsInt -= 1
+        } else {
+            clapsInt += 1
+        }
+        let clapsStr = String(clapsInt)
+        
+        REF_RAMBS.child("\(idStr)").updateChildValues(["claps": "\(clapsStr)"]) { err, ref in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("updating this ramb \(idStr) with this number of claps \(clapsStr)")
+            }
+        }
+        
+        return
+    }
 }
 
-//func handleClap(didClap: Bool, claps: String, id: String) {
-//    var clapsInt = Int(claps)!
-//    let idStr = String(id)
-//    if didClap {
-//        clapsInt -= 1
-//    } else {
-//        clapsInt += 1
-//    }
-//    let clapsStr = String(clapsInt)
-//
-//    REF_RAMBS.document("\(idStr)").updateData(["claps": "\(clapsStr)"]) { err in
-//        if let err = err {
-//            print("Error updating document: \(err)")
-//        } else {
-//            print("updating this ramb \(idStr) with this number of claps \(clapsStr)")
-//        }
-//    }
-//    return
-//}

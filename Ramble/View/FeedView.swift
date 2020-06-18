@@ -10,11 +10,11 @@ import SwiftUI
 
 struct FeedView: View {
     @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var locationManager = LocationManager()
+    
     @State var recordingModal_shown = false
     @State var profileModal_shown = false
     @State var locationModal_shown = false
-    
-    @ObservedObject var locationManager = LocationManager()
     
     var userLatitude: String {
         return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
@@ -30,6 +30,9 @@ struct FeedView: View {
         ZStack{
             VStack{
                 VStack{
+                    
+                    Text("Los Angeles")
+                    
                     Spacer()
                     
                     HStack{
@@ -41,7 +44,7 @@ struct FeedView: View {
                             Text("Hot")
                             Spacer().frame(width: 10)
                             Text("New")
-                        }
+                        }.accentColor(.red)
                         
                         Spacer()
                         
@@ -68,7 +71,7 @@ struct FeedView: View {
                                 .resizable()
                                 .frame(width: 20, height: 20)
                         }.buttonStyle(BorderlessButtonStyle())
-                    }.padding([.top, .leading, .trailing])
+                    }.padding([.top, .leading, .trailing]).accentColor(.red)
                 }.frame(height: 100)
                 
                 RambFeed()

@@ -41,8 +41,23 @@ class SessionStore : ObservableObject {
         email: String,
         password: String,
         handler: @escaping AuthDataResultCallback
-        ) {
-        Auth.auth().createUser(withEmail: email, password: password, completion: handler)
+    ) {
+        Auth.auth().createUser(withEmail: email, password: password) { (handler, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            let values = ["email": email, "password": password]
+            let uid = Auth.auth().currentUser?.uid
+            
+            REF_USERS.child(uid!).updateChildValues(values, withCompletionBlock: {(err, ref) in
+                if err != nil {
+                    print(err)
+                    return
+                }
+                print("Added user to firebase")
+            })
+        }
     }
 
     func signIn(

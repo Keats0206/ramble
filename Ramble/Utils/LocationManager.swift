@@ -66,7 +66,6 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         self.lastLocation = location
         
-        GEO_REF_USERS.setLocation(location, forKey: Auth.auth().currentUser!.uid)
+        GEO_REF_USERS.setLocation(location, forKey: Auth.auth().currentUser?.uid ?? "nil")
     }
-
 }

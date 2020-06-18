@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Ramb {
+struct Ramb: Identifiable {
     let id: String
     let caption: String
     let claps: String
@@ -18,20 +18,18 @@ struct Ramb {
     let userimage: String
     let uid: String
     var timestamp: Int
-    let user: User
     
-    init(user: User, id: String, dictionary: [String: Any]) {
+    init(id: String, dictionary: [String: Any]) {
         self.id = id
-        self.user = user
         
         self.claps = dictionary["claps"] as? String ?? ""
         self.caption = dictionary["caption"] as? String ?? ""
-        self.length = dictionary["uid"] as? String ?? ""
-        self.name = dictionary["uid"] as? String ?? ""
-        self.rambUrl = dictionary["uid"] as? String ?? ""
-        self.userimage = dictionary["uid"] as? String ?? ""
+        self.length = dictionary["length"] as? String ?? ""
+        self.name = dictionary["name"] as? String ?? ""
+        self.rambUrl = dictionary["rambUrl"] as? String ?? ""
+        self.userimage = dictionary["userimage"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
-        self.timestamp = dictionary["uid"] as? Int ?? 0
+        self.timestamp = dictionary["timestamp"] as? Int ?? 0
     }
 }
 

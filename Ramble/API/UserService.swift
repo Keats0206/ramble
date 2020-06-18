@@ -9,11 +9,7 @@
 import Firebase
 
 struct UserService {
-    static let shared = UserService()
-    
-    func CreateUser(){
-        
-    }
+
 }
     
 //    func fetchUser(uid: String, completion: @escaping(User) -> Void) {
