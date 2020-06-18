@@ -9,9 +9,11 @@ target 'Ramble' do
 
   # Pods for Ramble
 	pod 'Firebase/Auth'  
-	pod 'FirebaseFirestore'
+	pod ‘Firebase/Database’
 	pod 'Firebase/Analytics'
-	pod 'PRTween'
 	pod 'Firebase/Storage'
+	pod 'PRTween'
+	pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+
 
 end

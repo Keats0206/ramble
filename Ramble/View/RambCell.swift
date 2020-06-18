@@ -46,7 +46,8 @@ struct rambCell : View {
                 HStack{
                 
                     Button(action: {
-                        handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
+                        print("DEBUG: handle clap")
+//                        handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
                         self.didClap.toggle()
                     }){
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")

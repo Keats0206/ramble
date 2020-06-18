@@ -10,6 +10,8 @@
 import Foundation
 import CoreLocation
 import Combine
+import GeoFire
+import Firebase
 
 class LocationManager: NSObject, ObservableObject {
 
@@ -58,13 +60,13 @@ extension LocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.locationStatus = status
-        print(#function, statusString)
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.lastLocation = location
-        print(#function, location)
+        
+        GEO_REF_USERS.setLocation(location, forKey: Auth.auth().currentUser!.uid)
     }
 
 }

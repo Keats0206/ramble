@@ -11,6 +11,11 @@ import Firebase
 struct UserService {
     static let shared = UserService()
     
+    func CreateUser(){
+        
+    }
+}
+    
 //    func fetchUser(uid: String, completion: @escaping(User) -> Void) {
 //        REF_USERS.addSnapshotListener() { snapshot, err in
 //            guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
@@ -30,4 +35,4 @@ struct UserService {
 //            completion(users)
 //        }
 //    }
-}
+

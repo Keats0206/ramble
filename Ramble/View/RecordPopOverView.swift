@@ -14,11 +14,10 @@ struct RecordPopOverView: View {
 
     var body: some View {
         VStack {
-
             Handle()
-
+            
             Spacer().frame(height: 5)
-
+            
             HStack {
 
                 Spacer()
@@ -67,7 +66,6 @@ struct RecordPopOverView: View {
                     }
                 }
             }
-            
             
             HStack {
                 Button(action: {
