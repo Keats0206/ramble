@@ -8,13 +8,20 @@
 
 import SwiftUI
 
+
 struct FeedView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var locationManager = LocationManager()
     
-    @State var recordingModal_shown = false
-    @State var profileModal_shown = false
-    @State var locationModal_shown = false
+    @State private var recordingModal_shown = false
+    @State private var profileModal_shown = false
+    @State private var locationModal_shown = false
+    
+//    How can I use thise state toggle to chage what data is displayed??? hmmmm
+    
+    @State var dataSelector = 0
+    
+    var feedtoggle = ["Hot", "New"]
     
     var userLatitude: String {
         return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
@@ -30,22 +37,25 @@ struct FeedView: View {
         ZStack{
             VStack{
                 VStack{
-                    
-                    Text("Los Angeles")
-                    
+                                    
                     Spacer()
                     
                     HStack{
+                        
                         Text("Ramble")
                         
                         Spacer()
                         
-                        HStack{
-                            Text("Hot")
-                            Spacer().frame(width: 10)
-                            Text("New")
-                        }.accentColor(.red)
-                        
+                        HStack {
+                            
+                            Picker(selection: $dataSelector, label: Text("")) {
+                                ForEach(0..<feedtoggle.count) { index in
+                                    Text(self.feedtoggle[index]).tag(index)
+                                }
+                            }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
+                            
+                        }
+
                         Spacer()
                         
                         Button(action: {
@@ -74,15 +84,19 @@ struct FeedView: View {
                     }.padding([.top, .leading, .trailing]).accentColor(.red)
                 }.frame(height: 100)
                 
-                RambFeed()
-                
+                if dataSelector == 0{
+                    RambHotFeed()
+                } else {
+                    RambNewFeed()
+                }
+
             }
             
             HalfModalView(isShown: $recordingModal_shown, modalHeight: 400
             ){
                 RecordPopOverView(audioRecorder: AudioRecorder())
             }
-            
+                        
             HalfModalView(isShown: $profileModal_shown
             ){
                 ProfileView(isShown: self.$profileModal_shown)
@@ -95,3 +109,4 @@ struct FeedView: View {
         }
     }
 }
+

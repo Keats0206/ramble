@@ -22,12 +22,14 @@ class SessionStore : ObservableObject {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 // if we have a user, create a new user model
+                let uid = user.uid
+                let values = [
+                    "email": user.email,
+                    "displayName": user.displayName]
+                
                 print("Got user: \(user)")
                 self.session = User(
-                    uid: user.uid,
-                    displayName: user.displayName,
-                    email: user.email
-                )
+                    uid: uid, values: values as [String : Any])
             } else {
                 // if we don't have a user, set our session to nil
                 self.session = nil
@@ -40,19 +42,21 @@ class SessionStore : ObservableObject {
     func signUp(
         email: String,
         password: String,
+        fullname: String,
+        username: String,
         handler: @escaping AuthDataResultCallback
     ) {
         Auth.auth().createUser(withEmail: email, password: password) { (handler, error) in
             if error != nil {
-                print(error)
+                print(error!)
                 return
             }
-            let values = ["email": email, "password": password]
+            let values = ["email": email, "password": password, "fullname": fullname, "username": username]
             let uid = Auth.auth().currentUser?.uid
             
             REF_USERS.child(uid!).updateChildValues(values, withCompletionBlock: {(err, ref) in
                 if err != nil {
-                    print(err)
+                    print(err!)
                     return
                 }
                 print("Added user to firebase")
@@ -84,3 +88,5 @@ class SessionStore : ObservableObject {
         }
     }
 }
+
+

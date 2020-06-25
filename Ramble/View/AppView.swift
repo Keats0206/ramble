@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AppView: View {
     @ObservedObject var audioRecorder: AudioRecorder
-    @State var recordingModal_shown = false
     
     var body: some View {
         TabView{

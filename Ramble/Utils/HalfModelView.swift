@@ -21,7 +21,7 @@ struct HalfModalView<Content: View> : View {
     }
     
     var modalHeight:CGFloat =  UIScreen.main.bounds.size.height
-    
+
     var content: () -> Content
     
     var body: some View {

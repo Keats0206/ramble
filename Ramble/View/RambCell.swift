@@ -11,15 +11,17 @@ import SDWebImageSwiftUI
 
 struct rambCell : View {
     @ObservedObject var audioPlayer = AudioPlayer()
+    @ObservedObject var viewModel = RambService()
+    
     @State var didClap = false
+    @State var width : CGFloat = 0
     
     let ramb: Ramb
+    
     var body: some View {
         
         VStack{
-            
             HStack{
-                
                 VStack{
                     AnimatedImage(url: URL(string: "\(ramb.userimage)"))
                         .resizable()
@@ -34,9 +36,15 @@ struct rambCell : View {
                         Text(ramb.name).font(.body).fontWeight(.heavy)
                         
                         Text(formatDate(timestamp: ramb.timestamp) + " ago")
+                        
                     }
                     Text(ramb.caption).font(.subheadline).fontWeight(.regular).multilineTextAlignment(TextAlignment.leading)
                     Spacer()
+                    
+                    Text(String(audioPlayer.rambCurrentTime))
+                    
+                    Text(String(audioPlayer.rambDuration))
+                
                 }
                 
                 Spacer()
@@ -44,7 +52,7 @@ struct rambCell : View {
                 HStack{
                     
                     Button(action: {
-                        RambService.shared.handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
+                        self.viewModel.handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
                         self.didClap.toggle()
                     }){
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
@@ -52,7 +60,7 @@ struct rambCell : View {
                             .frame(width: 20, height: 20)
                     }.buttonStyle(BorderlessButtonStyle())
                     
-                    Text(ramb.claps)
+                    Text(String(ramb.claps * -1))
                 }
                 
                 Spacer().frame(width: 10)
@@ -68,7 +76,6 @@ struct rambCell : View {
                                 .frame(width: 35, height: 35)
                         }.buttonStyle(BorderlessButtonStyle())
                     } else {
-                        
                         Button(action: {
                             self.audioPlayer.stopPlayback()
                         }) {

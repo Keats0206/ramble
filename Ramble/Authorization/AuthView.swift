@@ -42,7 +42,6 @@ struct SignInView : View {
                     .frame(width: 100, height: 100)
                     .foregroundColor(.white)
                 
-                Spacer()
                 
                 VStack {
                     TextField("Email Addesss", text: $email)
@@ -86,6 +85,11 @@ struct SignUpView : View {
 
 @State var email: String = ""
 @State var password: String = ""
+@State var username: String = ""
+@State var fullname: String = ""
+@State var image: Image? = Image("placeholder")
+    
+@State var isShowPicker: Bool = false
 @State var loading = false
 @State var error = false
 
@@ -95,7 +99,7 @@ func signUp () {
     print("sign me up")
     loading = true
     error = false
-    session.signUp(email: email, password: password) { (result, error) in
+    session.signUp(email: email, password: password, fullname: fullname, username: username) { (result, error) in
         self.loading = false
         if error != nil {
             print("Oops")
@@ -116,18 +120,29 @@ var body : some View {
             VStack {
                 
                 Spacer()
-                
-                Image(systemName: "waveform")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.white)
-                
-                Spacer()
-                
-                Text("Create an account")
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .frame(height: 50)
-                .foregroundColor(.white)
+
+                ZStack {
+                    VStack {
+                        image?
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .cornerRadius(80)
+                        
+                        Button(action: {
+                            withAnimation {
+                                self.isShowPicker.toggle()
+                            }
+                        }) {
+                            Image(systemName: "person.badge.plus.fill")
+                                .font(.headline)
+                            Text("Select profile image").font(.headline)
+                        }.foregroundColor(.white)
+                        
+                        Spacer()
+                    }
+                }.sheet(isPresented: $isShowPicker) {
+                    ImagePicker(image: self.$image)
+                }
                 
                 VStack{
             
@@ -136,6 +151,16 @@ var body : some View {
                     .padding(12)
                     .background(Color(.white))
                     
+                TextField("Fullname", text: $fullname)
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(12)
+                    .background(Color(.white))
+                
+                TextField("Username", text: $username)
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(12)
+                    .background(Color(.white))
+                        
                 SecureField("Password", text: $password)
                     .font(.system(size: 18, weight: .bold))
                     .padding(12)
@@ -168,14 +193,59 @@ var body : some View {
                                 }
                         }
                 }
-                
-                Spacer()
-        
-                    Text("Thanks for joining Ramble. By joining, you are agreeing to our terms of use, which can be found on our website ramble.com").font(.system(size: 14)).foregroundColor(.black)
             }
         }
     }
 }
+
+struct ImagePicker: UIViewControllerRepresentable {
+
+    @Environment(\.presentationMode)
+    var presentationMode
+
+    @Binding var image: Image?
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+        @Binding var presentationMode: PresentationMode
+        @Binding var image: Image?
+
+        init(presentationMode: Binding<PresentationMode>, image: Binding<Image?>) {
+            _presentationMode = presentationMode
+            _image = image
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController,
+                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            let uiImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+            image = Image(uiImage: uiImage)
+            presentationMode.dismiss()
+
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            presentationMode.dismiss()
+        }
+
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(presentationMode: presentationMode, image: $image)
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController,
+                                context: UIViewControllerRepresentableContext<ImagePicker>) {
+
+    }
+
+}
+
 
 struct AuthView : View {
     var body : some View {

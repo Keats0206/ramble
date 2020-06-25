@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		299C9B029610FD3FE7789271 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEA2E46B276CBE44A6205E4 /* Pods_Ramble.framework */; };
 		40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D112498654D00B2E8A9 /* InlineAlert.swift */; };
 		40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1524986CB800B2E8A9 /* FeedView.swift */; };
 		40150D1A2499279D00B2E8A9 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D192499279D00B2E8A9 /* LocationView.swift */; };
@@ -19,7 +18,7 @@
 		402F549A244F91AA00FD899F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5499244F91AA00FD899F /* Preview Assets.xcassets */; };
 		402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402F549B244F91AA00FD899F /* LaunchScreen.storyboard */; };
 		402F54C1244F9AA100FD899F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C0244F9AA100FD899F /* ProfileView.swift */; };
-		402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C2244F9ACC00FD899F /* RambFeed.swift */; };
+		402F54C3244F9ACC00FD899F /* RambHotFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C2244F9ACC00FD899F /* RambHotFeed.swift */; };
 		402F54C6244F9CEB00FD899F /* RambService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C5244F9CEB00FD899F /* RambService.swift */; };
 		402F54C8244F9E4E00FD899F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */; };
 		402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 402F54CA244F9FD000FD899F /* SDWebImageSwiftUI */; };
@@ -28,11 +27,13 @@
 		40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C7E2492777700C0C39A /* HalfModelView.swift */; };
 		40353C83249282BB00C0C39A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* SettingsView.swift */; };
 		40353C872492DA2F00C0C39A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C862492DA2F00C0C39A /* LocationManager.swift */; };
+		404821D424A3BB4300BD63A3 /* RambNewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D324A3BB4300BD63A3 /* RambNewFeed.swift */; };
+		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
 		406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */; };
 		406FAD03244FF0EB00223873 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD02244FF0EB00223873 /* AudioPlayer.swift */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
 		406FAD07244FF13100223873 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD06244FF13100223873 /* Extensions.swift */; };
-		406FAD09244FF15D00223873 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD08244FF15D00223873 /* Helper.swift */; };
+		406FAD09244FF15D00223873 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD08244FF15D00223873 /* Helpers.swift */; };
 		406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0A244FF17600223873 /* RecordingModel.swift */; };
 		406FAD132450ABF300223873 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD122450ABF300223873 /* SessionStore.swift */; };
 		406FAD172450B55200223873 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD162450B55200223873 /* ContentView.swift */; };
@@ -46,7 +47,7 @@
 		40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA2F248EA0F100F3CE02 /* RambModel.swift */; };
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
 		40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA53248EB86900F3CE02 /* RambCell.swift */; };
-		40F3FA56248EBD1E00F3CE02 /* RambViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA55248EBD1E00F3CE02 /* RambViewModel.swift */; };
+		B091CB605533265212CE7FE5 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2173402475B40521169AF4 /* Pods_Ramble.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,7 +64,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2A284A236AC473BFFAF6B142 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
 		40150D112498654D00B2E8A9 /* InlineAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		40150D1524986CB800B2E8A9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		40150D192499279D00B2E8A9 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 		402F549C244F91AA00FD899F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		402F549E244F91AA00FD899F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		402F54C0244F9AA100FD899F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		402F54C2244F9ACC00FD899F /* RambFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambFeed.swift; sourceTree = "<group>"; };
+		402F54C2244F9ACC00FD899F /* RambHotFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambHotFeed.swift; sourceTree = "<group>"; };
 		402F54C5244F9CEB00FD899F /* RambService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService.swift; sourceTree = "<group>"; };
 		402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		402F54D5244FAD2A00FD899F /* Jimi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jimi.mp3; sourceTree = "<group>"; };
@@ -85,11 +85,13 @@
 		40353C7E2492777700C0C39A /* HalfModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModelView.swift; sourceTree = "<group>"; };
 		40353C82249282BB00C0C39A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		40353C862492DA2F00C0C39A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		404821D324A3BB4300BD63A3 /* RambNewFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambNewFeed.swift; sourceTree = "<group>"; };
+		404821D524A3BB7200BD63A3 /* RambUserFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserFeed.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
 		406FAD02244FF0EB00223873 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		406FAD06244FF13100223873 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		406FAD08244FF15D00223873 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		406FAD08244FF15D00223873 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		406FAD0A244FF17600223873 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
 		406FAD122450ABF300223873 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		406FAD162450B55200223873 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,9 +105,9 @@
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40F3FA53248EB86900F3CE02 /* RambCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCell.swift; sourceTree = "<group>"; };
-		40F3FA55248EBD1E00F3CE02 /* RambViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambViewModel.swift; sourceTree = "<group>"; };
-		573F0FDB73484A82253175FE /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
-		EEEA2E46B276CBE44A6205E4 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A9F8E848C861AB5640A0AD5 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
+		CF2173402475B40521169AF4 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDD54D55658B4FCD7F72CB12 /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,18 +116,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */,
-				299C9B029610FD3FE7789271 /* Pods_Ramble.framework in Frameworks */,
+				B091CB605533265212CE7FE5 /* Pods_Ramble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1815B93A03330F6F07C8CE41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF2173402475B40521169AF4 /* Pods_Ramble.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2D268D9C788D4B05278E39F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2A284A236AC473BFFAF6B142 /* Pods-Ramble.debug.xcconfig */,
-				573F0FDB73484A82253175FE /* Pods-Ramble.release.xcconfig */,
+				9A9F8E848C861AB5640A0AD5 /* Pods-Ramble.debug.xcconfig */,
+				DDD54D55658B4FCD7F72CB12 /* Pods-Ramble.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -137,7 +147,7 @@
 				402F548F244F91A900FD899F /* Ramble */,
 				402F548E244F91A900FD899F /* Products */,
 				2D268D9C788D4B05278E39F4 /* Pods */,
-				7C956160535D3E412B0A5D67 /* Frameworks */,
+				1815B93A03330F6F07C8CE41 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,7 +167,6 @@
 				40F3FA31248EA13B00F3CE02 /* API */,
 				408E258124849FF100C0C6A5 /* App */,
 				408E258224849FF800C0C6A5 /* Model */,
-				408E25842484A07800C0C6A5 /* ViewModel */,
 				408E25832484A01F00C0C6A5 /* View */,
 				402F5496244F91AA00FD899F /* Assets.xcassets */,
 				402F549B244F91AA00FD899F /* LaunchScreen.storyboard */,
@@ -189,6 +198,7 @@
 		408E258124849FF100C0C6A5 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				406FAD162450B55200223873 /* ContentView.swift */,
 				402F5490244F91A900FD899F /* AppDelegate.swift */,
 				402F5492244F91A900FD899F /* SceneDelegate.swift */,
 			);
@@ -213,22 +223,15 @@
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
 				40150D192499279D00B2E8A9 /* LocationView.swift */,
 				40353C82249282BB00C0C39A /* SettingsView.swift */,
-				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
+				402F54C2244F9ACC00FD899F /* RambHotFeed.swift */,
+				404821D324A3BB4300BD63A3 /* RambNewFeed.swift */,
+				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
-				406FAD162450B55200223873 /* ContentView.swift */,
 				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				402F54C0244F9AA100FD899F /* ProfileView.swift */,
 				406FAD2E2452154C00223873 /* ProfileHeader.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		408E25842484A07800C0C6A5 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				40F3FA55248EBD1E00F3CE02 /* RambViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		40F3FA31248EA13B00F3CE02 /* API */ = {
@@ -243,7 +246,7 @@
 		40F3FA32248EA15B00F3CE02 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				406FAD08244FF15D00223873 /* Helper.swift */,
+				406FAD08244FF15D00223873 /* Helpers.swift */,
 				406FAD06244FF13100223873 /* Extensions.swift */,
 				40F3FA51248EB69900F3CE02 /* Constants.swift */,
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
@@ -266,14 +269,6 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
-		7C956160535D3E412B0A5D67 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EEEA2E46B276CBE44A6205E4 /* Pods_Ramble.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,12 +276,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 402F54A1244F91AA00FD899F /* Build configuration list for PBXNativeTarget "Ramble" */;
 			buildPhases = (
-				FA854DC3EC5E08D05E88BA87 /* [CP] Check Pods Manifest.lock */,
+				0979A44F7EBE1861DD69260D /* [CP] Check Pods Manifest.lock */,
 				402F5489244F91A900FD899F /* Sources */,
 				402F548A244F91A900FD899F /* Frameworks */,
 				402F548B244F91A900FD899F /* Resources */,
 				40F3FA5D248EC20D00F3CE02 /* Embed Frameworks */,
-				BBAE626295233AB55A9E87BF /* [CP] Embed Pods Frameworks */,
+				E73E5FA190F5E4D48D3B3B14 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -326,6 +321,7 @@
 			mainGroup = 402F5484244F91A900FD899F;
 			packageReferences = (
 				402F54C9244F9FD000FD899F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				40B1F965249C03B4008A3F37 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 402F548E244F91A900FD899F /* Products */;
 			projectDirPath = "";
@@ -353,24 +349,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BBAE626295233AB55A9E87BF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA854DC3EC5E08D05E88BA87 /* [CP] Check Pods Manifest.lock */ = {
+		0979A44F7EBE1861DD69260D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -392,6 +371,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E73E5FA190F5E4D48D3B3B14 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -400,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
+				404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */,
 				40252C5F248F324600013742 /* UserService.swift in Sources */,
 				402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */,
 				406FAD212450D7FA00223873 /* AppView.swift in Sources */,
@@ -407,16 +404,16 @@
 				402F54C6244F9CEB00FD899F /* RambService.swift in Sources */,
 				40353C872492DA2F00C0C39A /* LocationManager.swift in Sources */,
 				406FAD292451E38D00223873 /* SlideOverCard.swift in Sources */,
-				406FAD09244FF15D00223873 /* Helper.swift in Sources */,
-				40F3FA56248EBD1E00F3CE02 /* RambViewModel.swift in Sources */,
+				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				406FAD2B2451E3B100223873 /* Handle.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
+				404821D424A3BB4300BD63A3 /* RambNewFeed.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
-				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
+				402F54C3244F9ACC00FD899F /* RambHotFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* SettingsView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
 				406FAD2F2452154C00223873 /* ProfileHeader.swift in Sources */,
@@ -564,7 +561,7 @@
 		};
 		402F54A2244F91AA00FD899F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A284A236AC473BFFAF6B142 /* Pods-Ramble.debug.xcconfig */;
+			baseConfigurationReference = 9A9F8E848C861AB5640A0AD5 /* Pods-Ramble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -586,7 +583,7 @@
 		};
 		402F54A3244F91AA00FD899F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 573F0FDB73484A82253175FE /* Pods-Ramble.release.xcconfig */;
+			baseConfigurationReference = DDD54D55658B4FCD7F72CB12 /* Pods-Ramble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -636,6 +633,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.3.3;
+			};
+		};
+		40B1F965249C03B4008A3F37 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

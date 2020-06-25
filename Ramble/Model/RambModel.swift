@@ -11,7 +11,7 @@ import Foundation
 struct Ramb: Identifiable {
     let id: String
     let caption: String
-    let claps: String
+    let claps: Int
     let length: String
     let name: String
     let rambUrl: String
@@ -22,7 +22,7 @@ struct Ramb: Identifiable {
     init(id: String, dictionary: [String: Any]) {
         self.id = id
         
-        self.claps = dictionary["claps"] as? String ?? ""
+        self.claps = dictionary["claps"] as? Int ?? 0
         self.caption = dictionary["caption"] as? String ?? ""
         self.length = dictionary["length"] as? String ?? ""
         self.name = dictionary["name"] as? String ?? ""
@@ -32,7 +32,3 @@ struct Ramb: Identifiable {
         self.timestamp = dictionary["timestamp"] as? Int ?? 0
     }
 }
-
-
-
-

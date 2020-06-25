@@ -10,6 +10,8 @@ import SwiftUI
 
 struct RecordPopOverView: View {
     @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var viewModel = RambService()
+    
     @State var caption = "Enter A Ramb Title Here"
 
     var body: some View {
@@ -70,7 +72,7 @@ struct RecordPopOverView: View {
             HStack {
                 Button(action: {
                     print("DEBUG: post-recording")
-                    RambService.shared.uploadRamb(caption: self.caption, rambUrl: self.audioRecorder.rambUrl)
+                    self.viewModel.uploadRamb(caption: self.caption, rambUrl: self.audioRecorder.rambUrl)
                 }) {
                     Image(systemName: "plus.square")
                         .resizable()
@@ -86,7 +88,6 @@ struct RecordPopOverView: View {
             }.padding()
             
             Spacer()
-            
         }
     }
 }

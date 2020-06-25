@@ -15,5 +15,4 @@ target 'Ramble' do
 	pod 'PRTween'
 	pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
-
 end
