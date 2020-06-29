@@ -239,6 +239,7 @@
 			children = (
 				402F54C5244F9CEB00FD899F /* RambService.swift */,
 				40252C5E248F324600013742 /* UserService.swift */,
+				40353C862492DA2F00C0C39A /* LocationManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -255,7 +256,6 @@
 				40353C7E2492777700C0C39A /* HalfModelView.swift */,
 				406FAD2A2451E3B100223873 /* Handle.swift */,
 				40150D112498654D00B2E8A9 /* InlineAlert.swift */,
-				40353C862492DA2F00C0C39A /* LocationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

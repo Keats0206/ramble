@@ -20,7 +20,6 @@ struct FeedView: View {
 //    How can I use thise state toggle to chage what data is displayed??? hmmmm
     
     @State var dataSelector = 0
-    
     var feedtoggle = ["Hot", "New"]
     
     var userLatitude: String {
@@ -47,13 +46,11 @@ struct FeedView: View {
                         Spacer()
                         
                         HStack {
-                            
                             Picker(selection: $dataSelector, label: Text("")) {
                                 ForEach(0..<feedtoggle.count) { index in
                                     Text(self.feedtoggle[index]).tag(index)
                                 }
                             }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-                            
                         }
 
                         Spacer()
@@ -89,7 +86,6 @@ struct FeedView: View {
                 } else {
                     RambNewFeed()
                 }
-
             }
             
             HalfModalView(isShown: $recordingModal_shown, modalHeight: 400

@@ -14,7 +14,7 @@ struct RambUserFeed : View {
     @State var user: User!
     
     init(){
-        viewModel.fetchUserRambs(forUser: self.user!)
+//        viewModel.fetchUserRambs(forUser: self.user!)
     }
     
     var body: some View {

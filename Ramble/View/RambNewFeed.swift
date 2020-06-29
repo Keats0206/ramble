@@ -13,12 +13,12 @@ struct RambNewFeed : View {
     @ObservedObject var viewModel = RambService()
     
     init(){
-        viewModel.fetchNewRambs()
+        viewModel.fetchRambs()
     }
     
     var body: some View {
         List{
-            ForEach(viewModel.newRambs){ramb in
+            ForEach(viewModel.rambs.sorted(by: { $0.timestamp < $1.timestamp })){ramb in
                 rambCell(ramb: ramb)
             }
         }.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
@@ -26,7 +26,6 @@ struct RambNewFeed : View {
 }
 
 // Helpers:
-
 struct RambNewFeed_Previews: PreviewProvider {
     static var previews: some View {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/

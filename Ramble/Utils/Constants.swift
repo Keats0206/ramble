@@ -25,6 +25,8 @@ let REF_RAMBS_LOCATIONS = DB_REF.child("ramb-locations")
 
 let REF_USER_RAMBS = DB_REF.child("user-rambs")
 let REF_USER_CLAPS = DB_REF.child("user-claps")
+let REF_RAMB_CLAPS = DB_REF.child("ramb-claps")
+
 
 //let DB_REF = Firestore.firestore()
 //let REF_USERS = Firestore.firestore().collection("users")

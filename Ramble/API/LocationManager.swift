@@ -47,6 +47,7 @@ class LocationManager: NSObject, ObservableObject {
         case .restricted: return "restricted"
         case .denied: return "denied"
         default: return "unknown"
+            
         }
 
     }

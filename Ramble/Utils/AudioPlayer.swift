@@ -48,7 +48,7 @@ class AudioPlayer: AVPlayer, ObservableObject {
             isPlaying = true
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ (_) in
-                
+                                
 //              Accessing current time and duration
                 
                 let floatCurrentTime = Float(CMTimeGetSeconds(self.audioPlayer.currentTime()))

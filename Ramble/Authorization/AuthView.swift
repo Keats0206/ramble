@@ -87,7 +87,7 @@ struct SignUpView : View {
 @State var password: String = ""
 @State var username: String = ""
 @State var fullname: String = ""
-@State var image: Image? = Image("placeholder")
+@State var image: UIImage?
     
 @State var isShowPicker: Bool = false
 @State var loading = false
@@ -99,7 +99,8 @@ func signUp () {
     print("sign me up")
     loading = true
     error = false
-    session.signUp(email: email, password: password, fullname: fullname, username: username) { (result, error) in
+    
+    session.signUp(email: email, password: password, fullname: fullname, username: username, image: image!) { (result, error) in
         self.loading = false
         if error != nil {
             print("Oops")
@@ -114,7 +115,6 @@ func signUp () {
 var body : some View {
     
     ZStack {
-    
         Color.red.edgesIgnoringSafeArea(.all)
         
             VStack {
@@ -123,11 +123,11 @@ var body : some View {
 
                 ZStack {
                     VStack {
-                        image?
-                            .resizable()
-                            .frame(width: 150, height: 150)
-                            .cornerRadius(80)
-                        
+//                        image?
+//                            .resizable()
+//                            .frame(width: 150, height: 150)
+//                            .cornerRadius(80)
+//                        
                         Button(action: {
                             withAnimation {
                                 self.isShowPicker.toggle()
@@ -140,10 +140,11 @@ var body : some View {
                         
                         Spacer()
                     }
-                }.sheet(isPresented: $isShowPicker) {
-                    ImagePicker(image: self.$image)
                 }
-                
+//                }.sheet(isPresented: $isShowPicker) {
+//                    ImagePicker(image: self.$image)
+//                }
+//
                 VStack{
             
                 TextField("Email", text: $email)

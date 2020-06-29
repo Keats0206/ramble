@@ -18,9 +18,13 @@ struct Ramb: Identifiable {
     let userimage: String
     let uid: String
     var timestamp: Int
+    let user: User
+    var didClap = false
     
-    init(id: String, dictionary: [String: Any]) {
+    
+    init(user: User, id: String, dictionary: [String: Any]) {
         self.id = id
+        self.user = user
         
         self.claps = dictionary["claps"] as? Int ?? 0
         self.caption = dictionary["caption"] as? String ?? ""

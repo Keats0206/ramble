@@ -11,30 +11,44 @@ import SwiftUI
 struct RecordPopOverView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var viewModel = RambService()
-    
-    @State var caption = "Enter A Ramb Title Here"
+    @State var expandRecorder: Bool = true
+    @State var caption = "What do you have to say?"
 
     var body: some View {
         VStack {
-            Handle()
-            
-            Spacer().frame(height: 5)
-            
             HStack {
-
-                Spacer()
-
-                TextField("Enter A Ramble Title", text: $caption)
-
-                Spacer()
-                
-            }
-            
-            Text("\(self.audioRecorder.currentTime)")
-            
-            Spacer().frame(height: 10)
+                VStack{
                     
-            Spacer().frame(height: 10)
+                    Button(action: {
+                        print("DEBUG: post-recording")
+                        self.viewModel.uploadRamb(caption: self.caption, rambUrl: self.audioRecorder.rambUrl)
+                    }) {
+                        Image(systemName: "plus.square")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.red)
+                    }
+                    
+                    Text("Post").font(.system(size: 12))
+                }
+                
+                Spacer().frame(width: 250)
+                
+                VStack{
+                    
+                    Button(action: {print("DEBUG: delete function")}) {
+                        Image(systemName: "trash")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.red)
+                    }
+                    
+                    Text("Delete").font(.system(size: 12))
+                    
+                }
+            }.padding()
+            
+            TextField("Enter A Ramble Title", text: $caption).multilineTextAlignment(.center)
             
             ZStack {
                 
@@ -47,45 +61,36 @@ struct RecordPopOverView: View {
                 HStack{
                     if audioRecorder.recording == false {
                         
-                        Button(action: {print(self.audioRecorder.startRecording())}) {
+                        Button(action: {
+                            self.audioRecorder.startRecording()
+                        }) {
                             
-                            Image(systemName: "mic.circle.fill")
+                            Image(systemName: "waveform.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 60, height: 60)
                                 .foregroundColor(.red)
                         }
                     } else {
-                        
-                        Button(action: {self.audioRecorder.stopRecording()}) {
-                            
-                            Image(systemName: "stop.fill")
+                        Button(action: {
+                            self.audioRecorder.stopRecording()
+                        }) {
+                            Image(systemName: "stop.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 30, height: 30)
+                                .frame(width: 60, height: 60)
                                 .foregroundColor(.red)
                         }
                     }
                 }
             }
-            
-            HStack {
-                Button(action: {
-                    print("DEBUG: post-recording")
-                    self.viewModel.uploadRamb(caption: self.caption, rambUrl: self.audioRecorder.rambUrl)
-                }) {
-                    Image(systemName: "plus.square")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                }
-                Spacer().frame(width: 220)
+
+            if audioRecorder.recording == false {
+                Text("0:00")
                 
-                Button(action: {print("DEBUG: delete function")}) {
-                    Image(systemName: "trash")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                }
-            }.padding()
+            } else {
+                Text("\(self.audioRecorder.currentTime)")
+            }
             
             Spacer()
         }

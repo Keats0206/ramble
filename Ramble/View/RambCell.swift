@@ -12,9 +12,9 @@ import SDWebImageSwiftUI
 struct rambCell : View {
     @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var viewModel = RambService()
-    
     @State var didClap = false
     @State var width : CGFloat = 0
+    @State var newClaps = 0
     
     let ramb: Ramb
     
@@ -39,11 +39,40 @@ struct rambCell : View {
                         
                     }
                     Text(ramb.caption).font(.subheadline).fontWeight(.regular).multilineTextAlignment(TextAlignment.leading)
+                    
                     Spacer()
                     
-                    Text(String(audioPlayer.rambCurrentTime))
+//                  Time bar for each ramble...this is not working at all
                     
-                    Text(String(audioPlayer.rambDuration))
+                    ZStack(alignment: .leading) {
+                    
+                        Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
+                        
+                        Capsule().fill(Color.red).frame(width: self.width, height: 8)
+                        .gesture(DragGesture()
+                            .onChanged({ (value) in
+                                let x = value.location.x
+                                
+                                let screen = UIScreen.main.bounds.width - 30
+                                
+                                let value = self.audioPlayer.rambCurrentTime / self.audioPlayer.rambDuration
+                                
+                                self.width = screen * CGFloat(value)
+                                
+                                self.width = x
+                                
+                            }).onEnded({ (value) in
+                                
+                                let x = value.location.x
+                                
+                                let screen = UIScreen.main.bounds.width - 30
+                                
+                                let percent = x / screen
+                                
+                                self.audioPlayer.rambCurrentTime = Int(Double(percent)) * self.audioPlayer.rambDuration
+                            }))
+                    }
+                    .padding(.top)
                 
                 }
                 
@@ -52,15 +81,17 @@ struct rambCell : View {
                 HStack{
                     
                     Button(action: {
-                        self.viewModel.handleClap(didClap: self.didClap, claps: self.ramb.claps, id: self.ramb.id)
+                        self.viewModel.handleClap(ramb: self.ramb)
                         self.didClap.toggle()
+                        self.newClaps = self.didClap ? 1 : 0
+                        
                     }){
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
                             .resizable()
                             .frame(width: 20, height: 20)
                     }.buttonStyle(BorderlessButtonStyle())
                     
-                    Text(String(ramb.claps * -1))
+                    Text(String(self.ramb.claps * -1 + newClaps))
                 }
                 
                 Spacer().frame(width: 10)
@@ -70,6 +101,12 @@ struct rambCell : View {
                     if audioPlayer.isPlaying == false {
                         Button(action: {
                             self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
+                            
+//                         Should have access to the CurrentTime and Duration through these variables
+                            
+                            print(self.audioPlayer.$rambCurrentTime)
+                            print(self.audioPlayer.$rambDuration)
+                            
                         }) {
                             Image(systemName: "play.fill")
                                 .resizable()

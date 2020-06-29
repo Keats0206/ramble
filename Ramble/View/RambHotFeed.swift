@@ -12,15 +12,13 @@ import SDWebImageSwiftUI
 struct RambHotFeed : View {
     @ObservedObject var viewModel = RambService()
     
-//   Use toggle to create linked variable with hot/new shift
-
     init(){
-        viewModel.fetchHotRambs()
+        viewModel.fetchRambs()
     }
-    
+        
     var body: some View {
         List{
-            ForEach(viewModel.hotRambs){ramb in
+            ForEach(viewModel.rambs.sorted(by: { $0.claps < $1.claps })){ramb in
                 rambCell(ramb: ramb)
             }
         }.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))

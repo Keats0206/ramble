@@ -36,7 +36,7 @@ class SessionStore : ObservableObject {
             }
         }
     }
-
+    
     // additional methods (sign up, sign in) will go here
     
     func signUp(
@@ -44,23 +44,41 @@ class SessionStore : ObservableObject {
         password: String,
         fullname: String,
         username: String,
+        image: UIImage,
         handler: @escaping AuthDataResultCallback
     ) {
-        Auth.auth().createUser(withEmail: email, password: password) { (handler, error) in
-            if error != nil {
-                print(error!)
-                return
-            }
-            let values = ["email": email, "password": password, "fullname": fullname, "username": username]
-            let uid = Auth.auth().currentUser?.uid
-            
-            REF_USERS.child(uid!).updateChildValues(values, withCompletionBlock: {(err, ref) in
-                if err != nil {
-                    print(err!)
-                    return
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.3) else { return }
+        let filename = NSUUID().uuidString
+        let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
+        
+        storageRef.putData(imageData, metadata: nil) { (meta, error) in
+            storageRef.downloadURL { (url, error) in
+                guard let profileImageURL = url?.absoluteString else { return }
+                
+                Auth.auth().createUser(withEmail: email, password: password) { (handler, error) in
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    
+                    let uid = Auth.auth().currentUser?.uid
+                    
+                    let values = ["email": email,
+                                  "password": password,
+                                  "fullname": fullname,
+                                  "username": username,
+                                  "profileImageUrl":profileImageURL] as [String : Any]
+                    
+                    REF_USERS.child(uid!).updateChildValues(values, withCompletionBlock: {(err, ref) in
+                        if err != nil {
+                            print(err!)
+                            return
+                        }
+                        print("Added user to firebase")
+                    })
                 }
-                print("Added user to firebase")
-            })
+            }
         }
     }
 

@@ -18,21 +18,18 @@ class UserService: ObservableObject {
     func fetchUser(uid: String, completion: @escaping(User) -> Void) {
         REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
             guard let values = snapshot.value as? [String: AnyObject] else { return }
-            
             let user = User(uid: uid, values: values)
-            
             completion(user)
         }
     }
     
     func fetchUser(completion: @escaping([User]) -> Void) {
-        var users = [User]()
         REF_USERS.observe(.childAdded) { snapshot in
             let uid = snapshot.key
             guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
             let user = User(uid: uid, values: dictionary)
-            users.append(user)
-            completion(users)
+            self.users.append(user)
+            completion(self.users)
         }
     }
 }
