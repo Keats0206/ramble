@@ -78,6 +78,7 @@ class RambService: ObservableObject {
                         UserService.shared.fetchUser(uid: uid) { user in
                             let ramb = Ramb(user: user, id: id, dictionary: dictionary)
                             self.rambs.append(ramb)
+                            print(self.rambs)
                         }
                     })
                 })

@@ -12,18 +12,18 @@ import SDWebImageSwiftUI
 struct rambCell : View {
     @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var viewModel = RambService()
+
     @State var didClap = false
     @State var width : CGFloat = 0
     @State var newClaps = 0
     
     let ramb: Ramb
-    
+
     var body: some View {
-        
         VStack{
             HStack{
                 VStack{
-                    AnimatedImage(url: URL(string: "\(ramb.userimage)"))
+                    AnimatedImage(url: ramb.user.profileImageUrl)
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 60, height: 60, alignment: .center)
@@ -33,7 +33,7 @@ struct rambCell : View {
                 
                 VStack(alignment: .leading){
                     HStack {
-                        Text(ramb.name).font(.body).fontWeight(.heavy)
+                        Text(ramb.user.username!).font(.body).fontWeight(.heavy)
                         
                         Text(formatDate(timestamp: ramb.timestamp) + " ago")
                         
@@ -73,7 +73,6 @@ struct rambCell : View {
                             }))
                     }
                     .padding(.top)
-                
                 }
                 
                 Spacer()
@@ -84,7 +83,6 @@ struct rambCell : View {
                         self.viewModel.handleClap(ramb: self.ramb)
                         self.didClap.toggle()
                         self.newClaps = self.didClap ? 1 : 0
-                        
                     }){
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
                             .resizable()

@@ -12,7 +12,7 @@ import Firebase
 struct User {
     var uid: String
     var email: String?
-    var displayName: String?
+    var username: String?
     let fullname: String
     var profileImageUrl: URL?
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
@@ -21,7 +21,7 @@ struct User {
         self.uid = uid
 
         self.email = values["email"] as? String ?? ""
-        self.displayName = values["displayName"] as? String ?? ""
+        self.username = values["username"] as? String ?? ""
         self.fullname = values["fullname"] as? String ?? ""
         
         if let profileImageUrlString = values["profileImageUrl"] as? String {
