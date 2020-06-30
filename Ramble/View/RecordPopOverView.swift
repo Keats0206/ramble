@@ -21,6 +21,7 @@ struct RecordPopOverView: View {
                     
                     Button(action: {
                         print("DEBUG: post-recording")
+                        
                         self.viewModel.uploadRamb(caption: self.caption, rambUrl: self.audioRecorder.rambUrl)
                     }) {
                         Image(systemName: "plus.square")

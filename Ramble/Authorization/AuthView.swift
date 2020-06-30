@@ -13,9 +13,9 @@ struct SignInView : View {
     @State var password: String = ""
     @State var loading = false
     @State var error = false
-
+    
     @EnvironmentObject var session: SessionStore
-
+    
     func signIn () {
         loading = true
         error = false
@@ -29,7 +29,7 @@ struct SignInView : View {
             }
         }
     }
-
+    
     var body: some View {
         ZStack {
             Color.red.edgesIgnoringSafeArea(.all)
@@ -48,24 +48,24 @@ struct SignInView : View {
                         .font(.system(size: 18, weight: .bold))
                         .padding(12)
                         .background(Color(.white))
-                
+                    
                     SecureField("Password", text: $password)
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(12)
-                    .background(Color(.white))
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                        .background(Color(.white))
                     
-                        if (error) {
-                            Text("ahhh crap")
-                        }
+                    if (error) {
+                        Text("ahhh crap")
+                    }
                 }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
-                    
+                
                 Button(action: signIn) {
-                        Text("Sign In")
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .frame(height: 50)
-                            .foregroundColor(.white)
-                            .font(.system(size: 18, weight: .bold))
-                            }
+                    Text("Sign In")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .frame(height: 50)
+                        .foregroundColor(.white)
+                        .font(.system(size: 18, weight: .bold))
+                }
                 
                 Spacer()
                 
@@ -73,7 +73,7 @@ struct SignInView : View {
                     HStack {
                         Text("Create Account")
                             .font(.system(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                 }
             }
@@ -81,94 +81,125 @@ struct SignInView : View {
     }
 }
 
+//To do - figure out how to upload a fucking photo
+
 struct SignUpView : View {
-
-@State var email: String = ""
-@State var password: String = ""
-@State var username: String = ""
-@State var fullname: String = ""
-@State var image: UIImage?
+    @State var email: String = ""
+    @State var password: String = ""
+    @State var username: String = ""
+    @State var fullname: String = ""
+    @State var profileImage: UIImage?
     
-@State var isShowPicker: Bool = false
-@State var loading = false
-@State var error = false
-
-@EnvironmentObject var session: SessionStore
-
-func signUp () {
-    print("sign me up")
-    loading = true
-    error = false
+    @State var showAction: Bool = false
+    @State var showImagePicker: Bool = false
     
-    session.signUp(email: email, password: password, fullname: fullname, username: username, image: image!) { (result, error) in
-        self.loading = false
-        if error != nil {
-            print("Oops")
-            self.error = true
-        } else {
-            self.email = ""
-            self.password = ""
+    @State var loading = false
+    @State var error = false
+    
+    @EnvironmentObject var session: SessionStore
+    
+    func signUp () {
+        loading = true
+        error = false
+        
+        session.signUp(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage!) { (result, error) in
+            self.loading = false
+            if error != nil {
+                print("Oops")
+                self.error = true
+            } else {
+                self.email = ""
+                self.password = ""
+            }
         }
     }
-}
-
-var body : some View {
     
-    ZStack {
-        Color.red.edgesIgnoringSafeArea(.all)
+    var sheet: ActionSheet {
+        ActionSheet(
+            title: Text("Action"),
+            message: Text("Quotemark"),
+            buttons: [
+                .default(Text("Change"), action: {
+                    self.showAction = false
+                    self.showImagePicker = true
+                }),
+                .cancel(Text("Close"), action: {
+                    self.showAction = false
+                }),
+                .destructive(Text("Remove"), action: {
+                    self.showAction = false
+                    self.profileImage = nil
+            })
+        ])
+    }
+    
+    var body : some View {
         
+        ZStack {
+            Color.red.edgesIgnoringSafeArea(.all)
+            
             VStack {
                 
                 Spacer()
-
-                ZStack {
-                    VStack {
-//                        image?
-//                            .resizable()
-//                            .frame(width: 150, height: 150)
-//                            .cornerRadius(80)
-//                        
-                        Button(action: {
-                            withAnimation {
-                                self.isShowPicker.toggle()
-                            }
-                        }) {
-                            Image(systemName: "person.badge.plus.fill")
-                                .font(.headline)
-                            Text("Select profile image").font(.headline)
-                        }.foregroundColor(.white)
-                        
-                        Spacer()
-                    }
-                }
-//                }.sheet(isPresented: $isShowPicker) {
-//                    ImagePicker(image: self.$image)
-//                }
-//
-                VStack{
-            
-                TextField("Email", text: $email)
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(12)
-                    .background(Color(.white))
-                    
-                TextField("Fullname", text: $fullname)
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(12)
-                    .background(Color(.white))
                 
-                TextField("Username", text: $username)
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(12)
-                    .background(Color(.white))
-                        
-                SecureField("Password", text: $password)
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(12)
-                    .background(Color(.white))
+                // Image picker
+                
+                VStack {
+                    
+                    if (profileImage == nil) {
+                        VStack{
+                            Image(systemName: "camera.on.rectangle")
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(6)
+                            
+                            Text("Add a profile pic").font(.system(size: 18, weight: .bold))
+                        }.onTapGesture {
+                                self.showImagePicker = true
+                        }
+                    } else {
+                        Image(uiImage: profileImage!)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .cornerRadius(200 / 2)
+                            .onTapGesture {
+                                    self.showAction = true
+                            }
+                        }
+                }.foregroundColor(.white)
+                    
+                .sheet(isPresented: $showImagePicker, onDismiss: {
+                    self.showImagePicker = false
+                }, content: {
+                    ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                })
+                    .actionSheet(isPresented: $showAction) {
+                        sheet
+                }
+                
+                VStack{
+                    
+                    TextField("Email", text: $email)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                        .background(Color(.white))
+                    
+                    TextField("Fullname", text: $fullname)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                        .background(Color(.white))
+                    
+                    TextField("Username", text: $username)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                        .background(Color(.white))
+                    
+                    SecureField("Password", text: $password)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                        .background(Color(.white))
                     
                 }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
-                                    
+                
                 if (error) {
                     InlineAlert(
                         title: "Hmm... That didn't work.",
@@ -190,61 +221,13 @@ var body : some View {
                         HStack {
                             Text("Already have an account? Sign In")
                                 .font(.system(size: 14))
-                                .foregroundColor(.black)
-                                }
+                                .foregroundColor(.white)
                         }
+                    }
                 }
             }
         }
     }
-}
-
-struct ImagePicker: UIViewControllerRepresentable {
-
-    @Environment(\.presentationMode)
-    var presentationMode
-
-    @Binding var image: Image?
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
-        @Binding var presentationMode: PresentationMode
-        @Binding var image: Image?
-
-        init(presentationMode: Binding<PresentationMode>, image: Binding<Image?>) {
-            _presentationMode = presentationMode
-            _image = image
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController,
-                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            let uiImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-            image = Image(uiImage: uiImage)
-            presentationMode.dismiss()
-
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            presentationMode.dismiss()
-        }
-
-    }
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(presentationMode: presentationMode, image: $image)
-    }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController,
-                                context: UIViewControllerRepresentableContext<ImagePicker>) {
-
-    }
-
 }
 
 
@@ -265,4 +248,48 @@ struct AuthView_Previews : PreviewProvider {
 }
 #endif
 
+struct ImagePicker: UIViewControllerRepresentable {
+    
+    @Binding var isShown: Bool
+    @Binding var uiImage: UIImage?
+    
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        
+        @Binding var isShown: Bool
+        @Binding var uiImage: UIImage?
+        
+        init(isShown: Binding<Bool>, uiImage: Binding<UIImage?>) {
+            _isShown = isShown
+            _uiImage = uiImage
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController,
+                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            let imagePicked = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+            uiImage = imagePicked
+            isShown = false
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            isShown = false
+        }
+        
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(isShown: $isShown, uiImage: $uiImage)
+    }
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController,
+                                context: UIViewControllerRepresentableContext<ImagePicker>) {
+        
+    }
+    
+}
 

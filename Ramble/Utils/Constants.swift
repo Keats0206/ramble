@@ -10,8 +10,9 @@ import Foundation
 import Firebase
 import GeoFire
 
-let STORAGE_REF = Storage.storage().reference()
-let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")
+let STORAGE_REF = Storage.storage().reference(forURL:"gs://ramb-ecce1.appspot.com")
+let STORAGE_RAMBS = STORAGE_REF.child("rambs")
+let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile-images")
 
 let DB_REF = Database.database().reference()
 let GEO_REF_USERS = GeoFire(firebaseRef: REF_USERS_LOCATIONS)
@@ -26,12 +27,3 @@ let REF_RAMBS_LOCATIONS = DB_REF.child("ramb-locations")
 let REF_USER_RAMBS = DB_REF.child("user-rambs")
 let REF_USER_CLAPS = DB_REF.child("user-claps")
 let REF_RAMB_CLAPS = DB_REF.child("ramb-claps")
-
-
-//let DB_REF = Firestore.firestore()
-//let REF_USERS = Firestore.firestore().collection("users")
-//let REF_USER_CLAPS = DB_REF.collection("user-claps")
-//
-//let REF_RAMBS = Firestore.firestore().collection("rambs")
-//let REF_USER_RAMBS = DB_REF.collection("user-rambs")
-

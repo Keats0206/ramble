@@ -49,7 +49,6 @@ class LocationManager: NSObject, ObservableObject {
         default: return "unknown"
             
         }
-
     }
 
     let objectWillChange = PassthroughSubject<Void, Never>()

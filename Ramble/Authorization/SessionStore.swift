@@ -7,89 +7,90 @@
 //
 
 import SwiftUI
+import UIKit
 import Firebase
 import Combine
+import CoreLocation
 
 class SessionStore : ObservableObject {
     var didChange = PassthroughSubject<SessionStore, Never>()
     @Published var session: User? {didSet {self.didChange.send(self) }}
     @ObservedObject var locationManager = LocationManager()
-
+    
     var handle: AuthStateDidChangeListenerHandle?
     
     func listen () {
-        // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                // if we have a user, create a new user model
                 let uid = user.uid
                 let values = [
                     "email": user.email,
                     "displayName": user.displayName]
-                
                 print("Got user: \(user)")
                 self.session = User(
                     uid: uid, values: values as [String : Any])
             } else {
-                // if we don't have a user, set our session to nil
                 self.session = nil
             }
         }
     }
-    
-    // additional methods (sign up, sign in) will go here
     
     func signUp(
         email: String,
         password: String,
         fullname: String,
         username: String,
-        image: UIImage,
+        profileImage: UIImage,
         handler: @escaping AuthDataResultCallback
-    ) {
-        
-        guard let imageData = image.jpegData(compressionQuality: 0.3) else { return }
+    ){
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
         let filename = NSUUID().uuidString
         let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
         
         storageRef.putData(imageData, metadata: nil) { (meta, error) in
-            storageRef.downloadURL { (url, error) in
-                guard let profileImageURL = url?.absoluteString else { return }
-                
-                Auth.auth().createUser(withEmail: email, password: password) { (handler, error) in
-                    if error != nil {
-                        print(error!)
-                        return
-                    }
+            if error != nil {
+                print("Don't put image")
+                return
+            }
+            print("put image on firebase storage")
+            storageRef.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    print("Failed to download url:", error!)
+                    return
+                } else {
+                    guard let profileImageUrl = url?.absoluteString else { return }
+                    print(profileImageUrl)
                     
-                    let uid = Auth.auth().currentUser?.uid
                     
-                    let values = ["email": email,
-                                  "password": password,
-                                  "fullname": fullname,
-                                  "username": username,
-                                  "profileImageUrl":profileImageURL] as [String : Any]
-                    
-                    REF_USERS.child(uid!).updateChildValues(values, withCompletionBlock: {(err, ref) in
-                        if err != nil {
-                            print(err!)
+                    Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                        if let error = error {
+                            print("DEBUG: Error is \(error.localizedDescription)")
                             return
                         }
-                        print("Added user to firebase")
-                    })
+                        
+                        guard let uid = result?.user.uid else { return }
+                        
+                        let values = ["email": email,
+                                      "password": password,
+                                      "fullname": fullname,
+                                      "username": username,
+                                      "profileImage": profileImageUrl]
+                        
+                        REF_USERS.child(uid).updateChildValues(values)
+                    }
                 }
-            }
+            })
         }
     }
-
+    
     func signIn(
         email: String,
         password: String,
         handler: @escaping AuthDataResultCallback
-        ) {
+    ) {
         Auth.auth().signIn(withEmail: email, password: password, completion: handler)
     }
-
+    
     func signOut () -> Bool {
         do {
             try Auth.auth().signOut()

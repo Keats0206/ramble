@@ -9,10 +9,11 @@
 import SwiftUI
 import Firebase
 import GeoFire
+import Combine
 
 class RambService: ObservableObject {
-    static let shared = RambService()
     @ObservedObject var location = LocationManager()
+    static let shared = RambService()
     @Published var rambs = [Ramb]()
     @Published var userRambs = [Ramb]()
     
@@ -44,9 +45,6 @@ class RambService: ObservableObject {
     }
     
     func fetchRambs(){
-//        I think this is sudo working...
-//        TODO: Sort this by time and like, make radius an input field...
-        
 //      Get users ID...
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
