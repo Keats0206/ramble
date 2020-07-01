@@ -14,13 +14,13 @@ struct LocationView: View {
     var body: some View{
          VStack {
             
-            VStack {
+            VStack(alignment: .leading) {
                 
-                Text("Distance")
+                Text("Distance").font(.system(size: 18, weight: .bold))
                 
                 Text("Up to \(radius, specifier: "%.0f") miles away")
             
-                Slider(value: $radius, in: 0...100, step: 1)
+                Slider(value: $radius, in: 0...100, step: 1).accentColor(.red)
             
             }
             

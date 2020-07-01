@@ -19,6 +19,8 @@ class AudioRecorder: NSObject, ObservableObject {
         super.init()
         sortLatestRecordings()
     }
+    
+//  Currently unused!
 
     @Published var rambUrl: String = "";
     @Published var currentTime: Int = 0
@@ -102,7 +104,7 @@ class AudioRecorder: NSObject, ObservableObject {
                 } else {
                     rambsRef.downloadURL(completion: { (url, error) in
                         self.rambUrl = (url?.absoluteString)!
-                        print("uploaded to storage with url \(url)")
+                        print("ramble is ready to post")
                         return
                     })
                 }

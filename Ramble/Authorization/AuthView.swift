@@ -249,7 +249,6 @@ struct AuthView_Previews : PreviewProvider {
 #endif
 
 struct ImagePicker: UIViewControllerRepresentable {
-    
     @Binding var isShown: Bool
     @Binding var uiImage: UIImage?
     

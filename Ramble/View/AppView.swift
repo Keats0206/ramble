@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject var session: SessionStore
     @ObservedObject var audioRecorder: AudioRecorder
     
+    @State var user: User
+    
+    func getUser(){
+        let uid = session.session!.uid
+        UserService.shared.fetchUser(uid: uid) { user in
+            self.user = user
+            return
+        }
+    }
+            
     var body: some View {
         TabView{
-            FeedView(audioRecorder: AudioRecorder()).tabItem {
+            FeedView(audioRecorder: AudioRecorder(), user: user).tabItem {
                 Image(systemName: "dot.radiowaves.left.and.right")
                 Text("Feed")
                 .tag(1)
@@ -23,7 +34,8 @@ struct AppView: View {
                 Text("Activity")
                 .tag(2)
             }
-        }
+        }.onAppear{
+            self.getUser()
+        }.accentColor(.red)
     }
 }
-

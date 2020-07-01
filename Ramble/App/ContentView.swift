@@ -10,21 +10,17 @@ import SwiftUI
 
 struct ContentView : View {
     @EnvironmentObject var session: SessionStore
-    
+        
     func getUser () {
         session.listen()
     }
-    
+        
     var body: some View {
         Group {
             if (session.session != nil) {
-                
-                AppView(audioRecorder: AudioRecorder())
-            
+                AppView(audioRecorder: AudioRecorder(), user: session.session!)
             } else {
-            
                 AuthView()
-            
             }
         }.onAppear(perform: getUser)
     }

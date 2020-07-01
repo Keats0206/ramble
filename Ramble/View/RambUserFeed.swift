@@ -11,10 +11,16 @@ import SDWebImageSwiftUI
 
 struct RambUserFeed : View {
     @ObservedObject var viewModel = RambService()
-    @State var user: User!
     
-    init(){
-//        viewModel.fetchUserRambs(forUser: self.user!)
+    var user: User
+    
+    init(_ model: RambService, user: User){
+        self.viewModel = model
+        self.user = user
+        model.fetchUserRambs(forUser: user) {ramb in
+            return
+        }
+        print("DEBUG: fetching rambs for user with the id \(user.uid)")
     }
     
     var body: some View {

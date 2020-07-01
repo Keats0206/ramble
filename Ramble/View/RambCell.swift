@@ -12,11 +12,12 @@ import SDWebImageSwiftUI
 struct rambCell : View {
     @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var viewModel = RambService()
-
+            
     @State var didClap = false
     @State var width : CGFloat = 0
     @State var newClaps = 0
-    
+        
+//  Binding variable to open the other user profile view
     let ramb: Ramb
 
     var body: some View {
@@ -26,17 +27,19 @@ struct rambCell : View {
                     AnimatedImage(url: ramb.user.profileImageUrl)
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: 60, height: 60, alignment: .center)
+                        .frame(width: 60, height: 60, alignment: .center).onTapGesture {
+                            
+                            print("open profile specific view for \(self.ramb.user.uid)")
+                    }
                 }
                 
                 Spacer().frame(width: 10)
                 
                 VStack(alignment: .leading){
                     HStack {
-                        Text(ramb.user.username!).font(.body).fontWeight(.heavy)
+                        Text("@" + ramb.user.username).font(.body).fontWeight(.heavy)
                         
                         Text(formatDate(timestamp: ramb.timestamp) + " ago")
-                        
                     }
                     Text(ramb.caption).font(.subheadline).fontWeight(.regular).multilineTextAlignment(TextAlignment.leading)
                     
@@ -72,10 +75,10 @@ struct rambCell : View {
                                 self.audioPlayer.rambCurrentTime = Int(Double(percent)) * self.audioPlayer.rambDuration
                             }))
                     }
-                    .padding(.top)
-                }
+                }.padding(5)
                 
-                Spacer()
+                Spacer().frame(width: 10)
+
                 
                 HStack{
                     
@@ -91,16 +94,14 @@ struct rambCell : View {
                     
                     Text(String(self.ramb.claps * -1 + newClaps))
                 }
-                
-                Spacer().frame(width: 10)
-                
+                                
                 VStack(alignment: .leading){
-                    
+                                        
                     if audioPlayer.isPlaying == false {
                         Button(action: {
                             self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
                             
-//                         Should have access to the CurrentTime and Duration through these variables
+//      Should have access to the CurrentTime and Duration through these variables
                             
                             print(self.audioPlayer.$rambCurrentTime)
                             print(self.audioPlayer.$rambDuration)
@@ -119,9 +120,6 @@ struct rambCell : View {
                                 .frame(width: 35, height: 35)
                         }.buttonStyle(BorderlessButtonStyle())
                     }
-                    
-                    Spacer().frame(width: 10)
-                    
                 }
             }.accentColor(.red)
         }

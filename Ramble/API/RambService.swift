@@ -12,8 +12,9 @@ import GeoFire
 import Combine
 
 class RambService: ObservableObject {
-    @ObservedObject var location = LocationManager()
     static let shared = RambService()
+
+    @ObservedObject var location = LocationManager()
     @Published var rambs = [Ramb]()
     @Published var userRambs = [Ramb]()
     
@@ -65,8 +66,7 @@ class RambService: ObservableObject {
                 
                 self.myQuery = GEO_REF_RAMBS.query(at: location, withRadius: 25)
                 self.myQuery?.observe(.keyEntered, with: { (key, location) in
-//          Print("KEY:\(String(describing: key)) and location:\(String(describing: location))")
-                    
+                                        
 //          For every ramble ID returned, build a RAMB and append it to the array...
                     let rambRef = REF_RAMBS.child(key)
                     
@@ -78,7 +78,6 @@ class RambService: ObservableObject {
                         UserService.shared.fetchUser(uid: uid) { user in
                             let ramb = Ramb(user: user, id: id, dictionary: dictionary)
                             self.rambs.append(ramb)
-                            print(self.rambs)
                         }
                     })
                 })
@@ -86,48 +85,26 @@ class RambService: ObservableObject {
         }
     }
     
-//    Old functions for fetching rambs hot and new, figured out a better sorting solution.
-    
-//    func fetchHotRambs() {
-//        REF_RAMBS.queryOrdered(byChild: "claps").observe(.childAdded, with: { (snapshot) in
-//            guard let dictionary = snapshot.value as? [String: Any] else { return }
-//            guard let uid = dictionary["uid"] as? String else { return }
-//            let id = snapshot.key
-//
-//            UserService.shared.fetchUser(uid: uid) { user in
-//                let ramb = Ramb(user: user, id: id, dictionary: dictionary)
-//                self.hotRambs.append(ramb)
-//          }
-//      })
-//    }
-    
-//    func fetchNewRambs() {
-//        REF_RAMBS.queryOrdered(byChild: "timestamp").observe(.childAdded, with: { (snapshot) in
-//            guard let dictionary = snapshot.value as? [String: Any] else { return }
-//            guard let uid = dictionary["uid"] as? String else { return }
-//            let id = snapshot.key
-//
-//            UserService.shared.fetchUser(uid: uid) { user in
-//                let ramb = Ramb(user: user, id: id, dictionary: dictionary)
-//                self.newRambs.append(ramb)
-//                return
-//            }
-//        })
-//    }
-    
-    func fetchUserRambs(forUser user: User) {
-        REF_USER_RAMBS.child(user.uid).observe(.childAdded) { snapshot in
-            let id = snapshot.key
+    func fetchRamb(withrambId rambId: String, completion: @escaping(Ramb) -> Void) {
+        REF_RAMBS.child(rambId).observeSingleEvent(of: .value) { snapshot in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
             
-            REF_USER_RAMBS.child(user.uid).observe(.childAdded, with: { (snapshot) in
-                guard let dictionary = snapshot.value as? [String: Any] else { return }
-                guard let uid = dictionary["uid"] as? String else { return }
-                
-                UserService.shared.fetchUser(uid: uid) { user in
-                    let ramb = Ramb(user: user, id: id, dictionary: dictionary)
-                    self.userRambs.append(ramb)
-                }
-            })
+            UserService.shared.fetchUser(uid: uid) { user in
+                let ramb = Ramb(user: user, id: rambId, dictionary: dictionary)
+                completion(ramb)
+            }
+        }
+    }
+
+    func fetchUserRambs(forUser user: User,  completion: @escaping([Ramb]) -> Void) {
+        REF_USER_RAMBS.child(user.uid).observe(.childAdded) { snapshot in
+            let rambId = snapshot.key
+            
+            self.fetchRamb(withrambId: rambId) { ramb in
+                self.userRambs.append(ramb)
+                completion(self.userRambs)
+            }
         }
     }
         
@@ -159,4 +136,36 @@ class RambService: ObservableObject {
             completion(snapshot.exists())
         }
     }
+    
+    
+    
+    //    Old functions for fetching rambs hot and new, figured out a better sorting solution.
+        
+    //    func fetchHotRambs() {
+    //        REF_RAMBS.queryOrdered(byChild: "claps").observe(.childAdded, with: { (snapshot) in
+    //            guard let dictionary = snapshot.value as? [String: Any] else { return }
+    //            guard let uid = dictionary["uid"] as? String else { return }
+    //            let id = snapshot.key
+    //
+    //            UserService.shared.fetchUser(uid: uid) { user in
+    //                let ramb = Ramb(user: user, id: id, dictionary: dictionary)
+    //                self.hotRambs.append(ramb)
+    //          }
+    //      })
+    //    }
+        
+    //    func fetchNewRambs() {
+    //        REF_RAMBS.queryOrdered(byChild: "timestamp").observe(.childAdded, with: { (snapshot) in
+    //            guard let dictionary = snapshot.value as? [String: Any] else { return }
+    //            guard let uid = dictionary["uid"] as? String else { return }
+    //            let id = snapshot.key
+    //
+    //            UserService.shared.fetchUser(uid: uid) { user in
+    //                let ramb = Ramb(user: user, id: id, dictionary: dictionary)
+    //                self.newRambs.append(ramb)
+    //                return
+    //            }
+    //        })
+    //    }
+    
 }

@@ -14,6 +14,7 @@ import CoreLocation
 
 class SessionStore : ObservableObject {
     var didChange = PassthroughSubject<SessionStore, Never>()
+    
     @Published var session: User? {didSet {self.didChange.send(self) }}
     @ObservedObject var locationManager = LocationManager()
     
@@ -26,7 +27,6 @@ class SessionStore : ObservableObject {
                 let values = [
                     "email": user.email,
                     "displayName": user.displayName]
-                print("Got user: \(user)")
                 self.session = User(
                     uid: uid, values: values as [String : Any])
             } else {

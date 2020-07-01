@@ -12,7 +12,6 @@ import Firebase
 
 class UserService: ObservableObject {
     static let shared = UserService()
-    
     @Published  var users = [User]()
     
     func fetchUser(uid: String, completion: @escaping(User) -> Void) {
@@ -30,6 +29,7 @@ class UserService: ObservableObject {
             let user = User(uid: uid, values: dictionary)
             self.users.append(user)
             completion(self.users)
+            print(self.users)
         }
     }
 }

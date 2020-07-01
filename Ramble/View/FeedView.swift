@@ -12,25 +12,25 @@ import SwiftUI
 struct FeedView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var locationManager = LocationManager()
-    
-    @State private var recordingModal_shown = false
-    @State private var profileModal_shown = false
-    @State private var locationModal_shown = false
-    
-//    How can I use thise state toggle to chage what data is displayed??? hmmmm
-    
+        
+    @State var recordingModal_shown = false
+    @State var myprofileModal_shown = false
+    @State var locationModal_shown = false
+    @State var userprofileModal_shown: Bool = false
+        
     @State var dataSelector = 0
+        
     var feedtoggle = ["Hot", "New"]
+   
+    var user: User
     
-    var userLatitude: String {
-        return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
-    }
+//  Create a other user profile view that takes in a uid
     
-    var userLongitude: String {
-        return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
-    }
+//  Create a half modal wrap around that view
     
-    // UI built without navigation view...just one App view, and all popover views.
+//  Send user uid from ramble cell up to feed view
+    
+//  If uid is not current user - open half model and pass in uid, if uid is current user do nothing/print some message...
     
     var body: some View {
         ZStack{
@@ -41,7 +41,9 @@ struct FeedView: View {
                     
                     HStack{
                         
-                        Text("Ramble")
+                        Text("RambleOn")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.red)
                         
                         Spacer()
                         
@@ -64,7 +66,7 @@ struct FeedView: View {
                         }.buttonStyle(BorderlessButtonStyle())
                         
                         Button(action: {
-                            self.profileModal_shown.toggle()
+                            self.myprofileModal_shown.toggle()
                         }){
                             Image(systemName: "person.circle")
                                 .resizable()
@@ -80,29 +82,26 @@ struct FeedView: View {
                         }.buttonStyle(BorderlessButtonStyle())
                     }.padding([.top, .leading, .trailing]).accentColor(.red)
                 }.frame(height: 100)
+                                    
+                RambFeed(RambService(), dataToggle: $dataSelector)
                 
-                if dataSelector == 0{
-                    RambHotFeed()
-                } else {
-                    RambNewFeed()
-                }
             }
             
-            HalfModalView(isShown: $recordingModal_shown, modalHeight: 400
-            ){
+            HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
                 RecordPopOverView(audioRecorder: AudioRecorder())
             }
                         
-            HalfModalView(isShown: $profileModal_shown
-            ){
-                ProfileView(isShown: self.$profileModal_shown)
+            HalfModalView(isShown: $myprofileModal_shown){
+                MyProfileView(isShown: self.$myprofileModal_shown, user: self.user)
             }
             
-            HalfModalView(isShown: $locationModal_shown, modalHeight: 300
-            ){
+            HalfModalView(isShown: $userprofileModal_shown){
+                UserProfileView(isShown: self.$userprofileModal_shown, user: self.user)
+            }
+                        
+            HalfModalView(isShown: $locationModal_shown, modalHeight: 300){
                 LocationView()
             }
         }
     }
 }
-
