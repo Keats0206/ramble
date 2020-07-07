@@ -10,7 +10,6 @@ import SwiftUI
 struct AppView: View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var audioRecorder: AudioRecorder
-    
     @State var user: User
     
     func getUser(){
@@ -20,7 +19,7 @@ struct AppView: View {
             return
         }
     }
-            
+    
     var body: some View {
         TabView{
             FeedView(audioRecorder: AudioRecorder(), user: user).tabItem {

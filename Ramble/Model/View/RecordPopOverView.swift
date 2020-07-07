@@ -11,18 +11,37 @@ import SwiftUI
 struct RecordPopOverView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var viewModel = RambService()
+    @ObservedObject var timerManager = TimerManager()
     @State var expandRecorder: Bool = true
     @State var caption = "What do you have to say?"
 
     var body: some View {
         VStack {
+            
             HStack {
+
+                Button(action: {
+                    print("DEBUG: delete recording from storage....")
+                    self.timerManager.reset()
+                }) {
+                    Text("Cancel")
+                        .foregroundColor(.red)
+                        .frame(width: 60)
+                }
+                
+                Spacer().frame(width: 200)
+                
                 VStack{
                     
                     Button(action: {
                         print("DEBUG: post-recording")
                         
-                        self.viewModel.uploadRamb(caption: self.caption, rambUrl: self.audioRecorder.rambUrl)
+                        self.viewModel.uploadRamb(
+                            caption: self.caption,
+                            rambUrl: self.audioRecorder.rambUrl,
+                            rambFileId: self.audioRecorder.rambFileID
+                        )
+                        self.timerManager.reset()
                     }) {
                         Image(systemName: "plus.square")
                             .resizable()
@@ -33,20 +52,6 @@ struct RecordPopOverView: View {
                     Text("Post").font(.system(size: 12))
                 }
                 
-                Spacer().frame(width: 250)
-                
-                VStack{
-                    
-                    Button(action: {print("DEBUG: delete function")}) {
-                        Image(systemName: "trash")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(.red)
-                    }
-                    
-                    Text("Delete").font(.system(size: 12))
-                    
-                }
             }.padding()
             
             TextField("Enter A Ramble Title", text: $caption).multilineTextAlignment(.center)
@@ -64,6 +69,7 @@ struct RecordPopOverView: View {
                         
                         Button(action: {
                             self.audioRecorder.startRecording()
+                            self.timerManager.start()
                         }) {
                             
                             Image(systemName: "waveform.circle")
@@ -72,10 +78,14 @@ struct RecordPopOverView: View {
                                 .frame(width: 60, height: 60)
                                 .foregroundColor(.red)
                         }
+                        
                     } else {
+                        
                         Button(action: {
                             self.audioRecorder.stopRecording()
+                            self.timerManager.stop()
                         }) {
+                            
                             Image(systemName: "stop.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -85,14 +95,10 @@ struct RecordPopOverView: View {
                     }
                 }
             }
-
-            if audioRecorder.recording == false {
-                Text("0:00")
-                
-            } else {
-                Text("\(self.audioRecorder.currentTime)")
-            }
+//          If I stop recording I want to see the time that i stopped recording, it shouldn't reset until I hit post or cancel...
             
+            Text(String(format: "%.1f", self.timerManager.secondsElapsed))
+                
             Spacer()
         }
     }

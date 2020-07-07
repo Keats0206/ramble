@@ -9,38 +9,85 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct rambCell : View {
+struct RambCell : View {
+    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var selectedRamb: SelectedRamb
     @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var viewModel = RambService()
-            
+    
     @State var didClap = false
-    @State var width : CGFloat = 0
     @State var newClaps = 0
-        
-//  Binding variable to open the other user profile view
-    let ramb: Ramb
 
+    @State var width: CGFloat = 0
+    @State private var showingActionSheet = false
+    
+    let ramb: Ramb
+        
     var body: some View {
         VStack{
+            
             HStack{
+                
                 VStack{
+                    
                     AnimatedImage(url: ramb.user.profileImageUrl)
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 60, height: 60, alignment: .center).onTapGesture {
                             
-                            print("open profile specific view for \(self.ramb.user.uid)")
+                            if self.session.session!.uid != self.ramb.user.uid {
+                                
+                                self.selectedRamb.user = self.ramb.user
+                                                           
+                                self.selectedRamb.userProfileShown.toggle()
+                                
+                                print("set selected user to user with id of: \(self.ramb.user.uid) and the view isShown is set to: \(self.selectedRamb.userProfileShown)")
+                                
+                            } else {
+
+                                print("no need to open my own profile")
+                        
+                        }
+                    }
+                    
+                    if ramb.user.uid != session.session?.uid {
+                    
+                    Spacer().frame(height: 10)
+                    
+                    } else {
+                        
+                        Button(action: {
+                            self.showingActionSheet.toggle()
+                        }){
+                            
+                            Image(systemName: "ellipsis")
+                            .frame(height: 10)
+                            .accentColor(.red)
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+                                            buttons:[
+                                                .default(Text("Delete"), action: {
+                                                    self.viewModel.deleteRamb(ramb: self.ramb)
+                                                }),
+                                                .cancel()
+                                    ])
+                                }
+                        }.buttonStyle(BorderlessButtonStyle())
                     }
                 }
                 
                 Spacer().frame(width: 10)
                 
                 VStack(alignment: .leading){
+                    
                     HStack {
+                    
                         Text("@" + ramb.user.username).font(.body).fontWeight(.heavy)
                         
                         Text(formatDate(timestamp: ramb.timestamp) + " ago")
+                    
                     }
+                    
                     Text(ramb.caption).font(.subheadline).fontWeight(.regular).multilineTextAlignment(TextAlignment.leading)
                     
                     Spacer()
@@ -87,6 +134,7 @@ struct rambCell : View {
                         self.didClap.toggle()
                         self.newClaps = self.didClap ? 1 : 0
                     }){
+                    
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
                             .resizable()
                             .frame(width: 20, height: 20)
@@ -96,32 +144,47 @@ struct rambCell : View {
                 }
                                 
                 VStack(alignment: .leading){
-                                        
+                    
                     if audioPlayer.isPlaying == false {
+                    
                         Button(action: {
+                            
                             self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
-                            
 //      Should have access to the CurrentTime and Duration through these variables
-                            
                             print(self.audioPlayer.$rambCurrentTime)
                             print(self.audioPlayer.$rambDuration)
                             
                         }) {
+                            
                             Image(systemName: "play.fill")
                                 .resizable()
-                                .frame(width: 35, height: 35)
+                                .frame(width: 25, height: 25)
                         }.buttonStyle(BorderlessButtonStyle())
+                    
                     } else {
+                        
                         Button(action: {
+                            
                             self.audioPlayer.stopPlayback()
+                        
                         }) {
+                            
                             Image(systemName: "stop.fill")
                                 .resizable()
-                                .frame(width: 35, height: 35)
+                                .frame(width: 25, height: 25)
+                            
                         }.buttonStyle(BorderlessButtonStyle())
                     }
                 }
-            }.accentColor(.red)
+            }.accentColor(.red).onAppear{
+                self.viewModel.checkIfUserLikedRamb(self.ramb){ ramb in
+                    if ramb {
+                        self.didClap = true
+                    } else {
+                        self.didClap = false
+                    }
+                }
+            }
         }
     }
 }

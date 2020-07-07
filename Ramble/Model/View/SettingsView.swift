@@ -11,20 +11,20 @@ import SwiftUI
 // This view needs the current user passed in...
 
 struct SettingsView : View {
+    @EnvironmentObject var session: SessionStore
+    
     @State var email: String = ""
     @State var username: String = ""
     @State var fullname: String = ""
     @State var profileImage: UIImage?
     @State var bio = ""
-    
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
-    
     @State var loading = false
     @State var error = false
     
-    @EnvironmentObject var session: SessionStore
-    
+    var user: User
+        
     func updateProfile(){
         print("DEBUG: Update user profile")
     }
@@ -55,21 +55,16 @@ struct SettingsView : View {
     var body : some View {
         ZStack {
             VStack {
-                
                 HStack{
                     Spacer()
-                    
                     Button(action: updateProfile) {
                         Text("Save Updates")
                             .foregroundColor(.red)
                             .font(.system(size: 18, weight: .bold))
                     }
                 }
-                
                 Spacer()
-                
                 // Image picker
-                
                 VStack {
                     if (profileImage == nil) {
                         VStack{
@@ -91,8 +86,7 @@ struct SettingsView : View {
                         }
                         Text("Change picture").font(.system(size: 18, weight: .bold))
                     }
-                }
-                .sheet(isPresented: $showImagePicker, onDismiss: {
+                }.sheet(isPresented: $showImagePicker, onDismiss: {
                     self.showImagePicker = false
                 }, content: {
                     ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
@@ -106,23 +100,18 @@ struct SettingsView : View {
                 VStack(alignment: .leading){
                     
                     HStack{
-                        
                         Text("Email").font(.system(size: 14, weight: .bold))
-                        
-                        TextField("Email", text: $email)
+                        TextField("\(self.user.email)", text: $email)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                        
                     }
                     
                     Divider()
                     
                     HStack{
-                        
                         Text("Fullname")
                             .font(.system(size: 14, weight: .bold))
-                        
-                        TextField("Fullname", text: $fullname)
+                        TextField("\(self.user.fullname)", text: $fullname)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
                     }
@@ -134,7 +123,7 @@ struct SettingsView : View {
                         Text("Username")
                             .font(.system(size: 14, weight: .bold))
                         
-                        TextField("Username", text: $username)
+                        TextField("\(self.user.username)", text: $username)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
                     }
@@ -147,7 +136,9 @@ struct SettingsView : View {
                             
                             Spacer().frame(height: 25)
                             
-                            Text("Bio").font(.system(size: 14, weight: .bold))
+                            Text("Bio").font(.system(size: 14, weight: .bold)).onAppear{
+                                self.bio = "\(String(describing: self.user.bio))"
+                            }
                         
                             Spacer()
                             

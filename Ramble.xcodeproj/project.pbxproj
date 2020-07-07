@@ -28,6 +28,8 @@
 		40353C83249282BB00C0C39A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* SettingsView.swift */; };
 		40353C872492DA2F00C0C39A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C862492DA2F00C0C39A /* LocationManager.swift */; };
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
+		406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19624B3DF4C009D224F /* Stopwatch.swift */; };
+		406EF19924B3FF51009D224F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19824B3FF51009D224F /* Timer.swift */; };
 		406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */; };
 		406FAD03244FF0EB00223873 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD02244FF0EB00223873 /* AudioPlayer.swift */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
@@ -41,10 +43,10 @@
 		406FAD292451E38D00223873 /* SlideOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD282451E38D00223873 /* SlideOverCard.swift */; };
 		406FAD2B2451E3B100223873 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2A2451E3B100223873 /* Handle.swift */; };
 		406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2C2451F0C800223873 /* RecordPopOverView.swift */; };
-		406FAD2F2452154C00223873 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2E2452154C00223873 /* ProfileHeader.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
 		40EB296F24AD037A00359BA3 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296E24AD037A00359BA3 /* UserProfileView.swift */; };
+		40EB297124AE89DA00359BA3 /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB297024AE89DA00359BA3 /* SessionSettings.swift */; };
 		40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA2F248EA0F100F3CE02 /* RambModel.swift */; };
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
 		40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA53248EB86900F3CE02 /* RambCell.swift */; };
@@ -87,6 +89,8 @@
 		40353C82249282BB00C0C39A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		40353C862492DA2F00C0C39A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		404821D524A3BB7200BD63A3 /* RambUserFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserFeed.swift; sourceTree = "<group>"; };
+		406EF19624B3DF4C009D224F /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		406EF19824B3FF51009D224F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
 		406FAD02244FF0EB00223873 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -100,10 +104,10 @@
 		406FAD282451E38D00223873 /* SlideOverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverCard.swift; sourceTree = "<group>"; };
 		406FAD2A2451E3B100223873 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		406FAD2C2451F0C800223873 /* RecordPopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopOverView.swift; sourceTree = "<group>"; };
-		406FAD2E2452154C00223873 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40EB296E24AD037A00359BA3 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		40EB297024AE89DA00359BA3 /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40F3FA53248EB86900F3CE02 /* RambCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCell.swift; sourceTree = "<group>"; };
@@ -169,7 +173,6 @@
 				40F3FA31248EA13B00F3CE02 /* API */,
 				408E258124849FF100C0C6A5 /* App */,
 				408E258224849FF800C0C6A5 /* Model */,
-				408E25832484A01F00C0C6A5 /* View */,
 				402F5496244F91AA00FD899F /* Assets.xcassets */,
 				402F549B244F91AA00FD899F /* LaunchScreen.storyboard */,
 				402F549E244F91AA00FD899F /* Info.plist */,
@@ -213,6 +216,7 @@
 				406FAD0A244FF17600223873 /* RecordingModel.swift */,
 				408E25852484A3DE00C0C6A5 /* UserModel.swift */,
 				40F3FA2F248EA0F100F3CE02 /* RambModel.swift */,
+				408E25832484A01F00C0C6A5 /* View */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -223,15 +227,14 @@
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				40150D1B2499641B00B2E8A9 /* ActivityView.swift */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
-				40150D192499279D00B2E8A9 /* LocationView.swift */,
 				40353C82249282BB00C0C39A /* SettingsView.swift */,
+				40150D192499279D00B2E8A9 /* LocationView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
 				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				402F54C0244F9AA100FD899F /* MyProfileView.swift */,
 				40EB296E24AD037A00359BA3 /* UserProfileView.swift */,
-				406FAD2E2452154C00223873 /* ProfileHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,6 +262,8 @@
 				406FAD2A2451E3B100223873 /* Handle.swift */,
 				40150D112498654D00B2E8A9 /* InlineAlert.swift */,
 				40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */,
+				406EF19624B3DF4C009D224F /* Stopwatch.swift */,
+				406EF19824B3FF51009D224F /* Timer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			children = (
 				406FAD1E2450D6D200223873 /* AuthView.swift */,
 				406FAD122450ABF300223873 /* SessionStore.swift */,
+				40EB297024AE89DA00359BA3 /* SessionSettings.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -410,8 +416,10 @@
 				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				406FAD2B2451E3B100223873 /* Handle.swift in Sources */,
+				406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
+				406EF19924B3FF51009D224F /* Timer.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
@@ -419,7 +427,6 @@
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* SettingsView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
-				406FAD2F2452154C00223873 /* ProfileHeader.swift in Sources */,
 				40150D1C2499641B00B2E8A9 /* ActivityView.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
 				406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */,
@@ -432,6 +439,7 @@
 				406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */,
 				40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */,
 				40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */,
+				40EB297124AE89DA00359BA3 /* SessionSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

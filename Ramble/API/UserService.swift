@@ -22,6 +22,11 @@ class UserService: ObservableObject {
         }
     }
     
+    func updateUserRadius(uid: String, radius: Binding<Double>){
+        REF_USERS.child(uid).setValue(["radius": radius])
+        print("DEBUG: Updated user to have a discovery radius of \(radius)")
+    }
+    
     func fetchUser(completion: @escaping([User]) -> Void) {
         REF_USERS.observe(.childAdded) { snapshot in
             let uid = snapshot.key

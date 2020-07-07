@@ -10,37 +10,28 @@ import SwiftUI
 
 
 struct FeedView: View {
+    @EnvironmentObject var selectedRamb: SelectedRamb
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var locationManager = LocationManager()
         
     @State var recordingModal_shown = false
     @State var myprofileModal_shown = false
     @State var locationModal_shown = false
-    @State var userprofileModal_shown: Bool = false
-        
+    @State var userprofileModal_shown = false
     @State var dataSelector = 0
-        
+
     var feedtoggle = ["Hot", "New"]
-   
     var user: User
     
-//  Create a other user profile view that takes in a uid
-    
-//  Create a half modal wrap around that view
-    
-//  Send user uid from ramble cell up to feed view
-    
-//  If uid is not current user - open half model and pass in uid, if uid is current user do nothing/print some message...
+    @State var ramb: Ramb?
     
     var body: some View {
         ZStack{
             VStack{
                 VStack{
-                                    
                     Spacer()
                     
                     HStack{
-                        
                         Text("RambleOn")
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.red)
@@ -95,13 +86,13 @@ struct FeedView: View {
                 MyProfileView(isShown: self.$myprofileModal_shown, user: self.user)
             }
             
-            HalfModalView(isShown: $userprofileModal_shown){
-                UserProfileView(isShown: self.$userprofileModal_shown, user: self.user)
+            HalfModalView(isShown: $selectedRamb.userProfileShown){
+                UserProfileView(isShown: self.$selectedRamb.userProfileShown, user: self.selectedRamb.user ?? self.user)
             }
                         
             HalfModalView(isShown: $locationModal_shown, modalHeight: 300){
                 LocationView()
             }
-        }
+        }.environmentObject(selectedRamb)
     }
 }

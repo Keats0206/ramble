@@ -14,7 +14,6 @@ import Firebase
 import FirebaseStorage
 
 class AudioRecorder: NSObject, ObservableObject {
-    
     override init() {
         super.init()
         sortLatestRecordings()
@@ -23,11 +22,15 @@ class AudioRecorder: NSObject, ObservableObject {
 //  Currently unused!
 
     @Published var rambUrl: String = "";
+    @Published var rambFileID: String = "";
     @Published var currentTime: Int = 0
+    @Published var didUpload = false
 
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
+    var timer = Timer()
     var recordings = [Recording]()
+    
     var recording = false {
         didSet {
             objectWillChange.send(self)
@@ -37,6 +40,8 @@ class AudioRecorder: NSObject, ObservableObject {
     // Starting recording locally
     
     func startRecording() {
+        
+        
         let recordingSession = AVAudioSession.sharedInstance()
         
         do {
@@ -56,9 +61,11 @@ class AudioRecorder: NSObject, ObservableObject {
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
+        
         do {
+            //      start recorder
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
-            audioRecorder.record(forDuration: 60.0)            
+            audioRecorder.record(forDuration: 60.0)
             recording = true
         } catch {
             print("Could not start recording")
@@ -68,6 +75,7 @@ class AudioRecorder: NSObject, ObservableObject {
     // Stop recording locally
     
     func stopRecording() {
+//      stop recorder
         audioRecorder.stop()
         recording = false
         sortThenUpload()
@@ -104,7 +112,8 @@ class AudioRecorder: NSObject, ObservableObject {
                 } else {
                     rambsRef.downloadURL(completion: { (url, error) in
                         self.rambUrl = (url?.absoluteString)!
-                        print("ramble is ready to post")
+                        self.rambFileID = rambId
+                        self.didUpload.toggle()
                         return
                     })
                 }

@@ -17,16 +17,15 @@ struct RambUserFeed : View {
     init(_ model: RambService, user: User){
         self.viewModel = model
         self.user = user
-        model.fetchUserRambs(forUser: user) {ramb in
+        model.fetchUserRambs(forUser: user) { ramb in
             return
         }
-        print("DEBUG: fetching rambs for user with the id \(user.uid)")
     }
     
     var body: some View {
         List{
             ForEach(viewModel.userRambs){ramb in
-                rambCell(ramb: ramb)
+                RambCell(ramb: ramb)
             }
         }.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
     }
