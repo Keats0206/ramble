@@ -14,23 +14,28 @@ struct LocationView: View {
     @EnvironmentObject var sessionSettings: SessionSettings
 
     var body: some View{
-        
-        VStack {
+        ZStack{
             
-            VStack(alignment: .leading) {
+            VStack{
                 
-                Text("Distance").font(.system(size: 18, weight: .bold))
+                VStack(alignment: .leading) {
+                            
+                    Text("Distance").font(.system(size: 18, weight: .bold))
+                            
+                    Text("Up to \(sessionSettings.radius, specifier: "%.0f") miles away")
+                            
+                    Slider(value: $sessionSettings.radius, in: 0...60, step: 1, onEditingChanged: { bool in
+                        if false {
+            //                        UserService.shared.updateUserRadius(uid: self.session.session!.uid, radius: self.$sessionSettings.radius)
+                            }
+                        
+                        }).accentColor(.red)
                 
-                Text("Up to \(sessionSettings.radius, specifier: "%.0f") miles away")
-                
-                Slider(value: $sessionSettings.radius, in: 0...60, step: 1, onEditingChanged: { bool in
-                    if false {
-//                        UserService.shared.updateUserRadius(uid: self.session.session!.uid, radius: self.$sessionSettings.radius)
                     }
-                }).accentColor(.red)
                 
+                Spacer()
+            
             }
-            Spacer()
         }
     }
 }

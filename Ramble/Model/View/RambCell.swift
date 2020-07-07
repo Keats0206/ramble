@@ -15,9 +15,9 @@ struct RambCell : View {
     @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var viewModel = RambService()
     
-    @State var didClap = false
     @State var newClaps = 0
 
+    @State var didClap = false
     @State var width: CGFloat = 0
     @State private var showingActionSheet = false
     
@@ -66,7 +66,8 @@ struct RambCell : View {
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
                                             buttons:[
-                                                .default(Text("Delete"), action: {
+                                                .default(
+                                                    Text("Delete").foregroundColor(.red), action: {
                                                     self.viewModel.deleteRamb(ramb: self.ramb)
                                                 }),
                                                 .cancel()
@@ -128,27 +129,25 @@ struct RambCell : View {
 
                 
                 HStack{
-                    
                     Button(action: {
-                        self.viewModel.handleClap(ramb: self.ramb)
                         self.didClap.toggle()
+                        self.viewModel.handleClap(ramb: self.ramb, didClap: self.didClap)
                         self.newClaps = self.didClap ? 1 : 0
                     }){
-                    
                         Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
                             .resizable()
                             .frame(width: 20, height: 20)
                     }.buttonStyle(BorderlessButtonStyle())
                     
-                    Text(String(self.ramb.claps * -1 + newClaps))
+                    Text(String((self.ramb.claps * -1) + newClaps))
                 }
                                 
                 VStack(alignment: .leading){
                     
                     if audioPlayer.isPlaying == false {
-                    
+                        
                         Button(action: {
-                            
+                        
                             self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
 //      Should have access to the CurrentTime and Duration through these variables
                             print(self.audioPlayer.$rambCurrentTime)

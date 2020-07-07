@@ -121,23 +121,23 @@ class RambService: ObservableObject {
     
     // Note about claps - firebase is only capable of supporting ordering by "ascending". As a work around for this, claps is being stored as a negative value in the database, so we can use it as a sorting key... TLDR; -2 claps in the DB = 2 claps in the UI - user clicking Clap = -1
     
-    func handleClap(ramb: Ramb){
+    func handleClap(ramb: Ramb, didClap: Bool){        
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        let claps = ramb.didClap ? ramb.claps + 1 : ramb.claps - 1
-        
+        let claps = didClap ? ramb.claps - 1 : ramb.claps + 1
+            
         REF_RAMBS.child(ramb.id).child("claps").setValue(claps)
-    
-        if ramb.didClap {
-            // unlike tweet
-                REF_USER_CLAPS.child(uid).child(ramb.id).removeValue()
+        
+        if didClap {
+            // add ramb to user claps
+            REF_USER_CLAPS.child(uid).updateChildValues([ramb.id : ramb.id])
+            print("DEBUG: Adding this users clap at ramb id \(ramb.id) because didClap was \(didClap)")
             
         } else {
-            // like tweet
-            REF_USER_CLAPS.child(uid).updateChildValues([ramb.id : ramb.id])
-            }
+            // remove ramb to user claps
+            REF_USER_CLAPS.child(uid).child(ramb.id).removeValue()
+            print("DEBUG: removing this users clap at ramb id \(ramb.id) because didClap was \(didClap)")
         }
-
+    }
 
     func checkIfUserLikedRamb(_ ramb: Ramb, completion: @escaping(Bool) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
