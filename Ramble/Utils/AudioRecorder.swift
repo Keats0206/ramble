@@ -14,6 +14,7 @@ import Firebase
 import FirebaseStorage
 
 class AudioRecorder: NSObject, ObservableObject {
+    
     override init() {
         super.init()
         sortLatestRecordings()
@@ -25,6 +26,7 @@ class AudioRecorder: NSObject, ObservableObject {
     @Published var rambFileID: String = "";
     @Published var currentTime: Int = 0
     @Published var didUpload = false
+    @Published var recordingViewState: RecordState?
 
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
@@ -40,7 +42,6 @@ class AudioRecorder: NSObject, ObservableObject {
     // Starting recording locally
     
     func startRecording() {
-        
         
         let recordingSession = AVAudioSession.sharedInstance()
         
@@ -67,6 +68,9 @@ class AudioRecorder: NSObject, ObservableObject {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record(forDuration: 60.0)
             recording = true
+            self.recordingViewState = .started
+            print(self.recordingViewState as Any)
+
         } catch {
             print("Could not start recording")
         }
@@ -79,6 +83,8 @@ class AudioRecorder: NSObject, ObservableObject {
         audioRecorder.stop()
         recording = false
         sortThenUpload()
+        self.recordingViewState = .stopped
+        print(self.recordingViewState as Any)
     }
     
     // store file locally and sort the latest local recordings so newest is at the top
@@ -114,6 +120,8 @@ class AudioRecorder: NSObject, ObservableObject {
                         self.rambUrl = (url?.absoluteString)!
                         self.rambFileID = rambId
                         self.didUpload.toggle()
+                        self.recordingViewState = .uploaded
+                        print(self.recordingViewState)
                         return
                     })
                 }
@@ -124,4 +132,11 @@ class AudioRecorder: NSObject, ObservableObject {
         sortLatestRecordings()
         uploadLatestRecording()
     }
+}
+
+enum RecordState {
+    case nothing
+    case started
+    case stopped
+    case uploaded
 }

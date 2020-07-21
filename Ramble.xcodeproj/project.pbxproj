@@ -30,6 +30,7 @@
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
 		406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19624B3DF4C009D224F /* Stopwatch.swift */; };
 		406EF19924B3FF51009D224F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19824B3FF51009D224F /* Timer.swift */; };
+		406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 406EF19F24B51CCF009D224F /* SwiftUIRefresh */; };
 		406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */; };
 		406FAD03244FF0EB00223873 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD02244FF0EB00223873 /* AudioPlayer.swift */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
@@ -121,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */,
 				402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */,
 				B091CB605533265212CE7FE5 /* Pods_Ramble.framework in Frameworks */,
 			);
@@ -299,6 +301,7 @@
 			name = Ramble;
 			packageProductDependencies = (
 				402F54CA244F9FD000FD899F /* SDWebImageSwiftUI */,
+				406EF19F24B51CCF009D224F /* SwiftUIRefresh */,
 			);
 			productName = Ramble;
 			productReference = 402F548D244F91A900FD899F /* Ramble.app */;
@@ -331,6 +334,7 @@
 			packageReferences = (
 				402F54C9244F9FD000FD899F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				40B1F965249C03B4008A3F37 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				406EF19E24B51CCF009D224F /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
 			productRefGroup = 402F548E244F91A900FD899F /* Products */;
 			projectDirPath = "";
@@ -647,6 +651,14 @@
 				minimumVersion = 1.3.3;
 			};
 		};
+		406EF19E24B51CCF009D224F /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/timbersoftware/SwiftUIRefresh.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 		40B1F965249C03B4008A3F37 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
@@ -662,6 +674,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 402F54C9244F9FD000FD899F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		406EF19F24B51CCF009D224F /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 406EF19E24B51CCF009D224F /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

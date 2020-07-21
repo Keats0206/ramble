@@ -74,7 +74,8 @@ class SessionStore : ObservableObject {
                                       "password": password,
                                       "fullname": fullname,
                                       "username": username,
-                                      "profileImageUrl": profileImageUrl]
+                                      "radius": 25,
+                                      "profileImageUrl": profileImageUrl] as [String : Any]
                         
                         REF_USERS.child(uid).updateChildValues(values)
                     }

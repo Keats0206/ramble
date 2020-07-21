@@ -14,92 +14,135 @@ struct RecordPopOverView: View {
     @ObservedObject var timerManager = TimerManager()
     @State var expandRecorder: Bool = true
     @State var caption = "What do you have to say?"
-
+    
     var body: some View {
-        VStack {
+        
+        VStack{
+            //          Cell top
             
-            HStack {
+            VStack{
+                
+                if self.audioRecorder.recordingViewState == .stopped {
+                    
+                    TextField("Title your post here", text: $caption).multilineTextAlignment(.center)
 
-                Button(action: {
-                    print("DEBUG: delete recording from storage....")
-                    self.timerManager.reset()
-                }) {
-                    Text("Cancel")
-                        .foregroundColor(.red)
-                        .frame(width: 60)
+                } else {
+                    
+                    HStack {
+                        Text("Show visualizer")
+                    }
                 }
                 
-                Spacer().frame(width: 200)
+            }.background(Color(.red)).frame(height: 150)
+                        
+//          Cell Bottom
+            
+            ZStack{
+                                
+                HStack{
+                    
+                    HStack{
+                        
+                        Button(action: {
+                                     
+                                     print("DEBUG: delete recording from storage....")
+                                     
+                                     self.timerManager.reset()
+                                     
+                                 }) {
+                                     
+                                     Text("Cancel")
+                                         .foregroundColor(.red)
+                                         .frame(width: 60)
+                                 }
+                        
+                        Spacer()
+                        
+                        HStack{
+                            
+                            if audioRecorder.recordingViewState == .uploaded {
+                                
+                                Text("Post").font(.system(size: 14)).foregroundColor(.red)
+                                
+                                Button(action: {
+                                    
+                                    print("DEBUG: post-recording")
+                                    
+                                    self.viewModel.uploadRamb(
+                                        
+                                        caption: self.caption,
+                                        
+                                        rambUrl: self.audioRecorder.rambUrl,
+                                        
+                                        rambFileId: self.audioRecorder.rambFileID
+                                    )
+                                    
+                                    self.timerManager.reset()
+                                    
+                                }) {
+                                    
+                                    Image(systemName: "plus.square")
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(.red)
+                                }
+                            } else {
+                                Spacer()
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                    .offset(y: 15)
+                    .frame(height: 50)
+                    .background(Color(.orange))
                 
                 VStack{
                     
-                    Button(action: {
-                        print("DEBUG: post-recording")
-                        
-                        self.viewModel.uploadRamb(
-                            caption: self.caption,
-                            rambUrl: self.audioRecorder.rambUrl,
-                            rambFileId: self.audioRecorder.rambFileID
-                        )
-                        self.timerManager.reset()
-                    }) {
-                        Image(systemName: "plus.square")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(.red)
-                    }
-                    
-                    Text("Post").font(.system(size: 12))
-                }
-                
-            }.padding()
-            
-            TextField("Enter A Ramble Title", text: $caption).multilineTextAlignment(.center)
-            
-            ZStack {
-                
-                Image(systemName: "circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 80, height: 80)
-                    .foregroundColor(.white)
-                
-                HStack{
                     if audioRecorder.recording == false {
                         
                         Button(action: {
+                            
                             self.audioRecorder.startRecording()
+                            
                             self.timerManager.start()
+                            
                         }) {
                             
                             Image(systemName: "waveform.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 60, height: 60)
+                                .frame(width: 50, height: 50)
                                 .foregroundColor(.red)
                         }
                         
                     } else {
                         
                         Button(action: {
+                            
                             self.audioRecorder.stopRecording()
+                            
                             self.timerManager.stop()
+                            
                         }) {
                             
                             Image(systemName: "stop.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 60, height: 60)
+                                .frame(width: 50, height: 50)
                                 .foregroundColor(.red)
                         }
                     }
-                }
+                    
+                    Text("0:00")
+                    
+                }.background(Color(.blue)).offset(y: -15)
+                
             }
-//          If I stop recording I want to see the time that i stopped recording, it shouldn't reset until I hit post or cancel...
-            
-            Text(String(format: "%.1f", self.timerManager.secondsElapsed))
                 
             Spacer()
+            
         }
     }
 }

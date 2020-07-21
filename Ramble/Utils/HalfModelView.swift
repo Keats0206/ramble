@@ -90,8 +90,6 @@ enum DragState {
     }
 }
 
-
-
 func fraction_progress(lowerLimit: Double = 0, upperLimit:Double, current:Double, inverted:Bool = false) -> Double{
     var val:Double = 0
     if current >= upperLimit {

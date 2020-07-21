@@ -149,7 +149,9 @@ struct RambCell : View {
                         Button(action: {
                         
                             self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
+                            
 //      Should have access to the CurrentTime and Duration through these variables
+                            
                             print(self.audioPlayer.$rambCurrentTime)
                             print(self.audioPlayer.$rambDuration)
                             

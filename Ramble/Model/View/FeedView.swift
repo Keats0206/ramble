@@ -10,7 +10,10 @@ import SwiftUI
 
 
 struct FeedView: View {
+    @EnvironmentObject var session: SessionStore
     @EnvironmentObject var selectedRamb: SelectedRamb
+    @EnvironmentObject var settings: SessionSettings
+    
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var locationManager = LocationManager()
         
@@ -18,6 +21,7 @@ struct FeedView: View {
     @State var myprofileModal_shown = false
     @State var locationModal_shown = false
     @State var userprofileModal_shown = false
+    
     @State var dataSelector = 0
 
     var feedtoggle = ["Hot", "New"]
@@ -93,6 +97,6 @@ struct FeedView: View {
             HalfModalView(isShown: $locationModal_shown, modalHeight: 300){
                 LocationView()
             }
-        }.environmentObject(selectedRamb)
+        }.environmentObject(selectedRamb).environmentObject(SessionSettings())
     }
 }

@@ -25,16 +25,9 @@ struct AppView: View {
             FeedView(audioRecorder: AudioRecorder(), user: user).tabItem {
                 Image(systemName: "dot.radiowaves.left.and.right")
                 Text("Feed")
-                .tag(1)
-            }
-           
-            ActivityView().tabItem {
-                Image(systemName: "bell.circle")
-                Text("Activity")
-                .tag(2)
             }
         }.onAppear{
             self.getUser()
-        }.accentColor(.red)
+        }.accentColor(.red).environmentObject(SessionSettings())
     }
 }
