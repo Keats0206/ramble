@@ -8,12 +8,22 @@
 
 import SwiftUI
 
+let numberOfSamples: Int = 20
+
 struct RecordPopOverView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var viewModel = RambService()
     @ObservedObject var timerManager = TimerManager()
+    @ObservedObject private var mic = MicrophoneMonitor(numberOfSamples: numberOfSamples)
+    
     @State var expandRecorder: Bool = true
     @State var caption = "What do you have to say?"
+    
+    private func normalizeSoundLevel(level: Float) -> CGFloat {
+        let level = max(0.4, CGFloat(level) + 50) / 2 // between 0.1 and 25
+        
+        return CGFloat(level * (300 / 25)) // scaled to max at 300 (our height of our bar)
+    }
     
     var body: some View {
         
@@ -22,18 +32,20 @@ struct RecordPopOverView: View {
             
             VStack{
                 
-                if self.audioRecorder.recordingViewState == .stopped {
-                    
+                if self.audioRecorder.recordingViewState != .started {
+                
                     TextField("Title your post here", text: $caption).multilineTextAlignment(.center)
 
                 } else {
                     
-                    HStack {
-                        Text("Show visualizer")
+                    HStack(spacing: 4) {
+                        ForEach(mic.soundSamples, id: \.self) { level in
+                            BarView(value: self.normalizeSoundLevel(level: level))
+                        }.frame(width: 25)
                     }
                 }
                 
-            }.background(Color(.red)).frame(height: 150)
+            }.frame(height: 150)
                         
 //          Cell Bottom
             
@@ -93,10 +105,9 @@ struct RecordPopOverView: View {
                         
                     }
                     
-                }
-                    .offset(y: 15)
-                    .frame(height: 50)
-                    .background(Color(.orange))
+                }.offset(y: 15)
+                .frame(height: 50)
+                    
                 
                 VStack{
                     
@@ -137,13 +148,27 @@ struct RecordPopOverView: View {
                     
                     Text("0:00")
                     
-                }.background(Color(.blue)).offset(y: -15)
+                }.offset(y: -15)
                 
             }
                 
             Spacer()
             
         }
+    }
+}
+
+struct BarView: View {
+    var value: CGFloat
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(LinearGradient(gradient: Gradient(colors: [.red, .blue]),
+                                     startPoint: .top,
+                                     endPoint: .bottom))
+                .frame(width: (UIScreen.main.bounds.width - CGFloat(numberOfSamples) * 4) / CGFloat(numberOfSamples), height: value)
+        }.padding(20)
     }
 }
 

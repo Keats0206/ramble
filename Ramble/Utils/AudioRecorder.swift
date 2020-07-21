@@ -121,7 +121,7 @@ class AudioRecorder: NSObject, ObservableObject {
                         self.rambFileID = rambId
                         self.didUpload.toggle()
                         self.recordingViewState = .uploaded
-                        print(self.recordingViewState)
+                        print(self.recordingViewState as Any)
                         return
                     })
                 }

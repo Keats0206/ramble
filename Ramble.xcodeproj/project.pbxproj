@@ -28,6 +28,7 @@
 		40353C83249282BB00C0C39A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* SettingsView.swift */; };
 		40353C872492DA2F00C0C39A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C862492DA2F00C0C39A /* LocationManager.swift */; };
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
+		404B980224C6A0C3000956E8 /* Microphone Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980124C6A0C3000956E8 /* Microphone Monitor.swift */; };
 		406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19624B3DF4C009D224F /* Stopwatch.swift */; };
 		406EF19924B3FF51009D224F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19824B3FF51009D224F /* Timer.swift */; };
 		406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 406EF19F24B51CCF009D224F /* SwiftUIRefresh */; };
@@ -90,6 +91,7 @@
 		40353C82249282BB00C0C39A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		40353C862492DA2F00C0C39A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		404821D524A3BB7200BD63A3 /* RambUserFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserFeed.swift; sourceTree = "<group>"; };
+		404B980124C6A0C3000956E8 /* Microphone Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Microphone Monitor.swift"; sourceTree = "<group>"; };
 		406EF19624B3DF4C009D224F /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		406EF19824B3FF51009D224F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
@@ -266,6 +268,7 @@
 				40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */,
 				406EF19624B3DF4C009D224F /* Stopwatch.swift */,
 				406EF19824B3FF51009D224F /* Timer.swift */,
+				404B980124C6A0C3000956E8 /* Microphone Monitor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */,
 				40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */,
 				40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */,
+				404B980224C6A0C3000956E8 /* Microphone Monitor.swift in Sources */,
 				40EB297124AE89DA00359BA3 /* SessionSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
