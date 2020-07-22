@@ -17,8 +17,8 @@ class AudioPlayer: AVPlayer, ObservableObject {
         super.init()
     }
     
-    @Published var rambCurrentTime: Int = 0
-    @Published var rambDuration: Int = 0
+    @Published var rambCurrentTime = 0
+    @Published var rambDuration = 0
     
     // this is to compute and show remaining time
 
@@ -47,22 +47,20 @@ class AudioPlayer: AVPlayer, ObservableObject {
             audioPlayer.play()
             isPlaying = true
             
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ (_) in
-                                
-//              Accessing current time and duration
-                
-                let floatCurrentTime = Float(CMTimeGetSeconds(self.audioPlayer.currentTime()))
-                let floatDuration = Float(CMTimeGetSeconds(self.audioPlayer.currentItem!.asset.duration))
-                
-//              Converting to Integer
-
-                self.rambCurrentTime = Int(floatCurrentTime)
-                self.rambDuration = Int(floatDuration)
-                
-//              TODO: variables are now storing and being accessed by feed cell...but they don't update live in the UI(not sure why), and they aren't loading
-                
-                return
-            }
+//            Old attempt at timer this shit wasn't working though
+            
+//            Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ (_) in
+////              Accessing current time and duration
+//                let floatCurrentTime = Float(CMTimeGetSeconds(self.audioPlayer.currentTime()))
+//                let floatDuration = Float(CMTimeGetSeconds(self.audioPlayer.currentItem!.asset.duration))
+//
+////              Converting to Integer
+//                self.rambCurrentTime = Int(floatCurrentTime)
+//                self.rambDuration = Int(floatDuration)
+//
+//
+//            }
+            return
         }
     }
 

@@ -16,6 +16,8 @@ struct RecordPopOverView: View {
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject private var mic = MicrophoneMonitor(numberOfSamples: numberOfSamples)
     
+    @Binding var isShown: Bool
+    
     @State var expandRecorder: Bool = true
     @State var caption = "What do you have to say?"
     
@@ -33,40 +35,43 @@ struct RecordPopOverView: View {
             VStack{
                 
                 if self.audioRecorder.recordingViewState != .started {
-                
-                    TextField("Title your post here", text: $caption).multilineTextAlignment(.center)
-
-                } else {
                     
-                    HStack(spacing: 4) {
-                        ForEach(mic.soundSamples, id: \.self) { level in
-                            BarView(value: self.normalizeSoundLevel(level: level))
-                        }.frame(width: 25)
+                    TextField("Title your post here", text: $caption).multilineTextAlignment(.center).font(.body)
+                    
+                } else {
+                    VStack{
+                        HStack(spacing: 4) {
+                            ForEach(mic.soundSamples, id: \.self) { level in
+                                BarView(value: self.normalizeSoundLevel(level: level))
+                            }.frame(width: 25)
+                        }
                     }
                 }
                 
             }.frame(height: 150)
-                        
-//          Cell Bottom
+            
+            //          Cell Bottom
             
             ZStack{
-                                
+                
                 HStack{
                     
                     HStack{
                         
                         Button(action: {
-                                     
-                                     print("DEBUG: delete recording from storage....")
-                                     
-                                     self.timerManager.reset()
-                                     
-                                 }) {
-                                     
-                                     Text("Cancel")
-                                         .foregroundColor(.red)
-                                         .frame(width: 60)
-                                 }
+                            
+                            print("DEBUG: delete recording from storage....")
+                            
+                            self.timerManager.reset()
+                            self.isShown.toggle()
+                            self.caption = "What do you have to say?"
+                            
+                        }) {
+                            
+                            Text("Cancel")
+                                .foregroundColor(.red)
+                                .frame(width: 60)
+                        }
                         
                         Spacer()
                         
@@ -90,6 +95,8 @@ struct RecordPopOverView: View {
                                     )
                                     
                                     self.timerManager.reset()
+                                    self.isShown.toggle()
+                                    self.caption = "What do you have to say?"
                                     
                                 }) {
                                     
@@ -106,8 +113,8 @@ struct RecordPopOverView: View {
                     }
                     
                 }.offset(y: 15)
-                .frame(height: 50)
-                    
+                    .frame(height: 50)
+                
                 
                 VStack{
                     
@@ -116,7 +123,6 @@ struct RecordPopOverView: View {
                         Button(action: {
                             
                             self.audioRecorder.startRecording()
-                            
                             self.timerManager.start()
                             
                         }) {
@@ -133,7 +139,6 @@ struct RecordPopOverView: View {
                         Button(action: {
                             
                             self.audioRecorder.stopRecording()
-                            
                             self.timerManager.stop()
                             
                         }) {
@@ -151,7 +156,7 @@ struct RecordPopOverView: View {
                 }.offset(y: -15)
                 
             }
-                
+            
             Spacer()
             
         }
@@ -160,7 +165,7 @@ struct RecordPopOverView: View {
 
 struct BarView: View {
     var value: CGFloat
-
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
@@ -172,8 +177,3 @@ struct BarView: View {
     }
 }
 
-struct RecordPopOverView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordPopOverView(audioRecorder: AudioRecorder())
-    }
-}

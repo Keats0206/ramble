@@ -83,7 +83,7 @@ struct FeedView: View {
             }
             
             HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
-                RecordPopOverView(audioRecorder: AudioRecorder())
+                RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown)
             }
                         
             HalfModalView(isShown: $myprofileModal_shown){

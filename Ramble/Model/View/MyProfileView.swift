@@ -22,7 +22,9 @@ struct MyProfileView: View {
                 VStack{
                     HStack{
                         Button(action: {
+                            
                             self.isShown.toggle()
+                            
                         }){
                             Image(systemName: "arrow.uturn.down.circle")
                                 .resizable()

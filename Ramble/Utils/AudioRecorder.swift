@@ -42,7 +42,6 @@ class AudioRecorder: NSObject, ObservableObject {
     // Starting recording locally
     
     func startRecording() {
-        
         let recordingSession = AVAudioSession.sharedInstance()
         
         do {
@@ -53,7 +52,6 @@ class AudioRecorder: NSObject, ObservableObject {
         }
         
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        
         let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
                 
         let settings = [
@@ -109,7 +107,7 @@ class AudioRecorder: NSObject, ObservableObject {
         let localFile = recordings[0].fileURL
         let rambId = UUID().uuidString
         let rambsRef = STORAGE_RAMBS.child(rambId)
-        
+                        
         rambsRef.putFile(from: localFile, metadata: nil
             , completion: { (metadata, error) in
                 if error != nil {
@@ -118,13 +116,13 @@ class AudioRecorder: NSObject, ObservableObject {
                 } else {
                     rambsRef.downloadURL(completion: { (url, error) in
                         self.rambUrl = (url?.absoluteString)!
-                        self.rambFileID = rambId
+                        self.rambFileID = ("test")
                         self.didUpload.toggle()
                         self.recordingViewState = .uploaded
                         print(self.recordingViewState as Any)
                         return
                     })
-                }
+            }
         })
     }
     

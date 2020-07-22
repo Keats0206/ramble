@@ -29,7 +29,7 @@ struct RambFeed : View {
                     ForEach(viewModel.rambs.sorted(by: { $0.claps < $1.claps })){ramb in
                         RambCell(ramb: ramb)
                     }
-                } else {
+               } else {
                     ForEach(viewModel.rambs.sorted(by: { $0.timestamp < $1.timestamp })){ramb in
                         RambCell(ramb: ramb)
                     }
