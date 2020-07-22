@@ -17,8 +17,8 @@ class AudioPlayer: AVPlayer, ObservableObject {
         super.init()
     }
     
-    @Published var rambCurrentTime = 0
-    @Published var rambDuration = 0
+    @Published var rambCurrentTime: Double = 0
+    @Published var rambDuration: Double = 60
     
     // this is to compute and show remaining time
 
@@ -34,6 +34,8 @@ class AudioPlayer: AVPlayer, ObservableObject {
         
     func startPlayback(audio: URL) {
         
+        print(rambDuration as Any)
+        
         let playbackSession = AVAudioSession.sharedInstance()
                 
         do {
@@ -47,20 +49,15 @@ class AudioPlayer: AVPlayer, ObservableObject {
             audioPlayer.play()
             isPlaying = true
             
-//            Old attempt at timer this shit wasn't working though
-            
-//            Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ (_) in
-////              Accessing current time and duration
-//                let floatCurrentTime = Float(CMTimeGetSeconds(self.audioPlayer.currentTime()))
-//                let floatDuration = Float(CMTimeGetSeconds(self.audioPlayer.currentItem!.asset.duration))
-//
-////              Converting to Integer
-//                self.rambCurrentTime = Int(floatCurrentTime)
-//                self.rambDuration = Int(floatDuration)
-//
-//
-//            }
-            return
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ (_) in
+                
+                self.rambCurrentTime = self.audioPlayer.currentTime().seconds
+                self.rambDuration = self.audioPlayer.currentItem?.duration.seconds as! Double
+                
+                print(self.rambDuration as Any)
+                
+                return
+            }
         }
     }
 

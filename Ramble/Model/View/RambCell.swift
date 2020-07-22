@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 import SDWebImageSwiftUI
 
 struct RambCell : View {
@@ -18,7 +19,8 @@ struct RambCell : View {
     @State var newClaps = 0
     
     @State var didClap = false
-    @State var time: Float = 0
+    @State var width: CGFloat = 0
+    @State var finish = false
     @State private var showingActionSheet = false
     
     let ramb: Ramb
@@ -103,15 +105,35 @@ struct RambCell : View {
                     
                     //                  Duration Bar
                     
+                    
+                    
                     VStack{
                         
                         ZStack(alignment: .leading) {
                             
                             Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
-                                
-                        }
+                            
+                            Capsule().fill(Color.red).frame(width: self.width, height: 8)
+                                .gesture(DragGesture().onChanged({ (value) in
+                                    
+                                    let x = value.location.x
+                                    
+                                    self.width = x
+                                    
+                                }).onEnded({ (value) in
+                                    
+                                    let x = value.location.x
+                                    
+                                    let screen = UIScreen.main.bounds.width - 30
+                                    
+                                    let percent = x / screen
+                                    
+                                    self.audioPlayer.rambCurrentTime = Double(percent) * self.audioPlayer.rambDuration
+                                    
+                                }))
+                        
+                        }.padding(.top)
                     }
-                    
                 }.padding(5)
                 
                 Spacer().frame(width: 10)
@@ -142,7 +164,16 @@ struct RambCell : View {
                             
                             if audioPlayer.isPlaying == false {
                                 
+//                              If player isn't playing show play button, and start playback on click
+
+                                
                                 Button(action: {
+                                    
+                                    if self.finish {
+                                        self.audioPlayer.rambCurrentTime = 0
+                                        self.width = 0
+                                        self.finish = false
+                                    }
                                     
                                     self.audioPlayer.startPlayback(audio: URL(string: "\(self.ramb.rambUrl)")!)
                                     
@@ -156,6 +187,8 @@ struct RambCell : View {
                                 }.buttonStyle(BorderlessButtonStyle())
                                 
                             } else {
+                                
+//                              If player is playing show stop button, and stop playback
                                 
                                 Button(action: {
                                     
@@ -188,6 +221,34 @@ struct RambCell : View {
                     }
                 }
             }
+        }.onAppear{
+        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+                    
+                    if self.audioPlayer.isPlaying{
+                        
+                        let screen = UIScreen.main.bounds.width - 30
+                        
+                        let value = self.audioPlayer.rambCurrentTime / self.audioPlayer.rambDuration
+                        
+                        self.width = screen * CGFloat(value)
+                    }
+                }
+                
+                NotificationCenter.default.addObserver(forName: NSNotification.Name("Finish"), object: nil, queue: .main) { (_) in
+                    
+                    self.finish = true
+                }
+                
+            }
         }
+}
+
+class AVdelegate : NSObject, AVAudioPlayerDelegate{
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("Finish"), object: nil)
     }
 }
+
