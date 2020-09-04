@@ -123,6 +123,7 @@ class RambService: ObservableObject {
     
     func handleClap(ramb: Ramb, didClap: Bool){        
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        
         let claps = didClap ? ramb.claps - 1 : ramb.claps + 1
             
         REF_RAMBS.child(ramb.id).child("claps").setValue(claps)
@@ -130,12 +131,9 @@ class RambService: ObservableObject {
         if didClap {
             // add ramb to user claps
             REF_USER_CLAPS.child(uid).updateChildValues([ramb.id : ramb.id])
-            print("DEBUG: Adding this users clap at ramb id \(ramb.id) because didClap was \(didClap)")
-            
         } else {
             // remove ramb to user claps
             REF_USER_CLAPS.child(uid).child(ramb.id).removeValue()
-            print("DEBUG: removing this users clap at ramb id \(ramb.id) because didClap was \(didClap)")
         }
     }
 

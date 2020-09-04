@@ -20,16 +20,23 @@ struct UserProfileView: View {
     var user: User
 
     var body: some View {
-            ZStack(){
+            ZStack{
+                
                 VStack{
+            
                     HStack{
+                    
                         Button(action: {
-                            self.isShown.toggle()
+                        
+//                            self.isShown.toggle()
+                        
                         }){
+                        
                             Image(systemName: "arrow.uturn.down.circle")
                                 .resizable()
                                 .frame(width: 20, height: 20)
                                 .accentColor(.red)
+                        
                         }.buttonStyle(BorderlessButtonStyle())
                         
                         Spacer()
@@ -46,7 +53,8 @@ struct UserProfileView: View {
                                 .frame(width: 20, height: 20)
                                 .accentColor(.red)
                         }.buttonStyle(BorderlessButtonStyle()).sheet(isPresented: $isPresented, content: {
-                            SettingsView(user: self.user)
+                            EditProfileView(user: self.user)
+                        
                         })
                         
                     }.frame(height: 20).offset(y: 10)
@@ -54,7 +62,9 @@ struct UserProfileView: View {
 //                  Profile Header
                     
                     VStack{
+                        
                         VStack{
+                           
                             AnimatedImage(url: user.profileImageUrl)
                                 .resizable()
                                 .frame(width: 150, height: 150)

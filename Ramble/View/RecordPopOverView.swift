@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let numberOfSamples: Int = 20
+let numberOfSamples: Int = 10
 
 struct RecordPopOverView: View {
     @ObservedObject var audioRecorder: AudioRecorder
@@ -17,35 +17,43 @@ struct RecordPopOverView: View {
     @ObservedObject private var mic = MicrophoneMonitor(numberOfSamples: numberOfSamples)
     
     @Binding var isShown: Bool
-    
     @State var expandRecorder: Bool = true
-    @State var caption = "What do you have to say?"
+    @State var caption = ""
     
     private func normalizeSoundLevel(level: Float) -> CGFloat {
         let level = max(0.4, CGFloat(level) + 50) / 2 // between 0.1 and 25
         
-        return CGFloat(level * (300 / 25)) // scaled to max at 300 (our height of our bar)
+        return CGFloat(level * (200 / 25)) // scaled to max at 300 (our height of our bar)
     }
     
     var body: some View {
         
         VStack{
-            //          Cell top
             
-            VStack{
+            
+            VStack(alignment: .leading){
                 
                 if self.audioRecorder.recordingViewState != .started {
                     
-                    TextField("Title your post here", text: $caption).multilineTextAlignment(.center).font(.body)
+                    TextField("What do you have to say", text: $caption)
+                        .multilineTextAlignment(.center)
+                        .font(.body)
                     
                 } else {
-                    VStack{
-                        HStack(spacing: 4) {
-                            ForEach(mic.soundSamples, id: \.self) { level in
-                                BarView(value: self.normalizeSoundLevel(level: level))
-                            }.frame(width: 25)
-                        }
-                    }
+                    
+//                    Some sort of animation if we need it
+                    
+//                    VStack{
+//
+//                        HStack(spacing: 4) {
+//
+//                            ForEach(mic.soundSamples, id: \.self) { level in
+//
+//                                BarView(value: self.normalizeSoundLevel(level: level))
+//
+//                            }.frame(width: 25)
+//                        }
+//                    }
                 }
                 
             }.frame(height: 150)
@@ -59,9 +67,7 @@ struct RecordPopOverView: View {
                     HStack{
                         
                         Button(action: {
-                            
                             print("DEBUG: delete recording from storage....")
-                            
                             self.timerManager.reset()
                             self.isShown.toggle()
                             self.caption = "What do you have to say?"
@@ -78,31 +84,24 @@ struct RecordPopOverView: View {
                         HStack{
                             
                             if audioRecorder.recordingViewState == .uploaded {
-                                
-                                Text("Post").font(.system(size: 14)).foregroundColor(.red)
-                                
+                                                                
                                 Button(action: {
                                     
                                     print("DEBUG: post-recording")
                                     
                                     self.viewModel.uploadRamb(
-                                        
                                         caption: self.caption,
-                                        
                                         rambUrl: self.audioRecorder.rambUrl,
-                                        
                                         rambFileId: self.audioRecorder.rambFileID
                                     )
-                                    
                                     self.timerManager.reset()
                                     self.isShown.toggle()
-                                    self.caption = "What do you have to say?"
+                                    self.caption = ""
                                     
                                 }) {
                                     
-                                    Image(systemName: "plus.square")
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
+                                    Text("Post")
+                                        .font(.system(size: 14))
                                         .foregroundColor(.red)
                                 }
                             } else {
@@ -150,9 +149,7 @@ struct RecordPopOverView: View {
                                 .foregroundColor(.red)
                         }
                     }
-                    
-                    Text("0:00")
-                    
+                                        
                 }.offset(y: -15)
                 
             }
@@ -168,12 +165,12 @@ struct BarView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: 15)
                 .fill(LinearGradient(gradient: Gradient(colors: [.red, .blue]),
                                      startPoint: .top,
                                      endPoint: .bottom))
-                .frame(width: (UIScreen.main.bounds.width - CGFloat(numberOfSamples) * 4) / CGFloat(numberOfSamples), height: value)
-        }.padding(20)
+                .frame(width: (UIScreen.main.bounds.width - CGFloat(numberOfSamples) * 10) / CGFloat(numberOfSamples), height: value)
+        }.padding(10)
     }
 }
 

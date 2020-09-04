@@ -11,7 +11,7 @@ import Foundation
 struct Ramb: Identifiable {
     let id: String
     let caption: String
-    let claps: Int
+    var claps: Int
     let length: String
     let rambUrl: String
     let fileId: String

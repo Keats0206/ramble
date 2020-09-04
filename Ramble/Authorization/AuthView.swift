@@ -201,6 +201,7 @@ struct SignUpView : View {
                 }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
                 
                 if (error) {
+                    
                     InlineAlert(
                         title: "Hmm... That didn't work.",
                         subtitle: "Are you sure you don't already have an account with that email address?"

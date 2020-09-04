@@ -4,7 +4,8 @@
 //
 //  Created by Peter Keating on 4/21/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
-//
+
+
 import SwiftUI
 import SDWebImageSwiftUI
 
@@ -18,8 +19,11 @@ struct MyProfileView: View {
     var user: User
     
     var body: some View {
-            ZStack(){
+        
+            ZStack{
+        
                 VStack{
+                
                     HStack{
                         Button(action: {
                             
@@ -46,7 +50,7 @@ struct MyProfileView: View {
                                 .frame(width: 20, height: 20)
                                 .accentColor(.red)
                         }.buttonStyle(BorderlessButtonStyle()).sheet(isPresented: $isPresented, content: {
-                            SettingsView(user: self.user)
+                           EditProfileView(user: self.user)
                         })
                         
                     }.frame(height: 20).offset(y: 10)
@@ -54,7 +58,9 @@ struct MyProfileView: View {
 //                  Profile Header
                     
                     VStack{
+                        
                         VStack{
+                            
                             AnimatedImage(url: user.profileImageUrl)
                                 .resizable()
                                 .frame(width: 150, height: 150)

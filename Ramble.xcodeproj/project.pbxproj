@@ -10,7 +10,6 @@
 		40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D112498654D00B2E8A9 /* InlineAlert.swift */; };
 		40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1524986CB800B2E8A9 /* FeedView.swift */; };
 		40150D1A2499279D00B2E8A9 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D192499279D00B2E8A9 /* LocationView.swift */; };
-		40150D1C2499641B00B2E8A9 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1B2499641B00B2E8A9 /* ActivityView.swift */; };
 		40252C5F248F324600013742 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40252C5E248F324600013742 /* UserService.swift */; };
 		402F5491244F91A900FD899F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F5490244F91A900FD899F /* AppDelegate.swift */; };
 		402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F5492244F91A900FD899F /* SceneDelegate.swift */; };
@@ -25,10 +24,14 @@
 		402F54D6244FAD2A00FD899F /* Jimi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 402F54D5244FAD2A00FD899F /* Jimi.mp3 */; };
 		402F54D8244FAD2F00FD899F /* Love.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 402F54D7244FAD2F00FD899F /* Love.mp3 */; };
 		40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C7E2492777700C0C39A /* HalfModelView.swift */; };
-		40353C83249282BB00C0C39A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* SettingsView.swift */; };
+		40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* EditProfileView.swift */; };
 		40353C872492DA2F00C0C39A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C862492DA2F00C0C39A /* LocationManager.swift */; };
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
 		404B980224C6A0C3000956E8 /* Microphone Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980124C6A0C3000956E8 /* Microphone Monitor.swift */; };
+		404B980524CB3C27000956E8 /* SiriWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980424CB3C27000956E8 /* SiriWave.swift */; };
+		404B980724CB3C3D000956E8 /* SiriWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980624CB3C3D000956E8 /* SiriWaveView.swift */; };
+		404B980924CB3C54000956E8 /* SupportLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980824CB3C54000956E8 /* SupportLine.swift */; };
+		404B980B24CB3C6C000956E8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980A24CB3C6C000956E8 /* WaveView.swift */; };
 		406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19624B3DF4C009D224F /* Stopwatch.swift */; };
 		406EF19924B3FF51009D224F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19824B3FF51009D224F /* Timer.swift */; };
 		406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 406EF19F24B51CCF009D224F /* SwiftUIRefresh */; };
@@ -46,6 +49,8 @@
 		406FAD2B2451E3B100223873 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2A2451E3B100223873 /* Handle.swift */; };
 		406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2C2451F0C800223873 /* RecordPopOverView.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
+		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
+		40B1474D250174BA00A2781A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474C250174BA00A2781A /* SettingsView.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
 		40EB296F24AD037A00359BA3 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296E24AD037A00359BA3 /* UserProfileView.swift */; };
 		40EB297124AE89DA00359BA3 /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB297024AE89DA00359BA3 /* SessionSettings.swift */; };
@@ -72,7 +77,6 @@
 		40150D112498654D00B2E8A9 /* InlineAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		40150D1524986CB800B2E8A9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		40150D192499279D00B2E8A9 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		40150D1B2499641B00B2E8A9 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		40252C5E248F324600013742 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		402F548D244F91A900FD899F /* Ramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ramble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402F5490244F91A900FD899F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,10 +92,14 @@
 		402F54D5244FAD2A00FD899F /* Jimi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jimi.mp3; sourceTree = "<group>"; };
 		402F54D7244FAD2F00FD899F /* Love.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Love.mp3; sourceTree = "<group>"; };
 		40353C7E2492777700C0C39A /* HalfModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModelView.swift; sourceTree = "<group>"; };
-		40353C82249282BB00C0C39A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		40353C82249282BB00C0C39A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		40353C862492DA2F00C0C39A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		404821D524A3BB7200BD63A3 /* RambUserFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserFeed.swift; sourceTree = "<group>"; };
 		404B980124C6A0C3000956E8 /* Microphone Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Microphone Monitor.swift"; sourceTree = "<group>"; };
+		404B980424CB3C27000956E8 /* SiriWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWave.swift; sourceTree = "<group>"; };
+		404B980624CB3C3D000956E8 /* SiriWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveView.swift; sourceTree = "<group>"; };
+		404B980824CB3C54000956E8 /* SupportLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLine.swift; sourceTree = "<group>"; };
+		404B980A24CB3C6C000956E8 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		406EF19624B3DF4C009D224F /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		406EF19824B3FF51009D224F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
@@ -108,6 +116,8 @@
 		406FAD2A2451E3B100223873 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		406FAD2C2451F0C800223873 /* RecordPopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopOverView.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		40B1474A25016C5F00A2781A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		40B1474C250174BA00A2781A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40EB296E24AD037A00359BA3 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		40EB297024AE89DA00359BA3 /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
@@ -176,6 +186,7 @@
 				40F3FA32248EA15B00F3CE02 /* Utils */,
 				40F3FA31248EA13B00F3CE02 /* API */,
 				408E258124849FF100C0C6A5 /* App */,
+				408E25832484A01F00C0C6A5 /* View */,
 				408E258224849FF800C0C6A5 /* Model */,
 				402F5496244F91AA00FD899F /* Assets.xcassets */,
 				402F549B244F91AA00FD899F /* LaunchScreen.storyboard */,
@@ -204,6 +215,17 @@
 			path = AudioSamples;
 			sourceTree = "<group>";
 		};
+		404B980324CB3C0D000956E8 /* SiriWaveView */ = {
+			isa = PBXGroup;
+			children = (
+				404B980424CB3C27000956E8 /* SiriWave.swift */,
+				404B980624CB3C3D000956E8 /* SiriWaveView.swift */,
+				404B980824CB3C54000956E8 /* SupportLine.swift */,
+				404B980A24CB3C6C000956E8 /* WaveView.swift */,
+			);
+			path = SiriWaveView;
+			sourceTree = "<group>";
+		};
 		408E258124849FF100C0C6A5 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +242,6 @@
 				406FAD0A244FF17600223873 /* RecordingModel.swift */,
 				408E25852484A3DE00C0C6A5 /* UserModel.swift */,
 				40F3FA2F248EA0F100F3CE02 /* RambModel.swift */,
-				408E25832484A01F00C0C6A5 /* View */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,9 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
-				40150D1B2499641B00B2E8A9 /* ActivityView.swift */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
-				40353C82249282BB00C0C39A /* SettingsView.swift */,
+				40353C82249282BB00C0C39A /* EditProfileView.swift */,
+				40B1474C250174BA00A2781A /* SettingsView.swift */,
 				40150D192499279D00B2E8A9 /* LocationView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
@@ -239,6 +260,7 @@
 				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				402F54C0244F9AA100FD899F /* MyProfileView.swift */,
 				40EB296E24AD037A00359BA3 /* UserProfileView.swift */,
+				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,6 +278,7 @@
 		40F3FA32248EA15B00F3CE02 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				404B980324CB3C0D000956E8 /* SiriWaveView */,
 				406FAD08244FF15D00223873 /* Helpers.swift */,
 				406FAD06244FF13100223873 /* Extensions.swift */,
 				40F3FA51248EB69900F3CE02 /* Constants.swift */,
@@ -423,18 +446,21 @@
 				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				406FAD2B2451E3B100223873 /* Handle.swift in Sources */,
+				40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */,
 				406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
 				406EF19924B3FF51009D224F /* Timer.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
+				404B980924CB3C54000956E8 /* SupportLine.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
+				40B1474D250174BA00A2781A /* SettingsView.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
-				40353C83249282BB00C0C39A /* SettingsView.swift in Sources */,
+				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
-				40150D1C2499641B00B2E8A9 /* ActivityView.swift in Sources */,
+				404B980524CB3C27000956E8 /* SiriWave.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
 				406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */,
 				406FAD07244FF13100223873 /* Extensions.swift in Sources */,
@@ -445,6 +471,8 @@
 				40150D1A2499279D00B2E8A9 /* LocationView.swift in Sources */,
 				406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */,
 				40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */,
+				404B980B24CB3C6C000956E8 /* WaveView.swift in Sources */,
+				404B980724CB3C3D000956E8 /* SiriWaveView.swift in Sources */,
 				40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */,
 				404B980224C6A0C3000956E8 /* Microphone Monitor.swift in Sources */,
 				40EB297124AE89DA00359BA3 /* SessionSettings.swift in Sources */,

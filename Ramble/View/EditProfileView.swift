@@ -10,7 +10,7 @@ import SwiftUI
 
 // This view needs the current user passed in...
 
-struct SettingsView : View {
+struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
     
     @State var email: String = ""
@@ -54,10 +54,15 @@ struct SettingsView : View {
     
     var body : some View {
         ZStack {
+            
             VStack {
+                
                 HStack{
+                    
                     Spacer()
+                    
                     Button(action: updateProfile) {
+                    
                         Text("Save Updates")
                             .foregroundColor(.red)
                             .font(.system(size: 18, weight: .bold))
@@ -65,18 +70,28 @@ struct SettingsView : View {
                 }
                 Spacer()
                 // Image picker
+                
                 VStack {
+                    
                     if (profileImage == nil) {
+                        
                         VStack{
+                            
                             Image(systemName: "camera.on.rectangle")
                                 .frame(width: 100, height: 100)
                                 .cornerRadius(6)
                             
-                            Text("Add a profile picture").font(.system(size: 18, weight: .bold))
+                            Text("Add a profile picture")
+                                .font(.system(size: 18, weight: .bold))
+                            
                         }.onTapGesture {
+                            
                             self.showImagePicker = true
+                        
                         }
+                    
                     } else {
+                    
                         Image(uiImage: profileImage!)
                             .resizable()
                             .frame(width: 200, height: 200)
@@ -84,12 +99,19 @@ struct SettingsView : View {
                             .onTapGesture {
                                 self.showAction = true
                         }
+                       
                         Text("Change picture").font(.system(size: 18, weight: .bold))
+                    
                     }
+                
                 }.sheet(isPresented: $showImagePicker, onDismiss: {
+                
                     self.showImagePicker = false
+                
                 }, content: {
+                
                     ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                
                 })
                     .actionSheet(isPresented: $showAction) {
                         sheet
@@ -100,17 +122,22 @@ struct SettingsView : View {
                 VStack(alignment: .leading){
                     
                     HStack{
+                        
                         Text("Email").font(.system(size: 14, weight: .bold))
+                        
                         TextField("\(self.user.email)", text: $email)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
+                    
                     }
                     
                     Divider()
                     
                     HStack{
+                        
                         Text("Fullname")
                             .font(.system(size: 14, weight: .bold))
+                        
                         TextField("\(self.user.fullname)", text: $fullname)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
@@ -136,7 +163,9 @@ struct SettingsView : View {
                             
                             Spacer().frame(height: 25)
                             
-                            Text("Bio").font(.system(size: 14, weight: .bold)).onAppear{
+                            Text("Bio")
+                                .font(.system(size: 14, weight: .bold))
+                                .onAppear{
                                 self.bio = "\(String(describing: self.user.bio))"
                             }
                         
@@ -156,9 +185,12 @@ struct SettingsView : View {
                     Divider()
                     
                     HStack{
+                        
                         Button(action: openThing) {
+                        
                             Text("Report Feedback")
                                 .font(.system(size: 14, weight: .bold))
+                            
                             Spacer()
                         }
                     }
@@ -197,6 +229,7 @@ struct SettingsView : View {
                 }
                 
                 HStack{
+                    
                     Spacer()
                     
                     Button(action: updateProfile) {
@@ -210,12 +243,5 @@ struct SettingsView : View {
                 
             }.padding()
         }
-    }
-}
-
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
