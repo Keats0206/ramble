@@ -27,7 +27,7 @@ class RambService: ObservableObject {
             "caption":"\(caption)",
             "claps": 0,
             "timestamp": Int(NSDate().timeIntervalSince1970) * -1,
-            "length":"59s",
+            "length": Double(10),
             "rambUrl": "\(rambUrl)",
             "fileId":"\(rambFileId)",
             "didClap": false,
@@ -118,6 +118,7 @@ class RambService: ObservableObject {
             }
         }
     }
+    
     
     // Note about claps - firebase is only capable of supporting ordering by "ascending". As a work around for this, claps is being stored as a negative value in the database, so we can use it as a sorting key... TLDR; -2 claps in the DB = 2 claps in the UI - user clicking Clap = -1
     

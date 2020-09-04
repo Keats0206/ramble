@@ -51,6 +51,9 @@
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
 		40B1474D250174BA00A2781A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474C250174BA00A2781A /* SettingsView.swift */; };
+		40B1474F250290F700A2781A /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474E250290F700A2781A /* TimeHelper.swift */; };
+		40B14751250295F300A2781A /* RambCellTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B14750250295F300A2781A /* RambCellTop.swift */; };
+		40B14753250296FA00A2781A /* RambCellBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B14752250296FA00A2781A /* RambCellBottom.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
 		40EB296F24AD037A00359BA3 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296E24AD037A00359BA3 /* UserProfileView.swift */; };
 		40EB297124AE89DA00359BA3 /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB297024AE89DA00359BA3 /* SessionSettings.swift */; };
@@ -118,6 +121,9 @@
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40B1474A25016C5F00A2781A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		40B1474C250174BA00A2781A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		40B1474E250290F700A2781A /* TimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
+		40B14750250295F300A2781A /* RambCellTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCellTop.swift; sourceTree = "<group>"; };
+		40B14752250296FA00A2781A /* RambCellBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCellBottom.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40EB296E24AD037A00359BA3 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		40EB297024AE89DA00359BA3 /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
@@ -257,6 +263,8 @@
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
+				40B14750250295F300A2781A /* RambCellTop.swift */,
+				40B14752250296FA00A2781A /* RambCellBottom.swift */,
 				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				402F54C0244F9AA100FD899F /* MyProfileView.swift */,
 				40EB296E24AD037A00359BA3 /* UserProfileView.swift */,
@@ -292,6 +300,7 @@
 				406EF19624B3DF4C009D224F /* Stopwatch.swift */,
 				406EF19824B3FF51009D224F /* Timer.swift */,
 				404B980124C6A0C3000956E8 /* Microphone Monitor.swift */,
+				40B1474E250290F700A2781A /* TimeHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -435,10 +444,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
+				40B14751250295F300A2781A /* RambCellTop.swift in Sources */,
 				404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */,
 				40252C5F248F324600013742 /* UserService.swift in Sources */,
 				402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */,
 				406FAD212450D7FA00223873 /* AppView.swift in Sources */,
+				40B1474F250290F700A2781A /* TimeHelper.swift in Sources */,
 				402F54C1244F9AA100FD899F /* MyProfileView.swift in Sources */,
 				402F54C6244F9CEB00FD899F /* RambService.swift in Sources */,
 				40353C872492DA2F00C0C39A /* LocationManager.swift in Sources */,
@@ -461,6 +472,7 @@
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
 				404B980524CB3C27000956E8 /* SiriWave.swift in Sources */,
+				40B14753250296FA00A2781A /* RambCellBottom.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
 				406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */,
 				406FAD07244FF13100223873 /* Extensions.swift in Sources */,

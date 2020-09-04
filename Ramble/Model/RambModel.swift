@@ -12,7 +12,7 @@ struct Ramb: Identifiable {
     let id: String
     let caption: String
     var claps: Int
-    let length: String
+    let length: Double
     let rambUrl: String
     let fileId: String
     let uid: String
@@ -26,7 +26,7 @@ struct Ramb: Identifiable {
         
         self.claps = dictionary["claps"] as? Int ?? 0
         self.caption = dictionary["caption"] as? String ?? ""
-        self.length = dictionary["length"] as? String ?? ""
+        self.length = dictionary["length"] as? Double ?? 0
         self.rambUrl = dictionary["rambUrl"] as? String ?? ""
         self.fileId = dictionary["fileId"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""

@@ -10,6 +10,12 @@ import Foundation
 import SwiftUI
 import Combine
 import AVKit
+import AVFoundation
+
+import Foundation
+import SwiftUI
+import Combine
+import AVKit
 
 class AudioPlayer: AVPlayer, ObservableObject {
     
@@ -22,7 +28,6 @@ class AudioPlayer: AVPlayer, ObservableObject {
     @Published var finish = false
     
     // this is to compute and show remaining time
-
     let objectWillChange = PassthroughSubject<AudioPlayer, Never>()
     
     var isPlaying = false {
@@ -61,10 +66,3 @@ class AudioPlayer: AVPlayer, ObservableObject {
     }
 }
 
-
-class AVdelegate : NSObject, AVAudioPlayerDelegate{
-
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        NotificationCenter.default.post(name: NSNotification.Name("Finish"), object: nil)
-    }
-}
