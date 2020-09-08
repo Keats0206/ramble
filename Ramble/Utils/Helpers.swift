@@ -31,3 +31,46 @@ func formatDate(timestamp: Int) -> String {
     let now = Date()
     return formatter.string(from: from, to: now)!
 }
+
+class TimeHelper: NSObject {
+    
+    private static var timeHMSFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = [.pad]
+        return formatter
+    }()
+    
+    static func formatSecondsToHMS(_ seconds: Double) -> String {
+        guard !seconds.isNaN,
+            let text = timeHMSFormatter.string(from: seconds) else {
+                return "00:00"
+        }
+         
+        return text
+    }
+    
+}
+
+extension Date
+{
+    func toString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension UIApplication {
+    var currentWindow: UIWindow? {
+        connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first
+    }
+}
+

@@ -14,21 +14,16 @@ struct FeedView: View {
     @EnvironmentObject var settings: SessionSettings
     
     @ObservedObject var audioRecorder: AudioRecorder
-    @ObservedObject var locationManager = LocationManager()
     
     @State var recordingModal_shown = false
     @State var myprofileModal_shown = false
     @State var locationModal_shown = false
-    
-    //    @State var userprofileModal_shown = false
-    
     @State var dataSelector = 0
-    
-    var feedtoggle = ["Hot", "New"]
-    var user: User
-    
     @State var ramb: Ramb?
-    
+
+    private var feedtoggle = ["Hot", "New"]
+    var user: User
+        
     init(user: User, audioRecorder: AudioRecorder) {
         UISegmentedControl.appearance().selectedSegmentTintColor = .red
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -37,7 +32,6 @@ struct FeedView: View {
         self.user = user
         self.audioRecorder = audioRecorder
     }
-    
     
     var body: some View {
         
@@ -71,19 +65,15 @@ struct FeedView: View {
                                 Spacer()
                                                                                         
                                 Button(action: {
-                                    
                                     self.recordingModal_shown.toggle()
                                     
                                 }){
-                                    
                                     Image(systemName: "mic.circle")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                    }.buttonStyle(BorderlessButtonStyle())
-                            }
-                                .padding()
-                                .accentColor(.red)
-
+                                    
+                                }.buttonStyle(BorderlessButtonStyle())
+                            }.padding()
                         }
                                                 
                     }
@@ -99,19 +89,7 @@ struct FeedView: View {
             
             }
             
-            //            HalfModalView(isShown: $myprofileModal_shown){
-            //                MyProfileView(isShown: self.$myprofileModal_shown, user: self.user)
-            //            }
-            
-            //            HalfModalView(isShown: $selectedRamb.userProfileShown){
-            //                UserProfileView(isShown: self.$selectedRamb.userProfileShown, user: self.selectedRamb.user ?? self.user)
-            //            }
-            
-            //            HalfModalView(isShown: $locationModal_shown, modalHeight: 300){
-            //                LocationView()
-            //            }
-            
         }.environmentObject(selectedRamb)
-            .environmentObject(SessionSettings())
+        .environmentObject(SessionSettings())
     }
 }

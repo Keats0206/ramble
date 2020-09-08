@@ -15,7 +15,6 @@ class RambService: ObservableObject {
     static let shared = RambService()
     
     @EnvironmentObject var sessionSettings: SessionSettings
-    @ObservedObject var location = LocationManager()
     @Published var rambs = [Ramb]()
     @Published var userRambs = [Ramb]()
     
@@ -38,11 +37,10 @@ class RambService: ObservableObject {
         ref.updateChildValues(values) { (err, ref) in
             guard let rambId = ref.key else { return }
             REF_USER_RAMBS.child(uid).updateChildValues([rambId: rambId])
-            GEO_REF_RAMBS.setLocation(self.location.lastLocation!, forKey: rambId)
         }
     }
     
-    func observeRambs(radius: Double){
+    func observeRambs(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         REF_USER_FOLLOWING.child(uid).observe(.childAdded) { snapshot in
@@ -65,8 +63,6 @@ class RambService: ObservableObject {
             }
         }
     }
-    
-
     
     func fetchRamb(withrambId rambId: String, completion: @escaping(Ramb) -> Void) {
         REF_RAMBS.child(rambId).observe(DataEventType.value, with: { (snapshot) in
@@ -137,56 +133,3 @@ class RambService: ObservableObject {
         print("DEBUG: deleted ramb with id of \(rambId)")
     }
 }
-
-    //  This was the old fetch function using the GeoFire
-    
-//    func observeRambs(radius: Double){
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        print("DEBUG: Fetching rambs for a users within this radius \(radius)")
-//
-//        //     Take that user ID and query the location based off the user's current radius...
-//        GEO_REF_USERS.getLocationForKey("\(uid)") { (location, error) in
-//            if (error != nil) {
-//                print("An error occurred getting the location for \"current user is\": \(String(describing: error?.localizedDescription))")
-//            } else if (location != nil) {
-//
-//                //          Return the user's latitude and longitude, create a location for that user
-//                let userLat = location?.coordinate.latitude
-//                let userLong = location?.coordinate.longitude
-//                let location:CLLocation = CLLocation(latitude: CLLocationDegrees(userLat!), longitude: CLLocationDegrees(userLong!))
-//
-//                //          Query rambles based off that location and return an ID for every ramble, store that as Key
-//
-//                self.myQuery = GEO_REF_RAMBS.query(at: location, withRadius: radius)
-//
-////              updated view model to include
-//                self.myQuery?.observe(.keyEntered, with: { (key, location) in
-//                    self.fetchRambs(key: key)
-//                })
-//
-////                I don't think these are doing anything...
-//
-////                self.myQuery?.observe(.keyExited, with: { (key, location) in
-////                    self.fetchRambs(key: key)
-////                })
-////
-////                self.myQuery?.observe(.keyMoved, with: { (key, location) in
-////                    self.fetchRambs(key: key)
-////                })
-//            }
-//        }
-//    }
-//    func fetchRambs(key: String){
-//        let rambRef = REF_RAMBS.child(key)
-//
-//        rambRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//            let id = snapshot.key
-//            guard let dictionary = snapshot.value as? [String: Any] else { return }
-//            guard let uid = dictionary["uid"] as? String else { return }
-//
-//            UserService.shared.fetchUser(uid: uid) { user in
-//                let ramb = Ramb(user: user, id: id, dictionary: dictionary)
-//                self.rambs.append(ramb)
-//            }
-//        })
-//    }

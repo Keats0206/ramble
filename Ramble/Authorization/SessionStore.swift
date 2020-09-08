@@ -16,7 +16,7 @@ class SessionStore : ObservableObject {
     var didChange = PassthroughSubject<SessionStore, Never>()
     
     @Published var session: User? {didSet {self.didChange.send(self) }}
-    @ObservedObject var locationManager = LocationManager()
+//    @ObservedObject var locationManager = LocationManager()
     
     var handle: AuthStateDidChangeListenerHandle?
     

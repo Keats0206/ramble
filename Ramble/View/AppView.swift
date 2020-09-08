@@ -40,8 +40,7 @@ struct AppView: View {
             
             self.getUser()
         
-        }
-            .accentColor(.red)
-            .environmentObject(SessionSettings())
+        }.accentColor(.red)
+        .environmentObject(SessionSettings())
     }
 }

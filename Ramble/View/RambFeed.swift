@@ -20,24 +20,29 @@ struct RambFeed : View {
     init(_ model: RambService, dataToggle: Binding<Int>){
         self.viewModel = model
         self._dataToggle = dataToggle
-        model.observeRambs(radius: 25)
+        model.observeRambs()
     }
     
     var body: some View {
         
             List{
+                
                 if dataToggle != 1 {
+                    
                     ForEach(viewModel.rambs.sorted(by: { $0.claps > $1.claps })){ramb in
                         RambCell(ramb: ramb)
                     }
+                    
                } else {
+                    
                     ForEach(viewModel.rambs.sorted(by: { $0.timestamp < $1.timestamp })){ramb in
                         RambCell(ramb: ramb)
+                        
                     }
                 }
             }.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)).environmentObject(SessionSettings())
                 .pullToRefresh(isShowing: $isShowing) {
-                    self.viewModel.observeRambs(radius: 25)
+                    self.viewModel.observeRambs()
                     self.isShowing = false
             }
         }

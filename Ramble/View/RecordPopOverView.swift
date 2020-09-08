@@ -13,8 +13,6 @@ let numberOfSamples: Int = 10
 struct RecordPopOverView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var viewModel = RambService()
-    @ObservedObject var timerManager = TimerManager()
-    @ObservedObject private var mic = MicrophoneMonitor(numberOfSamples: numberOfSamples)
     
     @Binding var isShown: Bool
     @State var expandRecorder: Bool = true
@@ -68,7 +66,7 @@ struct RecordPopOverView: View {
                         
                         Button(action: {
                             print("DEBUG: delete recording from storage....")
-                            self.timerManager.reset()
+//                            self.timerManager.reset()
                             self.isShown.toggle()
                             self.caption = "What do you have to say?"
                             
@@ -94,7 +92,7 @@ struct RecordPopOverView: View {
                                         rambUrl: self.audioRecorder.rambUrl,
                                         rambFileId: self.audioRecorder.rambFileID
                                     )
-                                    self.timerManager.reset()
+//                                    self.timerManager.reset()
                                     self.isShown.toggle()
                                     self.caption = ""
                                     
@@ -122,7 +120,6 @@ struct RecordPopOverView: View {
                         Button(action: {
                             
                             self.audioRecorder.startRecording()
-                            self.timerManager.start()
                             
                         }) {
                             
@@ -138,7 +135,6 @@ struct RecordPopOverView: View {
                         Button(action: {
                             
                             self.audioRecorder.stopRecording()
-                            self.timerManager.stop()
                             
                         }) {
                             
