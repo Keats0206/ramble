@@ -104,7 +104,9 @@ struct SettingsView: View {
                             .actionSheet(isPresented: $showingActionSheet) {
                             
                                 ActionSheet(title: Text("Are you sure you want to logout?"), buttons:[.default(Text("Logout").foregroundColor(.blue),
-                                            action: { self.session.signOut() }),.cancel()
+                                            action: {
+                                                self.session.signOut()
+                                }),.cancel()
                                     ]
                                 )
                             }

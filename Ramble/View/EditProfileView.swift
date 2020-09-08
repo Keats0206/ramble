@@ -60,38 +60,33 @@ struct EditProfileView : View {
                 HStack{
                     
                     Spacer()
-                    
+            
                     Button(action: updateProfile) {
-                    
                         Text("Save Updates")
                             .foregroundColor(.red)
                             .font(.system(size: 18, weight: .bold))
                     }
                 }
+            
                 Spacer()
                 // Image picker
                 
                 VStack {
-                    
                     if (profileImage == nil) {
                         
                         VStack{
-                            
                             Image(systemName: "camera.on.rectangle")
                                 .frame(width: 100, height: 100)
                                 .cornerRadius(6)
-                            
+    
                             Text("Add a profile picture")
                                 .font(.system(size: 18, weight: .bold))
-                            
+
                         }.onTapGesture {
-                            
                             self.showImagePicker = true
-                        
                         }
                     
                     } else {
-                    
                         Image(uiImage: profileImage!)
                             .resizable()
                             .frame(width: 200, height: 200)
@@ -99,9 +94,7 @@ struct EditProfileView : View {
                             .onTapGesture {
                                 self.showAction = true
                         }
-                       
                         Text("Change picture").font(.system(size: 18, weight: .bold))
-                    
                     }
                 
                 }.sheet(isPresented: $showImagePicker, onDismiss: {
@@ -109,11 +102,8 @@ struct EditProfileView : View {
                     self.showImagePicker = false
                 
                 }, content: {
-                
                     ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                
-                })
-                    .actionSheet(isPresented: $showAction) {
+                }).actionSheet(isPresented: $showAction) {
                         sheet
                 }
                 

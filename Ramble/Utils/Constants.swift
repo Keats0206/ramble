@@ -27,3 +27,6 @@ let REF_RAMBS_LOCATIONS = DB_REF.child("ramb-locations")
 let REF_USER_RAMBS = DB_REF.child("user-rambs")
 let REF_USER_CLAPS = DB_REF.child("user-claps")
 let REF_RAMB_CLAPS = DB_REF.child("ramb-claps")
+
+let REF_USER_FOLLOWERS = DB_REF.child("user-followers")
+let REF_USER_FOLLOWING = DB_REF.child("user-following")

@@ -16,6 +16,7 @@ struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
     
     @State var isPresented = false
+    @State var isFollowing = false
     
     var user: User
     
@@ -52,42 +53,97 @@ struct ProfileView: View {
                             }
                         
 
-                            VStack(alignment: .leading){
+                            VStack(alignment: .leading, spacing: 20){
                                 
                                 HStack{
-                                    
-                                    AnimatedImage(url: user.profileImageUrl)
+                                                                        
+                                        AnimatedImage(url: user.profileImageUrl)
                                         .resizable()
                                         .frame(width: 100, height: 100)
                                         .clipShape(Circle())
-                                    
-                                    VStack{
                                         
-                                        Text("@ \(user.username)").font(.system(size: 25)).fontWeight(.heavy)
+                                                        
+                                    VStack(alignment: .leading, spacing: 10){
                                         
-                                        Text("\(user.bio!)").font(.system(size: 16))
-                                        
+                                        HStack{
+                                            
+                                            Text("@\(user.username)")
+                                                .font(.system(size: 25))
+                                                .fontWeight(.heavy)
+                                            
+                                            Button(action: {
+                                                
+                                                self.isFollowing.toggle()
+                                                UserService.shared.followUser(uid: "uWXF2S5NGhZj9ib6mxDiYo1dGVs1")
+                                                
+                                            }, label: {
+                                                
+                                                if isFollowing{
+                                                
+                                                    Text("Follow")
+                                                    
+                                                } else {
+                                                    
+                                                    Text("Unfollow")
+                                                    
+                                                }
+                                                
+                                            })
+                                        }
+                                                                                
+                                        HStack(spacing: 20){
+                                            
+                                            VStack{
+                                                
+                                                Text("230")
+                                                    .bold()
+                                                
+                                                Text("Followers")
+                                                    
+                                            }
+                                            
+                                            VStack{
+                                                
+                                                Text("230")
+                                                    .bold()
+                                                
+                                                Text("Following")
+                                                    
+                                            }
+                                            
+                                            VStack{
+                                                
+                                                Text("230")
+                                                    .bold()
+                                                
+                                                Text("Likes")
+
+                                            }
+                                        }
                                     }
+                                }
+                                
+                                VStack(alignment: .leading){
                                     
-                                }.padding()
+                                    Text("\(user.bio!)").font(.system(size: 16))
+                                
+                                }
                                 
                                 HStack{
-                                    
-                                    Spacer()
-                                    
+                                                                        
                                     Text("Rambles")
                                         .font(.headline)
                                     
                                     Spacer()
                                                                     
-                                }.padding()
+                                }
                                 
                                 Divider()
                                 
                                 RambUserFeed(RambService(), user: self.user)
                                 
-                            }
-                    
+                            }.padding()
+                            
                         }
                         .navigationBarHidden(true)
                         .navigationBarItems(leading:
@@ -113,7 +169,7 @@ struct ProfileView: View {
                 
             }
             .edgesIgnoringSafeArea(.all)
-            .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.keyWindow?.frame.height ?? 0)
+            .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
         }
     }
 }

@@ -32,7 +32,6 @@
 		404B980724CB3C3D000956E8 /* SiriWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980624CB3C3D000956E8 /* SiriWaveView.swift */; };
 		404B980924CB3C54000956E8 /* SupportLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980824CB3C54000956E8 /* SupportLine.swift */; };
 		404B980B24CB3C6C000956E8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B980A24CB3C6C000956E8 /* WaveView.swift */; };
-		406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19624B3DF4C009D224F /* Stopwatch.swift */; };
 		406EF19924B3FF51009D224F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406EF19824B3FF51009D224F /* Timer.swift */; };
 		406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 406EF19F24B51CCF009D224F /* SwiftUIRefresh */; };
 		406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */; };
@@ -103,7 +102,6 @@
 		404B980624CB3C3D000956E8 /* SiriWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveView.swift; sourceTree = "<group>"; };
 		404B980824CB3C54000956E8 /* SupportLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLine.swift; sourceTree = "<group>"; };
 		404B980A24CB3C6C000956E8 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
-		406EF19624B3DF4C009D224F /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		406EF19824B3FF51009D224F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
 		406FAD02244FF0EB00223873 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 				406FAD2A2451E3B100223873 /* Handle.swift */,
 				40150D112498654D00B2E8A9 /* InlineAlert.swift */,
 				40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */,
-				406EF19624B3DF4C009D224F /* Stopwatch.swift */,
 				406EF19824B3FF51009D224F /* Timer.swift */,
 				404B980124C6A0C3000956E8 /* Microphone Monitor.swift */,
 				40B1474E250290F700A2781A /* TimeHelper.swift */,
@@ -458,7 +455,6 @@
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				406FAD2B2451E3B100223873 /* Handle.swift in Sources */,
 				40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */,
-				406EF19724B3DF4C009D224F /* Stopwatch.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
 				406EF19924B3FF51009D224F /* Timer.swift in Sources */,
@@ -555,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -609,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
