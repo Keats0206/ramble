@@ -15,170 +15,168 @@ import SDWebImageSwiftUI
 struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
     
-    @State var isPresented = false
-    @State var isFollowing = false
+    @State private var isPresented = false
+    @State var isFollowed = true
     
     var user: User
-    
+            
     var body: some View {
         
         ZStack{
             
             NavigationView{
                 
-                        ZStack{
+                ZStack{
+                    
+                    VStack{
+                        
+                        HStack{
                             
-                            VStack{
+                            Spacer()
+                            
+                            Button(action: {
                                 
-                                HStack{
+                                withAnimation{
                                     
-                                    Spacer()
+                                    self.isPresented.toggle()
                                     
-                                    Button(action: {
-                                        
-                                        withAnimation{
-                                            
-                                            self.isPresented.toggle()
-                                        }
-                                    }, label: {
-                                        
-                                        Image(systemName: "gear")
-                                            .accentColor(.red)
-                                        
-                                    })
-                                    
-                                }.padding()
+                                }
                                 
-                                Spacer()
-                            }
+                            }, label: {
+                                
+                                Image(systemName: "gear")
+                                    .accentColor(.red)
+                                
+                            })
+                            
+                        }.padding()
+                        
+                        Spacer()
+                        
+                    }
                         
 
-                            VStack(alignment: .leading, spacing: 20){
+                    VStack(alignment: .leading, spacing: 20){
+                        
+                        HStack{
+                            
+                            AnimatedImage(url: user.profileImageUrl)
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                            
+                            VStack(alignment: .leading, spacing: 10){
                                 
                                 HStack{
-                                                                        
-                                        AnimatedImage(url: user.profileImageUrl)
-                                        .resizable()
-                                        .frame(width: 100, height: 100)
-                                        .clipShape(Circle())
-                                        
-                                                        
-                                    VStack(alignment: .leading, spacing: 10){
-                                        
-                                        HStack{
-                                            
+                                    
+                                        VStack(alignment: .leading){
                                             Text("@\(user.username)")
                                                 .font(.system(size: 25))
                                                 .fontWeight(.heavy)
                                             
-                                            Button(action: {
+                                            Text("@\(user.fullname)")
+                                                .font(.system(size: 15))
+                                            }
+                                        
+                                        
+                                    
+                                        if user.isCurrentUser {
+                                            
+                                            Spacer()
+                                            
+                                        } else {
+                                    
+                                        Button(action: {
+                                            
+                                            if self.isFollowed {
                                                 
-                                                self.isFollowing.toggle()
-                                                UserService.shared.followUser(uid: "uWXF2S5NGhZj9ib6mxDiYo1dGVs1")
+                                                UserService.shared.unfollowUser(uid: self.user.uid)
                                                 
-                                            }, label: {
+                                                self.isFollowed.toggle()
                                                 
-                                                if isFollowing{
+                                            } else {
                                                 
-                                                    Text("Follow")
-                                                    
-                                                } else {
-                                                    
-                                                    Text("Unfollow")
-                                                    
-                                                }
+                                                UserService.shared.followUser(uid: self.user.uid)
                                                 
-                                            })
+                                                self.isFollowed.toggle()
+                                            }
+                                            
+                                            
+                                        }, label: {
+                                                
+                                        if isFollowed {
+                                            
+                                            Text("Unfollow")
+                                            
+                                        } else {
+                                            
+                                            Text("Follow")
+                                            
                                         }
-                                                                                
-                                        HStack(spacing: 20){
-                                            
-                                            VStack{
-                                                
-                                                Text("230")
-                                                    .bold()
-                                                
-                                                Text("Followers")
-                                                    
-                                            }
-                                            
-                                            VStack{
-                                                
-                                                Text("230")
-                                                    .bold()
-                                                
-                                                Text("Following")
-                                                    
-                                            }
-                                            
-                                            VStack{
-                                                
-                                                Text("230")
-                                                    .bold()
-                                                
-                                                Text("Likes")
-
-                                            }
-                                        }
+                                    })
+                                }
+                            }
+                                
+                                HStack(spacing: 20){
+                                    
+                                    VStack{
+                                        
+                                        Text("230")
+                                            .bold()
+                                        
+                                        Text("Followers")
+                                    }
+                                    
+                                    VStack{
+                                        
+                                        Text("230")
+                                            .bold()
+                                        
+                                        Text("Following")
+                                    }
+                                    
+                                    VStack{
+                                        
+                                        Text("230")
+                                            .bold()
+                                        
+                                        Text("Likes")
                                     }
                                 }
-                                
-                                VStack(alignment: .leading){
-                                    
-                                    Text("\(user.bio!)").font(.system(size: 16))
-                                
-                                }
-                                
-                                HStack{
-                                                                        
-                                    Text("Rambles")
-                                        .font(.headline)
-                                    
-                                    Spacer()
-                                                                    
-                                }
-                                
-                                Divider()
-                                
-                                RambUserFeed(RambService(), user: self.user)
-                                
-                            }.padding()
-                            
+                            }
                         }
-                        .navigationBarHidden(true)
-                        .navigationBarItems(leading:
                         
-                    Button(action: {
-                        
-                        withAnimation{
+                        VStack(alignment: .leading){
                             
-                            self.isPresented.toggle()
+                            Text("\(user.bio!)")
+                                .font(.system(size: 16))
                         }
-                    }, label: {
                         
-                        Image(systemName: "gear")
-                            .accentColor(.red)
+                        HStack{
+                            
+                            Text("Rambles")
+                                .font(.headline)
+                            
+                            Spacer()
+                        }
                         
-                    })
-                )
+                        Divider()
+                        
+                        RambUserFeed(RambService(), user: self.user)
+                        
+                    }.padding()
+                    
+                }.navigationBarHidden(true)
+                .navigationBarTitle(user.username)
+            
             }
             
             ZStack{
                 
                 SettingsView(isPresented: $isPresented)
                 
-            }
-            .edgesIgnoringSafeArea(.all)
+            }.edgesIgnoringSafeArea(.all)
             .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
         }
     }
 }
-
-//.sheet(isPresented: $isPresented, content: {
-//
-//    Button(action: {self.isPresented.toggle()
-//
-//    }){
-//        Text("Here is my work")
-//    }
-//})

@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Firebase
-import GeoFire
 import Combine
 
 class RambService: ObservableObject {
@@ -17,9 +16,7 @@ class RambService: ObservableObject {
     @EnvironmentObject var sessionSettings: SessionSettings
     @Published var rambs = [Ramb]()
     @Published var userRambs = [Ramb]()
-    
-    var myQuery: GFQuery?
-    
+        
     func uploadRamb(caption: String, rambUrl: String, rambFileId: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let values = [

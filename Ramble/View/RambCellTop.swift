@@ -15,6 +15,7 @@ struct RambCellTop: View {
     @ObservedObject var viewModel = RambService()
     
     @State private var showingActionSheet = false
+    @State private var isActive = false
     
     var ramb: Ramb
     
@@ -31,48 +32,35 @@ struct RambCellTop: View {
                 AnimatedImage(url: ramb.user.profileImageUrl)
                     .resizable()
                     .clipShape(Circle())
-                    .frame(width: 60, height: 60, alignment: .center).onTapGesture {
-                        
-                        if self.session.session!.uid != self.ramb.user.uid {
-                            
-                            self.selectedRamb.user = self.ramb.user
-                            
-                            self.selectedRamb.userProfileShown.toggle()
-                            
-                            print("set selected user to user with id of: \(self.ramb.user.uid) and the view isShown is set to: \(self.selectedRamb.userProfileShown)")
-                            
-                        } else {
-                            
-                            print("no need to open my own profile")
-                            
-                        }
-                        
-                }
+                    .frame(width: 60, height: 60, alignment: .center)
+                        .onTapGesture { self.isActive.toggle() } // activate link on image tap
+                        .background(NavigationLink(destination:  // link in background
+                            ProfileView(user: ramb.user), isActive: $isActive) { EmptyView() })
                 
                 if ramb.user.uid != session.session?.uid {
-                                   
-                                   Spacer().frame(height: 10)
-                                   
-                               } else {
-                                   
-                                   Button(action: {
-                                       self.showingActionSheet.toggle()
-                                   }){
-                                       
-                                       Image(systemName: "ellipsis")
-                                           .frame(height: 10)
-                                           .accentColor(.red)
-                                           .actionSheet(isPresented: $showingActionSheet) {
-                                               ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
-                                                           buttons:[
-                                                               .default(
-                                                                   Text("Delete").foregroundColor(.red), action: {
-                                                                       self.viewModel.deleteRamb(ramb: self.ramb)
-                                                               }),.cancel()
-                                               ])
-                                       }
-                                   }.buttonStyle(BorderlessButtonStyle())
-                               }
+                    
+                    Spacer().frame(height: 10)
+                    
+                } else {
+                    
+                    Button(action: {
+                        self.showingActionSheet.toggle()
+                    }){
+                        
+                        Image(systemName: "ellipsis")
+                            .frame(height: 10)
+                            .accentColor(.red)
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+                                            buttons:[
+                                                .default(
+                                                    Text("Delete").foregroundColor(.red), action: {
+                                                        self.viewModel.deleteRamb(ramb: self.ramb)
+                                                }),.cancel()
+                                ])
+                        }
+                    }.buttonStyle(BorderlessButtonStyle())
+                }
             }
             
             

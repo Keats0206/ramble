@@ -14,14 +14,15 @@ struct FeedView: View {
     @EnvironmentObject var settings: SessionSettings
     
     @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var userModel = UserService()
     
     @State var recordingModal_shown = false
-    @State var myprofileModal_shown = false
-    @State var locationModal_shown = false
+    @State var searchModal_shown = false
     @State var dataSelector = 0
     @State var ramb: Ramb?
 
     private var feedtoggle = ["Hot", "New"]
+    
     var user: User
         
     init(user: User, audioRecorder: AudioRecorder) {
@@ -60,9 +61,18 @@ struct FeedView: View {
                                 Text("RAMBLE")
                                     .font(.headline)
                                     .foregroundColor(.red)
-                                    .offset(x: (UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left)!)
                                 
                                 Spacer()
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.searchModal_shown.toggle()
+                                        UserService.shared.fetchUsers()
+                                    }
+                                }, label: {
+                                    Image(systemName: "magnifyingglass")
+                                        .accentColor(.red)
+                                })
                                                                                         
                                 Button(action: {
                                     self.recordingModal_shown.toggle()
@@ -82,9 +92,18 @@ struct FeedView: View {
                     
                 }
                 
-            }.navigationBarHidden(false)
+            }
             
-                HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
+            
+            ZStack{
+
+                SearchView(isPresented: $searchModal_shown)
+
+            }.edgesIgnoringSafeArea(.all)
+            .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+            
+            HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
+            
                 RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown)
             
             }

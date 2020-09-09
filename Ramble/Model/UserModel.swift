@@ -9,7 +9,8 @@
 import Foundation
 import Firebase
 
-struct User {
+struct User: Identifiable, Hashable {
+    var id: Int
     var uid: String
     var email: String
     var username: String
@@ -17,17 +18,16 @@ struct User {
     var profileImageUrl: URL?
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
     var bio: String?
-    var radius: Double?
+    var isFollowed: Bool
 
     init(uid: String, values: [String: Any]) {
         self.uid = uid
-
+        self.id = values["id"] as? Int ?? 0
         self.email = values["email"] as? String ?? ""
         self.username = values["username"] as? String ?? ""
         self.fullname = values["fullname"] as? String ?? ""
         self.bio = values["bio"] as? String ?? ""
-        self.radius = values["radius"] as? Double ?? nil
-
+        self.isFollowed = values["isFollowed"] as? Bool ?? false
         
         if let profileImageUrlString = values["profileImageUrl"] as? String {
             guard let url = URL(string: profileImageUrlString) else { return }

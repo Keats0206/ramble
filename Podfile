@@ -1,6 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '13.4'
-
+platform :ios, ’13.4’
 
 target 'Ramble' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -13,6 +12,5 @@ target 'Ramble' do
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Storage'
 	pod 'PRTween'
-	pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
 end

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27AF6173CBE08458213BCBCE /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D7D7AEBA063D859F869ACB /* Pods_Ramble.framework */; };
 		40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D112498654D00B2E8A9 /* InlineAlert.swift */; };
 		40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1524986CB800B2E8A9 /* FeedView.swift */; };
 		40252C5F248F324600013742 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40252C5E248F324600013742 /* UserService.swift */; };
@@ -24,6 +25,7 @@
 		40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C7E2492777700C0C39A /* HalfModelView.swift */; };
 		40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* EditProfileView.swift */; };
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
+		405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A5DE1250802F4009F9C6B /* SearchView.swift */; };
 		406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 406EF19F24B51CCF009D224F /* SwiftUIRefresh */; };
 		406FACFD244FEB9A00223873 /* Ramble-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */; };
 		406FAD03244FF0EB00223873 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD02244FF0EB00223873 /* AudioPlayer.swift */; };
@@ -45,7 +47,6 @@
 		40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA2F248EA0F100F3CE02 /* RambModel.swift */; };
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
 		40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA53248EB86900F3CE02 /* RambCell.swift */; };
-		B091CB605533265212CE7FE5 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2173402475B40521169AF4 /* Pods_Ramble.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1569229D43B32AD730F4ACA0 /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
 		40150D112498654D00B2E8A9 /* InlineAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		40150D1524986CB800B2E8A9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		40252C5E248F324600013742 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		40353C7E2492777700C0C39A /* HalfModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModelView.swift; sourceTree = "<group>"; };
 		40353C82249282BB00C0C39A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		404821D524A3BB7200BD63A3 /* RambUserFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserFeed.swift; sourceTree = "<group>"; };
+		405A5DE1250802F4009F9C6B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		406FACFC244FEB9A00223873 /* Ramble-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Ramble-Bridging-Header.m"; path = "/Users/petekeating/Desktop/Ramble/Ramble/Ramble-Bridging-Header.m"; sourceTree = "<absolute>"; };
 		406FAD02244FF0EB00223873 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -100,9 +103,8 @@
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40F3FA53248EB86900F3CE02 /* RambCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCell.swift; sourceTree = "<group>"; };
-		9A9F8E848C861AB5640A0AD5 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
-		CF2173402475B40521169AF4 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DDD54D55658B4FCD7F72CB12 /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
+		A7D7D7AEBA063D859F869ACB /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D722BABB8711D0E06B9FB6A1 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,26 +114,18 @@
 			files = (
 				406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */,
 				402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */,
-				B091CB605533265212CE7FE5 /* Pods_Ramble.framework in Frameworks */,
+				27AF6173CBE08458213BCBCE /* Pods_Ramble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1815B93A03330F6F07C8CE41 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CF2173402475B40521169AF4 /* Pods_Ramble.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2D268D9C788D4B05278E39F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9A9F8E848C861AB5640A0AD5 /* Pods-Ramble.debug.xcconfig */,
-				DDD54D55658B4FCD7F72CB12 /* Pods-Ramble.release.xcconfig */,
+				D722BABB8711D0E06B9FB6A1 /* Pods-Ramble.debug.xcconfig */,
+				1569229D43B32AD730F4ACA0 /* Pods-Ramble.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -143,7 +137,7 @@
 				402F548F244F91A900FD899F /* Ramble */,
 				402F548E244F91A900FD899F /* Products */,
 				2D268D9C788D4B05278E39F4 /* Pods */,
-				1815B93A03330F6F07C8CE41 /* Frameworks */,
+				ED7EC2E9D340B6C376F53EF7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,15 +210,16 @@
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
-				40353C82249282BB00C0C39A /* EditProfileView.swift */,
+				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				40B1474C250174BA00A2781A /* SettingsView.swift */,
+				405A5DE1250802F4009F9C6B /* SearchView.swift */,
+				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
 				40B14750250295F300A2781A /* RambCellTop.swift */,
 				40B14752250296FA00A2781A /* RambCellBottom.swift */,
 				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
-				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -262,6 +257,14 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
+		ED7EC2E9D340B6C376F53EF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7D7D7AEBA063D859F869ACB /* Pods_Ramble.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,12 +272,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 402F54A1244F91AA00FD899F /* Build configuration list for PBXNativeTarget "Ramble" */;
 			buildPhases = (
-				0979A44F7EBE1861DD69260D /* [CP] Check Pods Manifest.lock */,
+				DF80842FF9CD2C9414B6E133 /* [CP] Check Pods Manifest.lock */,
 				402F5489244F91A900FD899F /* Sources */,
 				402F548A244F91A900FD899F /* Frameworks */,
 				402F548B244F91A900FD899F /* Resources */,
 				40F3FA5D248EC20D00F3CE02 /* Embed Frameworks */,
-				E73E5FA190F5E4D48D3B3B14 /* [CP] Embed Pods Frameworks */,
+				C3E546ADC5C6DAF37C4ACA72 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -296,7 +299,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Peter Keating";
 				TargetAttributes = {
 					402F548C244F91A900FD899F = {
@@ -305,7 +308,7 @@
 				};
 			};
 			buildConfigurationList = 402F5488244F91A900FD899F /* Build configuration list for PBXProject "Ramble" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -344,7 +347,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0979A44F7EBE1861DD69260D /* [CP] Check Pods Manifest.lock */ = {
+		C3E546ADC5C6DAF37C4ACA72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF80842FF9CD2C9414B6E133 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -364,23 +384,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E73E5FA190F5E4D48D3B3B14 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -405,6 +408,7 @@
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
+				405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */,
 				40B1474D250174BA00A2781A /* SettingsView.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
@@ -463,6 +467,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -487,7 +492,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -523,6 +528,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -541,7 +547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -553,7 +559,7 @@
 		};
 		402F54A2244F91AA00FD899F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A9F8E848C861AB5640A0AD5 /* Pods-Ramble.debug.xcconfig */;
+			baseConfigurationReference = D722BABB8711D0E06B9FB6A1 /* Pods-Ramble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -575,7 +581,7 @@
 		};
 		402F54A3244F91AA00FD899F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDD54D55658B4FCD7F72CB12 /* Pods-Ramble.release.xcconfig */;
+			baseConfigurationReference = 1569229D43B32AD730F4ACA0 /* Pods-Ramble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

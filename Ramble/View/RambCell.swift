@@ -14,7 +14,8 @@ struct RambCell : View {
     var ramb: Ramb
     
     var body: some View {
-        VStack(alignment: .leading){
+        
+        VStack{
             
             RambCellTop(ramb: ramb)
             
