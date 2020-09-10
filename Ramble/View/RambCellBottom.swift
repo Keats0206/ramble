@@ -15,9 +15,6 @@ struct RambCellBottom: View {
     @EnvironmentObject var selectedRamb: SelectedRamb
     @ObservedObject var viewModel = RambService()
     
-//  Variable to manage the position of the slide
-    @State var seekPos = 0.0
-    
     var ramb: Ramb
     
     var body: some View {
@@ -45,12 +42,12 @@ struct AudioPlayerControlsView: View {
     let player: AVPlayer
     
 //  Observing the time / duration of the current audio player
-    
     let timeObserver: PlayerTimeObserver
     let durationObserver: PlayerDurationObserver
     @State private var currentTime: TimeInterval = 0
     @State private var currentDuration: TimeInterval = 0
-    
+    @State private var finished = false
+
     var body: some View {
         
         VStack {
@@ -121,7 +118,7 @@ struct AudioPlayerControlsView: View {
 struct AudioView: View {
     @State var isPlaying = false
     var player: AVPlayer
-        
+     
     var body: some View {
         
         HStack {
@@ -158,7 +155,7 @@ struct AudioView: View {
         }.onAppear{
             
             self.isPlaying = false
-            
+                        
         }
     }
 }
@@ -183,9 +180,11 @@ class PlayerTimeObserver {
             
             // Publish the new player time
             self.publisher.send(time.seconds)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         }
     }
-    
+        
     deinit {
         if let player = player,
             let observer = timeObservation {
@@ -195,6 +194,11 @@ class PlayerTimeObserver {
     
     func pause(_ pause: Bool) {
         paused = pause
+    }
+    
+    // Check if player finished
+
+    @objc func playerDidFinishPlaying(note: NSNotification) {
     }
 }
 
