@@ -25,7 +25,9 @@ struct RambFeed : View {
     
     var body: some View {
         
-            List{
+        VStack{
+            
+            ScrollView{
                 
                 if dataToggle != 1 {
                     
@@ -45,8 +47,10 @@ struct RambFeed : View {
                     
                 }
                 
-            }.listStyle(GroupedListStyle())
-            .environmentObject(SessionSettings())
+            }
+        }
+        .padding()
+        .environmentObject(SessionSettings())
             .pullToRefresh(isShowing: $isShowing) {
                     self.viewModel.observeRambs()
                     self.isShowing = false

@@ -38,7 +38,7 @@ struct FeedView: View {
         
         ZStack{
             
-            Color.white
+            Color.gray
             
             NavigationView{
                 

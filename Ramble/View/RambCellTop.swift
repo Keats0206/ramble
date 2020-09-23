@@ -29,7 +29,7 @@ struct RambCellTop: View {
             
             VStack{
                 
-                AnimatedImage(url: ramb.user.profileImageUrl)
+                WebImage(url: ramb.user.profileImageUrl)
                     .resizable()
                     .clipShape(Circle())
                     .frame(width: 60, height: 60, alignment: .center)
@@ -100,6 +100,11 @@ struct RambCellTop: View {
             }
                         
         }
+        .padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.gray.opacity(0.2))
+            )
 //        .onAppear{
 //
 //            self.claps = self.ramb.claps

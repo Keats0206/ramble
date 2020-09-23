@@ -24,11 +24,11 @@ struct RambUserFeed : View {
     }
     
     var body: some View {
-        List{
+        ScrollView{
             ForEach(viewModel.userRambs){ramb in
                 RambUserCell(ramb: ramb)
             }
-        }.listStyle(GroupedListStyle())
+        }
     }
 }
 
