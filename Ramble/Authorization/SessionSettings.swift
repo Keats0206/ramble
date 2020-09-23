@@ -11,6 +11,7 @@ import Foundation
 class SelectedRamb: ObservableObject {
     @Published var user: User?
     @Published var userProfileShown: Bool = false
+    @Published var selectedRamb: Ramb?
 }
 
 class SessionSettings: ObservableObject {
