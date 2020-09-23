@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FloatingPlayerView: View {
     
-    @State var height : CGFloat = 750
+    @State var height : CGFloat = UIScreen.main.bounds.height - 75
     @State var floating = true
     
     var body : some View{
@@ -38,25 +38,31 @@ struct FloatingPlayerView: View {
                         
                         VStack(alignment : .leading){
                             
-                            Text("Love Story").fontWeight(.heavy)
+                            Text("Love Story")
+                                .fontWeight(.heavy)
                             Text("Taylor Swift")
+                            
                         }
                         
                         Spacer()
                         
-                        Image(systemName: (self.height == geo.size.height - 75) ? "play.fill" :  "square.and.arrow.down.fill")
+                        Image(systemName: "play.fill")
                             .resizable()
                             .frame(width: 32, height: 30)
                         
                         
                     }.padding(10)
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
                     
                     } else {
                         
                         VStack{
                             
+                            Spacer()
+                            
                             Text("Big Music Player")
+                            
+                            Spacer()
                             
                         }
                         
@@ -84,22 +90,21 @@ struct FloatingPlayerView: View {
                         self.height = geo.size.height - 75
                         self.floating = true
                         
-                    }
-                    else{
+                    } else{
                         
                         if self.height < geo.size.height - 150{
                             
                             self.height = 0
                             self.floating = false
-                        }
-                        else{
+                            
+                        } else{
                             
                             self.height = geo.size.height - 75
                         }
                     }
                 })
                 
-            ).offset(y: self.height)
+            ).offset(y: self.height - 50)
             .animation(.spring())
         }
     }
