@@ -27,35 +27,7 @@ struct ProfileView: View {
             NavigationView{
                 
                 ZStack{
-                    
-                    VStack{
-                        
-                        HStack{
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                
-                                withAnimation{
-                                    
-                                    self.isPresented.toggle()
-                                    
-                                }
-                                
-                            }, label: {
-                                
-                                Image(systemName: "gear")
-                                    .accentColor(.red)
-                                
-                            })
-                            
-                        }.padding()
-                        
-                        Spacer()
-                        
-                    }
-                        
-
+            
                     VStack(alignment: .leading, spacing: 20){
                         
                         HStack{
@@ -166,15 +138,22 @@ struct ProfileView: View {
                         
                     }.padding()
                     
-                }.navigationBarHidden(true)
-                .navigationBarTitle(user.username)
-            
+                }.navigationBarItems(trailing:
+                    Button(action: {
+                            withAnimation{
+                                self.isPresented.toggle()
+                            }
+                    }, label: {
+                        Image(systemName: "gear")
+                            .accentColor(.red)
+                    })
+                )
             }
             
             ZStack{
-                
+
                 SettingsView(isPresented: $isPresented)
-                
+
             }.edgesIgnoringSafeArea(.all)
             .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
             

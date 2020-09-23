@@ -20,7 +20,7 @@ struct ContentView : View {
         Group {
         
             if (session.session != nil) {
-            
+                            
                 AppView(audioRecorder: AudioRecorder(), user: session.session!)
             
             } else {

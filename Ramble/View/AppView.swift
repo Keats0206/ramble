@@ -23,19 +23,21 @@ struct AppView: View {
     var body: some View {
     
         TabView{
-                FeedView(user: user, audioRecorder: AudioRecorder()).tabItem {
+            
+            FeedView(user: user, audioRecorder: AudioRecorder())
+                .tabItem {
                                             
-                    Image(systemName: "dot.radiowaves.left.and.right")
+                Image(systemName: "dot.radiowaves.left.and.right")
                                         
-                }.tag(0)
+            }.tag(0)
                 
-                ProfileView(user: user).tabItem {
+            ProfileView(user: user)
+                .tabItem {
                     
-                    Image(systemName: "person.circle")
+                Image(systemName: "person.circle")
                                         
-                }.tag(1)
+            }.tag(1)
                 
-        
         }.onAppear{
             self.getUser()
         }.accentColor(.red)

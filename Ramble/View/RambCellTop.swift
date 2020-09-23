@@ -66,8 +66,8 @@ struct RambCellTop: View {
 //              Center of Cell VStack
             
             VStack(alignment: .leading){
-                
-                //                  Username + timestamp
+
+//                  Username + timestamp
                 
                 HStack {
                     
@@ -77,7 +77,7 @@ struct RambCellTop: View {
                     
                 }
                 
-                //                  Caption
+//                  Caption
                 
                 Text(ramb.caption)
                     .font(.subheadline)
@@ -92,36 +92,14 @@ struct RambCellTop: View {
             
             VStack{
                 
-                HStack{
-                    
-                    //              Clap and clap count
-                    
-                    VStack{
-                        
-                        Button(action: {
-                            
-                            self.didClap.toggle()
-                            self.viewModel.handleClap(ramb: self.ramb, didClap: self.didClap)
-                            self.claps = self.didClap ? self.claps + 1 : self.claps - 1
-                            
-                        }){
-                            
-                            Image(systemName: self.didClap ? "hand.thumbsup.fill" : "hand.thumbsup")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            
-                        }.buttonStyle(BorderlessButtonStyle())
-                        
-                        Text(String((self.claps)))
-                        
-                    }
-                    
-                    
-                    
-                }
+                Image(systemName: "play.circle")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                
+                Text("3:30")
                 
             }
-            
+                        
         }.onAppear{
             
             self.claps = self.ramb.claps

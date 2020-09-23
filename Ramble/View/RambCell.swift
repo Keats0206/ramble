@@ -19,7 +19,7 @@ struct RambCell : View {
             
             RambCellTop(ramb: ramb)
             
-            RambCellBottom(ramb: ramb)
+//            RambCellBottom(ramb: ramb)
             
         }
     }
