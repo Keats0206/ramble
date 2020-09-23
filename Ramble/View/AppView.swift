@@ -21,10 +21,8 @@ struct AppView: View {
     }
     
     var body: some View {
-           
+    
         TabView{
-            
-                
                 FeedView(user: user, audioRecorder: AudioRecorder()).tabItem {
                                             
                     Image(systemName: "dot.radiowaves.left.and.right")
@@ -39,9 +37,7 @@ struct AppView: View {
                 
         
         }.onAppear{
-            
             self.getUser()
-        
         }.accentColor(.red)
         .environmentObject(SessionSettings())
     }

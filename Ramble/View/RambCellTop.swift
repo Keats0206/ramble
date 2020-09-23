@@ -63,8 +63,7 @@ struct RambCellTop: View {
                 }
             }
             
-            
-            //              Center of Cell VStack
+//              Center of Cell VStack
             
             VStack(alignment: .leading){
                 

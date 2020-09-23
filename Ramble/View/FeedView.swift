@@ -38,6 +38,8 @@ struct FeedView: View {
         
         ZStack{
             
+            Color.white
+            
             NavigationView{
                 
                 VStack{

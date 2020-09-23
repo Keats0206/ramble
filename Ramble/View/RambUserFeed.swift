@@ -28,7 +28,7 @@ struct RambUserFeed : View {
             ForEach(viewModel.userRambs){ramb in
                 RambCell(ramb: ramb)
             }
-        }.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+        }.listStyle(GroupedListStyle())
     }
 }
 

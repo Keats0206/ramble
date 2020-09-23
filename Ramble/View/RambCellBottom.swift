@@ -9,6 +9,8 @@
 import SwiftUI
 import AVKit
 import Combine
+import AVFoundation
+
 
 struct RambCellBottom: View {
     @EnvironmentObject var session: SessionStore
@@ -34,9 +36,6 @@ struct RambCellBottom: View {
         }
     }
 }
-
-import SwiftUI
-import AVFoundation
 
 struct AudioPlayerControlsView: View {
     let player: AVPlayer
