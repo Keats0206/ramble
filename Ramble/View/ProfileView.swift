@@ -177,6 +177,8 @@ struct ProfileView: View {
                 
             }.edgesIgnoringSafeArea(.all)
             .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+            
+            FloatingPlayerView()
         }
     }
 }

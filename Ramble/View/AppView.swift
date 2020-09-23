@@ -21,9 +21,10 @@ struct AppView: View {
     }
     
     var body: some View {
-                  
-            TabView{
-                    
+           
+        TabView{
+            
+                
                 FeedView(user: user, audioRecorder: AudioRecorder()).tabItem {
                                             
                     Image(systemName: "dot.radiowaves.left.and.right")
@@ -35,6 +36,7 @@ struct AppView: View {
                     Image(systemName: "person.circle")
                                         
                 }.tag(1)
+                
         
         }.onAppear{
             

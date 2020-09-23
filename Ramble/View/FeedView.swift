@@ -94,7 +94,6 @@ struct FeedView: View {
                 
             }
             
-            
             ZStack{
 
                 SearchView(isPresented: $searchModal_shown)
@@ -108,6 +107,8 @@ struct FeedView: View {
             
             }
             
+            FloatingPlayerView()
+                        
         }.environmentObject(selectedRamb)
         .environmentObject(SessionSettings())
     }

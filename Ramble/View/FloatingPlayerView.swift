@@ -14,7 +14,6 @@ struct FloatingPlayerView: View {
     @State var height : CGFloat = 0
     @State var floating = false
     
-    
     var body : some View{
         
         
@@ -23,9 +22,13 @@ struct FloatingPlayerView: View {
             
             ZStack{
                 
-                Color.orange
+                Color.red
                 
                 VStack{
+                    
+                    // SMALL PLAYER
+                    
+                    if floating == true {
                     
                     HStack{
                         
@@ -46,7 +49,17 @@ struct FloatingPlayerView: View {
                         
                         
                     }.padding(10)
-                    .foregroundColor(.white)
+                        .foregroundColor(.white)
+                    
+                    } else {
+                        
+                        VStack{
+                            
+                            Text("Big Music Player")
+                            
+                        }
+                        
+                    }
                     
                     // your music player.....
                     
