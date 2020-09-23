@@ -26,7 +26,7 @@ struct RambUserFeed : View {
     var body: some View {
         List{
             ForEach(viewModel.userRambs){ramb in
-                RambCell(ramb: ramb)
+                RambUserCell(ramb: ramb)
             }
         }.listStyle(GroupedListStyle())
     }

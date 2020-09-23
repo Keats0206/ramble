@@ -7,15 +7,58 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct RambUserCell: View {
+    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var selectedRamb: SelectedRamb
+    @ObservedObject var viewModel = RambService()
+    
+    @State private var showingActionSheet = false
+    
+    var ramb: Ramb
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+//              Center of Cell VStack
+            
+            VStack(alignment: .leading){
+                
+                Text(ramb.caption)
+                    .font(.subheadline)
+                    .fontWeight(.regular)
+                    .multilineTextAlignment(TextAlignment.leading)
+
+//               Username + timestamp
+                                        
+                    Text(formatDate(timestamp: ramb.timestamp) + " ago")
+                    
+                }
+                                        
+            Spacer()
+            
+            Button(action: {
+                self.showingActionSheet.toggle()
+            }){
+                Image(systemName: "ellipsis")
+                    .frame(height: 10)
+                    .accentColor(.red)
+                    .actionSheet(isPresented: $showingActionSheet) {
+                        ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+                                    buttons:[
+                                        .default(
+                                            Text("Delete").foregroundColor(.red), action: {
+                                                self.viewModel.deleteRamb(ramb: self.ramb)
+                                        }),.cancel()
+                        ])
+                }
+            }.buttonStyle(BorderlessButtonStyle())
+        }
     }
 }
 
-struct RambUserCell_Previews: PreviewProvider {
-    static var previews: some View {
-        RambUserCell()
-    }
-}
+//struct RambUserCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RambUserCell()
+//    }
+//}

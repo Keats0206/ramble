@@ -19,9 +19,9 @@ struct RambCellTop: View {
     
     var ramb: Ramb
     
-    @State var newClaps = 0
-    @State var didClap = false
-    @State var claps = 0
+//    @State var newClaps = 0
+//    @State var didClap = false
+//    @State var claps = 0
     
     var body: some View {
         
@@ -46,7 +46,6 @@ struct RambCellTop: View {
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }){
-                        
                         Image(systemName: "ellipsis")
                             .frame(height: 10)
                             .accentColor(.red)
@@ -100,18 +99,19 @@ struct RambCellTop: View {
                 
             }
                         
-        }.onAppear{
-            
-            self.claps = self.ramb.claps
-            
-            self.viewModel.checkIfUserLikedRamb(self.ramb){ ramb in
-                if ramb {
-                    self.didClap = true
-                } else {
-                    self.didClap = false
-                }
-            }
-            
         }
+//        .onAppear{
+//
+//            self.claps = self.ramb.claps
+//
+//            self.viewModel.checkIfUserLikedRamb(self.ramb){ ramb in
+//                if ramb {
+//                    self.didClap = true
+//                } else {
+//                    self.didClap = false
+//                }
+//            }
+//
+//        }
     }
 }
