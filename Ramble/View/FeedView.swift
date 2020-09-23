@@ -44,50 +44,46 @@ struct FeedView: View {
                 
                 VStack{
                     
-                    VStack{
+                    ZStack{
                         
-                        ZStack{
+                            Picker(selection: $dataSelector, label: Text("")) {
+                                
+                                ForEach(0..<feedtoggle.count) { index in
+                                
+                                    Text(self.feedtoggle[index]).tag(index)
+                                
+                                }
                             
-                                Picker(selection: $dataSelector, label: Text("")) {
-                                    
-                                    ForEach(0..<feedtoggle.count) { index in
-                                    
-                                        Text(self.feedtoggle[index]).tag(index)
-                                    
-                                    }
+                            }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
+                                                        
+                        HStack{
+                            
+                            Text("RAMBLE")
+                                .font(.headline)
+                                .foregroundColor(.red)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.searchModal_shown.toggle()
+                                    UserService.shared.fetchUsers()
+                                }
+                            }, label: {
+                                Image(systemName: "magnifyingglass")
+                                    .accentColor(.red)
+                            })
+                                                                                    
+                            Button(action: {
+                                self.recordingModal_shown.toggle()
                                 
-                                }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-                                                            
-                            HStack{
+                            }){
+                                Image(systemName: "mic.circle")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
                                 
-                                Text("RAMBLE")
-                                    .font(.headline)
-                                    .foregroundColor(.red)
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    withAnimation{
-                                        self.searchModal_shown.toggle()
-                                        UserService.shared.fetchUsers()
-                                    }
-                                }, label: {
-                                    Image(systemName: "magnifyingglass")
-                                        .accentColor(.red)
-                                })
-                                                                                        
-                                Button(action: {
-                                    self.recordingModal_shown.toggle()
-                                    
-                                }){
-                                    Image(systemName: "mic.circle")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    
-                                }.buttonStyle(BorderlessButtonStyle())
-                            }.padding()
-                        }
-                                                
+                            }.buttonStyle(BorderlessButtonStyle())
+                        }.padding()
                     }
                     
                     RambFeed(RambService(), dataToggle: $dataSelector)
