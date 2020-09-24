@@ -34,10 +34,8 @@ struct RambFeed : View {
                         RambCell(ramb: ramb)
                     }
                 }
-            }
-            .padding()
-            .environmentObject(SessionSettings())
-                .pullToRefresh(isShowing: $isShowing) {
+            }.environmentObject(SessionSettings())
+            .pullToRefresh(isShowing: $isShowing) {
                         self.viewModel.observeRambs()
                         self.isShowing = false
             }

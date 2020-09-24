@@ -104,7 +104,7 @@ struct FloatingPlayerView: View {
                     }
                 })
                 
-            ).offset(y: self.height - 50)
+            ).offset(y: self.height - 75)
             .animation(.spring())
         }
     }

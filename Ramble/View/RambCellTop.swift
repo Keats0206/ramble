@@ -34,17 +34,12 @@ struct RambCellTop: View {
                     .clipShape(Circle())
                         .shadow(radius: 10)
                         .overlay(Circle().stroke(Color.red, lineWidth: 5))
-
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
                             ProfileView(user: ramb.user), isActive: $isActive) { EmptyView() })
-                
                 if ramb.user.uid != session.session?.uid {
-                    
                     Spacer().frame(height: 10)
-                    
                 } else {
-                    
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }){
@@ -60,7 +55,8 @@ struct RambCellTop: View {
                                                 }),.cancel()
                                 ])
                         }
-                    }.buttonStyle(BorderlessButtonStyle())
+                    }
+                        .buttonStyle(BorderlessButtonStyle())
                 }
             }
             
@@ -102,23 +98,10 @@ struct RambCellTop: View {
             }
                         
         }
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.gray.opacity(0.2))
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.gray.opacity(0.2))
             )
-//        .onAppear{
-//
-//            self.claps = self.ramb.claps
-//
-//            self.viewModel.checkIfUserLikedRamb(self.ramb){ ramb in
-//                if ramb {
-//                    self.didClap = true
-//                } else {
-//                    self.didClap = false
-//                }
-//            }
-//
-//        }
     }
 }

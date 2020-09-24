@@ -16,19 +16,12 @@ struct ContentView : View {
     }
         
     var body: some View {
-        
         Group {
-        
             if (session.session != nil) {
-                            
                 AppView(audioRecorder: AudioRecorder(), user: session.session!)
-            
             } else {
-            
                 AuthView()
-            
             }
-        
         }.onAppear(perform: getUser)
     }
 }

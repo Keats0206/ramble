@@ -23,21 +23,16 @@ struct ProfileView: View {
             
     var body: some View {
         
-        ZStack{
-            
             ZStack{
-        
-                VStack(alignment: .leading){
-                    
-                    VStack(alignment: .leading, spacing: 5){
-                        
+                ZStack{
+                    VStack(alignment: .leading){
+                        VStack(alignment: .leading, spacing: 5){
                             WebImage(url: user.profileImageUrl)
                                 .frame(width: 100, height: 100)
                                 .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                    .overlay(Circle().stroke(Color.red, lineWidth: 5))
-
-                        
+                                .shadow(radius: 10)
+                                .overlay(Circle().stroke(Color.red, lineWidth: 5))
+                            
                             Text("\(user.fullname)")
                                 .font(.system(size: 35))
                                 .fontWeight(.heavy)
@@ -45,10 +40,10 @@ struct ProfileView: View {
                             Text("@\(user.username)")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
-                        
+                            
                             Text("\(user.bio)")
                                 .font(.system(size: 16))
-                                                    
+                            
                             HStack{
                                 
                                 Text("Rambles")
@@ -56,77 +51,68 @@ struct ProfileView: View {
                                 
                                 Spacer()
                             }
-                                                    
-                    }.padding([.leading,.trailing])
-                    
+                            
+                        }.padding([.leading,.trailing])
+                        
                         RambUserFeed(RambService(), user: self.user)
                         
                     }
-                                                                
-            }
-                .navigationBarItems(trailing:
-                    HStack{
-                        
-                        if user.isCurrentUser {
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.editProfileShown.toggle()
-                                }
-                            }){
-                                Text("Edit Profile")
-                                    .font(.body).bold()
-                                    .padding(5)
-                                    .padding([.trailing,.leading])
-                            }.background(Capsule().stroke(lineWidth: 2))
-                            
-                        } else {
-                    
-                        Button(action: {
-                            
-                            if self.isFollowed {
-                                
-                                UserService.shared.unfollowUser(uid: self.user.uid)
-                                
-                                self.isFollowed.toggle()
-                                
-                            } else {
-                                
-                                UserService.shared.followUser(uid: self.user.uid)
-                                
-                                self.isFollowed.toggle()
-                            }
-                            
-                            
-                        }){
-                                
-                            Text(self.isFollowed ? "Unfollow":"Follow")
-                            
-                        }.accentColor(.red)
-                            
-                    }
-                        
-                        Button(action: {
-                                withAnimation{
-                                    self.isPresented.toggle()
-                                }
-                        }){
-                            Image(systemName: "gear")
-                                .accentColor(.red)
-                                .padding(5)
-                        }.background(Capsule().stroke(lineWidth: 2))
-                    })
-            
-            ZStack{
-                SettingsView(isPresented: $isPresented)
-            }.edgesIgnoringSafeArea(.all)
-            .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-            
-            ZStack{
-                EditProfileView(editProfileShown: $editProfileShown, user: user)
-            }.edgesIgnoringSafeArea(.all)
-            .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-            FloatingPlayerView()
-        }
+                }
+                
+                ZStack{
+                    SettingsView(isPresented: $isPresented)
+                }
+                    .edgesIgnoringSafeArea(.all)
+                    .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+                
+                ZStack{
+                    EditProfileView(editProfileShown: $editProfileShown, user: user)
+                }
+                    .edgesIgnoringSafeArea(.all)
+                    .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+                
+                FloatingPlayerView()
+                
+            }.navigationBarTitle("\(user.username)", displayMode: .inline)
+            .navigationBarItems(trailing:
+                                    HStack{
+                                        if user.isCurrentUser {
+                                            Button(action: {
+                                                withAnimation{
+                                                    self.editProfileShown.toggle()
+                                                }
+                                            }){
+                                                Text("Edit Profile")
+                                                    .font(.body).bold()
+                                                    .padding(5)
+                                                    .padding([.trailing,.leading])
+                                            }.background(Capsule().stroke(lineWidth: 2))
+                                            
+                                        } else {
+                                            
+                                            Button(action: {
+                                                if self.isFollowed {
+                                                    UserService.shared.unfollowUser(uid: self.user.uid)
+                                                    self.isFollowed.toggle()
+                                                } else {
+                                                    UserService.shared.followUser(uid: self.user.uid)
+                                                    self.isFollowed.toggle()
+                                                }
+                                            }){
+                                                Text(self.isFollowed ? "Unfollow":"Follow")
+                                            }.accentColor(.red)
+                                            
+                                        }
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.isPresented.toggle()
+                                            }
+                                        }){
+                                            Image(systemName: "gear")
+                                                .accentColor(.red)
+                                                .padding(5)
+                                        }.background(Capsule().stroke(lineWidth: 2))
+                                    })
     }
 }
