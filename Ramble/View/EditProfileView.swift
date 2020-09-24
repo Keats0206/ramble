@@ -12,7 +12,7 @@ import SDWebImageSwiftUI
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
     
-    @Binding var editProfileShown : Bool
+    @Binding var editProfileShown: Bool
     
     @State var email: String = ""
     @State var username: String = ""
@@ -35,6 +35,7 @@ struct EditProfileView : View {
     }
     
     var sheet: ActionSheet {
+        
         ActionSheet(
             title: Text("Action"),
             message: Text("Quotemark"),
@@ -54,11 +55,12 @@ struct EditProfileView : View {
     }
     
     var body : some View {
+        
         ZStack{
             
             Color.white
             
-            VStack(alignment: .leading, spacing: 20){
+            VStack(spacing: 20){
                 
                 HStack{
                     
@@ -74,12 +76,18 @@ struct EditProfileView : View {
                     
                     Spacer()
                     
-                    Button(action: updateProfile) {
+                    Button(action: {
+                        
+                        self.editProfileShown.toggle()
+                        
+                    }) {
+                        
                         Text("Save")
                             .foregroundColor(.red)
                             .font(.system(size: 18, weight: .bold))
                     }
-                }
+                    
+                }.padding()
                 
                 Spacer().frame(height: 10)
                                 
@@ -122,7 +130,9 @@ struct EditProfileView : View {
                         self.showImagePicker = false
                         
                     }, content: {
+                        
                         ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                        
                     }).actionSheet(isPresented: $showAction) {
                         sheet
                     }

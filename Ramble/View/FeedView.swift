@@ -37,77 +37,57 @@ struct FeedView: View {
     var body: some View {
         
         ZStack{
-            
-            Color.gray
-            
-            NavigationView{
-                
+                                                                        
                 VStack{
                     
-                    ZStack{
-                        
-                            Picker(selection: $dataSelector, label: Text("")) {
-                                
-                                ForEach(0..<feedtoggle.count) { index in
-                                
-                                    Text(self.feedtoggle[index]).tag(index)
-                                
-                                }
-                            
-                            }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-                                                        
-                        HStack{
-                            
-                            Text("RAMBLE")
-                                .font(.headline)
-                                .foregroundColor(.red)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.searchModal_shown.toggle()
-                                    UserService.shared.fetchUsers()
-                                }
-                            }, label: {
-                                Image(systemName: "magnifyingglass")
-                                    .accentColor(.red)
-                            })
-                                                                                    
-                            Button(action: {
-                                self.recordingModal_shown.toggle()
-                                
-                            }){
-                                Image(systemName: "mic.circle")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                
-                            }.buttonStyle(BorderlessButtonStyle())
-                        }.padding()
-                    }
+                    Text("Feed")
                     
                     RambFeed(RambService(), dataToggle: $dataSelector)
-                    
                 }
+                                
+                ZStack{
+
+                    SearchView(isPresented: $searchModal_shown)
+
+                }.edgesIgnoringSafeArea(.all)
+                .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+            
+                HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
                 
-            }
+                    RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown)
+                
+                }
             
-            ZStack{
-
-                SearchView(isPresented: $searchModal_shown)
-
-            }.edgesIgnoringSafeArea(.all)
-            .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-            
-            HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
-            
-                RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown)
-            
-            }
-            
-            FloatingPlayerView()
+                FloatingPlayerView()
                         
-        }.environmentObject(selectedRamb)
+        }.navigationBarItems(leading: HStack{
+            Picker(selection: $dataSelector, label: Text("")) {
+                ForEach(0..<feedtoggle.count) { index in
+                    Text(self.feedtoggle[index]).tag(index)
+                }
+            }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
+        })
+        .navigationBarItems(trailing: HStack{
+            Button(action: {
+                withAnimation{
+                    self.searchModal_shown.toggle()
+                    UserService.shared.fetchUsers()
+                }
+            }, label: {
+                Image(systemName: "magnifyingglass")
+                    .accentColor(.black)
+            })
+            Button(action: {
+                self.recordingModal_shown.toggle()
+                
+            }){
+                Image(systemName: "mic.circle")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                
+            }.buttonStyle(BorderlessButtonStyle())
+        })
+        .environmentObject(selectedRamb)
         .environmentObject(SessionSettings())
     }
 }

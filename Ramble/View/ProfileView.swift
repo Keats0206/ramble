@@ -25,48 +25,46 @@ struct ProfileView: View {
         
         ZStack{
             
-            NavigationView{
-                
-                ZStack{
-            
-                    VStack(alignment: .leading){
+            ZStack{
+        
+                VStack(alignment: .leading){
+                    
+                    VStack(alignment: .leading, spacing: 5){
                         
-                        VStack(alignment: .leading, spacing: 5){
-                            
-                                WebImage(url: user.profileImageUrl)
-                                    .frame(width: 100, height: 100)
-                                    .clipShape(Circle())
-                                        .shadow(radius: 10)
-                                        .overlay(Circle().stroke(Color.red, lineWidth: 5))
+                            WebImage(url: user.profileImageUrl)
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                    .shadow(radius: 10)
+                                    .overlay(Circle().stroke(Color.red, lineWidth: 5))
 
-                            
-                                Text("\(user.fullname)")
-                                    .font(.system(size: 35))
-                                    .fontWeight(.heavy)
-                                
-                                Text("@\(user.username)")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                            
-                                Text("\(user.bio)")
-                                    .font(.system(size: 16))
-                                                        
-                                HStack{
-                                    
-                                    Text("Rambles")
-                                        .font(.headline)
-                                    
-                                    Spacer()
-                                }
-                                                        
-                        }.padding([.leading,.trailing])
                         
-                            RambUserFeed(RambService(), user: self.user)
+                            Text("\(user.fullname)")
+                                .font(.system(size: 35))
+                                .fontWeight(.heavy)
                             
-                        }
-                                                                    
-                }.navigationBarItems(trailing:
-                                        
+                            Text("@\(user.username)")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                        
+                            Text("\(user.bio)")
+                                .font(.system(size: 16))
+                                                    
+                            HStack{
+                                
+                                Text("Rambles")
+                                    .font(.headline)
+                                
+                                Spacer()
+                            }
+                                                    
+                    }.padding([.leading,.trailing])
+                    
+                        RambUserFeed(RambService(), user: self.user)
+                        
+                    }
+                                                                
+            }
+                .navigationBarItems(trailing:
                     HStack{
                         
                         if user.isCurrentUser {
@@ -117,24 +115,17 @@ struct ProfileView: View {
                                 .accentColor(.red)
                                 .padding(5)
                         }.background(Capsule().stroke(lineWidth: 2))
-                    }
-                )
-            }
+                    })
             
             ZStack{
-
                 SettingsView(isPresented: $isPresented)
-
             }.edgesIgnoringSafeArea(.all)
             .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
             
             ZStack{
-
                 EditProfileView(editProfileShown: $editProfileShown, user: user)
-
             }.edgesIgnoringSafeArea(.all)
             .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-            
             FloatingPlayerView()
         }
     }

@@ -21,26 +21,28 @@ struct AppView: View {
     }
     
     var body: some View {
-    
-        TabView{
+        NavigationView{
+            TabView{
+                FeedView(user: user, audioRecorder: AudioRecorder())
+                    .tabItem {
+                    Image(systemName: "dot.radiowaves.left.and.right")
+                }.tag(0)
+                
+                ProfileView(user: user)
+                    .tabItem {
+                    Image(systemName: "person.circle")
+                }.tag(1)
+                
+            }.navigationBarHidden(false)
             
-            FeedView(user: user, audioRecorder: AudioRecorder())
-                .tabItem {
-                                            
-                Image(systemName: "dot.radiowaves.left.and.right")
-                                        
-            }.tag(0)
-                
-            ProfileView(user: user)
-                .tabItem {
-                    
-                Image(systemName: "person.circle")
-                                        
-            }.tag(1)
-                
         }.onAppear{
             self.getUser()
-        }.accentColor(.red)
-        .environmentObject(SessionSettings())
+        }.environmentObject(SessionSettings())
     }
 }
+
+//struct AppView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppView()
+//    }
+//}
