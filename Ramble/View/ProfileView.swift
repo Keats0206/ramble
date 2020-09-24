@@ -71,7 +71,7 @@ struct ProfileView: View {
                     .edgesIgnoringSafeArea(.all)
                     .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
-                FloatingPlayerView()
+//                FloatingPlayerView()
                 
             }.navigationBarTitle("\(user.username)", displayMode: .inline)
             .navigationBarItems(trailing:

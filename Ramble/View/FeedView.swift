@@ -20,6 +20,8 @@ struct FeedView: View {
     @State var searchModal_shown = false
     @State var dataSelector = 0
     @State var ramb: Ramb?
+    
+    @State var hideNav = false
 
     private var feedtoggle = ["Hot", "New"]
     
@@ -49,9 +51,9 @@ struct FeedView: View {
                     RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown)
                 }
                 
-                FloatingPlayerView()
+                FloatingPlayerView(hideNav: $hideNav)
 
-            }.navigationBarHidden(false)
+            }.navigationBarHidden(hideNav)
             .navigationBarTitle("Feed", displayMode: .inline)
             .navigationBarItems(leading: HStack{
                     Picker(selection: $dataSelector, label: Text("")) {

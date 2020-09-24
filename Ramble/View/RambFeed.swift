@@ -34,7 +34,8 @@ struct RambFeed : View {
                         RambCell(ramb: ramb)
                     }
                 }
-            }.environmentObject(SessionSettings())
+            }.listStyle(GroupedListStyle())
+            .environmentObject(SessionSettings())
             .pullToRefresh(isShowing: $isShowing) {
                         self.viewModel.observeRambs()
                         self.isShowing = false

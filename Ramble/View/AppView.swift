@@ -12,6 +12,8 @@ struct AppView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @State var user: User
     
+    @State var hidNav = false
+    
     func getUser(){
         let uid = session.session!.uid
         UserService.shared.fetchUser(uid: uid) { user in
@@ -22,6 +24,7 @@ struct AppView: View {
     
     var body: some View {
         TabView{
+            
             NavigationView{
                 FeedView(user: user, audioRecorder: AudioRecorder())
             }.tabItem {
@@ -34,8 +37,6 @@ struct AppView: View {
                 Image(systemName: "person.circle")
             }.tag(1)
             
-            FloatingPlayerView()
-
         }.onAppear{
             self.getUser()
         }.environmentObject(SessionSettings())
