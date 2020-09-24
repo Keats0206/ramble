@@ -25,9 +25,8 @@ struct RambFeed : View {
     
     var body: some View {
         
-        VStack{
             
-            ScrollView{
+            List{
                 
                 if dataToggle != 1 {
                     
@@ -48,13 +47,12 @@ struct RambFeed : View {
                 }
                 
             }
-        }
-        .padding()
-        .environmentObject(SessionSettings())
-            .pullToRefresh(isShowing: $isShowing) {
-                    self.viewModel.observeRambs()
-                    self.isShowing = false
-            }
+            .padding()
+            .environmentObject(SessionSettings())
+                .pullToRefresh(isShowing: $isShowing) {
+                        self.viewModel.observeRambs()
+                        self.isShowing = false
+                }
         
         }
     

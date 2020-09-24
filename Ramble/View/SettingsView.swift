@@ -118,7 +118,6 @@ struct SettingsView: View {
                 
             }
                 .padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
-                .font(.largeTitle)
         }
     }
 }

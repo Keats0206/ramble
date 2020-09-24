@@ -16,6 +16,7 @@ struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
     
     @State private var isPresented = false
+    @State private var editProfileShown = false
     @State var isFollowed = true
     
     var user: User
@@ -33,9 +34,11 @@ struct ProfileView: View {
                         VStack(alignment: .leading, spacing: 5){
                             
                                 WebImage(url: user.profileImageUrl)
-                                    .resizable()
                                     .frame(width: 100, height: 100)
                                     .clipShape(Circle())
+                                        .shadow(radius: 10)
+                                        .overlay(Circle().stroke(Color.red, lineWidth: 5))
+
                             
                                 Text("\(user.fullname)")
                                     .font(.system(size: 35))
@@ -45,7 +48,7 @@ struct ProfileView: View {
                                     .font(.system(size: 25))
                                     .fontWeight(.bold)
                             
-                                Text("\(user.bio!)")
+                                Text("\(user.bio)")
                                     .font(.system(size: 16))
                                                         
                                 HStack{
@@ -68,7 +71,16 @@ struct ProfileView: View {
                         
                         if user.isCurrentUser {
                             
-                            Spacer()
+                            Button(action: {
+                                withAnimation{
+                                    self.editProfileShown.toggle()
+                                }
+                            }){
+                                Text("Edit Profile")
+                                    .font(.body).bold()
+                                    .padding(5)
+                                    .padding([.trailing,.leading])
+                            }.background(Capsule().stroke(lineWidth: 2))
                             
                         } else {
                     
@@ -88,18 +100,11 @@ struct ProfileView: View {
                             }
                             
                             
-                        }, label: {
+                        }){
                                 
-                        if isFollowed {
+                            Text(self.isFollowed ? "Unfollow":"Follow")
                             
-                            Text("Unfollow")
-                            
-                        } else {
-                            
-                            Text("Follow")
-                            
-                        }
-                    })
+                        }.accentColor(.red)
                             
                     }
                         
@@ -107,10 +112,11 @@ struct ProfileView: View {
                                 withAnimation{
                                     self.isPresented.toggle()
                                 }
-                        }, label: {
+                        }){
                             Image(systemName: "gear")
                                 .accentColor(.red)
-                        })
+                                .padding(5)
+                        }.background(Capsule().stroke(lineWidth: 2))
                     }
                 )
             }
@@ -121,6 +127,13 @@ struct ProfileView: View {
 
             }.edgesIgnoringSafeArea(.all)
             .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+            
+            ZStack{
+
+                EditProfileView(editProfileShown: $editProfileShown, user: user)
+
+            }.edgesIgnoringSafeArea(.all)
+            .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
             
             FloatingPlayerView()
         }

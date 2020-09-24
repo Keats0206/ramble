@@ -7,10 +7,13 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
-
+    
+    @Binding var editProfileShown : Bool
+    
     @State var email: String = ""
     @State var username: String = ""
     @State var fullname: String = ""
@@ -20,17 +23,17 @@ struct EditProfileView : View {
     @State var showImagePicker: Bool = false
     @State var loading = false
     @State var error = false
-
+    
     var user: User
-
+    
     func updateProfile(){
         print("DEBUG: Update user profile")
     }
-
+    
     func openThing(){
         print("Open link to review")
     }
-
+    
     var sheet: ActionSheet {
         ActionSheet(
             title: Text("Action"),
@@ -46,190 +49,116 @@ struct EditProfileView : View {
                 .destructive(Text("Remove"), action: {
                     self.showAction = false
                     self.profileImage = nil
-            })
-        ])
+                })
+            ])
     }
-
+    
     var body : some View {
-        ZStack {
-
-            VStack {
-
+        ZStack{
+            
+            Color.white
+            
+            VStack(alignment: .leading, spacing: 20){
+                
                 HStack{
-
+                    
+                    Button(action: {
+                        withAnimation{
+                            self.editProfileShown.toggle()
+                        }
+                    }){
+                        Text("Close")
+                            .foregroundColor(.red)
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                    
                     Spacer()
-
+                    
                     Button(action: updateProfile) {
-                        Text("Save Updates")
+                        Text("Save")
                             .foregroundColor(.red)
                             .font(.system(size: 18, weight: .bold))
                     }
                 }
+                
+                Spacer().frame(height: 10)
+                                
+                VStack(alignment: .leading, spacing: 5){
+                    
+                    Text("Username")
+                        .font(.system(size: 14, weight: .bold))
+                    
+                    TextField("\(self.user.username)", text: $username)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                    
+                    Divider()
 
-                Spacer()
-                // Image picker
-
-                VStack {
-                    if (profileImage == nil) {
-
-                        VStack{
-                            Image(systemName: "camera.on.rectangle")
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(6)
-
-                            Text("Add a profile picture")
-                                .font(.system(size: 18, weight: .bold))
-
-                        }.onTapGesture {
+                }
+                            
+                HStack{
+                    
+                    WebImage(url: user.profileImageUrl)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                            .shadow(radius: 10)
+                            .overlay(Circle().stroke(Color.red, lineWidth: 5))
+                    
+                    VStack{
+                        
+                        Text("Profile Picture").font(.system(size: 14, weight: .bold))
+                        
+                        Button(action: {
                             self.showImagePicker = true
-                        }
-
-                    } else {
-                        Image(uiImage: profileImage!)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .cornerRadius(200 / 2)
-                            .onTapGesture {
-                                self.showAction = true
-                        }
-                        Text("Change picture").font(.system(size: 18, weight: .bold))
-                    }
-
-                }.sheet(isPresented: $showImagePicker, onDismiss: {
-
-                    self.showImagePicker = false
-
-                }, content: {
-                    ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                }).actionSheet(isPresented: $showAction) {
+                        }){
+                            Text("Upload")
+                                .font(.body).bold()
+                                .padding(5)
+                                .padding([.trailing,.leading])
+                        }.background(Capsule().stroke(lineWidth: 2))
+                        
+                    }.sheet(isPresented: $showImagePicker, onDismiss: {
+                        
+                        self.showImagePicker = false
+                        
+                    }, content: {
+                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                    }).actionSheet(isPresented: $showAction) {
                         sheet
+                    }
                 }
-
+                
+                VStack(alignment: .leading, spacing: 5){
+                    
+                    Text("Fullname")
+                        .font(.system(size: 14, weight: .bold))
+                    
+                    TextField("\(self.user.fullname)", text: $fullname)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                    
+                    Divider()
+                }
+                
+                VStack(alignment: .leading, spacing: 5){
+                    
+                    Text("Bio")
+                        .font(.system(size: 14, weight: .bold))
+                    
+                    TextField("\(self.user.bio)", text: $bio)
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(12)
+                    
+                    Divider()
+                    
+                }
+                
                 Spacer()
-
-                VStack(alignment: .leading){
-
-                    HStack{
-
-                        Text("Email").font(.system(size: 14, weight: .bold))
-
-                        TextField("\(self.user.email)", text: $email)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-
-                    }
-
-                    Divider()
-
-                    HStack{
-
-                        Text("Fullname")
-                            .font(.system(size: 14, weight: .bold))
-
-                        TextField("\(self.user.fullname)", text: $fullname)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                    }
-
-                    Divider()
-
-                    HStack{
-
-                        Text("Username")
-                            .font(.system(size: 14, weight: .bold))
-
-                        TextField("\(self.user.username)", text: $username)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                    }
-
-                    Divider()
-
-                    HStack{
-
-                        VStack{
-
-                            Spacer().frame(height: 25)
-
-                            Text("Bio")
-                                .font(.system(size: 14, weight: .bold))
-                                .onAppear{
-                                self.bio = "\(String(describing: self.user.bio))"
-                            }
-
-                            Spacer()
-
-                        }
-
-                        MultiLineTF(txt: $bio).padding()
-
-                    }
-                }
-
+                
                 Spacer()
-
-                VStack{
-
-                    Divider()
-
-                    HStack{
-
-                        Button(action: openThing) {
-
-                            Text("Report Feedback")
-                                .font(.system(size: 14, weight: .bold))
-
-                            Spacer()
-                        }
-                    }
-
-                    Divider()
-
-                    HStack{
-                        Button(action: openThing) {
-                            Text("Leave A Review")
-                                .font(.system(size: 14, weight: .bold))
-                            Spacer()
-                        }
-                    }
-
-                    Divider()
-
-                    HStack{
-                        Button(action: openThing) {
-                            Text("Add Friends")
-                                .font(.system(size: 14, weight: .bold))
-                            Spacer()
-                        }
-                    }
-
-                    Divider()
-
-                    HStack{
-                        Button(action: openThing) {
-                            Text("Privacy Policy")
-                                .font(.system(size: 14, weight: .bold))
-                            Spacer()
-                        }
-                    }
-
-                    Divider()
-                }
-
-                HStack{
-
-                    Spacer()
-
-                    Button(action: updateProfile) {
-                        Text("Logout")
-                            .foregroundColor(.red)
-                            .font(.system(size: 18, weight: .bold))
-                    }
-
-                    Spacer()
-                }
-
+                                
             }.padding()
+            .padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
         }
     }
 }

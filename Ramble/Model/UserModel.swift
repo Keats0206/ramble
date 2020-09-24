@@ -17,7 +17,7 @@ struct User: Identifiable, Hashable {
     var fullname: String
     var profileImageUrl: URL?
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
-    var bio: String?
+    var bio: String
     var isFollowed: Bool
 
     init(uid: String, values: [String: Any]) {

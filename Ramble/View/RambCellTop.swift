@@ -27,12 +27,14 @@ struct RambCellTop: View {
         
         HStack{
             
-            VStack{
+            VStack(alignment: .center, spacing: 10){
                 
                 WebImage(url: ramb.user.profileImageUrl)
-                    .resizable()
+                    .frame(width: 60, height: 60)
                     .clipShape(Circle())
-                    .frame(width: 60, height: 60, alignment: .center)
+                        .shadow(radius: 10)
+                        .overlay(Circle().stroke(Color.red, lineWidth: 5))
+
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
                             ProfileView(user: ramb.user), isActive: $isActive) { EmptyView() })
@@ -89,7 +91,7 @@ struct RambCellTop: View {
             
             Spacer()
             
-            VStack{
+            VStack(alignment: .leading, spacing: 10){
                 
                 Image(systemName: "play.circle")
                     .resizable()

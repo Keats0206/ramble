@@ -24,7 +24,7 @@ struct RambUserFeed : View {
     }
     
     var body: some View {
-        ScrollView{
+        List{
             ForEach(viewModel.userRambs){ramb in
                 RambUserCell(ramb: ramb)
             }
