@@ -26,7 +26,7 @@ struct SettingsView: View {
                     Spacer()
                     
                     Button(action: {
-                        
+                        print("does the button work")
                         withAnimation{
                             
                             self.isPresented.toggle()

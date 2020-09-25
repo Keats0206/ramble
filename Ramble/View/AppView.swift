@@ -13,6 +13,8 @@ struct AppView: View {
     @State var user: User
     
     @State var hidNav = false
+    @State var testModalShown = true
+    
     
     func getUser(){
         let uid = session.session!.uid
@@ -23,20 +25,23 @@ struct AppView: View {
     }
     
     var body: some View {
-        TabView{
-            
-            NavigationView{
-                FeedView(user: user, audioRecorder: AudioRecorder())
-            }.tabItem {
-                Image(systemName: "person.circle")
-            }.tag(0)
-            
-            NavigationView{
-                ProfileView(user: user)
-            }.tabItem {
-                Image(systemName: "person.circle")
-            }.tag(1)
-            
+        ZStack{
+            TabView{
+                NavigationView{
+                    FeedView(user: user, audioRecorder: AudioRecorder())
+                }.tabItem {
+                    Image(systemName: "person.circle")
+                }.tag(0)
+                
+                NavigationView{
+                    ProfileView(user: user)
+                }.tabItem {
+                    Image(systemName: "person.circle")
+                }.tag(1)
+            }
+//            HalfModalView(isShown: $testModalShown, modalHeight: UIScreen.main.bounds.height){
+//                Text("TestView")
+//            }
         }.onAppear{
             self.getUser()
         }.environmentObject(SessionSettings())

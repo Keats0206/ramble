@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct RambCellTop: View {
     @EnvironmentObject var session: SessionStore
-    @EnvironmentObject var selectedRamb: SelectedRamb
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var viewModel = RambService()
     
     @State private var showingActionSheet = false
@@ -37,27 +37,30 @@ struct RambCellTop: View {
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
                             ProfileView(user: ramb.user), isActive: $isActive) { EmptyView() })
-                if ramb.user.uid != session.session?.uid {
-                    Spacer().frame(height: 10)
-                } else {
-                    Button(action: {
-                        self.showingActionSheet.toggle()
-                    }){
-                        Image(systemName: "ellipsis")
-                            .frame(height: 10)
-                            .accentColor(.red)
-                            .actionSheet(isPresented: $showingActionSheet) {
-                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
-                                            buttons:[
-                                                .default(
-                                                    Text("Delete").foregroundColor(.red), action: {
-                                                        self.viewModel.deleteRamb(ramb: self.ramb)
-                                                }),.cancel()
-                                ])
-                        }
-                    }
-                        .buttonStyle(BorderlessButtonStyle())
-                }
+                
+//                Action Button - move delete onto profile action button
+                
+//                if ramb.user.uid != session.session?.uid {
+//                    Spacer().frame(height: 10)
+//                } else {
+//                    Button(action: {
+//                        self.showingActionSheet.toggle()
+//                    }){
+//                        Image(systemName: "ellipsis")
+//                            .frame(height: 10)
+//                            .accentColor(.red)
+//                            .actionSheet(isPresented: $showingActionSheet) {
+//                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+//                                            buttons:[
+//                                                .default(
+//                                                    Text("Delete").foregroundColor(.red), action: {
+//                                                        self.viewModel.deleteRamb(ramb: self.ramb)
+//                                                }),.cancel()
+//                                ])
+//                        }
+//                    }.buttonStyle(BorderlessButtonStyle())
+//                }
+                
             }
             
 //              Center of Cell VStack

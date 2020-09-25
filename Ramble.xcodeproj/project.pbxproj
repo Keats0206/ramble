@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400A7067251E1E7C00A0DD8D /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400A7066251E1E7C00A0DD8D /* SwiftUIView.swift */; };
+		400A7069251E1EAB00A0DD8D /* FeedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400A7068251E1EAB00A0DD8D /* FeedHeaderView.swift */; };
+		400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400A706A251E43A300A0DD8D /* GlobalPlayer.swift */; };
 		40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D112498654D00B2E8A9 /* InlineAlert.swift */; };
 		40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1524986CB800B2E8A9 /* FeedView.swift */; };
 		40252C5F248F324600013742 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40252C5E248F324600013742 /* UserService.swift */; };
@@ -65,6 +68,9 @@
 
 /* Begin PBXFileReference section */
 		18260E38251A67E0004FFF9B /* Ramble-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ramble-Bridging-Header.h"; sourceTree = "<group>"; };
+		400A7066251E1E7C00A0DD8D /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		400A7068251E1EAB00A0DD8D /* FeedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeaderView.swift; sourceTree = "<group>"; };
+		400A706A251E43A300A0DD8D /* GlobalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlayer.swift; sourceTree = "<group>"; };
 		40150D112498654D00B2E8A9 /* InlineAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		40150D1524986CB800B2E8A9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		40252C5E248F324600013742 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 				406FAD162450B55200223873 /* ContentView.swift */,
 				402F5490244F91A900FD899F /* AppDelegate.swift */,
 				402F5492244F91A900FD899F /* SceneDelegate.swift */,
+				400A706A251E43A300A0DD8D /* GlobalPlayer.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -213,9 +220,12 @@
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
+				400A7068251E1EAB00A0DD8D /* FeedHeaderView.swift */,
+				400A7066251E1E7C00A0DD8D /* SwiftUIView.swift */,
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				40B1474C250174BA00A2781A /* SettingsView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
+				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
@@ -223,7 +233,6 @@
 				40B14750250295F300A2781A /* RambCellTop.swift */,
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
 				40B14752250296FA00A2781A /* RambCellBottom.swift */,
-				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */,
 			);
 			path = View;
@@ -398,8 +407,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */,
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
 				40FFDEDF251BEA1F0025799C /* FloatingPlayerView.swift in Sources */,
+				400A7067251E1E7C00A0DD8D /* SwiftUIView.swift in Sources */,
 				40B14751250295F300A2781A /* RambCellTop.swift in Sources */,
 				404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */,
 				40252C5F248F324600013742 /* UserService.swift in Sources */,
@@ -426,6 +437,7 @@
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
 				406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */,
 				406FAD132450ABF300223873 /* SessionStore.swift in Sources */,
+				400A7069251E1EAB00A0DD8D /* FeedHeaderView.swift in Sources */,
 				406FAD1F2450D6D200223873 /* AuthView.swift in Sources */,
 				40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */,
 				40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */,

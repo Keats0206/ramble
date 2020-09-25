@@ -24,8 +24,11 @@ struct ProfileView: View {
     var body: some View {
         
             ZStack{
+                
                 ZStack{
-                    VStack(alignment: .leading){
+                    
+                    VStack(alignment: .leading, spacing: 0){
+                        
                         VStack(alignment: .leading, spacing: 5){
                             WebImage(url: user.profileImageUrl)
                                 .frame(width: 100, height: 100)
@@ -44,26 +47,25 @@ struct ProfileView: View {
                             Text("\(user.bio)")
                                 .font(.system(size: 16))
                             
-                            HStack{
-                                
-                                Text("Rambles")
-                                    .font(.headline)
-                                
-                                Spacer()
-                            }
-                            
                         }.padding([.leading,.trailing])
+                        
+                        HStack{
+                            
+                            Text("Rambles")
+                                .font(.headline)
+                            
+                            Spacer()
+                        }
                         
                         RambUserFeed(RambService(), user: self.user)
                         
-                    }
+                    }.padding()
                 }
                 
                 ZStack{
                     SettingsView(isPresented: $isPresented)
-                }
-                    .edgesIgnoringSafeArea(.all)
-                    .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+                }.edgesIgnoringSafeArea(.all)
+                .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
                 ZStack{
                     EditProfileView(editProfileShown: $editProfileShown, user: user)
@@ -71,48 +73,43 @@ struct ProfileView: View {
                     .edgesIgnoringSafeArea(.all)
                     .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
-//                FloatingPlayerView()
-                
-            }.navigationBarTitle("\(user.username)", displayMode: .inline)
+            }.navigationBarHidden(!self.isPresented && !self.editProfileShown ? false : true)
             .navigationBarItems(trailing:
-                                    HStack{
-                                        if user.isCurrentUser {
-                                            Button(action: {
-                                                withAnimation{
-                                                    self.editProfileShown.toggle()
-                                                }
-                                            }){
-                                                Text("Edit Profile")
-                                                    .font(.body).bold()
-                                                    .padding(5)
-                                                    .padding([.trailing,.leading])
-                                            }.background(Capsule().stroke(lineWidth: 2))
-                                            
-                                        } else {
-                                            
-                                            Button(action: {
-                                                if self.isFollowed {
-                                                    UserService.shared.unfollowUser(uid: self.user.uid)
-                                                    self.isFollowed.toggle()
-                                                } else {
-                                                    UserService.shared.followUser(uid: self.user.uid)
-                                                    self.isFollowed.toggle()
-                                                }
-                                            }){
-                                                Text(self.isFollowed ? "Unfollow":"Follow")
-                                            }.accentColor(.red)
-                                            
-                                        }
-                                        
-                                        Button(action: {
-                                            withAnimation{
-                                                self.isPresented.toggle()
-                                            }
-                                        }){
-                                            Image(systemName: "gear")
-                                                .accentColor(.red)
-                                                .padding(5)
-                                        }.background(Capsule().stroke(lineWidth: 2))
-                                    })
+                HStack{
+                    if user.isCurrentUser {
+                        Button(action: {
+                            withAnimation{
+                                self.editProfileShown.toggle()
+                            }
+                        }){
+                            Text("Edit Profile")
+                                .font(.body).bold()
+                                .padding(5)
+                                .padding([.trailing,.leading])
+                        }.background(Capsule().stroke(lineWidth: 2))
+                        
+                    } else {
+                        Button(action: {
+                            if self.isFollowed {
+                                UserService.shared.unfollowUser(uid: self.user.uid)
+                                self.isFollowed.toggle()
+                            } else {
+                                UserService.shared.followUser(uid: self.user.uid)
+                                self.isFollowed.toggle()
+                            }
+                        }){
+                            Text(self.isFollowed ? "Unfollow":"Follow")
+                        }.accentColor(.red)
+                    }
+                    Button(action: {
+                        withAnimation{
+                            self.isPresented.toggle()
+                        }
+                    }){
+                        Image(systemName: "gear")
+                            .accentColor(.red)
+                            .padding(5)
+                    }.background(Capsule().stroke(lineWidth: 2))
+            })
     }
 }

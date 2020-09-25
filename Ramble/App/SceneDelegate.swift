@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: contentView
                 .environmentObject(SessionStore())
-                .environmentObject(SelectedRamb())
+                .environmentObject(GlobalPlayer())
                 .environmentObject(SessionSettings())
             )
             self.window = window

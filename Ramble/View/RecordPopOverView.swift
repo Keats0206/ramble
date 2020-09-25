@@ -13,6 +13,7 @@ struct RecordPopOverView: View {
     @ObservedObject var viewModel = RambService()
     
     @Binding var isShown: Bool
+    @Binding var hideNav: Bool
     @State var caption = ""
     
     var body: some View {
@@ -37,12 +38,10 @@ struct RecordPopOverView: View {
                     HStack{
                         
                         Button(action: {
-                            
                             self.isShown.toggle()
+                            self.hideNav.toggle()
                             self.caption = "What do you have to say?"
-                            
                         }) {
-                            
                             Text("Cancel")
                                 .foregroundColor(.red)
                                 .frame(width: 60)
@@ -51,17 +50,11 @@ struct RecordPopOverView: View {
                         Spacer()
                         
                         HStack{
-                            
                             if audioRecorder.recordingUploaded {
-                                
                                 Spacer()
-                                
                             } else {
-                                
                                 Button(action: {
-                                    
                                     print("DEBUG: post-recording")
-                                    
                                     self.viewModel.uploadRamb(
                                         caption: self.caption,
                                         rambUrl: self.audioRecorder.rambUrl,
@@ -69,9 +62,7 @@ struct RecordPopOverView: View {
                                     )
                                     self.isShown.toggle()
                                     self.caption = ""
-                                    
                                 }) {
-                                    
                                     Text("Post")
                                         .font(.system(size: 14))
                                         .foregroundColor(.red)

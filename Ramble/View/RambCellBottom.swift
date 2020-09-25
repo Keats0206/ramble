@@ -14,7 +14,7 @@ import AVFoundation
 
 struct RambCellBottom: View {
     @EnvironmentObject var session: SessionStore
-    @EnvironmentObject var selectedRamb: SelectedRamb
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var viewModel = RambService()
     
     var ramb: Ramb

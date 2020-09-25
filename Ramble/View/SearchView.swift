@@ -11,11 +11,14 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct SearchView: View {
-    @Binding var isPresented : Bool
     @ObservedObject var viewModel = UserService()
+    
+    @Binding var isPresented : Bool
+    @Binding var hideNav: Bool
     
     @State var searchText = ""
     @State var isSearching = false
+    
      
     var body: some View {
         
@@ -42,11 +45,9 @@ struct SearchView: View {
                             Button(action: {
                                 
                                 withAnimation{
-                                    
                                     self.isPresented.toggle()
-                                    
+                                    self.hideNav.toggle()
                                 }
-                                
                             }){
                                 
                                 Image(systemName: "arrow.down.circle")
@@ -69,8 +70,7 @@ struct SearchView: View {
                     
                         Spacer()
                         
-            }
-                    .padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
+            }.padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
         
         }
     

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FeedView: View {
     @EnvironmentObject var session: SessionStore
-    @EnvironmentObject var selectedRamb: SelectedRamb
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @EnvironmentObject var settings: SessionSettings
     
     @ObservedObject var audioRecorder: AudioRecorder
@@ -38,34 +38,35 @@ struct FeedView: View {
     
     var body: some View {
             ZStack{
-                VStack{
-                    RambFeed(RambService(), dataToggle: $dataSelector)
-                }
+                
+                RambFeed(RambService(), dataToggle: $dataSelector)
 
                 ZStack{
-                    SearchView(isPresented: $searchModal_shown)
+                    SearchView(isPresented: $searchModal_shown, hideNav: $hideNav)
                 }.edgesIgnoringSafeArea(.all)
                 .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
 //
                 HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
-                    RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown)
+                    RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown, hideNav: $hideNav)
                 }
                 
                 FloatingPlayerView(hideNav: $hideNav)
 
             }.navigationBarHidden(hideNav)
             .navigationBarTitle("Feed", displayMode: .inline)
-            .navigationBarItems(leading: HStack{
-                    Picker(selection: $dataSelector, label: Text("")) {
-                        ForEach(0..<feedtoggle.count) { index in
-                            Text(self.feedtoggle[index]).tag(index)
-                        }
-                    }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-                })
+//            .navigationBarItems(leading: HStack{
+//                    Picker(selection: $dataSelector, label: Text("")) {
+//                        ForEach(0..<feedtoggle.count) { index in
+//                            Text(self.feedtoggle[index]).tag(index)
+//                        }
+//                    }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
+//
+//                })
             .navigationBarItems(trailing: HStack{
                     Button(action: {
                         withAnimation{
-    //                                    self.searchModal_shown.toggle()
+                            self.searchModal_shown.toggle()
+                            self.hideNav.toggle()
                             UserService.shared.fetchUsers()
                         }
                     }, label: {
@@ -73,16 +74,15 @@ struct FeedView: View {
                             .accentColor(.black)
                     })
                     Button(action: {
-    //                                self.recordingModal_shown.toggle()
-
+                        self.recordingModal_shown.toggle()
+                        self.hideNav.toggle()
                     }){
                         Image(systemName: "mic.circle")
                             .resizable()
                             .frame(width: 20, height: 20)
-
                     }.buttonStyle(BorderlessButtonStyle())
                 })
-            .environmentObject(selectedRamb)
+            .environmentObject(GlobalPlayer())
             .environmentObject(SessionSettings())
         }
 }

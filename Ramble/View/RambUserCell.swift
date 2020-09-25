@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct RambUserCell: View {
     @EnvironmentObject var session: SessionStore
-    @EnvironmentObject var selectedRamb: SelectedRamb
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var viewModel = RambService()
     
     @State private var showingActionSheet = false
