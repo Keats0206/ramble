@@ -116,8 +116,7 @@ struct SettingsView: View {
                 
                 Spacer()
                 
-            }
-                .padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
+            }.padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
         }
     }
 }

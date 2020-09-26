@@ -16,7 +16,7 @@ struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
     
     @State private var isPresented = false
-    @State private var editProfileShown = false
+    @State private var editModal_shown = false
     @State var isFollowed = true
     
     var user: User
@@ -61,33 +61,32 @@ struct ProfileView: View {
                         
                     }
                 }
+//
+//                ZStack{
+//                    SettingsView(isPresented: $isPresented)
+//                }.edgesIgnoringSafeArea(.all)
+//                .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+//                ZStack{
+//                    EditProfileView(editProfileShown: $editModal_shown, user: user)
+//                }.edgesIgnoringSafeArea(.all)
+//                .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
-                ZStack{
-                    SettingsView(isPresented: $isPresented)
-                }.edgesIgnoringSafeArea(.all)
-                .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-                
-                ZStack{
-                    EditProfileView(editProfileShown: $editProfileShown, user: user)
-                }.edgesIgnoringSafeArea(.all)
-                .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-                
-            }.navigationBarHidden(!self.isPresented && !self.editProfileShown ? false : true)
-            .navigationBarItems(trailing:
+            }.navigationBarItems(trailing:
                 HStack{
-                    if user.isCurrentUser {
+                    if user.isCurrentUser == false {
                         Button(action: {
-                            withAnimation{
-                                self.editProfileShown.toggle()
-                            }
+                            self.editModal_shown.toggle()
                         }){
-                            Text("Edit Profile")
-                                .font(.body).bold()
+                            Image(systemName: "ellipsis")
                                 .padding(5)
-                                .padding([.trailing,.leading])
                         }.background(Capsule().stroke(lineWidth: 2))
-                        
+                        .sheet(isPresented: $editModal_shown, onDismiss: {
+                            print("Modal dismisses")
+                        }) {
+                            EditProfileView(user: user)
+                        }
                     } else {
+                        
                         Button(action: {
                             if self.isFollowed {
                                 UserService.shared.unfollowUser(uid: self.user.uid)
@@ -98,17 +97,10 @@ struct ProfileView: View {
                             }
                         }){
                             Text(self.isFollowed ? "Unfollow":"Follow")
-                        }.accentColor(.red)
-                    }
-                    Button(action: {
-                        withAnimation{
-                            self.isPresented.toggle()
-                        }
-                    }){
-                        Image(systemName: "gear")
-                            .accentColor(.red)
-                            .padding(5)
-                    }.background(Capsule().stroke(lineWidth: 2))
-            })
+                                .padding(5)
+                        }.background(Capsule().stroke(lineWidth: 2))
+                        .accentColor(.red)
+                }
+        })
     }
 }

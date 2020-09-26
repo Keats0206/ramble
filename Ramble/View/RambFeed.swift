@@ -21,7 +21,7 @@ struct RambFeed : View {
         self._dataToggle = dataToggle
         model.observeRambs()
     }
-    
+
     var body: some View {
             List{
                 if dataToggle != 1 {
@@ -37,6 +37,9 @@ struct RambFeed : View {
             .pullToRefresh(isShowing: $isShowing) {
                         self.viewModel.observeRambs()
                         self.isShowing = false
+            }
+            .onAppear{
+                print("DEBUG: Ramb feed called")
             }
         }
     }

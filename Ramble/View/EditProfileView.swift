@@ -11,9 +11,7 @@ import SDWebImageSwiftUI
 
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
-    
-    @Binding var editProfileShown: Bool
-    
+        
     @State var email: String = ""
     @State var username: String = ""
     @State var fullname: String = ""
@@ -64,24 +62,13 @@ struct EditProfileView : View {
                 
                 HStack{
                     
-                    Button(action: {
-                        withAnimation{
-                            self.editProfileShown.toggle()
-                        }
-                    }){
-                        Text("Close")
-                            .foregroundColor(.red)
-                            .font(.system(size: 18, weight: .bold))
-                    }
-                    
                     Spacer()
                     
                     Button(action: {
                         
-                        self.editProfileShown.toggle()
+                        print("DEBUG: Update profile information")
                         
                     }) {
-                        
                         Text("Save")
                             .foregroundColor(.red)
                             .font(.system(size: 18, weight: .bold))

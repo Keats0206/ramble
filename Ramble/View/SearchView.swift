@@ -12,14 +12,10 @@ import SDWebImageSwiftUI
 
 struct SearchView: View {
     @ObservedObject var viewModel = UserService()
-    
-    @Binding var isPresented : Bool
-    @Binding var hideNav: Bool
-    
+        
     @State var searchText = ""
     @State var isSearching = false
     
-     
     var body: some View {
         
           ZStack{
@@ -27,44 +23,20 @@ struct SearchView: View {
                 Color.white
             
                 VStack(alignment: .center){
-                        
                         HStack{
-                            
                             Button(action: {
-                                
                                 self.viewModel.fetchUsers()
-                                
                             }){
-                                
                                 Text("Fetch data")
-                                
                             }
-                            
                             Spacer()
-                            
-                            Button(action: {
-                                
-                                withAnimation{
-                                    self.isPresented.toggle()
-                                    self.hideNav.toggle()
-                                }
-                            }){
-                                
-                                Image(systemName: "arrow.down.circle")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                            }
-                            
                         }.padding()
                     
                         SearchBar(searchText: $searchText, isSearching: $isSearching)
                     
                         List{
-                            
                               ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
-                                    
                                         SearchCell(user: user)
-
                             }
                         }
                     

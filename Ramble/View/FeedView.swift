@@ -12,7 +12,7 @@ struct FeedView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
-    @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var userModel = UserService()
     
     @State var recordingModal_shown = false
@@ -26,63 +26,64 @@ struct FeedView: View {
     
     var user: User
         
-    init(user: User, audioRecorder: AudioRecorder) {
+    init(user: User) {
         UISegmentedControl.appearance().selectedSegmentTintColor = .red
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
         
         self.user = user
-        self.audioRecorder = audioRecorder
     }
     
     var body: some View {
             ZStack{
                 
                 RambFeed(RambService(), dataToggle: $dataSelector)
-
-                ZStack{
-                    SearchView(isPresented: $searchModal_shown, hideNav: $hideNav)
-                }.edgesIgnoringSafeArea(.all)
-                .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-//
-                HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
-                    RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown, hideNav: $hideNav)
-                }
                 
                 FloatingPlayerView(hideNav: $hideNav)
-
+                    .edgesIgnoringSafeArea(.all)
+                
+//                ZStack{
+//                    SearchView(isPresented: $searchModal_shown, hideNav: $hideNav)
+//                }.edgesIgnoringSafeArea(.all)
+//                .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+////
+//                HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
+//                    RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown, hideNav: $hideNav)
+//                }
+            
             }.navigationBarHidden(hideNav)
-            .navigationBarTitle("Feed", displayMode: .inline)
+            .navigationBarTitle("Feed")
 //            .navigationBarItems(leading: HStack{
 //                    Picker(selection: $dataSelector, label: Text("")) {
 //                        ForEach(0..<feedtoggle.count) { index in
 //                            Text(self.feedtoggle[index]).tag(index)
-//                        }
-//                    }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-//
-//                })
+//                       }
+//                  }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
+//            })
             .navigationBarItems(trailing: HStack{
                     Button(action: {
-                        withAnimation{
-                            self.searchModal_shown.toggle()
-                            self.hideNav.toggle()
-                            UserService.shared.fetchUsers()
-                        }
-                    }, label: {
+                        self.searchModal_shown.toggle()
+                    }){
                         Image(systemName: "magnifyingglass")
-                            .accentColor(.black)
-                    })
+                            .padding(5)
+                    }.background(Capsule().stroke(lineWidth: 2))
+                    .sheet(isPresented: $searchModal_shown, onDismiss: {
+                        print("Modal dismisses")
+                    }) {
+                        SearchView()
+                    }
+                
                     Button(action: {
                         self.recordingModal_shown.toggle()
-                        self.hideNav.toggle()
                     }){
                         Image(systemName: "mic.circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                }.buttonStyle(BorderlessButtonStyle())
+                            .padding(5)
+                    }.background(Capsule().stroke(lineWidth: 2))
+                    .sheet(isPresented: $recordingModal_shown, onDismiss: {
+                        print("Modal dismisses")
+                    }) {
+                        RecorderView()
+                    }
             })
         }
 }
-
-// To Do:
-//

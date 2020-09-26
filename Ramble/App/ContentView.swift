@@ -18,7 +18,7 @@ struct ContentView : View {
     var body: some View {
         Group {
             if (session.session != nil) {
-                AppView(audioRecorder: AudioRecorder(), user: session.session!)
+                AppView(user: session.session!)
             } else {
                 AuthView()
             }
