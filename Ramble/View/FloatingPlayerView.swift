@@ -22,12 +22,12 @@ struct FloatingPlayerView: View {
             
             ZStack{
                 
-                Color.red
+                Color.white
+                    .opacity(0.98)
+                    .shadow(radius: 5)
                 
                 VStack{
-                    
                     // SMALL PLAYER
-                    
                     if floating == true {
                         
                         HStack{
@@ -35,7 +35,6 @@ struct FloatingPlayerView: View {
                             Rectangle()
                                 .frame(width: 60, height: 45)
                                 .cornerRadius(10)
-                                .background(Color.red)
                             
                             VStack(alignment : .leading){
                                 Text(globalPlayer.globalRamb?.caption ?? "No ramb")
@@ -51,25 +50,28 @@ struct FloatingPlayerView: View {
                                 .frame(width: 32, height: 30)
 
                         }.padding(10)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
+
                         
                     } else {
                         
                         VStack{
 
-                            Spacer()
+                        Spacer()
+                        
+                        Spacer()
                             
-                            Spacer()
-                            
-                        }
                     }
+                }
                     
                     // your music player.....
                     
                     Spacer()
                     
                 }
-            }.gesture(DragGesture()
+                
+            }
+            .gesture(DragGesture()
                     .onChanged({ (value) in
                         if self.height >= 600{
                             self.hideNav = false

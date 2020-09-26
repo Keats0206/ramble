@@ -66,7 +66,7 @@ struct FeedView: View {
                     }){
                         Image(systemName: "magnifyingglass")
                             .padding(5)
-                    }.background(Capsule().stroke(lineWidth: 2))
+                    }.background(Capsule().fill(Color.black).opacity(0.2))
                     .sheet(isPresented: $searchModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
@@ -78,7 +78,7 @@ struct FeedView: View {
                     }){
                         Image(systemName: "mic.circle")
                             .padding(5)
-                    }.background(Capsule().stroke(lineWidth: 2))
+                    }.background(Capsule().fill(Color.black).opacity(0.2))
                     .sheet(isPresented: $recordingModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {

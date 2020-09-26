@@ -19,6 +19,7 @@ struct Ramb: Identifiable {
     var timestamp: Int
     let user: User
     var didClap: Bool
+    var isPlaying: Bool
     
     init(user: User, id: String, dictionary: [String: Any]) {
         self.id = id
@@ -31,6 +32,7 @@ struct Ramb: Identifiable {
         self.fileId = dictionary["fileId"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
         self.timestamp = dictionary["timestamp"] as? Int ?? 0
-        self.didClap = dictionary["timestamp"] as? Bool ?? false
+        self.didClap = dictionary["didClap"] as? Bool ?? false
+        self.isPlaying = dictionary["isPlaying"] as? Bool ?? false
     }
 }

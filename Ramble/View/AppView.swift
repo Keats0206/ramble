@@ -38,7 +38,7 @@ struct AppView: View {
                 NavigationView{
                         FeedView(user: user)
                 }.tabItem {
-                        Image(systemName: "person.circle")
+                        Image(systemName: "dot.radiowaves.left.and.right")
                 }.tag(0)
                     
                 NavigationView{
@@ -47,17 +47,8 @@ struct AppView: View {
                     Image(systemName: "person.circle")
                 }.tag(1)
             }
-            
-//            ZStack{
-//                SearchView(isPresented: $searchModal_shown, hideNav: $hideNav)
-//            }.edgesIgnoringSafeArea(.all)
-//            .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-//
-//            HalfModalView(isShown: $testModalShown, modalHeight: UIScreen.main.bounds.height){
-//                Text("TestView")
-//            }
         }.onAppear{
             self.getUser()
-        }.accentColor(.red)
+        }.accentColor(.black)
     }
 }

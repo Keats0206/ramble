@@ -33,7 +33,7 @@ struct RambCell : View {
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
                             ProfileView(user: ramb.user), isActive: $isActive) { EmptyView()
-                        })
+                    })
                 }
             
 //              Center of Cell VStack
@@ -67,13 +67,17 @@ struct RambCell : View {
                 
                 Button(action: {
                     globalPlayer.globalRamb = self.ramb
+                    globalPlayer.setGlobalPlayer(ramb: self.ramb)
+                    globalPlayer.globalRambPlayer?.play()
+                    globalPlayer.isPlaying.toggle()
                 }){
-                    Image(systemName: "play.circle")
+                    Image(systemName: globalPlayer.isPlaying && self.ramb.isPlaying ? "pause.circle" : "play.circle")
                         .resizable()
                         .frame(width: 30, height: 30)
                 }.buttonStyle(BorderlessButtonStyle())
         
                 Text("3:30")
+                
             }
         }.padding()
     }

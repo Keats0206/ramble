@@ -74,6 +74,7 @@ struct ProfileView: View {
 //                .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
             }.navigationBarHidden(hideNav)
+            .navigationBarTitle("\(user.username)")
             .navigationBarItems(trailing:
                 HStack{
                     if user.isCurrentUser == false {
@@ -82,7 +83,7 @@ struct ProfileView: View {
                         }){
                             Image(systemName: "ellipsis")
                                 .padding(5)
-                        }.background(Capsule().stroke(lineWidth: 2))
+                        }.background(Capsule().fill(Color.black).opacity(0.2))
                         .sheet(isPresented: $editModal_shown, onDismiss: {
                             print("Modal dismisses")
                         }) {
@@ -101,8 +102,8 @@ struct ProfileView: View {
                         }){
                             Text(self.isFollowed ? "Unfollow":"Follow")
                                 .padding(5)
-                        }.background(Capsule().stroke(lineWidth: 2))
-                        .accentColor(.red)
+                                .padding([.trailing,.leading])
+                        }.background(Capsule().fill(Color.black).opacity(0.2))
                 }
         })
     }

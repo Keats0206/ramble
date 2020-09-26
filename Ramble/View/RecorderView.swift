@@ -9,12 +9,20 @@
 import SwiftUI
 
 struct RecorderView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var viewModel = RambService()
     
     var body: some View {
         ZStack{
             VStack{
+                
+                NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
+                    Text("Preview")
+                        .foregroundColor(.blue)
+                }
+
                 if audioRecorder.recording == false {
                     Button(action: {
                         self.audioRecorder.startRecording()
@@ -36,21 +44,15 @@ struct RecorderView: View {
                             .foregroundColor(.red)
                     }
                 }
-                
             }.offset(y: -15)
         }.navigationBarTitle("Recorder", displayMode: .inline)
         .navigationBarHidden(false)
-        .navigationBarItems(trailing:
+        .navigationBarItems(leading:
             Button(action: {
-                print("close view")
-            }) {
+                presentationMode.wrappedValue.dismiss()
+            }){
                 Text("Cancel")
                     .foregroundColor(.red)
-                    .frame(width: 60)
-            }
-        ).navigationBarItems(leading:
-            NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
-                Text("Preview")
             }
         )
     }
