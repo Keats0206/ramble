@@ -27,9 +27,9 @@ struct RambCellBottom: View {
                 
 //              Build out a model to support likes comments sharing etc.
                     
-//  Load the AudioView with an AVPlayer using the Ramb streaming URL
+//              Load the AudioView with an AVPlayer using the Ramb streaming URL
                 
-//                    AudioView(player: AVPlayer(url: URL(string: "\(self.ramb.rambUrl)")!))
+//              AudioView(player: AVPlayer(url: URL(string: "\(self.ramb.rambUrl)")!))
                     
             }
         }

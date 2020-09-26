@@ -47,19 +47,19 @@ struct ProfileView: View {
                             Text("\(user.bio)")
                                 .font(.system(size: 16))
                             
-                        }.padding([.leading,.trailing])
-                        
-                        HStack{
+                            HStack{
+                                
+                                Text("Rambles")
+                                    .font(.headline)
+                                
+                                Spacer()
+                            }
                             
-                            Text("Rambles")
-                                .font(.headline)
-                            
-                            Spacer()
-                        }
-                        
+                        }.padding([.leading,.trailing, .top])
+                                                
                         RambUserFeed(RambService(), user: self.user)
                         
-                    }.padding()
+                    }
                 }
                 
                 ZStack{
@@ -69,9 +69,8 @@ struct ProfileView: View {
                 
                 ZStack{
                     EditProfileView(editProfileShown: $editProfileShown, user: user)
-                }
-                    .edgesIgnoringSafeArea(.all)
-                    .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
+                }.edgesIgnoringSafeArea(.all)
+                .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
             }.navigationBarHidden(!self.isPresented && !self.editProfileShown ? false : true)
             .navigationBarItems(trailing:

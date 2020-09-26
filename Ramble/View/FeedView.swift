@@ -11,7 +11,6 @@ import SwiftUI
 struct FeedView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    @EnvironmentObject var settings: SessionSettings
     
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var userModel = UserService()
@@ -80,10 +79,8 @@ struct FeedView: View {
                         Image(systemName: "mic.circle")
                             .resizable()
                             .frame(width: 20, height: 20)
-                    }.buttonStyle(BorderlessButtonStyle())
-                })
-            .environmentObject(GlobalPlayer())
-            .environmentObject(SessionSettings())
+                }.buttonStyle(BorderlessButtonStyle())
+            })
         }
 }
 

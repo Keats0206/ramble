@@ -53,11 +53,7 @@ struct RambUserCell: View {
                         ])
                 }
             }.buttonStyle(BorderlessButtonStyle())
-        }.padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.gray.opacity(0.2))
-        )
+        }
     }
 }
 

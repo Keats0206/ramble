@@ -9,7 +9,10 @@ import SwiftUI
 
 struct AppView: View {
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var viewModel = RambService()
+    
     @State var user: User
     
     @State var hidNav = false
@@ -23,7 +26,7 @@ struct AppView: View {
             return
         }
     }
-    
+
     var body: some View {
         ZStack{
             TabView{
@@ -44,8 +47,7 @@ struct AppView: View {
 //            }
         }.onAppear{
             self.getUser()
-        }.environmentObject(SessionSettings())
-        .accentColor(.red)
+        }.accentColor(.red)
     }
 }
 

@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import AVKit
 
 class GlobalPlayer: ObservableObject {
-    @Published var user: User?
-    @Published var playingRamb: Ramb?
-    @Published var rambQue: [Ramb]?
+    @Published var globalRamb: Ramb?
+//    @Published var rambQue: [Ramb]
+//    @Published var globalRambPlayer: AVPlayer
 }

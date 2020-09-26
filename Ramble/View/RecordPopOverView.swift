@@ -26,10 +26,9 @@ struct RecordPopOverView: View {
                     .multilineTextAlignment(.center)
                     .font(.body)
                 
-                
             }.frame(height: 150)
-            
-            //          Cell Bottom
+
+//          Cell Bottom
             
             ZStack{
                 

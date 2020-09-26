@@ -22,42 +22,30 @@ struct AudioPlayerControlsView: View {
     @State private var finished = false
 
     var body: some View {
-        
         VStack {
-            
             Slider(value: $currentTime,
                    in: 0...currentDuration,
                    onEditingChanged: sliderEditingChanged,
                    minimumValueLabel: nil,
                    maximumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentTime)) / \(TimeHelper.formatSecondsToHMS(currentDuration))")) {
-                    
 // This seems to be required but not sure when it would ever show in the UI
                     Text("Duration")
-                
             }.font(.system(size: 14))
             .accentColor(Color.red)
-            
         }.padding()
-        
 // Listen out for the time observer publishing changes to the player's time
-            
         .onReceive(timeObserver.publisher) { time in
-            
             // Update the local var
             self.currentTime = time
-            
         }
-
 // Listen out for the duration observer publishing changes to the player's item duration
-            
         .onReceive(durationObserver.publisher) { duration in
             // Update the local var
             self.currentDuration = duration
         }
-
     }
-    
-    // MARK: Private functions
+
+// MARK: Private functions
     private func sliderEditingChanged(editingStarted: Bool) {
         
         if editingStarted {
@@ -93,42 +81,26 @@ struct AudioView: View {
     var player: AVPlayer
      
     var body: some View {
-        
         HStack {
-            
             AudioPlayerControlsView(player: player,
                                     timeObserver: PlayerTimeObserver(player: player),
                                     durationObserver: PlayerDurationObserver(player: player))
             Spacer()
-            
             Button(action: {
-                
                 if self.isPlaying {
-               
                     self.player.pause()
                     self.isPlaying.toggle()
-               
-               }
-               
-               else {
-                
+                } else {
                     self.player.play()
                     self.isPlaying.toggle()
-               
                 }
-                
              }) {
-                
                 Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
                     .resizable()
                     .frame(width: 20, height: 20)
-            
             }.buttonStyle(BorderlessButtonStyle())
-            
         }.onAppear{
-            
             self.isPlaying = false
-                        
         }
     }
 }

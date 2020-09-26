@@ -13,17 +13,12 @@ struct FeedHeaderView: View {
         VStack{
             Spacer()
             HStack{
-                
                 Text("Ramble")
                     .font(.title)
-                
                 Text("New")
                     .font(.title)
-                
                 Spacer()
-                
                 Text("Hot")
-                
             }.padding()
             .foregroundColor(.white)
             

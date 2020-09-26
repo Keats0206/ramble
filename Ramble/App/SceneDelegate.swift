@@ -27,7 +27,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView: contentView
                 .environmentObject(SessionStore())
                 .environmentObject(GlobalPlayer())
-                .environmentObject(SessionSettings())
             )
             self.window = window
             window.makeKeyAndVisible()

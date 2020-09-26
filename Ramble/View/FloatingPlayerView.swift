@@ -7,17 +7,17 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct FloatingPlayerView: View {
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @State var height : CGFloat = UIScreen.main.bounds.height - 75
     @State var floating = true
     
     @Binding var hideNav: Bool
-    
+                
     var body : some View{
-        
-        
         GeometryReader{geo in
             
             ZStack{
@@ -38,11 +38,10 @@ struct FloatingPlayerView: View {
                                 .background(Color.red)
                             
                             VStack(alignment : .leading){
-                                
-                                Text("Love Story")
+                                Text(globalPlayer.globalRamb?.caption ?? "No ramb")
                                     .fontWeight(.heavy)
-                                Text("Taylor Swift")
                                 
+                                Text(globalPlayer.globalRamb?.user.username ?? "No ramb")
                             }
                             
                             Spacer()
@@ -50,18 +49,15 @@ struct FloatingPlayerView: View {
                             Image(systemName: "play.fill")
                                 .resizable()
                                 .frame(width: 32, height: 30)
-                            
-                            
+
                         }.padding(10)
                         .foregroundColor(.white)
                         
                     } else {
                         
                         VStack{
-                            
+
                             Spacer()
-                            
-                            Text("Big Music Player")
                             
                             Spacer()
                             

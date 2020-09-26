@@ -12,7 +12,6 @@ import UIKit
 import SDWebImageSwiftUI
 
 struct RambFeed : View {
-    @EnvironmentObject var sessionSettings: SessionSettings
     @ObservedObject var viewModel = RambService()
     @Binding var dataToggle: Int
     @State private var isShowing = false
@@ -35,7 +34,6 @@ struct RambFeed : View {
                     }
                 }
             }.listStyle(GroupedListStyle())
-            .environmentObject(SessionSettings())
             .pullToRefresh(isShowing: $isShowing) {
                         self.viewModel.observeRambs()
                         self.isShowing = false

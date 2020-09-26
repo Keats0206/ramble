@@ -11,9 +11,9 @@ import Firebase
 import Combine
 
 class RambService: ObservableObject {
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     static let shared = RambService()
     
-    @EnvironmentObject var sessionSettings: SessionSettings
     @Published var rambs = [Ramb]()
     @Published var userRambs = [Ramb]()
         

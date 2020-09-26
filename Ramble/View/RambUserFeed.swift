@@ -24,9 +24,12 @@ struct RambUserFeed : View {
     }
     
     var body: some View {
-        List{
-            ForEach(viewModel.userRambs){ramb in
-                RambUserCell(ramb: ramb)
+        ZStack{
+            Color.white
+                List{
+                    ForEach(viewModel.userRambs){ramb in
+                        RambUserCell(ramb: ramb)
+                }.listStyle(GroupedListStyle())
             }
         }
     }
