@@ -24,13 +24,13 @@ struct RambUserFeed : View {
     }
     
     var body: some View {
-        ZStack{
-            Color.white
-                List{
-                    ForEach(viewModel.userRambs){ramb in
-                        RambUserCell(ramb: ramb)
+        HStack{
+            List{
+                ForEach(viewModel.userRambs){ramb in
+                    RambUserCell(ramb: ramb)
                 }.listStyle(GroupedListStyle())
             }
         }
+        .background(Color.red)
     }
 }

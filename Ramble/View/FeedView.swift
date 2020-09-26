@@ -82,7 +82,9 @@ struct FeedView: View {
                     .sheet(isPresented: $recordingModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
-                        RecorderView()
+                        NavigationView{
+                            RecorderView(audioRecorder: AudioRecorder())
+                        }
                     }
             })
         }

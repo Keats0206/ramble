@@ -71,6 +71,11 @@ struct FloatingPlayerView: View {
                 }
             }.gesture(DragGesture()
                     .onChanged({ (value) in
+                        if self.height >= 600{
+                            self.hideNav = false
+                        }
+                    })
+                    .onChanged({ (value) in
                         if self.height >= 0{
                             self.height += value.translation.height / 8
                         }

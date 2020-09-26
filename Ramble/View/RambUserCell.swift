@@ -21,7 +21,6 @@ struct RambUserCell: View {
     var body: some View {
         HStack{
 //              Center of Cell VStack
-            
             VStack(alignment: .leading){
                 
                 Text(ramb.caption)
