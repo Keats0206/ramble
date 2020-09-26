@@ -26,9 +26,7 @@ struct ProfileView: View {
     var body: some View {
         
             ZStack{
-                                    
                 VStack(alignment: .leading, spacing: 0){
-                    
                     VStack(alignment: .leading, spacing: 5){
                         WebImage(url: user.profileImageUrl)
                             .frame(width: 100, height: 100)

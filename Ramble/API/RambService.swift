@@ -27,6 +27,7 @@ class RambService: ObservableObject {
             "rambUrl": "\(rambUrl)",
             "fileId":"\(rambFileId)",
             "didClap": false,
+            "isPlaying": false,
             "uid": uid ] as [String : Any]
         
         let ref = REF_RAMBS.childByAutoId()
@@ -116,6 +117,9 @@ class RambService: ObservableObject {
     func deleteRamb(ramb: Ramb){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let rambId = ramb.id
+        
+        self.rambs.removeAll(where: { $0.id == ramb.id })
+        self.userRambs.removeAll(where: { $0.id == ramb.id })
         //      Everything deletes except this part AND the UI is not updating when the post is deleted...
         STORAGE_RAMBS.child(rambId).delete()
         //      delete from rambs

@@ -48,7 +48,7 @@ struct RambUserCell: View {
                                         .default(
                                             Text("Delete").foregroundColor(.red), action: {
                                                 self.viewModel.deleteRamb(ramb: self.ramb)
-                                        }),.cancel()
+                                    }),.cancel()
                         ])
                 }
             }.buttonStyle(BorderlessButtonStyle())
