@@ -55,9 +55,3 @@ struct RambUserCell: View {
         }
     }
 }
-
-//struct RambUserCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RambUserCell()
-//    }
-//}

@@ -29,25 +29,20 @@ struct AppView: View {
     }
 
     var body: some View {
-        ZStack{
-            
-            Color.white.edgesIgnoringSafeArea(.all)
-            
-            TabView{
-                
+        TabView{
                 NavigationView{
-                        FeedView(user: user)
+                    FeedView(user: user)
                 }.tabItem {
-                        Image(systemName: "dot.radiowaves.left.and.right")
+                    Image(systemName: "dot.radiowaves.left.and.right")
                 }.tag(0)
-                    
+                
                 NavigationView{
                     ProfileView(user: user)
                 }.tabItem {
                     Image(systemName: "person.circle")
                 }.tag(1)
-            }
-        }.onAppear{
+            
+            }.onAppear{
             self.getUser()
         }.accentColor(.black)
     }

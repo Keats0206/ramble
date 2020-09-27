@@ -27,16 +27,16 @@ struct FeedView: View {
     var user: User
         
     init(user: User) {
-        UISegmentedControl.appearance().selectedSegmentTintColor = .red
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
-        
+//        UISegmentedControl.appearance().selectedSegmentTintColor = .red
+//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
+//        
         self.user = user
     }
     
     var body: some View {
             ZStack{
-                
+                     
                 RambFeed(RambService(), dataToggle: $dataSelector)
                 
                 FloatingPlayerView(hideNav: $hideNav)
@@ -53,13 +53,6 @@ struct FeedView: View {
             
             }.navigationBarHidden(hideNav)
             .navigationBarTitle("Feed")
-//            .navigationBarItems(leading: HStack{
-//                    Picker(selection: $dataSelector, label: Text("")) {
-//                        ForEach(0..<feedtoggle.count) { index in
-//                            Text(self.feedtoggle[index]).tag(index)
-//                       }
-//                  }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-//            })
             .navigationBarItems(trailing: HStack{
                     Button(action: {
                         self.searchModal_shown.toggle()
@@ -70,7 +63,9 @@ struct FeedView: View {
                     .sheet(isPresented: $searchModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
-                        SearchView()
+                        NavigationView{
+                            SearchView()
+                        }
                     }
                 
                     Button(action: {
@@ -87,5 +82,12 @@ struct FeedView: View {
                         }
                     }
             })
+//            .navigationBarItems(leading: HStack{
+//                    Picker(selection: $dataSelector, label: Text("")) {
+//                        ForEach(0..<feedtoggle.count) { index in
+//                            Text(self.feedtoggle[index]).tag(index)
+//                       }
+//                  }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
+//            })
         }
 }

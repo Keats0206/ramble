@@ -21,16 +21,15 @@ struct RambUserFeed : View {
         model.fetchUserRambs(forUser: user) { ramb in
             return
         }
+        print(model.userRambs)
     }
     
     var body: some View {
-        HStack{
-            List{
-                ForEach(viewModel.userRambs){ramb in
-                    RambUserCell(ramb: ramb)
-                }.listStyle(GroupedListStyle())
-            }
-        }
-        .background(Color.red)
+        List{
+            ForEach(viewModel.userRambs){ramb in
+                RambUserCell(ramb: ramb)
+            }.listStyle(GroupedListStyle())
+            
+        }.padding()
     }
 }

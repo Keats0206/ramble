@@ -26,39 +26,36 @@ struct ProfileView: View {
     var body: some View {
         
             ZStack{
-                VStack(alignment: .leading, spacing: 0){
-                    VStack(alignment: .leading, spacing: 5){
-                        WebImage(url: user.profileImageUrl)
-                            .frame(width: 100, height: 100)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.red, lineWidth: 5))
-                        
-                        Text("\(user.fullname)")
-                            .font(.system(size: 35))
-                            .fontWeight(.heavy)
-                        
-                        Text("@\(user.username)")
-                            .font(.system(size: 25))
-                            .fontWeight(.bold)
-                        
-                        Text("\(user.bio)")
-                            .font(.system(size: 16))
-                        
-                        HStack{
-                            
-                            Text("Rambles")
-                                .font(.headline)
-                            
-                            Spacer()
-                        }
-                        
-                    }.padding([.leading,.trailing, .top])
-                                            
-                    RambUserFeed(RambService(), user: self.user)
-                    
-                }
                 
+                VStack(alignment: .leading, spacing: 5){
+                    WebImage(url: user.profileImageUrl)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .shadow(radius: 10)
+                    
+                    Text("\(user.fullname)")
+                        .font(.system(size: 35))
+                        .fontWeight(.heavy)
+                    
+                    Text("@\(user.username)")
+                        .font(.system(size: 25))
+                        .fontWeight(.bold)
+                    
+                    Text("\(user.bio)")
+                        .font(.system(size: 16))
+                    
+                    HStack{
+                        
+                        Text("Rambles")
+                            .font(.headline)
+                        
+                        Spacer()
+                    }
+                    
+                    RambUserFeed(RambService(), user: user)
+                    
+                }.padding([.leading,.trailing, .top])
+                                
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
 //

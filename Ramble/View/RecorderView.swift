@@ -45,8 +45,7 @@ struct RecorderView: View {
                     }
                 }
             }.offset(y: -15)
-        }.navigationBarTitle("Recorder", displayMode: .inline)
-        .navigationBarHidden(false)
+        }.navigationBarHidden(false)
         .navigationBarItems(leading:
             Button(action: {
                 presentationMode.wrappedValue.dismiss()

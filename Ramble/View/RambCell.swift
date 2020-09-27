@@ -79,7 +79,8 @@ struct RambCell : View {
                 Text("3:30")
                 
             }
-        }.padding()
+        }
+            .padding()
     }
 }
 

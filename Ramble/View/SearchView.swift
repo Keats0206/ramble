@@ -11,6 +11,8 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct SearchView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     @ObservedObject var viewModel = UserService()
         
     @State var searchText = ""
@@ -19,9 +21,7 @@ struct SearchView: View {
     var body: some View {
         
           ZStack{
-                
-                Color.white
-            
+                            
                 VStack(alignment: .center){
                         HStack{
                             Button(action: {
@@ -35,16 +35,23 @@ struct SearchView: View {
                         SearchBar(searchText: $searchText, isSearching: $isSearching)
                     
                         List{
-                              ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
-                                        SearchCell(user: user)
+                            ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
+                                SearchCell(user: user)
                             }
                         }
                     
                         Spacer()
                         
-            }.padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
+            }
         
-        }
+        }.navigationBarItems(leading:
+                                Button(action: {
+                                    presentationMode.wrappedValue.dismiss()
+                                }){
+                                    Text("Cancel")
+                                        .foregroundColor(.red)
+                                }
+                            )
     
     }
 

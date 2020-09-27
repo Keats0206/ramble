@@ -33,7 +33,7 @@ struct RambFeed : View {
                         RambCell(ramb: ramb)
                     }
                 }
-            }.listStyle(GroupedListStyle())
+            }
             .pullToRefresh(isShowing: $isShowing) {
                         self.viewModel.observeRambs()
                         self.isShowing = false
