@@ -23,7 +23,7 @@ struct FloatingPlayerView: View {
             ZStack{
                 
                 Color.white
-                    .opacity(0.98)
+                    .opacity(0.97)
                     .shadow(radius: 5)
                 
                 VStack{

@@ -37,29 +37,20 @@ struct ProfileView: View {
     var body: some View {
         
             ZStack{
-                
                 ScrollView{
-                    
                     VStack(alignment: .leading){
-                        
                         WebImage(url: user.profileImageUrl)
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .shadow(radius: 10)
-                        
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
                         Text("\(user.fullname)")
                             .font(.system(size: 35))
                             .fontWeight(.heavy)
-                        
                         Text("@\(user.username)")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
-                        
                         Text("\(user.bio)")
                             .font(.system(size: 16))
-                        
                         Spacer()
-                        
                     }
                         
                     HStack{
@@ -124,10 +115,13 @@ struct ProfileView: View {
                                 UserService.shared.followUser(uid: self.user.uid)
                                 self.isFollowed.toggle()
                             }
+                            
                         }){
+                            
                             Text(self.isFollowed ? "Unfollow":"Follow")
                                 .padding(5)
                                 .padding([.trailing,.leading])
+                            
                         }.background(Capsule().fill(Color.black).opacity(0.2))
                 }
         })
@@ -137,5 +131,6 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(RambService(), user: _user)
+            .environmentObject(SessionStore())
     }
 }

@@ -24,78 +24,79 @@ struct RambCell : View {
         ZStack{
                         
             HStack(alignment: .center){
-                            
-                    VStack(alignment: .center, spacing: 10){
-                        
-                        WebImage(url: ramb.user.profileImageUrl)
-                            .frame(width: 75, height: 75)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                            .onTapGesture { self.isActive.toggle() } // activate link on image tap
-                            .background(NavigationLink(destination:  // link in background
-                                                        ProfileView(RambService(), user: ramb.user), isActive: $isActive) { EmptyView()
-                            })
-                        
-                        Spacer()
-                        
-                    }
-                    
-                    //              Center of Cell VStack
-                    
-                    VStack(alignment: .leading){
-                        
-                        //                  Username + timestamp
-                        
-                        HStack {
-                            
-                            Text("@" + ramb.user.username)
-                                .font(.body)
-                                .fontWeight(.heavy)
-                                                    
-                            Text(formatDate(timestamp: ramb.timestamp) + " ago")
-                                .font(.body)
-                                
-                        }
+            
+            VStack(alignment: .center, spacing: 10){
+                WebImage(url: ramb.user.profileImageUrl)
+                    .frame(width: 75, height: 75)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                    .onTapGesture { self.isActive.toggle() } // activate link on image tap
+                    .background(NavigationLink(destination:  // link in background
+                                                ProfileView(RambService(), user: ramb.user), isActive: $isActive) { EmptyView()
+                    })
                 
-                        //                  Caption
-                        
-                        Text(ramb.caption)
-                            .font(.subheadline)
-                            .fontWeight(.heavy)
-                            .multilineTextAlignment(TextAlignment.leading)
-                        
-                        Spacer()
-        
-                    }
+                Spacer()
+                
+                Button(action: {
+                        print("open ramb action menu")
+                }){
+                    Image(systemName: "ellipsis")
+                        .frame(height: 10)
+                }.foregroundColor(Color.accent4)
+            }
+            
+            //              Center of Cell VStack
+            
+            VStack(alignment: .leading){
+            //                  Username + timestamp
+                
+                Text("@" + ramb.user.username)
+                    .font(.system(.body, design: .rounded))
+                    .bold()
+    //                  Caption
+                
+                Text(ramb.caption)
+                    .font(.system(.title, design: .rounded))
+                    .bold()
+                    .multilineTextAlignment(TextAlignment.leading)
+                
+                Spacer()
+                
+            }
 
+            Spacer()
+            
+            VStack(alignment: .center){
+                
+                Text(formatDate(timestamp: ramb.timestamp))
+                    .font(.system(.body, design: .rounded))
+                
+                Spacer()
+                
+                Button(action: {
+                    globalPlayer.globalRamb = self.ramb
+                    globalPlayer.setGlobalPlayer(ramb: self.ramb)
+                    globalPlayer.globalRambPlayer?.play()
+                    globalPlayer.isPlaying.toggle()
+                }){
+                    Image(systemName: globalPlayer.isPlaying ? "pause.circle" : "play.circle")
+                        .resizable()
+                        .frame(width: 30, height: 30)
                     
-                    Spacer()
-                    
-                    VStack(alignment: .leading, spacing: 10){
-                        
-                        Button(action: {
-                            globalPlayer.globalRamb = self.ramb
-                            globalPlayer.setGlobalPlayer(ramb: self.ramb)
-                            globalPlayer.globalRambPlayer?.play()
-                            globalPlayer.isPlaying.toggle()
-                        }){
-                            Image(systemName: globalPlayer.isPlaying ? "pause.circle" : "play.circle")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                        }.buttonStyle(BorderlessButtonStyle())
-                            
-                        Text("3:30")
-                        
-                        Spacer()
-                        
-                    }
-            }.foregroundColor(.black)
-            .padding(20)
+                }.buttonStyle(BorderlessButtonStyle())
+                
+                Spacer()
+                
+                Text("3:30")
+                
+                
+            }
+            
         }
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .frame(height: 100)
-        .padding()
+            .padding()
+            .foregroundColor(.black)
+        }.frame(height: 150)
+        .cornerRadius(15)
     }
 }
 

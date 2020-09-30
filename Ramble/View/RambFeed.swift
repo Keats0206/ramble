@@ -21,28 +21,34 @@ struct RambFeed : View {
         self._dataToggle = dataToggle
         model.observeRambs()
     }
-
+    
     var body: some View {
-            List{
-                if dataToggle != 1 {
+        ZStack{
+            if dataToggle != 1 {
+                List{
                     ForEach(viewModel.rambs.sorted(by: { $0.claps > $1.claps })){ ramb in
                         RambCell(ramb: ramb)
+                            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                     }
-               } else {
+                }
+            } else {
+                List{
                     ForEach(viewModel.rambs.sorted(by: { $0.timestamp < $1.timestamp })){ ramb in
                         RambCell(ramb: ramb)
+                            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                     }
                 }
             }
-            .pullToRefresh(isShowing: $isShowing) {
-                        self.viewModel.observeRambs()
-                        self.isShowing = false
-            }
-            .onAppear{
-                print("DEBUG: Ramb feed called")
-            }
+        }
+        .pullToRefresh(isShowing: $isShowing) {
+            self.viewModel.observeRambs()
+            self.isShowing = false
+        }
+        .onAppear{
+            print("DEBUG: Ramb feed called")
         }
     }
+}
 
 struct RambFeed_Previews: PreviewProvider {
     @State static var dataToggle = 0

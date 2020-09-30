@@ -17,9 +17,7 @@ struct AppView: View {
     
     @State var hidNav = false
     @State var testModalShown = true
-    
-    let coloredNavAppearance = UINavigationBarAppearance()
-    
+        
     func getUser(){
         let uid = session.session!.uid
         UserService.shared.fetchUser(uid: uid) { user in
@@ -41,6 +39,7 @@ struct AppView: View {
             }.tabItem {
                 Image(systemName: "person.circle")
             }.tag(1)
+            
         }.onAppear{
             self.getUser()
         }.accentColor(.black)

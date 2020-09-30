@@ -41,7 +41,7 @@ struct RambUserCell: View {
             }){
                 Image(systemName: "ellipsis")
                     .frame(height: 10)
-                    .accentColor(.red)
+                    .accentColor(Color.accent1)
                     .actionSheet(isPresented: $showingActionSheet) {
                         ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
                                     buttons:[

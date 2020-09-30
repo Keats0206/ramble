@@ -33,22 +33,12 @@ struct FeedView: View {
     var body: some View {
             ZStack{
                 
-//                Color.flatDarkBackground
-                     
                 RambFeed(RambService(), dataToggle: $dataSelector)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)) 
                 
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
                 
-//                ZStack{
-//                    SearchView(isPresented: $searchModal_shown, hideNav: $hideNav)
-//                }.edgesIgnoringSafeArea(.all)
-//                .offset(x: 0, y: self.searchModal_shown ? 10 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-////
-//                HalfModalView(isShown: $recordingModal_shown, modalHeight: 400){
-//                    RecordPopOverView(audioRecorder: AudioRecorder(), isShown: self.$recordingModal_shown, hideNav: $hideNav)
-//                }
-            
             }.navigationBarHidden(hideNav)
             .navigationBarTitle("Feed")
             .navigationBarItems(trailing: HStack{
@@ -80,18 +70,13 @@ struct FeedView: View {
                         }
                     }
             })
-//            .navigationBarItems(leading: HStack{
-//                    Picker(selection: $dataSelector, label: Text("")) {
-//                        ForEach(0..<feedtoggle.count) { index in
-//                            Text(self.feedtoggle[index]).tag(index)
-//                       }
-//                  }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
-//            })
         }
 }
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
         FeedView(user: _user)
+            .environmentObject(SessionStore())
+            .environmentObject(GlobalPlayer())
     }
 }
