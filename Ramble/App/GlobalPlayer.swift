@@ -13,7 +13,6 @@ class GlobalPlayer: ObservableObject {
     @Published var globalRamb: Ramb?
     @Published var rambQue: [Ramb]?
     @Published var globalRambPlayer: AVPlayer?
-    
     @Published var isPlaying = false
     
     func setGlobalPlayer(ramb: Ramb){

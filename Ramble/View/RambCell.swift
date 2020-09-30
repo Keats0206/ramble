@@ -45,10 +45,10 @@ struct RambCell : View {
                 }.foregroundColor(Color.accent4)
             }
             
-            //              Center of Cell VStack
+    //              Center of Cell VStack
             
             VStack(alignment: .leading){
-            //                  Username + timestamp
+    //                  Username + timestamp
                 
                 Text("@" + ramb.user.username)
                     .font(.system(.body, design: .rounded))
@@ -77,12 +77,13 @@ struct RambCell : View {
                     globalPlayer.globalRamb = self.ramb
                     globalPlayer.setGlobalPlayer(ramb: self.ramb)
                     globalPlayer.globalRambPlayer?.play()
-                    globalPlayer.isPlaying.toggle()
+                    globalPlayer.isPlaying = true
                 }){
-                    Image(systemName: globalPlayer.isPlaying ? "pause.circle" : "play.circle")
+                    Image(systemName: "play.circle")
                         .resizable()
                         .frame(width: 30, height: 30)
-                    
+                        .foregroundColor(globalPlayer.globalRamb?.uid == self.ramb.uid ? .red : .black)
+                  
                 }.buttonStyle(BorderlessButtonStyle())
                 
                 Spacer()

@@ -47,12 +47,15 @@ struct FeedView: View {
                             self.dataSelector = 0
                         }){
                             Text("FRIENDS")
+                                .font(.system(.title, design: .rounded)).bold()
                                 .foregroundColor(dataSelector == 0 ? Color.accent3 : Color.black)
+                            
                         }
                         Button(action: {
                             self.dataSelector = 1
                         }){
                             Text("FEED")
+                                .font(.system(.title, design: .rounded)).bold()
                                 .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
                     }
                 }
@@ -62,6 +65,8 @@ struct FeedView: View {
                         self.recordingModal_shown.toggle()
                     }){
                         Image(systemName: "mic.circle")
+                            .resizable()
+                            .frame(width: 25, height: 25)
                             .padding(5)
                     }.background(Capsule().fill(Color.black).opacity(0.2))
                     .sheet(isPresented: $recordingModal_shown, onDismiss: {
@@ -76,6 +81,8 @@ struct FeedView: View {
                         self.recordingModal_shown.toggle()
                     }){
                         Image(systemName: "mic.circle")
+                            .resizable()
+                            .frame(width: 25, height: 25)
                             .padding(5)
                     }.background(Capsule().fill(Color.black).opacity(0.2))
                     .sheet(isPresented: $recordingModal_shown, onDismiss: {

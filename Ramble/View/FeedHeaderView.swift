@@ -14,9 +14,9 @@ struct FeedHeaderView: View {
             Spacer()
                 HStack{
                     Text("FEED")
-                        .font(.system(.headline, design: .rounded))
+                        .font(.system(.largeTitle, design: .rounded))
                     Text("FRIENDS")
-                        .font(.system(.headline, design: .rounded))
+                        .font(.system(.largeTitle, design: .rounded))
                     
                     Spacer()
                     

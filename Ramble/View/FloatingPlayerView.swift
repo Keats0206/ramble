@@ -45,11 +45,29 @@ struct FloatingPlayerView: View {
                             
                             Spacer()
                             
-                            Image(systemName: "play.fill")
-                                .resizable()
-                                .frame(width: 32, height: 30)
-
+                            if globalPlayer.isPlaying{
+                                
+                                Button(action: {
+                                    self.globalPlayer.globalRambPlayer?.pause()
+                                    globalPlayer.isPlaying = false
+                                }){
+                                    Image(systemName: "pause.fill")
+                                        .resizable()
+                                        .frame(width: 32, height: 30)
+                                }
+                            } else {
+                                Button(action: {
+                                    self.globalPlayer.globalRambPlayer?.play()
+                                    globalPlayer.isPlaying = true
+                                }){
+                                    Image(systemName: "play.fill")
+                                        .resizable()
+                                        .frame(width: 32, height: 30)
+                                }
+                            }
+                            
                         }.padding(10)
+                        .padding([.leading, .trailing])
                         .foregroundColor(.black)
 
                         

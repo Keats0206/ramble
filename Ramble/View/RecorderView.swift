@@ -21,26 +21,20 @@ struct RecorderView: View {
     var body: some View {
         ZStack{
             
+            VStack{
+                            
+                    switch audioRecorder.recorderState {
+                        case .ready:
+                            Text("Show red circle")
+                        case .started:
+                            Text("Show recording animation")
+                        case .stopped:
+                            Text("Show uploading circle")
+                        case .uploaded:
+                            Text("Show preview screen")
+                    }
+            
             ZStack{
-                
-                VStack{
-                    
-                    Button(action: {
-                        print("1 \(audioRecorder.recorderState)")
-                    }){
-                        Text("State print")
-                    }
-                
-                switch audioRecorder.recorderState {
-                    case .ready:
-                        Text("Show red circle")
-                    case .started:
-                        Text("Show recording animation")
-                    case .stopped:
-                        Text("Show uploading circle")
-                    case .uploaded:
-                        Text("Show preview screen")
-                    }
                     
                     if audioRecorder.recording == false {
 
@@ -53,6 +47,7 @@ struct RecorderView: View {
                                 .frame(width: 75, height: 75)
                                 .foregroundColor(.red)
                         }
+                        
                     } else {
 
                         Circle()
@@ -111,7 +106,15 @@ struct RecorderPostView: View {
     @State var caption = ""
 
     var body: some View {
-        HStack{
+        VStack(alignment: .leading){
+            
+            TextField("What do you have to say", text: $caption)
+                .font(.system(.largeTitle,design: .rounded))
+                .fixedSize(horizontal: true, vertical: false)
+                .multilineTextAlignment(.leading)
+            
+            Spacer()
+            
             Button(action: {
                 print("DEBUG: post-recording")
                 self.viewModel.uploadRamb(
@@ -121,7 +124,7 @@ struct RecorderPostView: View {
                 )
             }) {
                 Text("Post")
-                    .font(.system(size: 14))
+                    .font(.system(.headline,design: .rounded)).bold()
                     .foregroundColor(.red)
             }
         }
