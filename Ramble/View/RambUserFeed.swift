@@ -19,17 +19,14 @@ struct RambUserFeed : View {
         self.viewModel = model
         self.user = user
         model.fetchUserRambs(forUser: user) { ramb in
-            return
+        return
         }
-        print(model.userRambs)
     }
-
+    
     var body: some View {
-        List{
-            ForEach(viewModel.userRambs){ramb in
-                RambUserCell(ramb: ramb)
-            }.listStyle(GroupedListStyle())
-        }.padding()
+        ForEach(viewModel.userRambs){ramb in
+            RambUserCell(ramb: ramb)
+        }
     }
 }
 

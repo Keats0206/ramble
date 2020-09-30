@@ -27,7 +27,7 @@ class RambService: ObservableObject {
             "rambUrl": "\(rambUrl)",
             "fileId":"\(rambFileId)",
             "didClap": false,
-            "isPlaying": false,
+            "isSelected": false,
             "uid": uid ] as [String : Any]
         
         let ref = REF_RAMBS.childByAutoId()

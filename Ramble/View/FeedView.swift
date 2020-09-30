@@ -34,8 +34,7 @@ struct FeedView: View {
             ZStack{
                 
                 RambFeed(RambService(), dataToggle: $dataSelector)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                
+
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
                 
@@ -47,7 +46,7 @@ struct FeedView: View {
                             self.dataSelector = 0
                         }){
                             Text("FRIENDS")
-                                .font(.system(.title, design: .rounded)).bold()
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
                                 .foregroundColor(dataSelector == 0 ? Color.accent3 : Color.black)
                             
                         }
@@ -55,28 +54,12 @@ struct FeedView: View {
                             self.dataSelector = 1
                         }){
                             Text("FEED")
-                                .font(.system(.title, design: .rounded)).bold()
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
                                 .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
                     }
                 }
             , trailing: HStack{
-//                Change to filter
-                    Button(action: {
-                        self.recordingModal_shown.toggle()
-                    }){
-                        Image(systemName: "mic.circle")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .padding(5)
-                    }.background(Capsule().fill(Color.black).opacity(0.2))
-                    .sheet(isPresented: $recordingModal_shown, onDismiss: {
-                        print("Modal dismisses")
-                    }) {
-                        NavigationView{
-                            RecorderView(audioRecorder: AudioRecorder())
-                        }
-                    }
-                
+//                Change to filter                
                     Button(action: {
                         self.recordingModal_shown.toggle()
                     }){

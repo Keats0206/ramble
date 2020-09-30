@@ -35,7 +35,7 @@ struct AppView: View {
             }.tag(0)
             
             NavigationView{
-                ProfileView(RambService(), user: user)
+                ProfileView(user: user)
             }.tabItem {
                 Image(systemName: "person.circle")
             }.tag(1)

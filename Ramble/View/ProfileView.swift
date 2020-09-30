@@ -27,22 +27,13 @@ struct ProfileView: View {
     @State var hideNav = false
     
     var user: User
-    
-    init(_ model: RambService, user: User){
-            self.viewModel = model
-            self.user = user
-            model.fetchUserRambs(forUser: user) { ramb in
-            return
-        }
-    }
-            
+                
     var body: some View {
         
             ZStack{
-                
-                ScrollView{
-                    
-                    VStack(alignment: .leading){
+                                    
+                VStack{
+                        
                         WebImage(url: user.profileImageUrl)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
@@ -54,29 +45,22 @@ struct ProfileView: View {
                             .fontWeight(.bold)
                         Text("\(user.bio)")
                             .font(.system(size: 16))
-                        Spacer()
+                        
+                        HStack{
+                            
+                            Text("Rambles")
+                                .font(.headline)
+                            
+                            Spacer()
+                            
+                        }.padding()
+                        
+                        
+                        RambUserFeed(RambService(), user: _user)
+                    
                     }
-                        
-                    HStack{
-                        
-                        Text("Rambles")
-                            .font(.headline)
-                        
-                        Spacer()
-                        
-                    }.padding()
-                    
-                    Spacer()
-                    
-                    VStack{
-                        ForEach(viewModel.userRambs){ramb in
-                            RambUserCell(ramb: ramb)
-                        
-                            }
-                        }
-                    }.padding()
-                
-                    FloatingPlayerView(hideNav: $hideNav)
+                                    
+                FloatingPlayerView(hideNav: $hideNav)
                         .edgesIgnoringSafeArea(.all)
 //
 //                ZStack{
@@ -89,13 +73,14 @@ struct ProfileView: View {
 //                .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
             }.navigationBarHidden(hideNav)
-            .navigationBarTitle("\(user.username)")
             .navigationBarItems(trailing:
                 HStack{
                     Button(action: {
                         self.searchModal_shown.toggle()
                     }){
                         Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .frame(width: 25, height: 25)
                             .padding(5)
                     }.background(Capsule().fill(Color.black).opacity(0.2))
                     .sheet(isPresented: $searchModal_shown, onDismiss: {
@@ -143,7 +128,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(RambService(), user: _user)
+        ProfileView(user: _user)
             .environmentObject(SessionStore())
     }
 }

@@ -24,34 +24,42 @@ struct RambUserCell: View {
             VStack(alignment: .leading){
                 
                 Text(ramb.caption)
-                    .font(.subheadline)
-                    .fontWeight(.regular)
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                     .multilineTextAlignment(TextAlignment.leading)
 
 //               Username + timestamp
                                         
                     Text(formatDate(timestamp: ramb.timestamp) + " ago")
-                    
+                        .font(.system(size: 16, weight: .regular, design: .rounded))
                 }
                                         
             Spacer()
+            
+                Text("3:30")
+                    .font(.system(size: 18, weight: .light, design: .rounded))
             
             Button(action: {
                 self.showingActionSheet.toggle()
             }){
                 Image(systemName: "ellipsis")
                     .frame(height: 10)
-                    .accentColor(Color.accent1)
+                    .accentColor(Color.accent4)
                     .actionSheet(isPresented: $showingActionSheet) {
                         ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
                                     buttons:[
                                         .default(
                                             Text("Delete").foregroundColor(.red), action: {
                                                 self.viewModel.deleteRamb(ramb: self.ramb)
-                                    }),.cancel()
+                            }),.cancel()
                         ])
                 }
             }.buttonStyle(BorderlessButtonStyle())
-        }
+        }.padding()
+    }
+}
+
+struct RambUserCell_Previews: PreviewProvider {
+    static var previews: some View {
+        RambUserCell(ramb: _ramb)
     }
 }

@@ -20,19 +20,16 @@ struct RecorderView: View {
 
     var body: some View {
         ZStack{
-            
-            VStack{
-                            
-                    switch audioRecorder.recorderState {
-                        case .ready:
-                            Text("Show red circle")
-                        case .started:
-                            Text("Show recording animation")
-                        case .stopped:
-                            Text("Show uploading circle")
-                        case .uploaded:
-                            Text("Show preview screen")
-                    }
+//                    switch audioRecorder.recorderState {
+//                        case .ready:
+//                            Text("Show red circle")
+//                        case .started:
+//                            Text("Show recording animation")
+//                        case .stopped:
+//                            Text("Show uploading circle")
+//                        case .uploaded:
+//                            Text("Show preview screen")
+//                    }
             
             ZStack{
                     
@@ -74,21 +71,18 @@ struct RecorderView: View {
                     }
                 }
             }
-        }
         .navigationBarHidden(false)
-//        .navigationBarItems(leading:
-//            Button(action: {
-//                presentationMode.wrappedValue.dismiss()
-//            }){
-//                Text("Cancel")
-//                    .foregroundColor(.red)
-//            }
-//        )
-        .navigationBarItems(trailing:
+        .navigationBarItems(leading:
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }){
+                Text("Cancel")
+                    .foregroundColor(Color.accent1)
+            }, trailing:
             NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
-                Text("Preview")
-                    .foregroundColor(.blue)
-            }
+                    Text("Preview")
+                        .foregroundColor(Color.accent4)
+                }
         )
     }
 }
@@ -114,19 +108,20 @@ struct RecorderPostView: View {
                 .multilineTextAlignment(.leading)
             
             Spacer()
-            
+        }.navigationBarItems(trailing:
             Button(action: {
                 print("DEBUG: post-recording")
-                self.viewModel.uploadRamb(
-                    caption: self.caption,
-                    rambUrl: self.audioRecorder.rambUrl,
-                    rambFileId: self.audioRecorder.rambFileID
-                )
-            }) {
-                Text("Post")
-                    .font(.system(.headline,design: .rounded)).bold()
-                    .foregroundColor(.red)
-            }
+                    self.viewModel.uploadRamb(
+                        caption: self.caption,
+                        rambUrl: self.audioRecorder.rambUrl,
+                        rambFileId: self.audioRecorder.rambFileID
+                    )
+                }) {
+                    Text("Post")
+                        .font(.system(.headline,design: .rounded)).bold()
+                        .foregroundColor(.red)
+                }
+            )
         }
     }
-}
+
