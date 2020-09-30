@@ -22,6 +22,8 @@ struct ProfileView: View {
     @State private var editModal_shown = false
     @State private var isFollowed = true
     
+    @State private var searchModal_shown = false
+    
     @State var hideNav = false
     
     var user: User
@@ -37,7 +39,9 @@ struct ProfileView: View {
     var body: some View {
         
             ZStack{
+                
                 ScrollView{
+                    
                     VStack(alignment: .leading){
                         WebImage(url: user.profileImageUrl)
                             .frame(width: 100, height: 100)
@@ -65,20 +69,15 @@ struct ProfileView: View {
                     Spacer()
                     
                     VStack{
-                                            
                         ForEach(viewModel.userRambs){ramb in
                             RambUserCell(ramb: ramb)
                         
+                            }
                         }
-                    
-                    }
-
-                                    
-                }
-                    .padding()
+                    }.padding()
                 
-                FloatingPlayerView(hideNav: $hideNav)
-                    .edgesIgnoringSafeArea(.all)
+                    FloatingPlayerView(hideNav: $hideNav)
+                        .edgesIgnoringSafeArea(.all)
 //
 //                ZStack{
 //                    SettingsView(isPresented: $isPresented)
@@ -93,6 +92,20 @@ struct ProfileView: View {
             .navigationBarTitle("\(user.username)")
             .navigationBarItems(trailing:
                 HStack{
+                    Button(action: {
+                        self.searchModal_shown.toggle()
+                    }){
+                        Image(systemName: "magnifyingglass")
+                            .padding(5)
+                    }.background(Capsule().fill(Color.black).opacity(0.2))
+                    .sheet(isPresented: $searchModal_shown, onDismiss: {
+                        print("Modal dismisses")
+                    }) {
+                        NavigationView{
+                            SearchView()
+                        }
+                    }
+                    
                     if user.isCurrentUser == false {
                         Button(action: {
                             self.editModal_shown.toggle()

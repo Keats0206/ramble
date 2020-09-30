@@ -34,25 +34,41 @@ struct FeedView: View {
             ZStack{
                 
                 RambFeed(RambService(), dataToggle: $dataSelector)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)) 
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
                 
             }.navigationBarHidden(hideNav)
-            .navigationBarTitle("Feed")
-            .navigationBarItems(trailing: HStack{
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(leading:
+                    HStack{
+                        Button(action: {
+                            self.dataSelector = 0
+                        }){
+                            Text("FRIENDS")
+                                .foregroundColor(dataSelector == 0 ? Color.accent3 : Color.black)
+                        }
+                        Button(action: {
+                            self.dataSelector = 1
+                        }){
+                            Text("FEED")
+                                .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
+                    }
+                }
+            , trailing: HStack{
+//                Change to filter
                     Button(action: {
-                        self.searchModal_shown.toggle()
+                        self.recordingModal_shown.toggle()
                     }){
-                        Image(systemName: "magnifyingglass")
+                        Image(systemName: "mic.circle")
                             .padding(5)
                     }.background(Capsule().fill(Color.black).opacity(0.2))
-                    .sheet(isPresented: $searchModal_shown, onDismiss: {
+                    .sheet(isPresented: $recordingModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
                         NavigationView{
-                            SearchView()
+                            RecorderView(audioRecorder: AudioRecorder())
                         }
                     }
                 

@@ -12,18 +12,19 @@ struct FeedHeaderView: View {
     var body: some View {
         VStack{
             Spacer()
-            HStack{
-                Text("Ramble")
-                    .font(.title)
-                Text("New")
-                    .font(.title)
-                Spacer()
-                Text("Hot")
+                HStack{
+                    Text("FEED")
+                        .font(.system(.headline, design: .rounded))
+                    Text("FRIENDS")
+                        .font(.system(.headline, design: .rounded))
+                    
+                    Spacer()
+                    
+                    Image(systemName: "line.horizontal.3.decrease.circle")
+                    
             }.padding()
-            .foregroundColor(.white)
             
-        }.frame(height: 100)
-        .background(Color.red)
+        }.frame(height: 75)
     }
 }
 
