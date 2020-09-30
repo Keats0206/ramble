@@ -6,6 +6,7 @@
 //  Copyright © 2020 Peter Keating. All rights reserved.
 
 import SwiftUI
+import Foundation
 
 struct AppView: View {
     @EnvironmentObject var session: SessionStore
@@ -16,7 +17,21 @@ struct AppView: View {
     @State var user: User
     
     @State var hidNav = false
-    @State var testModalShown = true
+    
+    @State var recordingModal_shown = false
+    @State private var selection = 0
+    
+    private var actionSelection: Binding<Int> {
+           Binding<Int>(get: {
+               self.selection
+           }) { (newValue: Int) in
+               if newValue == 1 {
+                    self.recordingModal_shown = true
+               } else {
+                   self.selection = newValue
+               }
+           }
+       }
         
     func getUser(){
         let uid = session.session!.uid
@@ -27,20 +42,40 @@ struct AppView: View {
     }
     
     var body: some View {
-        TabView{
+        TabView(selection: actionSelection){
             NavigationView{
                 FeedView(user: user)
             }.tabItem {
-                Image(systemName: "dot.radiowaves.left.and.right")
+                HStack{
+                    Image(systemName: "dot.radiowaves.left.and.right")
+                    Text("Feed")
+                }
             }.tag(0)
+            
+            Text("Second Screen")
+                .tabItem {
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .frame(width: 50)
+            }.tag(1)
             
             NavigationView{
                 ProfileView(user: user)
             }.tabItem {
-                Image(systemName: "person.circle")
-            }.tag(1)
+                HStack {
+                    Image(systemName: "person.circle")
+                    Text("Profile")
+                }
+            }.tag(2)
             
-        }.onAppear{
+        }.sheet(isPresented: $recordingModal_shown, onDismiss: {
+            print("Modal dismisses")
+        }) {
+            NavigationView{
+                RecorderView(audioRecorder: AudioRecorder())
+            }
+        }
+        .onAppear{
             self.getUser()
         }.accentColor(.black)
     }

@@ -46,7 +46,7 @@ struct FeedView: View {
                             self.dataSelector = 0
                         }){
                             Text("FRIENDS")
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                                .font(.system(size: 20, weight: .heavy, design: .rounded))
                                 .foregroundColor(dataSelector == 0 ? Color.accent3 : Color.black)
                             
                         }
@@ -54,26 +54,19 @@ struct FeedView: View {
                             self.dataSelector = 1
                         }){
                             Text("FEED")
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                                .font(.system(size: 20, weight: .heavy, design: .rounded))
                                 .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
                     }
                 }
             , trailing: HStack{
 //                Change to filter                
                     Button(action: {
-                        self.recordingModal_shown.toggle()
+                        print("Show filter modal")
                     }){
-                        Image(systemName: "mic.circle")
+                        Image(systemName: "line.horizontal.3.decrease.circle")
                             .resizable()
                             .frame(width: 25, height: 25)
                             .padding(5)
-                    }.background(Capsule().fill(Color.black).opacity(0.2))
-                    .sheet(isPresented: $recordingModal_shown, onDismiss: {
-                        print("Modal dismisses")
-                    }) {
-                        NavigationView{
-                            RecorderView(audioRecorder: AudioRecorder())
-                        }
                     }
             })
         }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 import AVKit
 
 struct FloatingPlayerView: View {
@@ -32,9 +33,10 @@ struct FloatingPlayerView: View {
                         
                         HStack{
                             
-                            Rectangle()
-                                .frame(width: 60, height: 45)
-                                .cornerRadius(10)
+                            WebImage(url: globalPlayer.globalRamb?.user.profileImageUrl)
+                                .frame(width: 45, height: 45)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 2))
                             
                             VStack(alignment : .leading){
                                 Text(globalPlayer.globalRamb?.caption ?? "No ramb")

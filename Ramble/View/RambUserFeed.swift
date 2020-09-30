@@ -24,8 +24,11 @@ struct RambUserFeed : View {
     }
     
     var body: some View {
-        ForEach(viewModel.userRambs){ramb in
-            RambUserCell(ramb: ramb)
+        VStack{
+            ForEach(viewModel.userRambs){ramb in
+                RambUserCell(ramb: ramb)
+            }
+            Spacer()
         }
     }
 }

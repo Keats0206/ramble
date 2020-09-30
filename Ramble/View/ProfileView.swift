@@ -32,17 +32,22 @@ struct ProfileView: View {
         
             ZStack{
                                     
-                VStack{
+                ScrollView{
+                    
+                    VStack(alignment: .leading){
                         
                         WebImage(url: user.profileImageUrl)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
+                        
                         Text("\(user.fullname)")
                             .font(.system(size: 35))
                             .fontWeight(.heavy)
+                        
                         Text("@\(user.username)")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
+                        
                         Text("\(user.bio)")
                             .font(.system(size: 16))
                         
@@ -54,14 +59,17 @@ struct ProfileView: View {
                             Spacer()
                             
                         }.padding()
+                                        
+                    }.padding()
                         
-                        
-                        RambUserFeed(RambService(), user: _user)
+                    RambUserFeed(RambService(), user: user)
                     
-                    }
+                    Spacer()
                                     
+                }.padding(0)
+                                                        
                 FloatingPlayerView(hideNav: $hideNav)
-                        .edgesIgnoringSafeArea(.all)
+                    .edgesIgnoringSafeArea(.all)
 //
 //                ZStack{
 //                    SettingsView(isPresented: $isPresented)
@@ -82,8 +90,7 @@ struct ProfileView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                             .padding(5)
-                    }.background(Capsule().fill(Color.black).opacity(0.2))
-                    .sheet(isPresented: $searchModal_shown, onDismiss: {
+                    }.sheet(isPresented: $searchModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
                         NavigationView{
@@ -104,7 +111,6 @@ struct ProfileView: View {
                             EditProfileView(user: user)
                         }
                     } else {
-                        
                         Button(action: {
                             if self.isFollowed {
                                 UserService.shared.unfollowUser(uid: self.user.uid)
@@ -115,8 +121,8 @@ struct ProfileView: View {
                             }
                             
                         }){
-                            
-                            Text(self.isFollowed ? "Unfollow":"Follow")
+                            Text(self.isFollowed ? "UNFOLLOW":"FOLLOW")
+                                .font(.system(size: 16, weight: .heavy, design: .rounded))
                                 .padding(5)
                                 .padding([.trailing,.leading])
                             
