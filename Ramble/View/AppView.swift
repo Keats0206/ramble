@@ -27,23 +27,28 @@ struct AppView: View {
             return
         }
     }
-
+    
     var body: some View {
         TabView{
-                NavigationView{
-                    FeedView(user: user)
-                }.tabItem {
-                    Image(systemName: "dot.radiowaves.left.and.right")
-                }.tag(0)
-                
-                NavigationView{
-                    ProfileView(user: user)
-                }.tabItem {
-                    Image(systemName: "person.circle")
-                }.tag(1)
+            NavigationView{
+                FeedView(user: user)
+            }.tabItem {
+                Image(systemName: "dot.radiowaves.left.and.right")
+            }.tag(0)
             
-            }.onAppear{
+            NavigationView{
+                ProfileView(RambService(), user: user)
+            }.tabItem {
+                Image(systemName: "person.circle")
+            }.tag(1)
+        }.onAppear{
             self.getUser()
         }.accentColor(.black)
+    }
+}
+
+struct AppView_Previews: PreviewProvider {
+    static var previews: some View {
+        AppView(user: _user)
     }
 }

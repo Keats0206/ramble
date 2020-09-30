@@ -15,10 +15,11 @@ import FirebaseStorage
 
 class AudioRecorder: NSObject, ObservableObject {
     
-    override init() {
-        super.init()
-        sortLatestRecordings()
-    }
+//    override init() {
+//        super.init()
+////        sortLatestRecordings()
+//        print("1 \(self.recorderState)")
+//    }
     
 //  Currently unused!
 
@@ -27,6 +28,8 @@ class AudioRecorder: NSObject, ObservableObject {
     @Published var currentTime: Int = 0
     @Published var didUpload = false
     @Published var recordingUploaded = false
+    @Published var recorderState: RecordState = .ready
+    
 
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
@@ -63,11 +66,12 @@ class AudioRecorder: NSObject, ObservableObject {
         ]
         
         do {
-            //      start recorder
+//      start recorder
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record(forDuration: 60.0)
             recording = true
-
+            recorderState = .started
+            print("2 \(self.recorderState)")
         } catch {
             print("Could not start recording")
         }
@@ -80,6 +84,8 @@ class AudioRecorder: NSObject, ObservableObject {
         audioRecorder.stop()
         recording = false
         sortThenUpload()
+        recorderState = .stopped
+        print("3 \(self.recorderState)")
     }
     
     // store file locally and sort the latest local recordings so newest is at the top
@@ -114,8 +120,8 @@ class AudioRecorder: NSObject, ObservableObject {
                     rambsRef.downloadURL(completion: { (url, error) in
                         self.rambUrl = (url?.absoluteString)!
                         self.rambFileID = ("test")
-                        self.didUpload.toggle()
-                        self.recordingUploaded = true
+                        self.recorderState = .uploaded
+                        print("4 \(self.recorderState)")
                         return
                     })
             }
@@ -125,11 +131,12 @@ class AudioRecorder: NSObject, ObservableObject {
     func sortThenUpload() {
         sortLatestRecordings()
         uploadLatestRecording()
+        print("5 \(self.recorderState)")
     }
 }
 
 enum RecordState {
-    case nothing
+    case ready
     case started
     case stopped
     case uploaded

@@ -159,3 +159,9 @@ struct EditProfileView : View {
         }
     }
 }
+
+struct EditProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditProfileView(user: _user)
+    }
+}

@@ -117,3 +117,12 @@ struct RecordPopOverView: View {
         }
     }
 }
+
+struct RecordPopOverView_Previews: PreviewProvider {
+    @State static var value1 = true
+    @State static var value2 = true
+    
+    static var previews: some View {
+        RecordPopOverView(audioRecorder: AudioRecorder(), isShown: $value1, hideNav: $value2)
+    }
+}

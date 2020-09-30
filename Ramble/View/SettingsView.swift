@@ -120,3 +120,12 @@ struct SettingsView: View {
         }
     }
 }
+
+struct SettingsView_Previews: PreviewProvider {
+    
+    @State static var value = false
+    
+    static var previews: some View {
+        SettingsView(isPresented: $value)
+    }
+}

@@ -14,48 +14,78 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
+    @ObservedObject var viewModel = RambService()
+    
+    @State private var isShowing = false
     
     @State private var isPresented = false
     @State private var editModal_shown = false
-    @State var isFollowed = true
+    @State private var isFollowed = true
     
     @State var hideNav = false
     
     var user: User
+    
+    init(_ model: RambService, user: User){
+            self.viewModel = model
+            self.user = user
+            model.fetchUserRambs(forUser: user) { ramb in
+            return
+        }
+    }
             
     var body: some View {
         
             ZStack{
                 
-                VStack(alignment: .leading, spacing: 5){
-                    WebImage(url: user.profileImageUrl)
+                ScrollView{
+                    
+                    VStack(alignment: .leading){
+                        
+                        WebImage(url: user.profileImageUrl)
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                         .shadow(radius: 10)
-                    
-                    Text("\(user.fullname)")
-                        .font(.system(size: 35))
-                        .fontWeight(.heavy)
-                    
-                    Text("@\(user.username)")
-                        .font(.system(size: 25))
-                        .fontWeight(.bold)
-                    
-                    Text("\(user.bio)")
-                        .font(.system(size: 16))
-                    
+                        
+                        Text("\(user.fullname)")
+                            .font(.system(size: 35))
+                            .fontWeight(.heavy)
+                        
+                        Text("@\(user.username)")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                        
+                        Text("\(user.bio)")
+                            .font(.system(size: 16))
+                        
+                        Spacer()
+                        
+                    }
+                        
                     HStack{
                         
                         Text("Rambles")
                             .font(.headline)
                         
                         Spacer()
+                        
+                    }.padding()
+                    
+                    Spacer()
+                    
+                    VStack{
+                                            
+                        ForEach(viewModel.userRambs){ramb in
+                            RambUserCell(ramb: ramb)
+                        
+                        }
+                    
                     }
-                    
-                    RambUserFeed(RambService(), user: user)
-                    
-                }.padding([.leading,.trailing, .top])
-                                
+
+                                    
+                }
+                    .padding()
+                
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
 //
@@ -101,5 +131,11 @@ struct ProfileView: View {
                         }.background(Capsule().fill(Color.black).opacity(0.2))
                 }
         })
+    }
+}
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView(RambService(), user: _user)
     }
 }

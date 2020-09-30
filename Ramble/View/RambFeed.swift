@@ -43,3 +43,11 @@ struct RambFeed : View {
             }
         }
     }
+
+struct RambFeed_Previews: PreviewProvider {
+    @State static var dataToggle = 0
+    
+    static var previews: some View {
+        RambFeed(RambService(), dataToggle: $dataToggle)
+    }
+}

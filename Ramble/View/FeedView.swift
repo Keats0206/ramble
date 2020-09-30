@@ -27,15 +27,13 @@ struct FeedView: View {
     var user: User
         
     init(user: User) {
-//        UISegmentedControl.appearance().selectedSegmentTintColor = .red
-//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
-//        
         self.user = user
     }
     
     var body: some View {
             ZStack{
+                
+//                Color.flatDarkBackground
                      
                 RambFeed(RambService(), dataToggle: $dataSelector)
                 
@@ -90,4 +88,10 @@ struct FeedView: View {
 //                  }.pickerStyle(SegmentedPickerStyle()).frame(width: 150)
 //            })
         }
+}
+
+struct FeedView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeedView(user: _user)
+    }
 }

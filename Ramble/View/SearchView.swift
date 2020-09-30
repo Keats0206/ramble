@@ -12,38 +12,37 @@ import SDWebImageSwiftUI
 
 struct SearchView: View {
     @Environment(\.presentationMode) var presentationMode
-
+    
     @ObservedObject var viewModel = UserService()
-        
+    
     @State var searchText = ""
     @State var isSearching = false
     
     var body: some View {
         
-          ZStack{
-                            
-                VStack(alignment: .center){
-                        HStack{
-                            Button(action: {
-                                self.viewModel.fetchUsers()
-                            }){
-                                Text("Fetch data")
-                            }
-                            Spacer()
-                        }.padding()
-                    
-                        SearchBar(searchText: $searchText, isSearching: $isSearching)
-                    
-                        List{
-                            ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
-                                SearchCell(user: user)
-                            }
-                        }
-                    
-                        Spacer()
-                        
+        ZStack{
+            
+            VStack(alignment: .center){
+                
+                SearchBar(searchText: $searchText, isSearching: $isSearching)
+                
+                HStack{
+                    Button(action: {
+                        self.viewModel.fetchUsers()
+                    }){
+                        Text("Fetch data")
+                    }
+                    Spacer()
+                }.padding()
+                
+                List{
+                    ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
+                        SearchCell(user: user)
+                    }
+                }
+                
+                Spacer()
             }
-        
         }.navigationBarItems(leading:
                                 Button(action: {
                                     presentationMode.wrappedValue.dismiss()
@@ -51,10 +50,8 @@ struct SearchView: View {
                                     Text("Cancel")
                                         .foregroundColor(.red)
                                 }
-                            )
-    
+        )
     }
-
 }
 
 struct SearchCell: View {
@@ -97,11 +94,6 @@ struct SearchCell: View {
                     .frame(width: 30, height: 30)
                 
             }.buttonStyle(BorderlessButtonStyle())
-                
-                
-                
-
-    
         }.padding()
     }
 }
@@ -143,7 +135,6 @@ struct SearchBar: View {
            )
            
            if isSearching {
-               
                Button(action: {
                    self.isSearching.toggle()
                    self.searchText = ""
@@ -157,5 +148,11 @@ struct SearchBar: View {
        
        }
 
+    }
+}
+
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
     }
 }

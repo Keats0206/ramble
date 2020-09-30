@@ -14,44 +14,85 @@ struct RecorderView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @ObservedObject var viewModel = RambService()
     
+//    @State private var wave1 = false
+    @State private var wave2 = false
+//    @State private var wave3 = false
+
     var body: some View {
         ZStack{
-            VStack{
+            
+            ZStack{
                 
-                NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
-                    Text("Preview")
-                        .foregroundColor(.blue)
-                }
+                VStack{
+                    
+                    Button(action: {
+                        print("1 \(audioRecorder.recorderState)")
+                    }){
+                        Text("State print")
+                    }
+                
+                switch audioRecorder.recorderState {
+                    case .ready:
+                        Text("Show red circle")
+                    case .started:
+                        Text("Show recording animation")
+                    case .stopped:
+                        Text("Show uploading circle")
+                    case .uploaded:
+                        Text("Show preview screen")
+                    }
+                    
+                    if audioRecorder.recording == false {
 
-                if audioRecorder.recording == false {
-                    Button(action: {
-                        self.audioRecorder.startRecording()
-                    }) {
-                        Image(systemName: "waveform.circle")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 50, height: 50)
+                        Button(action: {
+                            self.audioRecorder.startRecording()
+                        }) {
+                            Image(systemName: "circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 75, height: 75)
+                                .foregroundColor(.red)
+                        }
+                    } else {
+
+                        Circle()
+                            .stroke(lineWidth: 5)
+                            .frame(width: 90, height: 90)
                             .foregroundColor(.red)
-                    }
-                } else {
-                    Button(action: {
-                        self.audioRecorder.stopRecording()
-                    }) {
-                        Image(systemName: "stop.circle")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(.red)
+                            .scaleEffect(wave2 ? 2 : 1)
+                            .opacity(wave2 ? 0 : 1)
+                            .animation(Animation.easeInOut(duration: 1).repeatForever().speed(0.5))
+                            .onAppear{
+                                self.wave2.toggle()
+                            }
+
+                        Button(action: {
+                            self.audioRecorder.stopRecording()
+                        }) {
+                            Image(systemName: "square.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.red)
+
+                        }
                     }
                 }
-            }.offset(y: -15)
-        }.navigationBarHidden(false)
-        .navigationBarItems(leading:
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }){
-                Text("Cancel")
-                    .foregroundColor(.red)
+            }
+        }
+        .navigationBarHidden(false)
+//        .navigationBarItems(leading:
+//            Button(action: {
+//                presentationMode.wrappedValue.dismiss()
+//            }){
+//                Text("Cancel")
+//                    .foregroundColor(.red)
+//            }
+//        )
+        .navigationBarItems(trailing:
+            NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
+                Text("Preview")
+                    .foregroundColor(.blue)
             }
         )
     }
@@ -86,4 +127,3 @@ struct RecorderPostView: View {
         }
     }
 }
-
