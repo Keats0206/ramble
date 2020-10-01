@@ -17,14 +17,13 @@ struct ProfileView: View {
     @ObservedObject var viewModel = RambService()
     
     @State private var isShowing = false
-    
     @State private var isPresented = false
     @State private var editModal_shown = false
     @State private var isFollowed = true
-    
     @State private var searchModal_shown = false
-    
     @State var hideNav = false
+    
+    @State var offset: CGSize
     
     var user: User
                 
@@ -34,22 +33,22 @@ struct ProfileView: View {
                                     
                 ScrollView{
                     
-                    VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 10){
                         
                         WebImage(url: user.profileImageUrl)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
                         
                         Text("\(user.fullname)")
-                            .font(.system(size: 35))
-                            .fontWeight(.heavy)
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
                         
                         Text("@\(user.username)")
-                            .font(.system(size: 25))
-                            .fontWeight(.bold)
+                            .font(.system(size: 22, weight: .heavy, design: .rounded))
                         
                         Text("\(user.bio)")
-                            .font(.system(size: 16))
+                            .font(.system(size: 22, weight: .regular, design: .rounded))
+                        
+                        Spacer()
                         
                         HStack{
                             
@@ -58,7 +57,13 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                        }.padding()
+                            Image(systemName: "line.horizontal.3.decrease.circle")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                            
+                        }
+                        
+                        Divider()
                                         
                     }.padding()
                         
@@ -66,7 +71,9 @@ struct ProfileView: View {
                     
                     Spacer()
                                     
-                }.padding(0)
+                }
+                    .offset(offset)
+                    .padding(0)
                                                         
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
@@ -134,7 +141,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: _user)
+        ProfileView(offset: CGSize(width: 0, height: 0), user: _user)
             .environmentObject(SessionStore())
     }
 }

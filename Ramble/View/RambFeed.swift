@@ -29,7 +29,6 @@ struct RambFeed : View {
                     List{
                         ForEach(viewModel.rambs.sorted(by: { $0.claps > $1.claps })){ ramb in
                             RambCell(ramb: ramb)
-                                .buttonStyle(PlainButtonStyle())
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }
                     }
@@ -38,7 +37,6 @@ struct RambFeed : View {
                     List{
                         ForEach(viewModel.rambs.sorted(by: { $0.timestamp < $1.timestamp })){ ramb in
                             RambCell(ramb: ramb)
-                                .buttonStyle(PlainButtonStyle())
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }
                     }

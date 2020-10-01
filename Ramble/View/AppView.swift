@@ -42,7 +42,9 @@ struct AppView: View {
     }
     
     var body: some View {
+        ZStack{
         TabView(selection: actionSelection){
+            
             NavigationView{
                 FeedView(user: user)
             }.tabItem {
@@ -60,7 +62,7 @@ struct AppView: View {
             }.tag(1)
             
             NavigationView{
-                ProfileView(user: user)
+                ProfileView(offset: CGSize(width: 0, height: -50), user: user)
             }.tabItem {
                 HStack {
                     Image(systemName: "person.circle")
@@ -75,9 +77,11 @@ struct AppView: View {
                 RecorderView(audioRecorder: AudioRecorder())
             }
         }
-        .onAppear{
+            .onAppear{
             self.getUser()
         }.accentColor(.black)
+        
+        }
     }
 }
 

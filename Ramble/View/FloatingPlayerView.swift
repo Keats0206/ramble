@@ -40,9 +40,10 @@ struct FloatingPlayerView: View {
                             
                             VStack(alignment : .leading){
                                 Text(globalPlayer.globalRamb?.caption ?? "No ramb")
-                                    .fontWeight(.heavy)
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
                                 
                                 Text(globalPlayer.globalRamb?.user.username ?? "No ramb")
+                                    .font(.system(size: 16, weight: .regular, design: .rounded))
                             }
                             
                             Spacer()

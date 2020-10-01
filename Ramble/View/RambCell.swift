@@ -31,9 +31,8 @@ struct RambCell : View {
                         .overlay(Circle().stroke(Color.white, lineWidth: 2))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
-                                                    ProfileView(user: ramb.user), isActive: $isActive) { EmptyView()
-                        })
-                        .buttonStyle(BorderlessButtonStyle())
+                                                    ProfileView(offset: CGSize(width: 0, height: 0), user: ramb.user), isActive: $isActive) { EmptyView()
+                        }).buttonStyle(BorderlessButtonStyle())
                     
                     Spacer()
                     
@@ -42,8 +41,17 @@ struct RambCell : View {
                     }){
                         Image(systemName: "ellipsis")
                             .frame(height: 10)
-                    }.foregroundColor(Color.accent4)
-                    .buttonStyle(BorderlessButtonStyle())
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+                                            buttons:[
+                                                .default(
+                                                    Text("Delete").foregroundColor(.red), action: {
+                                                        self.viewModel.deleteRamb(ramb: self.ramb)
+                                    }),.cancel()
+                                ])
+                        }
+                    }.buttonStyle(BorderlessButtonStyle())
+                    .foregroundColor(Color.accent4)
                 }
                 
                 //              Center of Cell VStack
@@ -54,7 +62,7 @@ struct RambCell : View {
                     HStack{
                         
                         Text("@" + ramb.user.username)
-                            .font(.system(.body, design: .rounded))
+                            .font(.system(size: 18, weight: .heavy, design: .rounded))
                             .bold()
                         //                  Caption
                         
@@ -64,7 +72,7 @@ struct RambCell : View {
                     }
                     
                     Text(ramb.caption)
-                        .font(.system(size: 24,weight: .bold, design: .rounded))
+                        .font(.system(size: 22,weight: .regular, design: .rounded))
                         .bold()
                         .multilineTextAlignment(TextAlignment.leading)
                     
@@ -85,16 +93,18 @@ struct RambCell : View {
                             .resizable()
                             .frame(width: 30, height: 30)
                             .foregroundColor(globalPlayer.globalRamb?.id == self.ramb.id ? .red : .black)
-                        
+
                     }.buttonStyle(BorderlessButtonStyle())
                     
                     Text("3:30")
+                        .font(.system(size: 18, weight: .regular, design: .rounded))
                 }
-            }.padding()
+            }
+            .padding()
             .foregroundColor(.black)
         }
-            .frame(height: 150)
-            .cornerRadius(15)
+        .frame(height: 150)
+        .cornerRadius(15)
     }
 }
 

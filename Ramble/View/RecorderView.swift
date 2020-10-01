@@ -77,10 +77,12 @@ struct RecorderView: View {
                 presentationMode.wrappedValue.dismiss()
             }){
                 Text("Cancel")
+                    .font(.system(size: 20, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.accent1)
             }, trailing:
             NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
                     Text("Preview")
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .foregroundColor(Color.accent4)
                 }
         )
