@@ -58,17 +58,20 @@ struct FeedView: View {
                                 .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
                     }
                 }
-            , trailing: HStack{
-//                Change to filter                
-                    Button(action: {
-                        print("Show filter modal")
-                    }){
-                        Image(systemName: "line.horizontal.3.decrease.circle")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .padding(5)
+            , trailing:
+                    
+                HStack{
+    //                Change to filter
+                        Button(action: {
+                            print("Show filter modal")
+                        }){
+                            Image(systemName: "line.horizontal.3.decrease.circle")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .padding(5)
+                        }
                     }
-            })
+            )
         }
 }
 
