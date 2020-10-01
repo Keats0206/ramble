@@ -80,11 +80,12 @@ struct RecorderView: View {
                     .font(.system(size: 20, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.accent1)
             }, trailing:
+            
             NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
-                    Text("Preview")
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundColor(Color.accent4)
-                }
+                Text("Preview")
+                    .font(.system(size: 20, weight: .heavy, design: .rounded))
+                    .foregroundColor(Color.accent4)
+            }
         )
     }
 }

@@ -8,9 +8,10 @@ target 'Ramble' do
 
   # Pods for Ramble
 	pod 'Firebase/Auth'  
-	pod ‘Firebase/Database’
+	pod 'Firebase/Database'
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Storage'
 	pod 'PRTween'
+	pod 'FirebaseFirestoreSwift'
 
 end

@@ -42,6 +42,9 @@
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
 		40B1474D250174BA00A2781A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474C250174BA00A2781A /* SettingsView.swift */; };
+		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
+		40B3385E25267F54009321F2 /* RambService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385D25267F54009321F2 /* RambService2.swift */; };
+		40B3386025267F64009321F2 /* UserService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385F25267F64009321F2 /* UserService2.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
 		40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA2F248EA0F100F3CE02 /* RambModel.swift */; };
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
@@ -102,6 +105,9 @@
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40B1474A25016C5F00A2781A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		40B1474C250174BA00A2781A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		40B3385B25267E90009321F2 /* Constants2.0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants2.0.swift; sourceTree = "<group>"; };
+		40B3385D25267F54009321F2 /* RambService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService2.swift; sourceTree = "<group>"; };
+		40B3385F25267F64009321F2 /* UserService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService2.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 			children = (
 				40F3FA6E248ED3DE00F3CE02 /* Authorization */,
 				40F3FA32248EA15B00F3CE02 /* Utils */,
+				40B3385A25267E6B009321F2 /* API 2.0 */,
 				40F3FA31248EA13B00F3CE02 /* API */,
 				408E258124849FF100C0C6A5 /* App */,
 				408E25832484A01F00C0C6A5 /* View */,
@@ -233,6 +240,16 @@
 				40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		40B3385A25267E6B009321F2 /* API 2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				40B3385B25267E90009321F2 /* Constants2.0.swift */,
+				40B3385D25267F54009321F2 /* RambService2.swift */,
+				40B3385F25267F64009321F2 /* UserService2.swift */,
+			);
+			path = "API 2.0";
 			sourceTree = "<group>";
 		};
 		40F3FA31248EA13B00F3CE02 /* API */ = {
@@ -406,6 +423,7 @@
 			files = (
 				400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */,
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
+				40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */,
 				40FFDEDF251BEA1F0025799C /* FloatingPlayerView.swift in Sources */,
 				404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */,
 				40252C5F248F324600013742 /* UserService.swift in Sources */,
@@ -421,6 +439,7 @@
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
 				40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */,
+				40B3385E25267F54009321F2 /* RambService2.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
 				4056E9A4252404E10004E598 /* Extensions.swift in Sources */,
@@ -438,6 +457,7 @@
 				406FAD1F2450D6D200223873 /* AuthView.swift in Sources */,
 				40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */,
 				40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */,
+				40B3386025267F64009321F2 /* UserService2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
