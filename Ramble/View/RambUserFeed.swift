@@ -13,9 +13,9 @@ import SDWebImageSwiftUI
 struct RambUserFeed : View {
     @ObservedObject var viewModel = RambService2()
 
-    var user: User2
+    var user: User
 
-    init(user: User2){
+    init(user: User){
         self.user = user
         return
     }
@@ -26,6 +26,8 @@ struct RambUserFeed : View {
                 RambUserCell(ramb: ramb)
             }
             Spacer()
+        }.onAppear{
+            viewModel.fetchUserRambs(user: user)
         }
     }
 }

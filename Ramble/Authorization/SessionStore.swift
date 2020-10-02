@@ -15,7 +15,7 @@ import CoreLocation
 class SessionStore : ObservableObject {
     var didChange = PassthroughSubject<SessionStore, Never>()
     
-    @Published var session: User2? {didSet {self.didChange.send(self) }}
+    @Published var session: User? {didSet {self.didChange.send(self) }}
 //    @ObservedObject var locationManager = LocationManager()
     
     var handle: AuthStateDidChangeListenerHandle?
@@ -24,10 +24,14 @@ class SessionStore : ObservableObject {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 let uid = user.uid
-                let values = [
-                    "email": user.email,
-                    "displayName": user.displayName]
-                self.session = User2(uid: uid, values: values as [String : Any])
+                let email = user.email
+                self.session = User(id: user.providerID,
+                                    uid: uid, email: email!,
+                                    username: email!,
+                                    displayname: email!,
+                                    profileImageUrl: "",
+                                    bio: "I'm new here",
+                                    isFollowed: false)
             } else {
                 self.session = nil
             }

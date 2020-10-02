@@ -25,7 +25,7 @@ struct ProfileView: View {
     
     @State var offset: CGSize
     
-    var user: User2
+    var user: User
                 
     var body: some View {
         
@@ -35,11 +35,11 @@ struct ProfileView: View {
                     
                     VStack(alignment: .leading, spacing: 10){
                         
-                        WebImage(url: user.profileImageUrl)
+                        WebImage(url: URL(string: "\(user.profileImageUrl)"))
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
                         
-                        Text("\(user.fullname)")
+                        Text("\(user.displayname)")
                             .font(.system(size: 28, weight: .bold, design: .rounded))
                         
                         Text("@\(user.username)")
@@ -92,12 +92,6 @@ struct ProfileView: View {
                 HStack{
                     
                     Button(action: {
-                        UserService2.shared.fetchUser(user: user)
-                    }){
-                        Text("print user")
-                    }
-                    
-                    Button(action: {
                         self.searchModal_shown.toggle()
                     }){
                         Image(systemName: "magnifyingglass")
@@ -140,13 +134,13 @@ struct ProfileView: View {
                         
                     } else {
                         Button(action: {
-                            if self.isFollowed {
-                                UserService.shared.unfollowUser(uid: self.user.uid)
-                                self.isFollowed.toggle()
-                            } else {
-                                UserService.shared.followUser(uid: self.user.uid)
-                                self.isFollowed.toggle()
-                            }
+//                            if self.isFollowed {
+//                                UserService.shared.unfollowUser(uid: self.user.uid)
+//                                self.isFollowed.toggle()
+//                            } else {
+//                                UserService.shared.followUser(uid: self.user.uid)
+//                                self.isFollowed.toggle()
+//                            }
                             
                         }){
                             Text(self.isFollowed ? "UNFOLLOW":"FOLLOW")

@@ -21,8 +21,22 @@ class RambService2: ObservableObject {
         fetchRambs()
     }
     
-//  Fetch all rambs for the for you page
+    //  This function is working!
+    func addRamb(_ ramb: Ramb2) {
+        let newRamb = FB_REF_RAMBS.document()
+        let userId = ramb.user.id
+        let rambId = newRamb.documentID
+        
+        do {
+            let _ = try newRamb.setData(from: ramb)
+            FB_REF_USER_RAMBS.document(userId!).setData(["rambId":rambId], merge: true)
+        }
+        catch {
+            print("There was an error while trying to save a task \(error.localizedDescription).")
+        }
+    }
     
+//  Fetch all rambs for the for you page
     func fetchRambs() {
         FB_REF_RAMBS.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
             if let querySnapshot = querySnapshot {
@@ -34,20 +48,23 @@ class RambService2: ObservableObject {
     }
 
 //  Fetch user specific rambs by getting following uid's, then getting user rambs
+    
+//  Fetch user rambs
+    func fetchUserRambs(user: User) {
+//        _ = user.id
+//      code no working because of user auth issue, will work once that is resolved
+        let userId = user.id
+        
+        FB_REF_RAMBS.whereField("uid", isEqualTo: userId!)
+            .addSnapshotListener { (querySnapshot, error) in // (2)
+                if let querySnapshot = querySnapshot {
+                    self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
+                        try? document.data(as: Ramb2.self) // (4)
+                    }
+                }
+            }
+        }
 
-    
-//  This function is working!
-    func addRamb(_ ramb: Ramb2) {
-        let newRamb = FB_REF_RAMBS.document()
-        do {
-          let _ = try newRamb.setData(from: ramb)
-//        Update user child rambs
-        }
-        catch {
-          print("There was an error while trying to save a task \(error.localizedDescription).")
-        }
-    }
-    
 //    private func uploadRamb(caption: String, rambUrl: String, rambFileId: String) {
 //
 //    }
@@ -56,10 +73,6 @@ class RambService2: ObservableObject {
 //
 //    }
 //
-    func fetchUserRambs(user: User2) {
-        print("get user rambs")
-    }
-    
 //     Note about claps - firebase is only capable of supporting ordering by "ascending". As a work around for this, claps is being stored as a negative value in the database, so we can use it as a sorting key... TLDR; -2 claps in the DB = 2 claps in the UI - user clicking Clap = -1
     
 //    func handleClap(ramb: Ramb, didClap: Bool){

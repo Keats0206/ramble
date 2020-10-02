@@ -14,7 +14,7 @@ struct EditProfileView : View {
         
     @State var email: String = ""
     @State var username: String = ""
-    @State var fullname: String = ""
+    @State var displayname: String = ""
     @State var profileImage: UIImage?
     @State var bio = ""
     @State var showAction: Bool = false
@@ -22,7 +22,7 @@ struct EditProfileView : View {
     @State var loading = false
     @State var error = false
     
-    var user: User2
+    var user: User
     
     func updateProfile(){
         print("DEBUG: Update user profile")
@@ -93,7 +93,7 @@ struct EditProfileView : View {
                             
                 HStack{
                     
-                    WebImage(url: user.profileImageUrl)
+                    WebImage(url: URL(string: "\(user.profileImageUrl)"))
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                             .shadow(radius: 10)
@@ -130,7 +130,7 @@ struct EditProfileView : View {
                     Text("Fullname")
                         .font(.system(size: 14, weight: .bold))
                     
-                    TextField("\(self.user.fullname)", text: $fullname)
+                    TextField("\(self.user.displayname)", text: $displayname)
                         .font(.system(size: 18, weight: .bold))
                         .padding(12)
                     

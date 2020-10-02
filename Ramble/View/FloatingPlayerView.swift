@@ -19,6 +19,7 @@ struct FloatingPlayerView: View {
     @Binding var hideNav: Bool
                 
     var body : some View{
+        
         GeometryReader{geo in
             
             ZStack{
@@ -33,7 +34,7 @@ struct FloatingPlayerView: View {
                         
                         HStack{
                             
-                            WebImage(url: globalPlayer.globalRamb?.user.profileImageUrl)
+                            WebImage(url: URL(string: "\(globalPlayer.globalRamb?.user.profileImageUrl)"))
                                 .frame(width: 45, height: 45)
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))

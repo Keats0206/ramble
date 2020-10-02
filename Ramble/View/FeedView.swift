@@ -13,20 +13,20 @@ struct FeedView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @ObservedObject var audioRecorder = AudioRecorder()
-    @ObservedObject var userModel = UserService()
+    @ObservedObject var userModel = UserService2()
     
     @State var recordingModal_shown = false
     @State var searchModal_shown = false
     @State var dataSelector = 0
-    @State var ramb: Ramb?
+    @State var ramb: Ramb2?
     
     @State var hideNav = false
 
     private var feedtoggle = ["Hot", "New"]
     
-    var user: User2
+    var user: User
         
-    init(user: User2) {
+    init(user: User) {
         self.user = user
     }
     

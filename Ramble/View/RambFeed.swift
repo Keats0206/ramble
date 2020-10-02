@@ -12,6 +12,7 @@ import UIKit
 import SDWebImageSwiftUI
 
 struct RambFeed : View {
+    @EnvironmentObject var globalPlayer : GlobalPlayer
     @ObservedObject var viewModel = RambService2()
     @Binding var dataToggle: Int
     @State private var isShowing = false
@@ -45,9 +46,17 @@ struct RambFeed : View {
         }
         .onAppear{
             self.dataToggle = 0
-            self.viewModel.fetchRambs()
+            viewModel.fetchRambs()
         }
     }
+    
+//    private func loadRamb(){
+//        let ramb = viewModel.allRambs[0]
+//        print(ramb)
+//        globalPlayer.globalRamb = ramb
+//        globalPlayer.setGlobalPlayer(ramb: ramb)
+//        globalPlayer.globalRambPlayer?.play()
+//    }
 }
 
 struct RambFeed_Previews: PreviewProvider {

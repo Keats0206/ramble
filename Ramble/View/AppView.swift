@@ -14,7 +14,7 @@ struct AppView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var viewModel = RambService2()
     
-    @State var user: User2
+    @State var user: User
     
     @State var hidNav = false
     
@@ -34,11 +34,12 @@ struct AppView: View {
        }
         
     func getUser(){
-        let uid = session.session!.uid
-        UserService2.shared.fetchUser(uid: uid) { user in
-            self.user = user
-            return
-        }
+        self.user = session.session!
+//        UserService2.shared.fetchUser(user: user) { user in
+//            self.user = user
+//            return
+//        }
+        print(self.user)
     }
     
     var body: some View {

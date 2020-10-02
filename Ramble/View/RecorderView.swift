@@ -16,7 +16,7 @@ struct RecorderView: View {
     @State private var wave2 = false
 //    @State private var wave3 = false
     
-    var user: User2
+    var user: User
 
     var body: some View {
         ZStack{
@@ -111,13 +111,16 @@ struct RecorderPostView: View {
     @State var caption = ""
     @State var rambUrl: String
     
-    var user: User2
+    var user: User
     
-    func uploadRamb2(user: User2, caption: String, rambUrl: String, fileId: String){
+    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String){
         let timestamp = Int(NSDate().timeIntervalSince1970) * -1
         let isSelected = false
         let length = Double(0)
-        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, user: user, isSelected: isSelected)
+        let uid = user.id!
+        
+        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, user: user, uid: uid, isSelected: isSelected)
+        
         RambService2().addRamb(ramb)
     }
 

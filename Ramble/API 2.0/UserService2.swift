@@ -12,53 +12,29 @@ import Combine
 class UserService2: ObservableObject {
     static let shared = UserService2()
     
-    @Published var users = [User2]()
+    @Published var users = [User]()
             
+    func fetchUser(user: User, completion: @escaping(User) -> Void) {
+        let userRef = FB_REF_USERS.document(user.id!)
 
-//  Need to figure out how to get this to query firebase and give the same result, still using old Database
-    func fetchUser(uid: String, completion: @escaping(User2) -> Void) {
-        REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
-            guard let values = snapshot.value as? [String: AnyObject] else { return }
-            let user = User2(uid: uid, values: values)
-            completion(user)
+        userRef.getDocument { (querySnapshot, error) in
+            if let querySnapshot = querySnapshot {
+                let user = try? querySnapshot.data(as: User.self)
+                completion(user!)
+            }
         }
     }
-    
-        func fetchUser(user: User2) {
-            print(user)
-//            print(user.id)
-//            print(user.uid)
-//            let userRef = FB_REF_USERS.document(user.id!)
-//
-//            userRef.getDocument { (querySnapshot, error) in
-//                if let querySnapshot = querySnapshot {
-//                    let user = try? querySnapshot.data(as: User2.self)
-//                    return completion(user!)
-//                }
-//            }
-        }
     
     func fetchUsers() {
         FB_REF_USERS.addSnapshotListener { (querySnapshot, error) in // (2)
             if let querySnapshot = querySnapshot {
-                self.users = querySnapshot.documents.compactMap { document -> User2? in // (3)
-                    try? document.data(as: User2.self) // (4)
+                self.users = querySnapshot.documents.compactMap { document -> User? in // (3)
+                    try? document.data(as: User.self) // (4)
                 }
             }
         }
     }
         
-    func fetchUser(completion: @escaping([User]) -> Void) {
-//        REF_USERS.observe(.childAdded) { snapshot in
-//            let uid = snapshot.key
-//            guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
-//            let user = User(uid: uid, values: dictionary)
-//            self.users.append(user)
-//            completion(self.users)
-//            print(self.users)
-//        }
-    }
-    
     func followUser(uid: String) {
 //        guard let currentUid = Auth.auth().currentUser?.uid else { return }
 //

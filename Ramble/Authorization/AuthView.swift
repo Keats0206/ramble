@@ -87,7 +87,7 @@ struct SignUpView : View {
     @State var email: String = ""
     @State var password: String = ""
     @State var username: String = ""
-    @State var fullname: String = ""
+    @State var displayname: String = ""
     @State var profileImage: UIImage?
     
     @State var showAction: Bool = false
@@ -102,7 +102,7 @@ struct SignUpView : View {
         loading = true
         error = false
         
-        session.signUp(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage!) { (result, error) in
+        session.signUp(email: email, password: password, fullname: displayname, username: username, profileImage: profileImage!) { (result, error) in
             self.loading = false
             if error != nil {
                 print("Oops")
@@ -183,7 +183,7 @@ struct SignUpView : View {
                         .padding(12)
                         .background(Color(.white))
                     
-                    TextField("Fullname", text: $fullname)
+                    TextField("Display Name", text: $displayname)
                         .font(.system(size: 18, weight: .bold))
                         .padding(12)
                         .background(Color(.white))

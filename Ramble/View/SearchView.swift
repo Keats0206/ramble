@@ -27,7 +27,7 @@ struct SearchView: View {
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
                             
                 List{
-                    ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
+                    ForEach(self.viewModel.users.filter{$0.displayname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
                             SearchCell(user: user)
                     }
                 }
@@ -52,13 +52,13 @@ struct SearchView: View {
 
 struct SearchCell: View {
     
-    var user: User2
+    var user: User
     
     var body: some View {
         
         HStack{
             
-            AnimatedImage(url: user.profileImageUrl)
+            WebImage(url: URL(string: "\(user.profileImageUrl)"))
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
@@ -69,7 +69,7 @@ struct SearchCell: View {
                     .font(.title)
                     .bold()
                 
-                Text("\(user.fullname)")
+                Text("\(user.displayname)")
                     .font(.subheadline)
                 
             }
@@ -81,7 +81,7 @@ struct SearchCell: View {
             
             Button(action: {
                                 
-                UserService.shared.followUser(uid: self.user.uid)
+//                UserService.shared.followUser(uid: self.user.uid)
                 
             }){
                 

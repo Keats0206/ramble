@@ -26,7 +26,7 @@ struct RambCell : View {
             HStack(alignment: .center){
                 
                 VStack(alignment: .center, spacing: 10){
-                    WebImage(url: ramb.user.profileImageUrl)
+                    WebImage(url: URL(string: "\(ramb.user.profileImageUrl)"))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 2))
