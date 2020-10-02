@@ -12,11 +12,10 @@ import SDWebImageSwiftUI
 struct RambUserCell: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    @ObservedObject var viewModel = RambService()
     
     @State private var showingActionSheet = false
     
-    var ramb: Ramb
+    var ramb: Ramb2
     
     var body: some View {
         HStack{
@@ -49,7 +48,8 @@ struct RambUserCell: View {
                                     buttons:[
                                         .default(
                                             Text("Delete").foregroundColor(.red), action: {
-                                                self.viewModel.deleteRamb(ramb: self.ramb)
+                                                print("delete ramb")
+//                                                self.viewModel.deleteRamb(ramb: self.ramb)
                             }),.cancel()
                         ])
                 }
@@ -60,6 +60,6 @@ struct RambUserCell: View {
 
 struct RambUserCell_Previews: PreviewProvider {
     static var previews: some View {
-        RambUserCell(ramb: _ramb)
+        RambUserCell(ramb: _ramb2)
     }
 }

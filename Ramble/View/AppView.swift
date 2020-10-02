@@ -12,9 +12,9 @@ struct AppView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()
-    @ObservedObject var viewModel = RambService()
+    @ObservedObject var viewModel = RambService2()
     
-    @State var user: User
+    @State var user: User2
     
     @State var hidNav = false
     
@@ -35,14 +35,14 @@ struct AppView: View {
         
     func getUser(){
         let uid = session.session!.uid
-        UserService.shared.fetchUser(uid: uid) { user in
+        UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
             return
         }
     }
     
     var body: some View {
-        ZStack{
+    ZStack{
         TabView(selection: actionSelection){
             
             NavigationView{
@@ -74,7 +74,7 @@ struct AppView: View {
             print("Modal dismisses")
         }) {
             NavigationView{
-                RecorderView(audioRecorder: AudioRecorder())
+                RecorderView(user: user)
             }
         }
             .onAppear{
@@ -87,6 +87,6 @@ struct AppView: View {
 
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
-        AppView(user: _user)
+        AppView(user: _user2)
     }
 }

@@ -290,6 +290,5 @@ struct ImagePicker: UIViewControllerRepresentable {
                                 context: UIViewControllerRepresentableContext<ImagePicker>) {
         
     }
-    
 }
 

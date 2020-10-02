@@ -11,25 +11,16 @@ import SwiftUI
 struct RecorderView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var audioRecorder: AudioRecorder
-    @ObservedObject var viewModel = RambService()
+    @ObservedObject var audioRecorder = AudioRecorder()
     
 //    @State private var wave1 = false
     @State private var wave2 = false
 //    @State private var wave3 = false
+    
+    var user: User2
 
     var body: some View {
         ZStack{
-//                    switch audioRecorder.recorderState {
-//                        case .ready:
-//                            Text("Show red circle")
-//                        case .started:
-//                            Text("Show recording animation")
-//                        case .stopped:
-//                            Text("Show uploading circle")
-//                        case .uploaded:
-//                            Text("Show preview screen")
-//                    }
             
             ZStack{
                     
@@ -81,7 +72,7 @@ struct RecorderView: View {
                     .foregroundColor(Color.accent1)
             }, trailing:
             
-            NavigationLink(destination: RecorderPostView(audioRecorder: AudioRecorder())){
+                NavigationLink(destination: RecorderPostView(user: user)){
                 Text("Preview")
                     .font(.system(size: 20, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.accent4)
@@ -92,15 +83,26 @@ struct RecorderView: View {
 
 struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
-        RecorderView(audioRecorder: AudioRecorder())
+        RecorderView(user: _user2)
     }
 }
 
 struct RecorderPostView: View {
-    @ObservedObject var viewModel = RambService()
-    @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var audioRecorder = AudioRecorder()
 
     @State var caption = ""
+    
+    var user: User2
+    
+    func uploadRamb2(user: User2, caption: String, rambUrl: String, fileId: String){
+        let timestamp = Int(NSDate().timeIntervalSince1970) * -1
+        let isSelected = false
+        let length = Double(0)
+        
+        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, user: user, isSelected: isSelected)
+        
+        RambService2().addRamb(ramb)
+    }
 
     var body: some View {
         VStack(alignment: .leading){
@@ -113,12 +115,11 @@ struct RecorderPostView: View {
             Spacer()
         }.navigationBarItems(trailing:
             Button(action: {
-                print("DEBUG: post-recording")
-                    self.viewModel.uploadRamb(
-                        caption: self.caption,
-                        rambUrl: self.audioRecorder.rambUrl,
-                        rambFileId: self.audioRecorder.rambFileID
-                    )
+                self.uploadRamb2(
+                    user: self.user,
+                    caption: self.caption,
+                    rambUrl: self.audioRecorder.rambUrl,
+                    fileId: self.audioRecorder.rambFileID)
                 }) {
                     Text("Post")
                         .font(.system(.headline,design: .rounded)).bold()

@@ -15,20 +15,19 @@ import CoreLocation
 class SessionStore : ObservableObject {
     var didChange = PassthroughSubject<SessionStore, Never>()
     
-    @Published var session: User? {didSet {self.didChange.send(self) }}
+    @Published var session: User2? {didSet {self.didChange.send(self) }}
 //    @ObservedObject var locationManager = LocationManager()
     
     var handle: AuthStateDidChangeListenerHandle?
     
-    func listen () {
+    func listen(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 let uid = user.uid
                 let values = [
                     "email": user.email,
                     "displayName": user.displayName]
-                self.session = User(
-                    uid: uid, values: values as [String : Any])
+                self.session = User2(uid: uid, values: values as [String : Any])
             } else {
                 self.session = nil
             }
@@ -67,9 +66,7 @@ class SessionStore : ObservableObject {
                             print("DEBUG: Error is \(error.localizedDescription)")
                             return
                         }
-                        
-                        guard let uid = result?.user.uid else { return }
-                        
+                                                
                         let values = ["email": email,
                                       "password": password,
                                       "fullname": fullname,
@@ -77,7 +74,7 @@ class SessionStore : ObservableObject {
                                       "radius": 25,
                                       "profileImageUrl": profileImageUrl] as [String : Any]
                         
-                        REF_USERS.child(uid).updateChildValues(values)
+                        FB_REF_USERS.addDocument(data: values)
                     }
                 }
             })

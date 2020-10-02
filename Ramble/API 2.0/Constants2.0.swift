@@ -19,11 +19,11 @@ let FB_REF = Firestore.firestore()
 //let GEO_REF_USERS = GeoFire(firebaseRef: REF_USERS_LOCATIONS)
 //let GEO_REF_RAMBS = GeoFire(firebaseRef: REF_RAMBS_LOCATIONS)
 
-let FB_REF_USERS = FB_REF.collection("user")
-let FB_REF_USERS_LOCATIONS = FB_REF.collection("user-locations")
+let FB_REF_USERS = FB_REF.collection("users")
+//let FB_REF_USERS_LOCATIONS = FB_REF.collection("user-locations")
 
 let FB_REF_RAMBS = FB_REF.collection("rambs")
-let FB_REF_RAMBS_LOCATIONS = FB_REF.collection("ramb-locations")
+//let FB_REF_RAMBS_LOCATIONS = FB_REF.collection("ramb-locations")
 
 let FB_REF_USER_RAMBS = FB_REF.collection("user-rambs")
 let FB_REF_USER_CLAPS = FB_REF.collection("user-claps")

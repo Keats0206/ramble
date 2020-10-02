@@ -13,7 +13,7 @@ import SDWebImageSwiftUI
 struct SearchView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var viewModel = UserService()
+    @ObservedObject var viewModel = UserService2()
     
     @State var searchText = ""
     @State var isSearching = false
@@ -25,38 +25,34 @@ struct SearchView: View {
             VStack(alignment: .center){
                 
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
-                
-                HStack{
-                    Button(action: {
-                        self.viewModel.fetchUsers()
-                    }){
-                        Text("Fetch data")
-                    }
-                    Spacer()
-                }.padding()
-                
+                            
                 List{
                     ForEach(self.viewModel.users.filter{$0.fullname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
-                        SearchCell(user: user)
+                            SearchCell(user: user)
                     }
                 }
                 
                 Spacer()
             }
-        }.navigationBarItems(leading:
-                                Button(action: {
-                                    presentationMode.wrappedValue.dismiss()
-                                }){
-                                    Text("Cancel")
-                                        .foregroundColor(.red)
-                                }
+        }
+        .onAppear{
+            self.viewModel.fetchUsers()
+            
+        }
+        .navigationBarItems(leading:
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }){
+                Text("Cancel")
+                    .foregroundColor(.red)
+            }
         )
     }
 }
 
 struct SearchCell: View {
     
-    var user: User
+    var user: User2
     
     var body: some View {
         

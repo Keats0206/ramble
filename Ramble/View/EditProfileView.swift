@@ -22,7 +22,7 @@ struct EditProfileView : View {
     @State var loading = false
     @State var error = false
     
-    var user: User
+    var user: User2
     
     func updateProfile(){
         print("DEBUG: Update user profile")
@@ -162,6 +162,6 @@ struct EditProfileView : View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(user: _user)
+        EditProfileView(user: _user2)
     }
 }

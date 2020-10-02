@@ -12,7 +12,6 @@ import Firebase
 
 class UserService: ObservableObject {
     static let shared = UserService()
-    
     @Published var users = [User]()
     
     func fetchUser(uid: String, completion: @escaping(User) -> Void) {

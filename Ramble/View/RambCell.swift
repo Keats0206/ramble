@@ -13,15 +13,16 @@ import AVKit
 struct RambCell : View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    @ObservedObject var viewModel = RambService()
     
     @State private var showingActionSheet = false
     @State private var isActive = false
     
-    var ramb: Ramb
+    var ramb: Ramb2
     
     var body: some View {
+        
         ZStack{
+            
             HStack(alignment: .center){
                 
                 VStack(alignment: .center, spacing: 10){
@@ -31,7 +32,7 @@ struct RambCell : View {
                         .overlay(Circle().stroke(Color.white, lineWidth: 2))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
-                                                    ProfileView(offset: CGSize(width: 0, height: 0), user: ramb.user), isActive: $isActive) { EmptyView()
+                                ProfileView(offset: CGSize(width: 0, height: 0), user: ramb.user), isActive: $isActive) { EmptyView()
                         }).buttonStyle(BorderlessButtonStyle())
                     
                     Spacer()
@@ -46,7 +47,8 @@ struct RambCell : View {
                                             buttons:[
                                                 .default(
                                                     Text("Delete").foregroundColor(.red), action: {
-                                                        self.viewModel.deleteRamb(ramb: self.ramb)
+                                                        print("delete ramb")
+//                                                        self.viewModel.deleteRamb(ramb: self.ramb)
                                     }),.cancel()
                                 ])
                         }
@@ -109,10 +111,10 @@ struct RambCell : View {
 }
 
 
-struct RambCell_Previews: PreviewProvider {
-    static var previews: some View {
-        RambCell(ramb: _ramb)
-            .environmentObject(SessionStore())
-            .environmentObject(GlobalPlayer())
-    }
-}
+//struct RambCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RambCell(ramb: _ramb)
+//            .environmentObject(SessionStore())
+//            .environmentObject(GlobalPlayer())
+//    }
+//}

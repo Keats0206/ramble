@@ -14,18 +14,18 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var viewModel = RambService()
     
     @State private var isShowing = false
     @State private var isPresented = false
-    @State private var editModal_shown = false
     @State private var isFollowed = true
+    @State private var editModal_shown = false
+    @State private var settingsModal_shown = false
     @State private var searchModal_shown = false
     @State var hideNav = false
     
     @State var offset: CGSize
     
-    var user: User
+    var user: User2
                 
     var body: some View {
         
@@ -67,7 +67,7 @@ struct ProfileView: View {
                                         
                     }.padding()
                         
-                    RambUserFeed(RambService(), user: user)
+                    RambUserFeed(user: user)
                     
                     Spacer()
                                     
@@ -90,6 +90,13 @@ struct ProfileView: View {
             }.navigationBarHidden(hideNav)
             .navigationBarItems(trailing:
                 HStack{
+                    
+                    Button(action: {
+                        UserService2.shared.fetchUser(user: user)
+                    }){
+                        Text("print user")
+                    }
+                    
                     Button(action: {
                         self.searchModal_shown.toggle()
                     }){
@@ -105,7 +112,8 @@ struct ProfileView: View {
                         }
                     }
                     
-                    if user.isCurrentUser == false {
+                    if Auth.auth().currentUser?.uid == user.uid {
+                        
                         Button(action: {
                             self.editModal_shown.toggle()
                         }){
@@ -117,6 +125,19 @@ struct ProfileView: View {
                         }) {
                             EditProfileView(user: user)
                         }
+                        
+                        Button(action: {
+                            self.settingsModal_shown.toggle()
+                        }){
+                            Image(systemName: "gear")
+                                .padding(5)
+                        }.background(Capsule().fill(Color.black).opacity(0.2))
+                        .sheet(isPresented: $settingsModal_shown, onDismiss: {
+                            print("Modal dismisses")
+                        }) {
+                            SettingsView()
+                        }
+                        
                     } else {
                         Button(action: {
                             if self.isFollowed {
@@ -141,7 +162,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(offset: CGSize(width: 0, height: 0), user: _user)
+        ProfileView(offset: CGSize(width: 0, height: 0), user: _user2)
             .environmentObject(SessionStore())
     }
 }

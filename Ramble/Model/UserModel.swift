@@ -38,8 +38,8 @@ struct User: Identifiable, Hashable{
     }
 }
 
-struct User2: Identifiable, Codable{
-    @DocumentID var id: String?
+struct User2: Identifiable, Codable, Hashable{
+    @DocumentID var id : String?
     var uid: String
     var email: String
     var username: String

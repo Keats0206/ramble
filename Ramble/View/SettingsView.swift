@@ -11,7 +11,6 @@ import SwiftUI
 struct SettingsView: View {
     @ObservedObject var session = SessionStore()
     @State private var showingActionSheet = false
-    @Binding var isPresented : Bool
     
     var body: some View {
         
@@ -24,22 +23,7 @@ struct SettingsView: View {
                 HStack{
                     
                     Spacer()
-                    
-                    Button(action: {
-                        print("does the button work")
-                        withAnimation{
-                            
-                            self.isPresented.toggle()
-                            
-                        }
-                        
-                    }){
-                        
-                        Image(systemName: "arrow.down.circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    }
-                    
+                                        
                 }.padding()
                 
                     VStack(alignment: .leading, spacing: 30){
@@ -126,6 +110,6 @@ struct SettingsView_Previews: PreviewProvider {
     @State static var value = false
     
     static var previews: some View {
-        SettingsView(isPresented: $value)
+        SettingsView()
     }
 }

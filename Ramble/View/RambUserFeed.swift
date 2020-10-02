@@ -11,16 +11,13 @@ import AVKit
 import SDWebImageSwiftUI
 
 struct RambUserFeed : View {
-    @ObservedObject var viewModel = RambService()
+    @ObservedObject var viewModel = RambService2()
 
-    var user: User
+    var user: User2
 
-    init(_ model: RambService, user: User){
-        self.viewModel = model
+    init(user: User2){
         self.user = user
-        model.fetchUserRambs(forUser: user) { ramb in
         return
-        }
     }
     
     var body: some View {
@@ -35,6 +32,6 @@ struct RambUserFeed : View {
 
 struct RambUserFeed_Previews: PreviewProvider {
     static var previews: some View {
-        RambUserFeed(RambService(), user: _user)
+        RambUserFeed(user: _user2)
     }
 }
