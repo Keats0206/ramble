@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RecorderView: View {
     @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject var audioRecorder = AudioRecorder()
     
 //    @State private var wave1 = false
@@ -21,11 +20,12 @@ struct RecorderView: View {
 
     var body: some View {
         ZStack{
-            
-            ZStack{
                     
-                    if audioRecorder.recording == false {
-
+            ZStack{
+                
+                switch audioRecorder.recorderState {
+                
+                    case .ready:
                         Button(action: {
                             self.audioRecorder.startRecording()
                         }) {
@@ -36,8 +36,7 @@ struct RecorderView: View {
                                 .foregroundColor(.red)
                         }
                         
-                    } else {
-
+                    case .started:
                         Circle()
                             .stroke(lineWidth: 5)
                             .frame(width: 90, height: 90)
@@ -59,9 +58,15 @@ struct RecorderView: View {
                                 .foregroundColor(.red)
 
                         }
-                    }
+                        
+                    case .stopped:
+                        Text("Uploading")
+                   
+                    case .uploaded:
+                        Text("Done")
                 }
             }
+        }
         .navigationBarHidden(false)
         .navigationBarItems(leading:
             Button(action: {
@@ -71,15 +76,27 @@ struct RecorderView: View {
                     .font(.system(size: 20, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.accent1)
             }, trailing:
-            
-                NavigationLink(destination: RecorderPostView(user: user)){
-                Text("Preview")
-                    .font(.system(size: 20, weight: .heavy, design: .rounded))
-                    .foregroundColor(Color.accent4)
-            }
+                previewButton
         )
     }
 }
+
+private extension RecorderView {
+    var previewButton: some View {
+        ZStack{
+            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, user: user)){
+                if audioRecorder.recorderState != .uploaded {
+                    Spacer()
+                } else {
+                    Text("Preview")
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .foregroundColor(Color.accent4)
+                }
+            }
+        }
+    }
+}
+
 
 struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
@@ -88,9 +105,11 @@ struct RecorderView_Previews: PreviewProvider {
 }
 
 struct RecorderPostView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var audioRecorder = AudioRecorder()
 
     @State var caption = ""
+    @State var rambUrl: String
     
     var user: User2
     
@@ -98,13 +117,12 @@ struct RecorderPostView: View {
         let timestamp = Int(NSDate().timeIntervalSince1970) * -1
         let isSelected = false
         let length = Double(0)
-        
         let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, user: user, isSelected: isSelected)
-        
         RambService2().addRamb(ramb)
     }
 
     var body: some View {
+        
         VStack(alignment: .leading){
             
             TextField("What do you have to say", text: $caption)
@@ -113,13 +131,18 @@ struct RecorderPostView: View {
                 .multilineTextAlignment(.leading)
             
             Spacer()
-        }.navigationBarItems(trailing:
+        
+        }.padding()
+        .navigationBarItems(trailing:
             Button(action: {
+//                print(self.rambUrl)
                 self.uploadRamb2(
-                    user: self.user,
-                    caption: self.caption,
-                    rambUrl: self.audioRecorder.rambUrl,
-                    fileId: self.audioRecorder.rambFileID)
+                    user: user,
+                    caption: caption,
+                    rambUrl: rambUrl,
+                    fileId: ""
+                )
+                presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Post")
                         .font(.system(.headline,design: .rounded)).bold()
@@ -128,4 +151,3 @@ struct RecorderPostView: View {
             )
         }
     }
-

@@ -15,26 +15,28 @@ import FirebaseStorage
 
 class AudioRecorder: NSObject, ObservableObject {
     
-//    override init() {
-//        super.init()
-////        sortLatestRecordings()
-//        print("1 \(self.recorderState)")
-//    }
+    override init() {
+        self.recorderState = .ready
+    }
     
 //  Currently unused!
-
-    @Published var rambUrl: String = "";
-    @Published var rambFileID: String = "";
-    @Published var currentTime: Int = 0
-    @Published var didUpload = false
-    @Published var recordingUploaded = false
-    @Published var recorderState: RecordState = .ready
-    
 
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
     var timer = Timer()
     var recordings = [Recording]()
+    
+    var rambUrl = "" {
+        didSet {
+            objectWillChange.send(self)
+        }
+    }
+    
+    var recorderState: RecordState = .ready {
+        didSet {
+            objectWillChange.send(self)
+        }
+    }
     
     var recording = false {
         didSet {
@@ -117,13 +119,12 @@ class AudioRecorder: NSObject, ObservableObject {
                     print("error")
                     return
                 } else {
-                    rambsRef.downloadURL(completion: { (url, error) in
-                        self.rambUrl = (url?.absoluteString)!
-                        self.rambFileID = ("test")
-                        self.recorderState = .uploaded
-                        print("4 \(self.recorderState)")
+                    rambsRef.downloadURL(completion: { [self] (url, error) in
+                        rambUrl = (url?.absoluteString)!
+                        recorderState = .uploaded
+                        print(rambUrl)
                         return
-                    })
+                })
             }
         })
     }
@@ -131,7 +132,6 @@ class AudioRecorder: NSObject, ObservableObject {
     func sortThenUpload() {
         sortLatestRecordings()
         uploadLatestRecording()
-        print("5 \(self.recorderState)")
     }
 }
 

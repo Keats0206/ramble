@@ -39,7 +39,6 @@ class RambService2: ObservableObject {
 //  This function is working!
     func addRamb(_ ramb: Ramb2) {
         let newRamb = FB_REF_RAMBS.document()
-        
         do {
           let _ = try newRamb.setData(from: ramb)
 //        Update user child rambs
