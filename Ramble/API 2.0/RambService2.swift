@@ -51,11 +51,9 @@ class RambService2: ObservableObject {
     
 //  Fetch user rambs
     func fetchUserRambs(user: User) {
-//        _ = user.id
-//      code no working because of user auth issue, will work once that is resolved
-        let userId = user.id
+        let userId = user.uid
         
-        FB_REF_RAMBS.whereField("uid", isEqualTo: userId!)
+        FB_REF_RAMBS.whereField("uid", isEqualTo: userId)
             .addSnapshotListener { (querySnapshot, error) in // (2)
                 if let querySnapshot = querySnapshot {
                     self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)

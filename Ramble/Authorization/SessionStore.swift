@@ -25,7 +25,7 @@ class SessionStore : ObservableObject {
             if let user = user {
                     let uid = user.uid
                     let email = user.email
-                    self.session = User(id: uid, email: email!)
+                    self.session = User(id: uid, uid: uid, email: email!)
             } else {
                 self.session = nil
             }
@@ -67,7 +67,7 @@ class SessionStore : ObservableObject {
                         
                         let uid = result?.user.uid
                         let userRef = FB_REF_USERS.document(uid!)
-                        let user = User(id: uid, email: email, username: username, displayname: fullname, profileImageUrl: profileImageUrl, bio: "", isFollowed: false)
+                        let user = User(id: uid, uid: uid!, email: email, username: username, displayname: fullname, profileImageUrl: profileImageUrl, bio: "", isFollowed: false)
  
                         do {
                             let _ = try userRef.setData(from: user)

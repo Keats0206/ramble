@@ -90,6 +90,7 @@ struct RambCell : View {
                         globalPlayer.globalRamb = self.ramb
                         globalPlayer.setGlobalPlayer(ramb: self.ramb)
                         globalPlayer.globalRambPlayer?.play()
+                        globalPlayer.isPlaying = true
                     }){
                         Image(systemName: "play.circle")
                             .resizable()

@@ -17,7 +17,7 @@ struct FeedView: View {
     
     @State var recordingModal_shown = false
     @State var searchModal_shown = false
-    @State var dataSelector = 0
+    @State var dataToggle = 0
     @State var ramb: Ramb2?
     
     @State var hideNav = false
@@ -33,16 +33,18 @@ struct FeedView: View {
     var body: some View {
             ZStack{
                 
-                RambFeed(dataToggle: $dataSelector)
-
-                FloatingPlayerView(hideNav: $hideNav)
-                    .edgesIgnoringSafeArea(.all)
+                RambFeed(dataToggle: $dataToggle)
                 
+                if globalPlayer.globalRamb != nil{
+                    
+                    FloatingPlayerView(hideNav: $hideNav)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                }
             }.navigationBarHidden(hideNav)
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(leading:
                 HStack{
-                    
 //                    Button(action: {
 //                        self.dataSelector = 0
 //                    }){
@@ -63,22 +65,24 @@ struct FeedView: View {
             HStack{
 //      Change to filter
                 Button(action: {
-                    self.dataSelector = 0
+                    self.dataToggle = 0
                 }){
-                    Image(systemName: dataSelector == 0 ? "clock.fill" : "clock")
+                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(dataSelector == 0 ? Color.accent4 : Color.black)
+                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.black)
                         .padding(5)
                 }
                 
                 Button(action: {
-                    self.dataSelector = 1
+                    
+                    self.dataToggle = 1
+                    
                 }){
-                    Image(systemName: dataSelector == 1 ? "flame.fill" : "flame")
+                    Image(systemName: dataToggle == 1 ? "flame.fill" : "flame")
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(dataSelector == 1 ? Color.accent4 : Color.black)
+                        .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.black)
                         .padding(5)
                 }
             }

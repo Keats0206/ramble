@@ -20,7 +20,7 @@ struct RambFeed : View {
     var body: some View {
         ZStack{
             VStack{
-                if dataToggle != 0 {
+                if dataToggle == 1 {
                     List{
                         ForEach(viewModel.allRambs.sorted(by: { $0.plays > $1.plays })){ ramb in
                             RambCell(ramb: ramb)

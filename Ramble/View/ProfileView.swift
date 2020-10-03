@@ -23,6 +23,8 @@ struct ProfileView: View {
     @State private var searchModal_shown = false
     @State var hideNav = false
     
+    @State var userDataToggle = 0
+    
     @State var offset: CGSize
     
     var user: User
@@ -57,10 +59,6 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            Image(systemName: "line.horizontal.3.decrease.circle")
-                                .resizable()
-                                .frame(width: 25, height: 25)
-                            
                         }
                         
                         Divider()
@@ -71,9 +69,8 @@ struct ProfileView: View {
                     
                     Spacer()
                                     
-                }
-                    .offset(offset)
-                    .padding(0)
+                }.offset(offset)
+                .padding(0)
                                                         
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
@@ -89,6 +86,7 @@ struct ProfileView: View {
                 
             }.navigationBarHidden(hideNav)
             .navigationBarItems(trailing:
+                                    
                 HStack{
                     
                     Button(action: {

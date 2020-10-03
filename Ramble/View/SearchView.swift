@@ -38,7 +38,6 @@ struct SearchView: View {
         }
         .onAppear{
             self.viewModel.fetchUsers()
-            
         }
         .navigationBarItems(leading:
             Button(action: {
@@ -91,8 +90,11 @@ struct SearchCell: View {
                     .frame(width: 30, height: 30)
                 
             }.buttonStyle(BorderlessButtonStyle())
+            
         }.padding()
+        
     }
+    
 }
 
 struct SearchBar: View {

@@ -90,6 +90,7 @@ struct SettingsView: View {
                                 ActionSheet(title: Text("Are you sure you want to logout?"), buttons:[.default(Text("Logout").foregroundColor(.blue),
                                             action: {
                                                 self.session.signOut()
+                                                
                                 }),.cancel()
                                     ]
                                 )

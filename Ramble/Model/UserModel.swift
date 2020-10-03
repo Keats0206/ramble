@@ -38,10 +38,9 @@ import FirebaseFirestoreSwift
 //    }
 //}
 
-
-
 struct User: Identifiable, Codable, Hashable{
     @DocumentID var id: String?
+    var uid: String
     var email: String
     var username: String?
     var displayname: String?
@@ -51,6 +50,7 @@ struct User: Identifiable, Codable, Hashable{
 
     enum CodingKeys: String, CodingKey {
         case id
+        case uid
         case email
         case username
         case displayname
