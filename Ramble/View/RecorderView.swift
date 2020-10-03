@@ -119,7 +119,7 @@ struct RecorderPostView: View {
         let length = Double(0)
         let uid = user.id!
         
-        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, user: user, uid: uid, isSelected: isSelected)
+        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, plays: 0, user: user, uid: uid, isSelected: isSelected)
         
         RambService2().addRamb(ramb)
     }

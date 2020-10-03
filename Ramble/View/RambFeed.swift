@@ -20,10 +20,9 @@ struct RambFeed : View {
     var body: some View {
         ZStack{
             VStack{
-                if dataToggle != 1 {
+                if dataToggle != 0 {
                     List{
-//                        ForEach(viewModel.rambs.sorted(by: { $0.claps > $1.claps })){ ramb in
-                        ForEach(viewModel.allRambs){ ramb in
+                        ForEach(viewModel.allRambs.sorted(by: { $0.plays > $1.plays })){ ramb in
                             RambCell(ramb: ramb)
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }
@@ -31,8 +30,7 @@ struct RambFeed : View {
                     
                 } else {
                     List{
-//                        ForEach(viewModel.rambs.sorted(by: { $0.timestamp < $1.timestamp })){ ramb in
-                        ForEach(viewModel.followingRambs){ ramb in
+                        ForEach(viewModel.allRambs.sorted(by: { $0.timestamp < $1.timestamp })){ ramb in
                             RambCell(ramb: ramb)
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }

@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore // (1)
 import FirebaseFirestoreSwift
 
-//struct Ramb: Identifiable {
+//struct Ramb2: Identifiable {
 //    let id: String
 //    let caption: String
 //    var claps: Int
@@ -19,7 +19,7 @@ import FirebaseFirestoreSwift
 //    let fileId: String
 //    let uid: String
 //    var timestamp: Int
-//    let user: User2
+//    let user: User
 //    var isSelected: Bool
 //    
 //    init(user: User, id: String, dictionary: [String: Any]) {
@@ -44,10 +44,11 @@ struct Ramb2: Codable, Identifiable, Hashable {
     var rambUrl: String
     var fileId: String
     var timestamp: Int
+    var plays: Int
     var user: User
     var uid: String
     var isSelected: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case caption
@@ -55,6 +56,7 @@ struct Ramb2: Codable, Identifiable, Hashable {
         case rambUrl
         case fileId
         case timestamp
+        case plays
         case user
         case uid
         case isSelected

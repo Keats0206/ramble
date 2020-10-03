@@ -35,17 +35,17 @@ struct ProfileView: View {
                     
                     VStack(alignment: .leading, spacing: 10){
                         
-                        WebImage(url: URL(string: "\(user.profileImageUrl)"))
+                        WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
                         
-                        Text("\(user.displayname)")
+                        Text("\(user.displayname ?? "")")
                             .font(.system(size: 28, weight: .bold, design: .rounded))
                         
-                        Text("@\(user.username)")
+                        Text("@\(user.username ?? "")")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                         
-                        Text("\(user.bio)")
+                        Text("\(user.bio ?? "")")
                             .font(.system(size: 22, weight: .regular, design: .rounded))
                         
                         Spacer()
@@ -106,7 +106,7 @@ struct ProfileView: View {
                         }
                     }
                     
-                    if Auth.auth().currentUser?.uid == user.uid {
+                    if Auth.auth().currentUser?.uid == user.id {
                         
                         Button(action: {
                             self.editModal_shown.toggle()

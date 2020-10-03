@@ -14,25 +14,34 @@ class UserService2: ObservableObject {
     
     @Published var users = [User]()
             
-    func fetchUser(user: User, completion: @escaping(User) -> Void) {
-        let userRef = FB_REF_USERS.document(user.id!)
+    func fetchUser(uid: String, completion: @escaping(User) -> Void) {
+        let userRef = FB_REF_USERS.document(uid)
 
-        userRef.getDocument { (querySnapshot, error) in
-            if let querySnapshot = querySnapshot {
-                let user = try? querySnapshot.data(as: User.self)
-                completion(user!)
+        userRef.getDocument { (document, error) in
+            let result = Result {
+              try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    completion(user)
+                } else {
+                    print("DEBUG: Document does not exist")
+                }
+            case .failure(let error):
+                print("DEBUG: Error decoding user: \(error)")
             }
         }
     }
     
     func fetchUsers() {
-        FB_REF_USERS.addSnapshotListener { (querySnapshot, error) in // (2)
-            if let querySnapshot = querySnapshot {
-                self.users = querySnapshot.documents.compactMap { document -> User? in // (3)
-                    try? document.data(as: User.self) // (4)
-                }
-            }
-        }
+//        FB_REF_USERS.addSnapshotListener { (querySnapshot, error) in // (2)
+//            if let querySnapshot = querySnapshot {
+//                self.users = querySnapshot.documents.compactMap { document -> User? in // (3)
+//                    try? document.data(as: User.self) // (4)
+//                }
+//            }
+//        }
     }
         
     func followUser(uid: String) {

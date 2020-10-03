@@ -26,7 +26,7 @@ struct RambCell : View {
             HStack(alignment: .center){
                 
                 VStack(alignment: .center, spacing: 10){
-                    WebImage(url: URL(string: "\(ramb.user.profileImageUrl)"))
+                    WebImage(url: URL(string: "\(ramb.user.profileImageUrl ?? "")"))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 2))
@@ -56,14 +56,14 @@ struct RambCell : View {
                     .foregroundColor(Color.accent4)
                 }
                 
-                //              Center of Cell VStack
+//              Center of Cell VStack
                 
                 VStack(alignment: .leading){
                     //                  Username + timestamp
                     
                     HStack{
                         
-                        Text("@" + ramb.user.username)
+                        Text("@" + (ramb.user.username ?? ""))
                             .font(.system(size: 18, weight: .heavy, design: .rounded))
                             .bold()
                         //                  Caption

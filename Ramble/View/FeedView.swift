@@ -42,30 +42,43 @@ struct FeedView: View {
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(leading:
                 HStack{
-                    Button(action: {
-                        self.dataSelector = 0
-                    }){
-                        Text("FEED")
+                    
+//                    Button(action: {
+//                        self.dataSelector = 0
+//                    }){
+                        Text("RAMBLE")
                             .font(.system(size: 20, weight: .heavy, design: .rounded))
-                            .foregroundColor(dataSelector == 0 ? Color.accent3 : Color.black)
-                    }
-                    Button(action: {
-                        self.dataSelector = 1
-                    }){
-                        Text("FRIENDS")
-                            .font(.system(size: 20, weight: .heavy, design: .rounded))
-                            .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
-                    }
+                            .foregroundColor(Color.accent3)
+//                    }
+                    
+//                    Button(action: {
+//                        self.dataSelector = 1
+//                    }){
+//                        Text("FRIENDS")
+//                            .font(.system(size: 20, weight: .heavy, design: .rounded))
+//                            .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
+//                    }
                 }
             , trailing:
             HStack{
-    //      Change to filter
+//      Change to filter
                 Button(action: {
-                    print("Show filter modal")
+                    self.dataSelector = 0
                 }){
-                    Image(systemName: "line.horizontal.3.decrease.circle")
+                    Image(systemName: dataSelector == 0 ? "clock.fill" : "clock")
                         .resizable()
                         .frame(width: 25, height: 25)
+                        .foregroundColor(dataSelector == 0 ? Color.accent4 : Color.black)
+                        .padding(5)
+                }
+                
+                Button(action: {
+                    self.dataSelector = 1
+                }){
+                    Image(systemName: dataSelector == 1 ? "flame.fill" : "flame")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(dataSelector == 1 ? Color.accent4 : Color.black)
                         .padding(5)
                 }
             }

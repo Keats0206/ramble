@@ -23,15 +23,9 @@ class SessionStore : ObservableObject {
     func listen(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                let uid = user.uid
-                let email = user.email
-                self.session = User(id: user.providerID,
-                                    uid: uid, email: email!,
-                                    username: email!,
-                                    displayname: email!,
-                                    profileImageUrl: "",
-                                    bio: "I'm new here",
-                                    isFollowed: false)
+                    let uid = user.uid
+                    let email = user.email
+                    self.session = User(id: uid, email: email!)
             } else {
                 self.session = nil
             }
@@ -70,15 +64,17 @@ class SessionStore : ObservableObject {
                             print("DEBUG: Error is \(error.localizedDescription)")
                             return
                         }
-                                                
-                        let values = ["email": email,
-                                      "password": password,
-                                      "fullname": fullname,
-                                      "username": username,
-                                      "radius": 25,
-                                      "profileImageUrl": profileImageUrl] as [String : Any]
                         
-                        FB_REF_USERS.addDocument(data: values)
+                        let uid = result?.user.uid
+                        let userRef = FB_REF_USERS.document(uid!)
+                        let user = User(id: uid, email: email, username: username, displayname: fullname, profileImageUrl: profileImageUrl, bio: "", isFollowed: false)
+ 
+                        do {
+                            let _ = try userRef.setData(from: user)
+                        }
+                        catch {
+                            print("There was an error while trying to create the user \(error.localizedDescription).")
+                        }
                     }
                 }
             })

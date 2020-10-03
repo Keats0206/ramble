@@ -34,16 +34,16 @@ struct AppView: View {
        }
         
     func getUser(){
-        self.user = session.session!
-//        UserService2.shared.fetchUser(user: user) { user in
-//            self.user = user
-//            return
-//        }
-        print(self.user)
+        let uid = session.session!.id!
+        UserService2.shared.fetchUser(uid: uid) { user in
+            self.user = user
+            return
+        }
     }
     
     var body: some View {
     ZStack{
+        
         TabView(selection: actionSelection){
             
             NavigationView{

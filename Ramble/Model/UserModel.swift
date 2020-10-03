@@ -38,19 +38,19 @@ import FirebaseFirestoreSwift
 //    }
 //}
 
+
+
 struct User: Identifiable, Codable, Hashable{
     @DocumentID var id: String?
-    var uid: String
     var email: String
-    var username: String
-    var displayname: String
+    var username: String?
+    var displayname: String?
     var profileImageUrl: String?
-    var bio: String
+    var bio: String?
     var isFollowed: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id
-        case uid
         case email
         case username
         case displayname

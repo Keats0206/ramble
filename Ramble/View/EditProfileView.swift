@@ -83,7 +83,7 @@ struct EditProfileView : View {
                     Text("Username")
                         .font(.system(size: 14, weight: .bold))
                     
-                    TextField("\(self.user.username)", text: $username)
+                    TextField("\(self.user.username ?? "")", text: $username)
                         .font(.system(size: 18, weight: .bold))
                         .padding(12)
                     
@@ -93,7 +93,7 @@ struct EditProfileView : View {
                             
                 HStack{
                     
-                    WebImage(url: URL(string: "\(user.profileImageUrl)"))
+                    WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                             .shadow(radius: 10)
@@ -130,7 +130,7 @@ struct EditProfileView : View {
                     Text("Fullname")
                         .font(.system(size: 14, weight: .bold))
                     
-                    TextField("\(self.user.displayname)", text: $displayname)
+                    TextField("\(self.user.displayname ?? "")", text: $displayname)
                         .font(.system(size: 18, weight: .bold))
                         .padding(12)
                     
@@ -142,7 +142,7 @@ struct EditProfileView : View {
                     Text("Bio")
                         .font(.system(size: 14, weight: .bold))
                     
-                    TextField("\(self.user.bio)", text: $bio)
+                    TextField("\(self.user.bio ?? "")", text: $bio)
                         .font(.system(size: 18, weight: .bold))
                         .padding(12)
                     

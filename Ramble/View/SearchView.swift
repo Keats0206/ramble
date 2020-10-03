@@ -27,7 +27,8 @@ struct SearchView: View {
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
                             
                 List{
-                    ForEach(self.viewModel.users.filter{$0.displayname.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
+                    
+                    ForEach(self.viewModel.users.filter{$0.email.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
                             SearchCell(user: user)
                     }
                 }
@@ -65,11 +66,11 @@ struct SearchCell: View {
             
             VStack(alignment: .leading){
                 
-                Text("\(user.username)")
+                Text("\(user.username ?? "")")
                     .font(.title)
                     .bold()
                 
-                Text("\(user.displayname)")
+                Text("\(user.displayname ?? "")")
                     .font(.subheadline)
                 
             }
