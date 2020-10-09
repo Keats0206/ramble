@@ -102,9 +102,12 @@ struct ProfileView: View {
                     }.sheet(isPresented: $searchModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
+                        
                         NavigationView{
+                            
                             SearchView()
                         }
+                    
                     }
                     
                     if Auth.auth().currentUser?.uid == user.id {
@@ -114,6 +117,7 @@ struct ProfileView: View {
                         }){
                             Image(systemName: "ellipsis")
                                 .padding(5)
+                            
                         }.background(Capsule().fill(Color.black).opacity(0.2))
                         .sheet(isPresented: $editModal_shown, onDismiss: {
                             print("Modal dismisses")

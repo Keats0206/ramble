@@ -76,7 +76,7 @@ struct AppView: View {
             }
                 .onAppear{
                 self.getUser()
-            }.accentColor(.black)
+            }.accentColor(.primary)
             
             }
     }
@@ -109,17 +109,15 @@ struct MainView: View {
     }
     
     var body: some View {
-            VStack {
+        VStack(spacing: 0){
                 CurrentScreen(currentView: self.$currentView, user: user)
                 TabBar(currentView: self.$currentView, showModal: self.$showModal)
-            }.background(Color(.white))
-            .onAppear{
+        }.onAppear{
                 self.getUser()
-            }
-            .sheet(isPresented: self.$showModal) {
+            }.sheet(isPresented: self.$showModal) {
                 NavigationView{
                     RecorderView(user: user)
-                }
+            }
         }
     }
 }
@@ -135,8 +133,7 @@ struct TabBar: View {
             ShowModalTabBarItem(radius: 55) { self.showModal.toggle() }
             Spacer()
             TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "PROFILE", paddingEdges: .trailing, tab: .Tab2)
-        }
-        .frame(minHeight: 70)
+        }.frame(minHeight: 70)
     }
 }
 
@@ -182,7 +179,7 @@ struct TabBarItem: View {
                 .cornerRadius(6)
             
             Text(title)
-                .font(.system(size: 20, weight: .heavy, design: .rounded))
+                .font(.system(size: 14, weight: .heavy, design: .rounded))
         }
         .foregroundColor(self.currentView == tab ? .accent4 : .flatDarkCardBackground)
         .frame(width: 140, height: 50)
@@ -207,10 +204,8 @@ public struct ShowModalTabBarItem: View {
                 .padding(5)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: radius, height: radius, alignment: .center)
-                .foregroundColor(Color.flatDarkBackground)
-                .background(Color(.white))
+                .foregroundColor(Color.primary)
                 .cornerRadius(radius/2)
-
         }
         .frame(width: radius, height: radius)
         .onTapGesture(perform: action)

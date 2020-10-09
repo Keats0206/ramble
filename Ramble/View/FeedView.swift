@@ -47,7 +47,7 @@ struct FeedView: View {
 //                        self.dataSelector = 0
 //                    }){
                         Text("RAMBLE")
-                            .font(.system(size: 20, weight: .heavy, design: .rounded))
+                            .font(.system(size: 30, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.accent3)
 //                    }
 //                    Button(action: {

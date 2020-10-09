@@ -43,6 +43,18 @@ class UserService2: ObservableObject {
 //            }
 //        }
     }
+    
+    func saveUserProfile(user: User, username: String, fullname: String, bio: String){
+        let userRef = FB_REF_USERS.document(user.uid)
+        let newUser = User(id: user.id, uid: user.uid, email: user.email, username: username, displayname: fullname, profileImageUrl: user.profileImageUrl, bio: bio, isFollowed: user.isFollowed)
+        
+        do {
+            try userRef.setData(from: newUser)
+        } catch let error {
+            print("Error writing city to Firestore: \(error)")
+        }
+
+    }
         
     func followUser(uid: String) {
 //        guard let currentUid = Auth.auth().currentUser?.uid else { return }

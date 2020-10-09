@@ -24,15 +24,15 @@ struct FloatingPlayerView: View {
             
             ZStack{
                 
-                Color.white
-                    .shadow(radius: 5)
+                Color.black
+                    .shadow(color: .primary, radius: 10)
                     .cornerRadius(25)
                 
                 VStack{
                     // SMALL PLAYER
                     if floating == true {
                         
-                        HStack{
+                        HStack(spacing: 5){
                             
                             WebImage(url: URL(string: "\(globalPlayer.globalRamb?.user.profileImageUrl)"))
                                 .frame(width: 45, height: 45)
@@ -70,9 +70,9 @@ struct FloatingPlayerView: View {
                                 }
                             }
                             
-                        }.padding(10)
+                        }
+                        .padding(10)
                         .padding([.leading, .trailing])
-                        .foregroundColor(.black)
 
                     } else {
                         

@@ -12,8 +12,8 @@ struct RecorderView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var audioRecorder = AudioRecorder()
     
-//    @State private var wave1 = false
-    @State private var wave2 = false
+    @State private var animateRecording = false
+    @State private var animateUploading = false
 //    @State private var wave3 = false
     
     var user: User
@@ -37,16 +37,6 @@ struct RecorderView: View {
                         }
                         
                     case .started:
-                        Circle()
-                            .stroke(lineWidth: 5)
-                            .frame(width: 90, height: 90)
-                            .foregroundColor(.red)
-                            .scaleEffect(wave2 ? 2 : 1)
-                            .opacity(wave2 ? 0 : 1)
-                            .animation(Animation.easeInOut(duration: 1).repeatForever().speed(0.5))
-                            .onAppear{
-                                self.wave2.toggle()
-                            }
 
                         Button(action: {
                             self.audioRecorder.stopRecording()
@@ -56,14 +46,55 @@ struct RecorderView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 50, height: 50)
                                 .foregroundColor(.red)
+                                .overlay(
+                                    ZStack {
+                                        Circle()
+                                            .stroke(Color.red, lineWidth: 100)
+                                                        .scaleEffect(animateRecording ? 1 : 0)
+                                                    Circle()
+                                                        .stroke(Color.red, lineWidth: 100)
+                                                        .scaleEffect(animateRecording ? 1.5 : 0)
+                                                    Circle()
+                                                        .stroke(Color.red, lineWidth: 100)
+                                                        .scaleEffect(animateRecording ? 2 : 0)
+                                                }
+                                                .opacity(animateRecording ? 0.0 : 0.2)
+                                                .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: false))
+                                        )
+                                        .onAppear {
+                                            self.animateRecording = true
+                                        }
 
                         }
                         
                     case .stopped:
-                        Text("Uploading")
+                        
+                        HStack {
+                            Circle()
+                                .fill(Color.accent1)
+                                .frame(width: 20, height: 20)
+                                .scaleEffect(animateUploading ? 1.0 : 0.5)
+                                .animation(Animation.easeInOut(duration: 0.5).repeatForever())
+                            Circle()
+                                .fill(Color.accent3)
+                                .frame(width: 20, height: 20)
+                                .scaleEffect(animateUploading ? 1.0 : 0.5)
+                                .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.3))
+                            Circle()
+                                .fill(Color.accent2)
+                                .frame(width: 20, height: 20)
+                                .scaleEffect(animateUploading ? 1.0 : 0.5)
+                                .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.6))
+                                }
+                        .onAppear {
+                            self.animateUploading = true
+                        }
                    
                     case .uploaded:
-                        Text("Done")
+                        previewButton
+                            .onAppear {
+                            
+                    }
                 }
             }
         }
@@ -75,9 +106,7 @@ struct RecorderView: View {
                 Text("Cancel")
                     .font(.system(size: 20, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.accent4)
-            }, trailing:
-                previewButton
-        )
+            })
     }
 }
 

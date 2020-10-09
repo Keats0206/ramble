@@ -25,8 +25,8 @@ struct EditProfileView : View {
     
     var user: User
     
-    func updateProfile(){
-        print("DEBUG: Update user profile")
+    func saveProfile(){
+        UserService2.shared.saveUserProfile(user: user, username: username, fullname: displayname, bio: bio)
     }
     
     func openThing(){
@@ -59,38 +59,50 @@ struct EditProfileView : View {
             
             ZStack{
             
-            Color.white
+            Color.black
             
             VStack(spacing: 20){
                 
-                HStack(alignment: .top){
+                HStack(spacing: 20){
                     
                     WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                             .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.red, lineWidth: 5))
+                            .overlay(Circle().stroke(Color.accent3, lineWidth: 5))
                                                                     
-                    Button(action: {
-                        self.showImagePicker = true
-                    }){
-                        Text("Replace")
-                            .font(.body).bold()
-                            .padding(5)
-                            .padding([.trailing,.leading])
-                    }.background(Capsule().stroke(lineWidth: 2))
-                        .sheet(isPresented: $showImagePicker, onDismiss: {
-                    
-                    self.showImagePicker = false
-                    
-                }, content: {
+                    VStack{
                         
-                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                        Text("Profile Pic")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
                         
-                    }).actionSheet(isPresented: $showAction) {
-                        sheet
+                            Button(action: {
+                            
+                            self.showImagePicker = true
+                            
+                        })
+                            {
+                            
+                            Text("Change")
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                                .padding(5)
+                                .padding([.trailing,.leading])
+                            
+                        }.background(Capsule().stroke(lineWidth: 2))
+                            .sheet(isPresented: $showImagePicker, onDismiss: {
+                        
+                        self.showImagePicker = false
+                        
+                    }, content: {
+                            
+                            ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                            
+                        }).actionSheet(isPresented: $showAction) {
+                            sheet
 
-                    }
+                        }
+                                                
+                    }.frame(height: 100)
 
                     Spacer()
 
@@ -99,11 +111,11 @@ struct EditProfileView : View {
                 VStack(alignment: .leading, spacing: 5){
                     
                     Text("Username")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
                     
                     TextField("\(self.user.username ?? "")", text: $username)
-                        .font(.system(size: 18, weight: .bold))
-                        .padding(12)
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .padding(5)
                     
                     Divider()
 
@@ -112,11 +124,11 @@ struct EditProfileView : View {
                 VStack(alignment: .leading, spacing: 5){
                     
                     Text("Fullname")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
                     
                     TextField("\(self.user.displayname ?? "")", text: $displayname)
-                        .font(.system(size: 18, weight: .bold))
-                        .padding(12)
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .padding(5)
                     
                     Divider()
                 }
@@ -124,11 +136,11 @@ struct EditProfileView : View {
                 VStack(alignment: .leading, spacing: 5){
                     
                     Text("Bio")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
                     
                     TextField("\(self.user.bio ?? "")", text: $bio)
-                        .font(.system(size: 18, weight: .bold))
-                        .padding(12)
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .padding(5)
                     
                     Divider()
                     
@@ -143,7 +155,7 @@ struct EditProfileView : View {
                     }) {
 
                         Text("Privacy & Terms")
-
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
                     }
 
                     Spacer()
@@ -160,6 +172,7 @@ struct EditProfileView : View {
                     }) {
 
                         Text("Give Feedback")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
 
                     }
 
@@ -177,6 +190,7 @@ struct EditProfileView : View {
                     }) {
 
                         Text("Rate Us")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
 
                     }
 
@@ -184,16 +198,25 @@ struct EditProfileView : View {
 
                 }
      
-            }.padding()
             }
-            .navigationBarItems(trailing:
-            Button(action: {
-                print("Save changes")
-                presentationMode.wrappedValue.dismiss()
-            }){
-                Text("Post")
-                    .font(.system(.headline,design: .rounded)).bold()
-                    .foregroundColor(.red)
+                .foregroundColor(.white)
+                .padding()
+            }
+            .navigationBarItems(leading:
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                        }){
+                    Text("Cancel")
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .foregroundColor(Color.accent2)
+                }, trailing:
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                    self.saveProfile()
+                }){
+                    Text("Save")
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .foregroundColor(Color.accent1)
                 }
             )
         }
