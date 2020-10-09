@@ -13,7 +13,7 @@ struct RecorderView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     
     @State private var animateRecording = false
-    @State private var animateUploading = false
+    @State var animateUploading = false
 //    @State private var wave3 = false
     
     var user: User
@@ -69,34 +69,16 @@ struct RecorderView: View {
                         
                     case .stopped:
                         
-                        HStack {
-                            Circle()
-                                .fill(Color.accent1)
-                                .frame(width: 20, height: 20)
-                                .scaleEffect(animateUploading ? 1.0 : 0.5)
-                                .animation(Animation.easeInOut(duration: 0.5).repeatForever())
-                            Circle()
-                                .fill(Color.accent3)
-                                .frame(width: 20, height: 20)
-                                .scaleEffect(animateUploading ? 1.0 : 0.5)
-                                .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.3))
-                            Circle()
-                                .fill(Color.accent2)
-                                .frame(width: 20, height: 20)
-                                .scaleEffect(animateUploading ? 1.0 : 0.5)
-                                .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.6))
-                                }
-                        .onAppear {
-                            self.animateUploading = true
-                        }
+                        LoadingAnimation()
                    
                     case .uploaded:
                         previewButton
                             .onAppear {
-                            
                     }
                 }
             }
+        }.onAppear{
+            animateUploading = false
         }
         .navigationBarHidden(false)
         .navigationBarItems(leading:
@@ -126,10 +108,36 @@ private extension RecorderView {
     }
 }
 
-
-struct RecorderView_Previews: PreviewProvider {
+struct RecorderView_Previews: PreviewProvider {    
     static var previews: some View {
         RecorderView(user: _user2)
+    }
+}
+
+struct LoadingAnimation: View{
+    @State var animateUploading = false
+
+    var body: some View {
+        HStack {
+            Circle()
+                .fill(Color.accent1)
+                .frame(width: 20, height: 20)
+                .scaleEffect(animateUploading ? 1.0 : 0.5)
+                .animation(Animation.easeInOut(duration: 0.5).repeatForever())
+            Circle()
+                .fill(Color.accent3)
+                .frame(width: 20, height: 20)
+                .scaleEffect(animateUploading ? 1.0 : 0.5)
+                .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.3))
+            Circle()
+                .fill(Color.accent2)
+                .frame(width: 20, height: 20)
+                .scaleEffect(animateUploading ? 1.0 : 0.5)
+                .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.6))
+                }
+        .onAppear {
+            self.animateUploading = true
+        }
     }
 }
 
@@ -177,8 +185,8 @@ struct RecorderPostView: View {
                 presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Post")
-                        .font(.system(.headline,design: .rounded)).bold()
-                        .foregroundColor(.red)
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .foregroundColor(.accent4)
                 }
             )
         }
