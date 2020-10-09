@@ -130,11 +130,11 @@ struct TabBar: View {
 
     var body: some View {
         HStack {
-            TabBarItem(currentView: self.$currentView, imageName: "list.bullet", title: "feed", paddingEdges: .leading, tab: .Tab1)
+            TabBarItem(currentView: self.$currentView, imageName: "list.bullet", title: "FEED", paddingEdges: .leading, tab: .Tab1)
             Spacer()
             ShowModalTabBarItem(radius: 55) { self.showModal.toggle() }
             Spacer()
-            TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "profile", paddingEdges: .trailing, tab: .Tab2)
+            TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "PROFILE", paddingEdges: .trailing, tab: .Tab2)
         }
         .frame(minHeight: 70)
     }
@@ -184,8 +184,8 @@ struct TabBarItem: View {
             Text(title)
                 .font(.system(size: 20, weight: .heavy, design: .rounded))
         }
-        .foregroundColor(self.currentView == tab ? .flatDarkBackground : .gray)
-        .frame(width: 120, height: 50)
+        .foregroundColor(self.currentView == tab ? .accent4 : .flatDarkCardBackground)
+        .frame(width: 140, height: 50)
         .onTapGesture { self.currentView = self.tab }
         .padding(paddingEdges, 15)
     }

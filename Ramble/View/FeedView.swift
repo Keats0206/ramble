@@ -67,7 +67,7 @@ struct FeedView: View {
                     Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.black)
+                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
                         .padding(5)
                 }
                 
@@ -79,7 +79,7 @@ struct FeedView: View {
                     Image(systemName: dataToggle == 1 ? "flame.fill" : "flame")
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.black)
+                        .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
                         .padding(5)
                 }
             }

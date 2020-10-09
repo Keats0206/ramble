@@ -123,22 +123,7 @@ struct ProfileView: View {
                         
                     } else {
                         
-                        Button(action: {
-//                            if self.isFollowed {
-//                                UserService.shared.unfollowUser(uid: self.user.uid)
-//                                self.isFollowed.toggle()
-//                            } else {
-//                                UserService.shared.followUser(uid: self.user.uid)
-//                                self.isFollowed.toggle()
-//                            }
-                            
-                        }){
-                            Text(self.isFollowed ? "UNFOLLOW":"FOLLOW")
-                                .font(.system(size: 16, weight: .heavy, design: .rounded))
-                                .padding(5)
-                                .padding([.trailing,.leading])
-                            
-                        }.background(Capsule().fill(Color.black).opacity(0.2))
+                        Spacer()
                 }
         })
     }

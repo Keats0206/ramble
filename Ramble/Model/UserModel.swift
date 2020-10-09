@@ -47,6 +47,7 @@ struct User: Identifiable, Codable, Hashable{
     var profileImageUrl: String?
     var bio: String?
     var isFollowed: Bool?
+    var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
 
     enum CodingKeys: String, CodingKey {
         case id

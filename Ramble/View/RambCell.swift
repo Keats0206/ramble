@@ -29,7 +29,7 @@ struct RambCell : View {
                     WebImage(url: URL(string: "\(ramb.user.profileImageUrl ?? "")"))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                        .overlay(Circle().stroke(globalPlayer.globalRamb?.id == self.ramb.id ? Color.accent3 : .primary, lineWidth: 3))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                         .background(NavigationLink(destination:  // link in background
                                 ProfileView(offset: CGSize(width: 0, height: 0), user: ramb.user), isActive: $isActive) { EmptyView()

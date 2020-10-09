@@ -34,32 +34,48 @@ struct RambUserCell: View {
                                         
             Spacer()
             
-                Text("3:30")
+            Text("3:30")
                     .font(.system(size: 18, weight: .light, design: .rounded))
             
-            Button(action: {
+            if ramb.user.isCurrentUser {
                 
-                self.showingActionSheet.toggle()
-            
-            }){
-                Image(systemName: "ellipsis")
-                    .frame(height: 10)
-                    .accentColor(Color.accent4)
-                    .actionSheet(isPresented: $showingActionSheet) {
-                        
-                        ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
-                                    buttons:[
-                                        .default(
-                                            Text("Delete").foregroundColor(.red), action: {
-                                                print("delete ramb")
-//                                                self.viewModel.deleteRamb(ramb: self.ramb)
-                            }),.cancel()
-                        ])
-                        
-                }
+                Button(action: {
+                    self.showingActionSheet.toggle()
+                }){
+                        Image(systemName: "ellipsis")
+                            .frame(height: 10)
+                            .accentColor(Color.accent4)
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+                                            buttons:[
+                                                .default(
+                                                    Text("Delete").foregroundColor(.red), action: {
+                                                        print("DEBUG: delete ramb")
+                                    }),.cancel()
+                                ])
+                            }
+                    }.buttonStyle(BorderlessButtonStyle())
+            } else {
                 
-            }.buttonStyle(BorderlessButtonStyle())
-            
+                Button(action: {
+                    self.showingActionSheet.toggle()
+                }){
+                        Image(systemName: "ellipsis")
+                            .frame(height: 10)
+                            .accentColor(Color.accent4)
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text("Report this ramb?"),
+                                            buttons:[
+                                                .default(
+                                                    Text("Report").foregroundColor(.red), action: {
+                                                        print("DEBUG: report ramb")
+                                    }),.cancel()
+                                ])
+                            }
+                    }.buttonStyle(BorderlessButtonStyle())
+                
+            }
+                                    
         }.padding()
     }
 }
