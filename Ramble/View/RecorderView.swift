@@ -74,7 +74,7 @@ struct RecorderView: View {
             }){
                 Text("Cancel")
                     .font(.system(size: 20, weight: .heavy, design: .rounded))
-                    .foregroundColor(Color.accent1)
+                    .foregroundColor(Color.accent4)
             }, trailing:
                 previewButton
         )
@@ -90,7 +90,7 @@ private extension RecorderView {
                 } else {
                     Text("Preview")
                         .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundColor(Color.accent4)
+                        .foregroundColor(Color.accent1)
                 }
             }
         }

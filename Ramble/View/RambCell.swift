@@ -37,23 +37,23 @@ struct RambCell : View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        print("open ramb action menu")
-                    }){
-                        Image(systemName: "ellipsis")
-                            .frame(height: 10)
-                            .actionSheet(isPresented: $showingActionSheet) {
-                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
-                                            buttons:[
-                                                .default(
-                                                    Text("Delete").foregroundColor(.red), action: {
-                                                        print("delete ramb")
-//                                                        self.viewModel.deleteRamb(ramb: self.ramb)
-                                    }),.cancel()
-                                ])
-                        }
-                    }.buttonStyle(BorderlessButtonStyle())
-                    .foregroundColor(Color.accent4)
+//                    Button(action: {
+//                        print("open ramb action menu")
+//                    }){
+//                        Image(systemName: "ellipsis")
+//                            .frame(height: 10)
+//                            .actionSheet(isPresented: $showingActionSheet) {
+//                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
+//                                            buttons:[
+//                                                .default(
+//                                                    Text("Delete").foregroundColor(.red), action: {
+//                                                        print("delete ramb")
+////                                                        self.viewModel.deleteRamb(ramb: self.ramb)
+//                                    }),.cancel()
+//                                ])
+//                        }
+//                    }.buttonStyle(BorderlessButtonStyle())
+//                    .foregroundColor(Color.accent4)
                 }
                 
 //              Center of Cell VStack
@@ -95,16 +95,15 @@ struct RambCell : View {
                         Image(systemName: "play.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
-                            .foregroundColor(globalPlayer.globalRamb?.id == self.ramb.id ? .red : .black)
+                            .foregroundColor(globalPlayer.globalRamb?.id == self.ramb.id ? .accent4 : .primary)
 
                     }.buttonStyle(BorderlessButtonStyle())
                     
                     Text("3:30")
                         .font(.system(size: 18, weight: .regular, design: .rounded))
                 }
-            }
-            .padding()
-            .foregroundColor(.black)
+            }.padding()
+        
         }
         .frame(height: 150)
         .cornerRadius(15)

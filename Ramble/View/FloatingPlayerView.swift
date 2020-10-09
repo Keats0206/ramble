@@ -13,7 +13,7 @@ import AVKit
 struct FloatingPlayerView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
-    @State var height : CGFloat = UIScreen.main.bounds.height - 75
+    @State var height : CGFloat = UIScreen.main.bounds.height - 175
     @State var floating = true
     
     @Binding var hideNav: Bool
@@ -25,8 +25,8 @@ struct FloatingPlayerView: View {
             ZStack{
                 
                 Color.white
-                    .opacity(0.97)
                     .shadow(radius: 5)
+                    .cornerRadius(25)
                 
                 VStack{
                     // SMALL PLAYER
@@ -74,7 +74,6 @@ struct FloatingPlayerView: View {
                         .padding([.leading, .trailing])
                         .foregroundColor(.black)
 
-                        
                     } else {
                         
                         VStack{
@@ -105,21 +104,21 @@ struct FloatingPlayerView: View {
                         }
                     }).onEnded({ (value) in
                             if self.height > 100 && !self.floating {
-                                self.height = geo.size.height - 75
+                                self.height = geo.size.height - 60
                                 self.floating = true
                                 self.hideNav = false
                             } else{
-                                if self.height < geo.size.height - 500{
+                                if self.height < geo.size.height - 150{
                                     self.height = 25
                                     self.floating = false
                                     self.hideNav = true
                                 } else{
-                                    self.height = geo.size.height - 75
+                                    self.height = geo.size.height - 60
                                 }
                             }
                         })
-                      
-            ).offset(y: self.height - 75)
+            )
+            .offset(y: self.height)
             .animation(.spring())
         }
     }

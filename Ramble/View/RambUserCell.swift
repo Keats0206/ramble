@@ -38,12 +38,15 @@ struct RambUserCell: View {
                     .font(.system(size: 18, weight: .light, design: .rounded))
             
             Button(action: {
+                
                 self.showingActionSheet.toggle()
+            
             }){
                 Image(systemName: "ellipsis")
                     .frame(height: 10)
                     .accentColor(Color.accent4)
                     .actionSheet(isPresented: $showingActionSheet) {
+                        
                         ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
                                     buttons:[
                                         .default(
@@ -52,8 +55,11 @@ struct RambUserCell: View {
 //                                                self.viewModel.deleteRamb(ramb: self.ramb)
                             }),.cancel()
                         ])
+                        
                 }
+                
             }.buttonStyle(BorderlessButtonStyle())
+            
         }.padding()
     }
 }

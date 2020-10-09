@@ -11,7 +11,8 @@ import SDWebImageSwiftUI
 
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
-        
+    @Environment(\.presentationMode) var presentationMode
+
     @State var email: String = ""
     @State var username: String = ""
     @State var displayname: String = ""
@@ -54,30 +55,47 @@ struct EditProfileView : View {
     
     var body : some View {
         
-        ZStack{
+        NavigationView{
+            
+            ZStack{
             
             Color.white
             
             VStack(spacing: 20){
                 
-                HStack{
+                HStack(alignment: .top){
                     
-                    Spacer()
-                    
+                    WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                            .shadow(radius: 10)
+                            .overlay(Circle().stroke(Color.red, lineWidth: 5))
+                                                                    
                     Button(action: {
-                        
-                        print("DEBUG: Update profile information")
-                        
-                    }) {
-                        Text("Save")
-                            .foregroundColor(.red)
-                            .font(.system(size: 18, weight: .bold))
-                    }
+                        self.showImagePicker = true
+                    }){
+                        Text("Replace")
+                            .font(.body).bold()
+                            .padding(5)
+                            .padding([.trailing,.leading])
+                    }.background(Capsule().stroke(lineWidth: 2))
+                        .sheet(isPresented: $showImagePicker, onDismiss: {
                     
-                }.padding()
-                
-                Spacer().frame(height: 10)
-                                
+                    self.showImagePicker = false
+                    
+                }, content: {
+                        
+                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                        
+                    }).actionSheet(isPresented: $showAction) {
+                        sheet
+
+                    }
+
+                    Spacer()
+
+                }
+                                            
                 VStack(alignment: .leading, spacing: 5){
                     
                     Text("Username")
@@ -89,40 +107,6 @@ struct EditProfileView : View {
                     
                     Divider()
 
-                }
-                            
-                HStack{
-                    
-                    WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.red, lineWidth: 5))
-                    
-                    VStack{
-                        
-                        Text("Profile Picture").font(.system(size: 14, weight: .bold))
-                        
-                        Button(action: {
-                            self.showImagePicker = true
-                        }){
-                            Text("Upload")
-                                .font(.body).bold()
-                                .padding(5)
-                                .padding([.trailing,.leading])
-                        }.background(Capsule().stroke(lineWidth: 2))
-                        
-                    }.sheet(isPresented: $showImagePicker, onDismiss: {
-                        
-                        self.showImagePicker = false
-                        
-                    }, content: {
-                        
-                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                        
-                    }).actionSheet(isPresented: $showAction) {
-                        sheet
-                    }
                 }
                 
                 VStack(alignment: .leading, spacing: 5){
@@ -150,12 +134,68 @@ struct EditProfileView : View {
                     
                 }
                 
-                Spacer()
-                
-                Spacer()
-                                
+                HStack{
+
+                        Button(action: {
+
+                        UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+
+                    }) {
+
+                        Text("Privacy & Terms")
+
+                    }
+
+                    Spacer()
+                }
+
+                Divider()
+
+                HStack{
+
+                        Button(action: {
+
+                        UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+
+                    }) {
+
+                        Text("Give Feedback")
+
+                    }
+
+                    Spacer()
+                }
+
+                Divider()
+
+                HStack{
+
+                    Button(action: {
+
+                        UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+
+                    }) {
+
+                        Text("Rate Us")
+
+                    }
+
+                    Spacer()
+
+                }
+     
             }.padding()
-            .padding(.top, UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top)
+            }
+            .navigationBarItems(trailing:
+            Button(action: {
+                print("Save changes")
+                presentationMode.wrappedValue.dismiss()
+            }){
+                Text("Post")
+                    .font(.system(.headline,design: .rounded)).bold()
+                    .foregroundColor(.red)
+                }
+            )
         }
     }
 }

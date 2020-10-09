@@ -36,10 +36,8 @@ struct FeedView: View {
                 RambFeed(dataToggle: $dataToggle)
                 
                 if globalPlayer.globalRamb != nil{
-                    
                     FloatingPlayerView(hideNav: $hideNav)
                         .edgesIgnoringSafeArea(.all)
-                    
                 }
             }.navigationBarHidden(hideNav)
             .navigationBarTitle("", displayMode: .inline)
@@ -52,7 +50,6 @@ struct FeedView: View {
                             .font(.system(size: 20, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.accent3)
 //                    }
-                    
 //                    Button(action: {
 //                        self.dataSelector = 1
 //                    }){

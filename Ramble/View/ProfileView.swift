@@ -14,6 +14,7 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @State private var isShowing = false
     @State private var isPresented = false
@@ -72,8 +73,10 @@ struct ProfileView: View {
                 }.offset(offset)
                 .padding(0)
                                                         
-                FloatingPlayerView(hideNav: $hideNav)
-                    .edgesIgnoringSafeArea(.all)
+                if globalPlayer.globalRamb != nil{
+                    FloatingPlayerView(hideNav: $hideNav)
+                        .edgesIgnoringSafeArea(.all)
+                }
 //
 //                ZStack{
 //                    SettingsView(isPresented: $isPresented)
@@ -118,19 +121,8 @@ struct ProfileView: View {
                             EditProfileView(user: user)
                         }
                         
-                        Button(action: {
-                            self.settingsModal_shown.toggle()
-                        }){
-                            Image(systemName: "gear")
-                                .padding(5)
-                        }.background(Capsule().fill(Color.black).opacity(0.2))
-                        .sheet(isPresented: $settingsModal_shown, onDismiss: {
-                            print("Modal dismisses")
-                        }) {
-                            SettingsView()
-                        }
-                        
                     } else {
+                        
                         Button(action: {
 //                            if self.isFollowed {
 //                                UserService.shared.unfollowUser(uid: self.user.uid)
