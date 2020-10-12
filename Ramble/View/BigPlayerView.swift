@@ -46,11 +46,8 @@ struct BigPlayerView: View {
                 ZStack{
                     
                     // Album Image...
-//                    Image(uiImage: homeData.album.artwork)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fill)
-//                        .frame(width: width, height: width)
-//                        .clipShape(Circle())
+                    Circle()
+                        .frame(width: width, height: width)
                     
                     ZStack{
                         
@@ -85,38 +82,28 @@ struct BigPlayerView: View {
                     
                     // Time Texts....
                     
-//                    Text("homeData.getCurrentTime(value: homeData.player.currentTime"))
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(.black)
-//                        .offset(x: UIScreen.main.bounds.height < 750 ? -65 : -85 , y: (width + 70) / 2)
-//
-//                    Text(homeData.getCurrentTime(value: homeData.player.duration))
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(.black)
-//                        .offset(x: UIScreen.main.bounds.height < 750 ? 65 : 85 , y: (width + 70) / 2)
+                    Text("3:30")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                        .offset(x: UIScreen.main.bounds.height < 750 ? -65 : -85 , y: (width + 70) / 2)
+
+                    Text("3:30")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                        .offset(x: UIScreen.main.bounds.height < 750 ? 65 : 85 , y: (width + 70) / 2)
                 }
                 
-                Text("Title")
+                Text("Pete Keating")
+                    .foregroundColor(.gray)
+                    .padding(.top,20)
+                
+                Text("This is a song about how to be wild")
                     .font(.title)
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
-                    .padding(.top,30)
+                    .padding(.top,10)
                     .padding(.horizontal)
                     .lineLimit(1)
-                
-                Text("Album")
-                    .foregroundColor(.gray)
-                    .padding(.top,5)
-                
-                Text("Type")
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding(.vertical,6)
-                    .padding(.horizontal)
-                    .background(Color.black.opacity(0.07))
-                    .cornerRadius(5)
-                    .padding(.top)
                 
                 HStack(spacing: 55){
                     
@@ -124,17 +111,14 @@ struct BigPlayerView: View {
                         
                         Image(systemName: "backward.fill")
                             .font(.title)
-                            .foregroundColor(.gray)
                     }
                     
                     Button(action: {
                         print("Playe")
                     }) {
                         
-//                        Image(systemName: homeData.isPlaying ? "pause.fill" : "play.fill")
-                        Image(systemName: "pause.fill")
+                        Image(systemName: "play.fill")
                             .font(.title)
-                            .foregroundColor(.white)
                             .padding(20)
                             .background(Color("orange"))
                             .clipShape(Circle())
@@ -144,7 +128,6 @@ struct BigPlayerView: View {
                         
                         Image(systemName: "forward.fill")
                             .font(.title)
-                            .foregroundColor(.gray)
                     }
                 }
                 .padding(.top,25)

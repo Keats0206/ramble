@@ -78,9 +78,7 @@ struct FloatingPlayerView: View {
                         
                         VStack{
 
-                        Spacer()
-                        
-                        Spacer()
+                        BigPlayerView()
                             
                     }
                 }
