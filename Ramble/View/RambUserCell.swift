@@ -22,12 +22,19 @@ struct RambUserCell: View {
 //              Center of Cell VStack
             VStack(alignment: .leading){
                 
-                Text(ramb.caption)
+                Button(action:{
+                    globalPlayer.globalRamb = self.ramb
+                    globalPlayer.setGlobalPlayer(ramb: self.ramb)
+                    globalPlayer.globalRambPlayer?.play()
+                    globalPlayer.isPlaying = true
+                }){
+                    Text(ramb.caption)
                     .font(.system(size: 20, weight: .bold, design: .rounded))
+//                    .foregroundColor(globalPlayer.globalRamb?.id == self.ramb.id ? .accent4 : .primary)
                     .multilineTextAlignment(TextAlignment.leading)
+                }
 
 //               Username + timestamp
-                                        
                     Text(formatDate(timestamp: ramb.timestamp) + " ago")
                         .font(.system(size: 16, weight: .regular, design: .rounded))
                 }
@@ -76,7 +83,8 @@ struct RambUserCell: View {
                 
             }
                                     
-        }.padding()
+        }
+            .padding()
     }
 }
 

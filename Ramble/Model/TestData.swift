@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVKit
 //
 //let _user = User(uid: "1", values: [
 //                 "id": "1",
@@ -52,3 +53,5 @@ let _ramb2 = Ramb2(id: "1",
                    uid: _user2.id!,
                    isSelected: false
 )
+
+let _player = AVPlayer(url: URL(string: "\(_ramb2.rambUrl)")!)

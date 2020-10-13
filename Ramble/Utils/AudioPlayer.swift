@@ -26,12 +26,11 @@ struct AudioPlayerControlsView: View {
             Slider(value: $currentTime,
                    in: 0...currentDuration,
                    onEditingChanged: sliderEditingChanged,
-                   minimumValueLabel: nil,
-                   maximumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentTime)) / \(TimeHelper.formatSecondsToHMS(currentDuration))")) {
+                   minimumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentTime))"),
+                   maximumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentDuration))")) {
 // This seems to be required but not sure when it would ever show in the UI
                     Text("Duration")
             }.font(.system(size: 14))
-            .accentColor(Color.red)
         }.padding()
 // Listen out for the time observer publishing changes to the player's time
         .onReceive(timeObserver.publisher) { time in
@@ -47,30 +46,21 @@ struct AudioPlayerControlsView: View {
 
 // MARK: Private functions
     private func sliderEditingChanged(editingStarted: Bool) {
-        
         if editingStarted {
             
             // Tell the PlayerTimeObserver to stop publishing updates while the user is interacting
             // with the slider (otherwise it would keep jumping from where they've moved it to, back
             // to where the player is currently at)
-            
             timeObserver.pause(true)
-            
         }
-            
         else {
             
 // Start the seek
-            
             let targetTime = CMTime(seconds: currentTime,
                                     preferredTimescale: 600)
-            
             player.seek(to: targetTime) { _ in
-                
 // Now the (async) seek is completed, resume normal operation
-                
                 self.timeObserver.pause(false)
-                                
             }
         }
     }
@@ -81,26 +71,42 @@ struct AudioView: View {
     var player: AVPlayer
      
     var body: some View {
-        HStack {
+        VStack {
+            
+            HStack(spacing: 55){
+                
+                Button(action: {}) {
+                    
+                    Image(systemName: "backward.fill")
+                        .font(.title)
+                }
+                
+                Button(action: {
+                    if self.isPlaying {
+                        self.player.pause()
+                        self.isPlaying.toggle()
+                    } else {
+                        self.player.play()
+                        self.isPlaying.toggle()
+                    }
+                 }) {
+                    Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }.buttonStyle(BorderlessButtonStyle())
+                
+                Button(action: {}) {
+                    
+                    Image(systemName: "forward.fill")
+                        .font(.title)
+                }
+            }.padding(.top,25)
+            
             AudioPlayerControlsView(player: player,
                                     timeObserver: PlayerTimeObserver(player: player),
                                     durationObserver: PlayerDurationObserver(player: player))
-            Spacer()
-            Button(action: {
-                if self.isPlaying {
-                    self.player.pause()
-                    self.isPlaying.toggle()
-                } else {
-                    self.player.play()
-                    self.isPlaying.toggle()
-                }
-             }) {
-                Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-            }.buttonStyle(BorderlessButtonStyle())
         }.onAppear{
-            self.isPlaying = false
+            self.isPlaying = true
         }
     }
 }

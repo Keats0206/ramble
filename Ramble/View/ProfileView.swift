@@ -71,27 +71,18 @@ struct ProfileView: View {
                     Spacer()
                                     
                 }.offset(offset)
-                .padding(0)
+                    .padding(0)
                                                         
                 if globalPlayer.globalRamb != nil{
                     FloatingPlayerView(hideNav: $hideNav)
                         .edgesIgnoringSafeArea(.all)
                 }
-//
-//                ZStack{
-//                    SettingsView(isPresented: $isPresented)
-//                }.edgesIgnoringSafeArea(.all)
-//                .offset(x: 0, y: self.isPresented ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
-//                ZStack{
-//                    EditProfileView(editProfileShown: $editModal_shown, user: user)
-//                }.edgesIgnoringSafeArea(.all)
-//                .offset(x: 0, y: self.editProfileShown ? 0 : UIApplication.shared.currentWindow?.frame.height ?? 0)
                 
             }.navigationBarHidden(hideNav)
             .navigationBarItems(trailing:
                                     
                 HStack{
-                    
+                                    
                     Button(action: {
                         self.searchModal_shown.toggle()
                     }){

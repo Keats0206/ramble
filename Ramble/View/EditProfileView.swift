@@ -58,55 +58,44 @@ struct EditProfileView : View {
         NavigationView{
             
             ZStack{
-            
-            Color.black
-            
+                        
             VStack(spacing: 20){
                 
-                HStack(spacing: 20){
+                VStack{
                     
                     WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                             .shadow(radius: 10)
                             .overlay(Circle().stroke(Color.accent3, lineWidth: 5))
-                                                                    
-                    VStack{
+                    
+                        Button(action: {
                         
-                        Text("Profile Pic")
+                        self.showImagePicker = true
+                        
+                    })
+                        {
+                        
+                        Text("Change")
                             .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .padding(5)
+                            .padding([.trailing,.leading])
                         
-                            Button(action: {
-                            
-                            self.showImagePicker = true
-                            
-                        })
-                            {
-                            
-                            Text("Change")
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
-                                .padding(5)
-                                .padding([.trailing,.leading])
-                            
-                        }.background(Capsule().stroke(lineWidth: 2))
-                            .sheet(isPresented: $showImagePicker, onDismiss: {
+                    }.background(Capsule().stroke(lineWidth: 2))
+                        .sheet(isPresented: $showImagePicker, onDismiss: {
+                    
+                    self.showImagePicker = false
+                    
+                }, content: {
                         
-                        self.showImagePicker = false
+                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
                         
-                    }, content: {
-                            
-                            ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                            
-                        }).actionSheet(isPresented: $showAction) {
-                            sheet
+                    }).actionSheet(isPresented: $showAction) {
+                        sheet
 
-                        }
-                                                
-                    }.frame(height: 100)
-
-                    Spacer()
-
-                }
+                    }
+                                            
+                }.frame(height: 100)
                                             
                 VStack(alignment: .leading, spacing: 5){
                     
@@ -198,9 +187,9 @@ struct EditProfileView : View {
 
                 }
      
-            }
-                .foregroundColor(.white)
+                }
                 .padding()
+            
             }
             .navigationBarItems(leading:
                 Button(action: {

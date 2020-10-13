@@ -24,10 +24,8 @@ struct FloatingPlayerView: View {
             
             ZStack{
                 
-                Color.black
-                    .shadow(color: .primary, radius: 10)
-                    .cornerRadius(25)
-                
+                Color.white
+        
                 VStack{
                     // SMALL PLAYER
                     if floating == true {
@@ -78,10 +76,10 @@ struct FloatingPlayerView: View {
                         
                         VStack{
 
-                        BigPlayerView()
+                            BigPlayerView(ramb: globalPlayer.globalRamb!, player: globalPlayer.globalRambPlayer!)
                             
+                        }
                     }
-                }
                     
                     // your music player.....
                     
@@ -119,5 +117,11 @@ struct FloatingPlayerView: View {
             .offset(y: self.height)
             .animation(.spring())
         }
+    }
+}
+
+struct FloatingPlayerView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
