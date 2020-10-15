@@ -10,15 +10,20 @@ import Firebase
 import Combine
 
 class RambService2: ObservableObject {
-    @EnvironmentObject var globalPlayer: GlobalPlayer
+    @Published var globalPlayer: GlobalPlayer?
     static let shared = RambService2()
     
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
     @Published var userRambs = [Ramb2]()
+    @Published var initialRamb : Ramb2?
     
     init() {
-        fetchRambs()
+        fetchRambs(isInitialFetch: true)
+    }
+    
+    func setUp(globalPlayer: GlobalPlayer) {
+        self.globalPlayer = globalPlayer
     }
     
     //  This function is working!
@@ -37,11 +42,20 @@ class RambService2: ObservableObject {
     }
     
 //  Fetch all rambs for the for you page
-    func fetchRambs() {
+    func fetchRambs(isInitialFetch : Bool = false) {
         FB_REF_RAMBS.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
             if let querySnapshot = querySnapshot {
                 self.allRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                     try? document.data(as: Ramb2.self) // (4)
+                }
+                if isInitialFetch {
+                    self.allRambs.sort(by: { $0.plays > $1.plays })
+                    if let ramb = self.allRambs.first {
+                        self.globalPlayer?.globalRamb = ramb
+                        self.globalPlayer?.setGlobalPlayer(ramb: ramb)
+                    }
+//                    globalPlayer.globalRambPlayer?.play()
+//                    globalPlayer.isPlaying = true
                 }
             }
         }

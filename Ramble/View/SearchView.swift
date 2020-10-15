@@ -28,8 +28,8 @@ struct SearchView: View {
                             
                 List{
                     
-                    ForEach(self.viewModel.users.filter{$0.email.lowercased().contains(self.searchText.lowercased())}, id: \.self) { user in
-                            SearchCell(user: user)
+                    ForEach(self.viewModel.users.filter{($0.username?.lowercased() ?? "").contains(self.searchText.lowercased()) || ($0.displayname?.lowercased() ?? "").contains(self.searchText.lowercased())}, id: \.self) { user in
+                        SearchCell(user: user)
                     }
                 }
                 

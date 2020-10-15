@@ -21,76 +21,41 @@ struct RambCell : View {
     
     var body: some View {
         
-        ZStack{
-            
-            HStack(alignment: .center){
+        ZStack {
+            NavigationLink(destination:  // link in background
+                    ProfileView(offset: CGSize(width: 0, height: 0), user: ramb.user), isActive: $isActive) { EmptyView()
+            }
+            HStack(alignment: .center) {
                 
-                VStack(alignment: .center, spacing: 10){
+                VStack(alignment: .center, spacing: 10) {
                     WebImage(url: URL(string: "\(ramb.user.profileImageUrl ?? "")"))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(globalPlayer.globalRamb?.id == self.ramb.id ? Color.accent3 : .primary, lineWidth: 3))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
-                        .background(NavigationLink(destination:  // link in background
-                                ProfileView(offset: CGSize(width: 0, height: 0), user: ramb.user), isActive: $isActive) { EmptyView()
-                        }).buttonStyle(BorderlessButtonStyle())
-                    
                     Spacer()
-                    
-//                    Button(action: {
-//                        print("open ramb action menu")
-//                    }){
-//                        Image(systemName: "ellipsis")
-//                            .frame(height: 10)
-//                            .actionSheet(isPresented: $showingActionSheet) {
-//                                ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
-//                                            buttons:[
-//                                                .default(
-//                                                    Text("Delete").foregroundColor(.red), action: {
-//                                                        print("delete ramb")
-////                                                        self.viewModel.deleteRamb(ramb: self.ramb)
-//                                    }),.cancel()
-//                                ])
-//                        }
-//                    }.buttonStyle(BorderlessButtonStyle())
-//                    .foregroundColor(Color.accent4)
                 }
-                
-//              Center of Cell VStack
-                
-                VStack(alignment: .leading){
-                    //                  Username + timestamp
-                    
+                VStack(alignment: .leading) {
                     HStack{
-                        
                         Text("@" + (ramb.user.username ?? ""))
                             .font(.system(size: 18, weight: .heavy, design: .rounded))
                             .bold()
-                        //                  Caption
-                        
                         Text(formatDate(timestamp: ramb.timestamp))
                             .font(.system(.body, design: .rounded))
-                        
+                        Spacer()
                     }
                     
                     Text(ramb.caption)
                         .font(.system(size: 22,weight: .regular, design: .rounded))
                         .bold()
                         .multilineTextAlignment(TextAlignment.leading)
-                    
                     Spacer()
-                    
-                }
-                
-                Spacer()
+                }.background(Color.white)
                 
                 VStack(alignment: .center){
                     
                     Button(action: {
-                        globalPlayer.globalRamb = self.ramb
-                        globalPlayer.setGlobalPlayer(ramb: self.ramb)
-                        globalPlayer.globalRambPlayer?.play()
-                        globalPlayer.isPlaying = true
+                        play()
                     }){
                         Image(systemName: "play.circle")
                             .resizable()
@@ -104,9 +69,17 @@ struct RambCell : View {
                 }
             }.padding()
         
-        }
-        .frame(height: 150)
+        }.onTapGesture(perform: {
+            play()
+        })
         .cornerRadius(15)
+    }
+    
+    func play() {
+        globalPlayer.globalRamb = self.ramb
+        globalPlayer.setGlobalPlayer(ramb: self.ramb)
+        globalPlayer.globalRambPlayer?.play()
+        globalPlayer.isPlaying = true
     }
 }
 

@@ -14,6 +14,7 @@ struct RecorderView: View {
     
     @State private var animateRecording = false
     @State var animateUploading = false
+    @Binding var currentTab: Tab
 //    @State private var wave3 = false
     
     var user: User
@@ -79,6 +80,10 @@ struct RecorderView: View {
             }
         }.onAppear{
             animateUploading = false
+            if currentTab == .profile {
+                currentTab = .Tab2
+                presentationMode.wrappedValue.dismiss()
+            }
         }
         .navigationBarHidden(false)
         .navigationBarItems(leading:
@@ -95,7 +100,7 @@ struct RecorderView: View {
 private extension RecorderView {
     var previewButton: some View {
         ZStack{
-            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, user: user)){
+            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, currentTab: $currentTab, user: user)){
                 if audioRecorder.recorderState != .uploaded {
                     Spacer()
                 } else {
@@ -110,7 +115,7 @@ private extension RecorderView {
 
 struct RecorderView_Previews: PreviewProvider {    
     static var previews: some View {
-        RecorderView(user: _user2)
+        RecorderView(currentTab: .constant(Tab.Tab1), user: _user2)
     }
 }
 
@@ -140,54 +145,3 @@ struct LoadingAnimation: View{
         }
     }
 }
-
-struct RecorderPostView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var audioRecorder = AudioRecorder()
-
-    @State var caption = ""
-    @State var rambUrl: String
-    
-    var user: User
-    
-    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String){
-        let timestamp = Int(NSDate().timeIntervalSince1970) * -1
-        let isSelected = false
-        let length = Double(0)
-        let uid = user.id!
-        
-        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, plays: 0, user: user, uid: uid, isSelected: isSelected)
-        
-        RambService2().addRamb(ramb)
-    }
-
-    var body: some View {
-        
-        VStack(alignment: .leading){
-            
-            TextField("What do you have to say", text: $caption)
-                .font(.system(.largeTitle,design: .rounded))
-                .fixedSize(horizontal: true, vertical: false)
-                .multilineTextAlignment(.leading)
-            
-            Spacer()
-        
-        }.padding()
-        .navigationBarItems(trailing:
-            Button(action: {
-//                print(self.rambUrl)
-                self.uploadRamb2(
-                    user: user,
-                    caption: caption,
-                    rambUrl: rambUrl,
-                    fileId: ""
-                )
-                presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Post")
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundColor(.accent4)
-                }
-            )
-        }
-    }

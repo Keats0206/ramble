@@ -35,13 +35,13 @@ class UserService2: ObservableObject {
     }
     
     func fetchUsers() {
-//        FB_REF_USERS.addSnapshotListener { (querySnapshot, error) in // (2)
-//            if let querySnapshot = querySnapshot {
-//                self.users = querySnapshot.documents.compactMap { document -> User? in // (3)
-//                    try? document.data(as: User.self) // (4)
-//                }
-//            }
-//        }
+        FB_REF_USERS.addSnapshotListener { (querySnapshot, error) in // (2)
+            if let querySnapshot = querySnapshot {
+                self.users = querySnapshot.documents.compactMap { document -> User? in // (3)
+                    try? document.data(as: User.self) // (4)
+                }
+            }
+        }
     }
     
     func saveUserProfile(user: User, username: String, fullname: String, bio: String){
