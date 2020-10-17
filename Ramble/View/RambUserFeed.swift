@@ -17,6 +17,7 @@ struct RambUserFeed : View {
 
     init(user: User){
         self.user = user
+        viewModel.fetchUserRambs(user: user)
         return
     }
     

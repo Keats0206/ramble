@@ -56,6 +56,7 @@
 		40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF04251BF94F0025799C /* AudioPlayer.swift */; };
 		40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF06251BFC100025799C /* RambUserCell.swift */; };
 		57991328E7CB7B211CC47CFE /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660913489296DEBCA2856061 /* Pods_Ramble.framework */; };
+		EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -124,6 +125,7 @@
 		660913489296DEBCA2856061 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		876D5044B5AAC2E4E780DE9E /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
 		94798487FBAE67DE4BA41F0C /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
+		EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderPostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
 				40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */,
 				403390F425311CBC0041BF68 /* BigPlayerView.swift */,
+				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
+				EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
 				40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,

@@ -44,17 +44,11 @@ struct RambFeed : View {
         }
         .onAppear{
             self.dataToggle = 0
-            viewModel.fetchRambs()
+            if self.globalPlayer.globalRambPlayer == nil {
+                viewModel.setUp(globalPlayer: self.globalPlayer)
+            }
         }
     }
-    
-//    private func loadRamb(){
-//        let ramb = viewModel.allRambs[0]
-//        print(ramb)
-//        globalPlayer.globalRamb = ramb
-//        globalPlayer.setGlobalPlayer(ramb: ramb)
-//        globalPlayer.globalRambPlayer?.play()
-//    }
 }
 
 struct RambFeed_Previews: PreviewProvider {

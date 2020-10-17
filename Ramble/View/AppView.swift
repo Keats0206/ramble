@@ -71,7 +71,7 @@ struct AppView: View {
                 print("Modal dismisses")
             }) {
                 NavigationView{
-                    RecorderView(user: user)
+                    RecorderView(currentTab: .constant(Tab.Tab1), user: user)
                 }
             }
                 .onAppear{
@@ -109,14 +109,20 @@ struct MainView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0){
-                CurrentScreen(currentView: self.$currentView, user: user)
+        NavigationView {
+            VStack(spacing: 0) {
+                if self.currentView == .Tab1 {
+                    FeedView(user: user)
+                } else {
+                    ProfileView(offset: CGSize(width: 0, height: -50), user: user)
+                }
                 TabBar(currentView: self.$currentView, showModal: self.$showModal)
-        }.onAppear{
-                self.getUser()
-            }.sheet(isPresented: self.$showModal) {
-                NavigationView{
-                    RecorderView(user: user)
+            }.onAppear{
+                    self.getUser()
+                }.sheet(isPresented: self.$showModal) {
+                    NavigationView{
+                        RecorderView(currentTab: $currentView, user: user)
+                }
             }
         }
     }
@@ -160,6 +166,7 @@ struct CurrentScreen: View {
 enum Tab {
     case Tab1
     case Tab2
+    case profile
 }
 
 struct TabBarItem: View {
