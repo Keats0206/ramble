@@ -78,8 +78,7 @@ struct RambCell : View {
     func play() {
         globalPlayer.globalRamb = self.ramb
         globalPlayer.setGlobalPlayer(ramb: self.ramb)
-        globalPlayer.globalRambPlayer?.play()
-        globalPlayer.isPlaying = true
+        globalPlayer.play()
     }
 }
 

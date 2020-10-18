@@ -25,8 +25,7 @@ struct RambUserCell: View {
                 Button(action:{
                     globalPlayer.globalRamb = self.ramb
                     globalPlayer.setGlobalPlayer(ramb: self.ramb)
-                    globalPlayer.globalRambPlayer?.play()
-                    globalPlayer.isPlaying = true
+                    globalPlayer.play()
                 }){
                     Text(ramb.caption)
                     .font(.system(size: 20, weight: .bold, design: .rounded))

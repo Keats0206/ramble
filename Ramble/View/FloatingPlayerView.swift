@@ -59,8 +59,7 @@ struct FloatingPlayerView: View {
                                 }
                             } else {
                                 Button(action: {
-                                    self.globalPlayer.globalRambPlayer?.play()
-                                    globalPlayer.isPlaying = true
+                                    self.globalPlayer.play()
                                 }){
                                     Image(systemName: "play.fill")
                                         .resizable()
