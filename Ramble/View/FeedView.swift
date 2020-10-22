@@ -31,51 +31,37 @@ struct FeedView: View {
     }
     
     var body: some View {
-            ZStack{
-                
-                RambFeed(dataToggle: $dataToggle)
-                
-                if globalPlayer.globalRamb != nil{
-                    FloatingPlayerView(hideNav: $hideNav)
-                        .edgesIgnoringSafeArea(.all)
-                }
-            }.navigationBarHidden(hideNav)
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(leading:
+        ZStack{
+            RambFeed(dataToggle: $dataToggle)
+            if globalPlayer.globalRamb != nil {
+                FloatingPlayerView(hideNav: $hideNav)
+                    .edgesIgnoringSafeArea(.all)
+                    .clipped()
+                    .shadow(color: .gray, radius: 2, x: 0.0, y: -3)
+            }
+        }.navigationBarHidden(hideNav)
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarItems(
+            leading:
                 HStack{
-//                    Button(action: {
-//                        self.dataSelector = 0
-//                    }){
-                        Text("RAMBLE")
-                            .font(.system(size: 30, weight: .heavy, design: .rounded))
-                            .foregroundColor(Color.accent3)
-//                    }
-//                    Button(action: {
-//                        self.dataSelector = 1
-//                    }){
-//                        Text("FRIENDS")
-//                            .font(.system(size: 20, weight: .heavy, design: .rounded))
-//                            .foregroundColor(dataSelector == 1 ? Color.accent3 : Color.black)
-//                    }
-                }
-            , trailing:
+                    Text("RAMBLE")
+                        .font(.system(size: 30, weight: .heavy, design: .rounded))
+                        .foregroundColor(Color.accent3)
+                }, trailing:
             HStack{
-//      Change to filter
                 Button(action: {
                     self.dataToggle = 0
-                }){
+                }) { 
                     Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
                         .resizable()
                         .frame(width: 25, height: 25)
                         .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
                         .padding(5)
                 }
-                
+            
                 Button(action: {
-                    
                     self.dataToggle = 1
-                    
-                }){
+                }) {
                     Image(systemName: dataToggle == 1 ? "flame.fill" : "flame")
                         .resizable()
                         .frame(width: 25, height: 25)

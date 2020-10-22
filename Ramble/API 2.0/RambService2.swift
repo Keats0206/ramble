@@ -51,7 +51,7 @@ class RambService2: ObservableObject {
                 if isInitialFetch {
                     self.allRambs.sort(by: { $0.plays > $1.plays })
                     if let ramb = self.allRambs.first {
-                        self.globalPlayer?.globalRamb = ramb
+                        self.globalPlayer?.globalRamb = [ramb]
                         self.globalPlayer?.setGlobalPlayer(ramb: ramb)
                     }
 //                    globalPlayer.globalRambPlayer?.play()
@@ -72,10 +72,32 @@ class RambService2: ObservableObject {
                 if let querySnapshot = querySnapshot {
                     self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                         try? document.data(as: Ramb2.self) // (4)
-                    }
                 }
             }
         }
+    }
+    
+    func updateUserData(user: User) {
+        let dict = [
+            "bio" : user.bio,
+            "displayname" : user.displayname,
+            "email" : user.email,
+            "isFollowed" : user.isFollowed,
+            "profileImageUrl" : user.profileImageUrl,
+            "uid" : user.uid,
+            "username" : user.username
+        ] as [String : Any]
+        FB_REF_RAMBS.whereField("uid", isEqualTo: user.uid).getDocuments(completion: { (snapshots, error) in
+            if let error = error {
+                print("Error " + error.localizedDescription)
+                return
+            } else if let snaps = snapshots?.documents {
+                for snap in snaps {
+                    snap.reference.updateData(["user" : dict])
+                }
+            }
+        })
+    }
 
 //    private func uploadRamb(caption: String, rambUrl: String, rambFileId: String) {
 //
