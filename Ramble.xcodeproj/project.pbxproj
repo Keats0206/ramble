@@ -240,6 +240,7 @@
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
 				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
+				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
 				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
@@ -248,7 +249,6 @@
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
 				40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */,
 				403390F425311CBC0041BF68 /* BigPlayerView.swift */,
-				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

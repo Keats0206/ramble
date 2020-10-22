@@ -31,7 +31,7 @@ struct RecorderPostView: View {
 
     var body: some View {
         
-        VStack(alignment: .leading){
+        VStack(alignment: .center){
             
             TextField("What do you have to say", text: $caption)
                 .font(.system(.largeTitle,design: .rounded))
@@ -39,11 +39,21 @@ struct RecorderPostView: View {
                 .multilineTextAlignment(.leading)
             
             Spacer()
+            
+            Button(action: {
+                print("Play ramb")
+            }){
+                Image(systemName: "play.circle")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(Color.accent3)
+            }
+            
+            Spacer()
         
         }.padding()
         .navigationBarItems(trailing:
             Button(action: {
-//                print(self.rambUrl)
                 self.uploadRamb2(
                     user: user,
                     caption: caption,

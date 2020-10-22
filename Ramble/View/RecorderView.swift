@@ -15,18 +15,23 @@ struct RecorderView: View {
     @State private var animateRecording = false
     @State var animateUploading = false
     @Binding var currentTab: Tab
+    
+    @State var isActive = false
 //    @State private var wave3 = false
     
     var user: User
 
     var body: some View {
         ZStack{
-                    
+            
+            previewButton
+            
             ZStack{
                 
                 switch audioRecorder.recorderState {
                 
                     case .ready:
+                        
                         Button(action: {
                             self.audioRecorder.startRecording()
                         }) {
@@ -38,7 +43,6 @@ struct RecorderView: View {
                         }
                         
                     case .started:
-
                         Button(action: {
                             self.audioRecorder.stopRecording()
                         }) {
@@ -73,8 +77,9 @@ struct RecorderView: View {
                         LoadingAnimation()
                    
                     case .uploaded:
-                        previewButton
+                        Spacer()
                             .onAppear {
+                                self.isActive.toggle()
                     }
                 }
             }
@@ -100,14 +105,8 @@ struct RecorderView: View {
 private extension RecorderView {
     var previewButton: some View {
         ZStack{
-            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, currentTab: $currentTab, user: user)){
-                if audioRecorder.recorderState != .uploaded {
-                    Spacer()
-                } else {
-                    Text("Preview")
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundColor(Color.accent1)
-                }
+            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, currentTab: $currentTab, user: user), isActive: $isActive){
+                Spacer()
             }
         }
     }
