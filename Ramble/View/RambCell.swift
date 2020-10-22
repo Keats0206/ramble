@@ -22,17 +22,21 @@ struct RambCell : View {
     var body: some View {
         
         ZStack {
+            
             NavigationLink(destination:  // link in background
-                            ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
+                ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
             }
+            
             HStack(alignment: .center) {
                 
                 VStack(alignment: .center, spacing: 10) {
+                    
                     WebImage(url: URL(string: ramb.user.profileImageUrl))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
-                        .overlay(Circle().stroke(globalPlayer.globalRamb?.first?.id == self.ramb.id ? Color.accent3 : .primary, lineWidth: 3))
+                        .overlay(Circle().stroke(globalPlayer.globalRamb?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
+                    
                     Spacer()
                 }
                 VStack(alignment: .leading) {
@@ -61,14 +65,14 @@ struct RambCell : View {
                             .resizable()
                             .frame(width: 30, height: 30)
                             .foregroundColor(globalPlayer.globalRamb?.first?.id == self.ramb.id ? .accent4 : .primary)
-
+                        
                     }.buttonStyle(BorderlessButtonStyle())
                     
                     Text("3:30")
                         .font(.system(size: 18, weight: .regular, design: .rounded))
                 }
             }.padding()
-        
+            
         }.onTapGesture(perform: {
             play()
         })

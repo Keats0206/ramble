@@ -37,6 +37,7 @@ struct FeedView: View {
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
                     .clipped()
+                    .shadow(color: .gray, radius: 2, x: 0.0, y: -3)
             }
         }.navigationBarHidden(hideNav)
         .navigationBarTitle("", displayMode: .inline)

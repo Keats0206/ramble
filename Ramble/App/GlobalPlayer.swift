@@ -37,7 +37,7 @@ class GlobalPlayer: ObservableObject {
         setupRemoteTransportControls()
     }
     
-    func setupNowPlaying() {
+    func setupNowPlaying(){
         // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = globalRamb?.first?.caption
