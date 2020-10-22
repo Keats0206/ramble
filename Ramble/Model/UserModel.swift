@@ -37,16 +37,15 @@ import FirebaseFirestoreSwift
 //        }
 //    }
 //}
-
 struct User: Identifiable, Codable, Hashable{
     @DocumentID var id: String?
     var uid: String
     var email: String
-    var username: String?
-    var displayname: String?
-    var profileImageUrl: String?
-    var bio: String?
-    var isFollowed: Bool?
+    var username: String
+    var displayname: String
+    var profileImageUrl: String
+    var bio: String
+    var isFollowed: Bool
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
 
     enum CodingKeys: String, CodingKey {

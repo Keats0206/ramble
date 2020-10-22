@@ -59,7 +59,7 @@ struct AppView: View {
                 }.tag(1)
                 
                 NavigationView{
-                    ProfileView(offset: CGSize(width: 0, height: -50), user: user)
+                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                 }.tabItem {
                     HStack {
                         Image(systemName: "person.circle")
@@ -87,7 +87,6 @@ struct AppView: View {
 //        AppView(user: _user2)
 //    }
 //}
-
 struct MainView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
@@ -114,7 +113,7 @@ struct MainView: View {
                 if self.currentView == .Tab1 {
                     FeedView(user: user)
                 } else {
-                    ProfileView(offset: CGSize(width: 0, height: -50), user: user)
+                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                 }
                 TabBar(currentView: self.$currentView, showModal: self.$showModal)
             }.onAppear{
@@ -146,7 +145,7 @@ struct TabBar: View {
 
 struct CurrentScreen: View {
     @Binding var currentView: Tab
-    var user: User
+    @State var user: User
 
     var body: some View {
         VStack {
@@ -156,7 +155,7 @@ struct CurrentScreen: View {
                 }
             } else {
                 NavigationView{
-                    ProfileView(offset: CGSize(width: 0, height: -50), user: user)
+                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                 }
             }
         }

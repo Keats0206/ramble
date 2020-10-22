@@ -5,6 +5,7 @@
 //  Created by Peter Keating on 10/1/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
+
 import SwiftUI
 import Firebase
 import Combine
@@ -44,9 +45,9 @@ class UserService2: ObservableObject {
         }
     }
     
-    func saveUserProfile(user: User, username: String, fullname: String, bio: String){
+    func saveUserProfile(user: User) {
         let userRef = FB_REF_USERS.document(user.uid)
-        let newUser = User(id: user.id, uid: user.uid, email: user.email, username: username, displayname: fullname, profileImageUrl: user.profileImageUrl, bio: bio, isFollowed: user.isFollowed)
+        let newUser = User(id: user.id, uid: user.uid, email: user.email, username: user.username, displayname: user.displayname, profileImageUrl: user.profileImageUrl, bio: user.bio, isFollowed: user.isFollowed)
         
         do {
             try userRef.setData(from: newUser)

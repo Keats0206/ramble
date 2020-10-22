@@ -32,16 +32,16 @@ struct FloatingPlayerView: View {
                         
                         HStack(spacing: 5){
                             
-                            WebImage(url: URL(string: "\(globalPlayer.globalRamb?.user.profileImageUrl)"))
+                            WebImage(url: URL(string: "\(globalPlayer.globalRamb?.first?.user.profileImageUrl ?? "")"))
                                 .frame(width: 45, height: 45)
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
                             
                             VStack(alignment : .leading){
-                                Text(globalPlayer.globalRamb?.caption ?? "No ramb")
+                                Text(globalPlayer.globalRamb?.first?.caption ?? "No ramb")
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
                                 
-                                Text(globalPlayer.globalRamb?.user.username ?? "No ramb")
+                                Text(globalPlayer.globalRamb?.first?.user.username ?? "No ramb")
                                     .font(.system(size: 16, weight: .regular, design: .rounded))
                             }
                             
@@ -75,7 +75,7 @@ struct FloatingPlayerView: View {
                         
                         VStack{
 
-                            BigPlayerView(ramb: globalPlayer.globalRamb!, player: globalPlayer.globalRambPlayer!)
+                            BigPlayerView(ramb: (globalPlayer.globalRamb?.first!)!, player: globalPlayer.globalRambPlayer!)
                             
                         }
                     }
@@ -109,9 +109,9 @@ struct FloatingPlayerView: View {
                                     self.hideNav = true
                                 } else{
                                     self.height = geo.size.height - 60
-                                }
-                            }
-                        })
+                        }
+                    }
+                })
             )
             .offset(y: self.height)
             .animation(.spring())
@@ -121,6 +121,7 @@ struct FloatingPlayerView: View {
 
 struct FloatingPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        FloatingPlayerView(hideNav: .constant(false))
+            .environmentObject(GlobalPlayer())
     }
 }

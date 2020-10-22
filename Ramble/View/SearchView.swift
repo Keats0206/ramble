@@ -20,15 +20,15 @@ struct SearchView: View {
     
     var body: some View {
         
-        ZStack{
+        ZStack {
             
-            VStack(alignment: .center){
+            VStack(alignment: .center) {
                 
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
                             
                 List{
                     
-                    ForEach(self.viewModel.users.filter{($0.username?.lowercased() ?? "").contains(self.searchText.lowercased()) || ($0.displayname?.lowercased() ?? "").contains(self.searchText.lowercased())}, id: \.self) { user in
+                    ForEach(self.viewModel.users.filter{($0.username.lowercased()).contains(self.searchText.lowercased()) || ($0.displayname.lowercased()).contains(self.searchText.lowercased())}, id: \.self) { user in
                         SearchCell(user: user)
                     }
                 }
@@ -56,20 +56,18 @@ struct SearchCell: View {
     
     var body: some View {
         
-        HStack{
-            
-            WebImage(url: URL(string: "\(user.profileImageUrl)"))
+        HStack {
+            WebImage(url: URL(string: user.profileImageUrl))
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
             
-            VStack(alignment: .leading){
-                
-                Text("\(user.username ?? "")")
+            VStack(alignment: .leading) {
+                Text(user.username)
                     .font(.title)
                     .bold()
                 
-                Text("\(user.displayname ?? "")")
+                Text(user.displayname)
                     .font(.subheadline)
                 
             }
@@ -103,10 +101,8 @@ struct SearchBar: View {
     
     var body: some View {
         
-       HStack{
-           
-           HStack{
-                   
+       HStack {
+           HStack {
                TextField("Search terms here", text: $searchText)
                    .padding(.leading, 24)
                

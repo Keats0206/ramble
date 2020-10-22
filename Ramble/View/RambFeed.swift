@@ -27,7 +27,6 @@ struct RambFeed : View {
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }
                     }
-                    
                 } else {
                     List{
                         ForEach(viewModel.allRambs.sorted(by: { $0.timestamp < $1.timestamp })){ ramb in
@@ -43,7 +42,7 @@ struct RambFeed : View {
             self.isShowing = false
         }
         .onAppear{
-            self.dataToggle = 0
+            self.dataToggle = 1
             if self.globalPlayer.globalRambPlayer == nil {
                 viewModel.setUp(globalPlayer: self.globalPlayer)
             }

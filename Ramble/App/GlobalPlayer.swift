@@ -11,8 +11,8 @@ import AVKit
 import MediaPlayer
 
 class GlobalPlayer: ObservableObject {
-    @Published var globalRamb: Ramb2?
-    @Published var rambQue: [Ramb2]?
+    @Published var globalRamb: [Ramb2]?
+    @Published var rambQue: [Ramb2] = []
     @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
     let session = AVAudioSession.sharedInstance()
@@ -24,6 +24,7 @@ class GlobalPlayer: ObservableObject {
         } catch let error {
             fatalError("*** Unable to set up the audio session: \(error.localizedDescription) ***")
         }
+        rambQue.append(ramb)
         let url = URL(string: "\(ramb.rambUrl)")
         self.globalRambPlayer = AVPlayer(url: url!)
         return
@@ -39,7 +40,7 @@ class GlobalPlayer: ObservableObject {
     func setupNowPlaying() {
         // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = globalRamb?.caption
+        nowPlayingInfo[MPMediaItemPropertyTitle] = globalRamb?.first?.caption
 
 //        if let image = UIImage(named: "Play-button") {
 //            nowPlayingInfo[MPMediaItemPropertyArtwork] =

@@ -33,9 +33,10 @@ struct FeedView: View {
     var body: some View {
         ZStack{
             RambFeed(dataToggle: $dataToggle)
-            if globalPlayer.globalRamb != nil{
+            if globalPlayer.globalRamb != nil {
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
+                    .clipped()
             }
         }.navigationBarHidden(hideNav)
         .navigationBarTitle("", displayMode: .inline)
@@ -47,16 +48,7 @@ struct FeedView: View {
                         .foregroundColor(Color.accent3)
                 }, trailing:
             HStack{
-                Button(action: {
-                    self.dataToggle = 0
-                }) { 
-                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
-                        .padding(5)
-                }
-            
+                
                 Button(action: {
                     self.dataToggle = 1
                 }) {
@@ -64,6 +56,16 @@ struct FeedView: View {
                         .resizable()
                         .frame(width: 25, height: 25)
                         .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
+                        .padding(5)
+                }
+                
+                Button(action: {
+                    self.dataToggle = 0
+                }) {
+                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
                         .padding(5)
                 }
             }

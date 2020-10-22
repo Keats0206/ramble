@@ -25,7 +25,7 @@ class SessionStore : ObservableObject {
             if let user = user {
                     let uid = user.uid
                     let email = user.email
-                    self.session = User(id: uid, uid: uid, email: email!)
+                self.session = User(id: uid, uid: uid, email: email!, username: "", displayname: "", profileImageUrl: "", bio: "", isFollowed: false)
             } else {
                 self.session = nil
             }
