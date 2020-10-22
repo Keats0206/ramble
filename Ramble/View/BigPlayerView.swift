@@ -24,15 +24,15 @@ struct BigPlayerView: View {
                 
                 Spacer(minLength: 0)
 
-                WebImage(url: URL(string: "\(ramb.user.profileImageUrl ?? "")"))
+                WebImage(url: URL(string: ramb.user.profileImageUrl))
                     .frame(width: 150, height: 150)
                     .clipShape(Circle())
                 
-                Text("@ \(ramb.user.displayname!)")
+                Text("@ \(ramb.user.displayname)")
                     .foregroundColor(.gray)
                     .padding(.top,20)
                 
-                Text(ramb.user.username!)
+                Text(ramb.user.username)
                     .foregroundColor(.gray)
                     .padding(.top,20)
                 

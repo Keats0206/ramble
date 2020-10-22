@@ -23,7 +23,7 @@ struct RambUserCell: View {
             VStack(alignment: .leading){
                 
                 Button(action:{
-                    globalPlayer.globalRamb = self.ramb
+                    globalPlayer.globalRamb = [self.ramb]
                     globalPlayer.setGlobalPlayer(ramb: self.ramb)
                     globalPlayer.play()
                 }){

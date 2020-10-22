@@ -28,7 +28,7 @@ struct ProfileView: View {
     
     @State var offset: CGSize
     
-    var user: User
+    @Binding var user: User
                 
     var body: some View {
         
@@ -38,17 +38,18 @@ struct ProfileView: View {
                     
                     VStack(alignment: .leading, spacing: 10){
                         
-                        WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
+                        WebImage(url: URL(string: user.profileImageUrl))
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
+                            .padding(.top, 50)
                         
-                        Text("\(user.displayname ?? "")")
+                        Text(user.displayname)
                             .font(.system(size: 28, weight: .bold, design: .rounded))
                         
-                        Text("@\(user.username ?? "")")
+                        Text("@\(user.username)")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                         
-                        Text("\(user.bio ?? "")")
+                        Text(user.bio)
                             .font(.system(size: 22, weight: .regular, design: .rounded))
                         
                         Spacer()
@@ -113,7 +114,7 @@ struct ProfileView: View {
                         .sheet(isPresented: $editModal_shown, onDismiss: {
                             print("Modal dismisses")
                         }) {
-                            EditProfileView(user: user)
+                            EditProfileView(user: $user)
                         }
                         
                     } else {
@@ -126,7 +127,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(offset: CGSize(width: 0, height: 0), user: _user2)
+        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(_user2))
             .environmentObject(SessionStore())
     }
 }

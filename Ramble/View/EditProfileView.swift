@@ -13,20 +13,17 @@ struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
     @Environment(\.presentationMode) var presentationMode
 
-    @State var email: String = ""
-    @State var username: String = ""
-    @State var displayname: String = ""
     @State var profileImage: UIImage?
-    @State var bio = ""
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
     @State var loading = false
     @State var error = false
     
-    var user: User
+    @Binding var user: User
     
     func saveProfile(){
-        UserService2.shared.saveUserProfile(user: user, username: username, fullname: displayname, bio: bio)
+        UserService2.shared.saveUserProfile(user: user)
+        RambService2.shared.updateUserData(user: user)
     }
     
     func openThing(){
@@ -63,7 +60,7 @@ struct EditProfileView : View {
                 
                 VStack{
                     
-                    WebImage(url: URL(string: "\(user.profileImageUrl ?? "")"))
+                    WebImage(url: URL(string: user.profileImageUrl))
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                             .shadow(radius: 10)
@@ -102,7 +99,7 @@ struct EditProfileView : View {
                     Text("Username")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     
-                    TextField("\(self.user.username ?? "")", text: $username)
+                    TextField(self.user.username, text: $user.username)
                         .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .padding(5)
                     
@@ -115,7 +112,7 @@ struct EditProfileView : View {
                     Text("Fullname")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     
-                    TextField("\(self.user.displayname ?? "")", text: $displayname)
+                    TextField(self.user.displayname, text: $user.displayname)
                         .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .padding(5)
                     
@@ -127,7 +124,7 @@ struct EditProfileView : View {
                     Text("Bio")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     
-                    TextField("\(self.user.bio ?? "")", text: $bio)
+                    TextField(self.user.bio, text: $user.bio)
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .padding(5)
                     
@@ -214,6 +211,6 @@ struct EditProfileView : View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(user: _user2)
+        EditProfileView(user: .constant(_user2))
     }
 }
