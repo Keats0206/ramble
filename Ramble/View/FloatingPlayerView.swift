@@ -10,28 +10,30 @@ import SwiftUI
 import SDWebImageSwiftUI
 import AVKit
 
+
 struct FloatingPlayerView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    
-    @State var height : CGFloat = UIScreen.main.bounds.height - 175
+    @State var height : CGFloat = 25
     @State var floating = true
     
     @Binding var hideNav: Bool
                 
     var body : some View{
         
-        GeometryReader{geo in
+        GeometryReader{ geo in
             
             ZStack{
                 
                 Color.white
+                    .shadow(color: Color.blue, radius: 20, x: 100, y:0)
+
         
                 VStack{
                     // SMALL PLAYER
                     if floating == true {
-                        
-                        HStack(spacing: 5){
-                            
+                        VStack{
+                            HStack(spacing: 5){
+                                                            
                             WebImage(url: URL(string: "\(globalPlayer.globalRamb?.first?.user.profileImageUrl ?? "")"))
                                 .frame(width: 45, height: 45)
                                 .clipShape(Circle())
@@ -55,7 +57,7 @@ struct FloatingPlayerView: View {
                                 }){
                                     Image(systemName: "pause.fill")
                                         .resizable()
-                                        .frame(width: 32, height: 30)
+                                        .frame(width: 20, height: 20)
                                 }
                             } else {
                                 Button(action: {
@@ -63,14 +65,18 @@ struct FloatingPlayerView: View {
                                 }){
                                     Image(systemName: "play.fill")
                                         .resizable()
-                                        .frame(width: 32, height: 30)
+                                        .frame(width: 20, height: 20)
                                 }
                             }
                             
                         }
-                        .padding(10)
-                        .padding([.leading, .trailing])
-
+                                .padding(10)
+                                .padding([.leading, .trailing])
+                            
+                            Divider()
+                        }.onAppear{
+                            self.height = geo.size.height - 60
+                        }
                     } else {
                         
                         VStack{
@@ -79,15 +85,16 @@ struct FloatingPlayerView: View {
                             
                         }
                     }
-                    
                     // your music player.....
-                    
                     Spacer()
-                    
                 }
-                
-            }
-            .gesture(DragGesture()
+            }.onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                self.height = 25
+                self.floating = false
+                self.hideNav = true
+            })
+            .gesture(
+                DragGesture()
                     .onChanged({ (value) in
                         if self.height >= 600{
                             self.hideNav = false
@@ -97,24 +104,25 @@ struct FloatingPlayerView: View {
                         if self.height >= 0{
                             self.height += value.translation.height / 8
                         }
-                    }).onEnded({ (value) in
-                            if self.height > 100 && !self.floating {
-                                self.height = geo.size.height - 60
-                                self.floating = true
-                                self.hideNav = false
-                            } else{
-                                if self.height < geo.size.height - 150{
-                                    self.height = 25
-                                    self.floating = false
-                                    self.hideNav = true
-                                } else{
-                                    self.height = geo.size.height - 60
+                    })
+                    .onEnded({ (value) in
+                        if self.height > 100 && !self.floating {
+                            self.height = geo.size.height - 60
+                            self.floating = true
+                            self.hideNav = false
                         }
+                    else {
+                        if self.height < geo.size.height - 150{
+                            self.height = 25
+                            self.floating = false
+                            self.hideNav = true
+                    } else {
+                        self.height = geo.size.height - 60
                     }
-                })
-            )
-            .offset(y: self.height)
-            .animation(.spring())
+                }
+            })
+        ).offset(y: self.height)
+        .animation(.spring())
         }
     }
 }

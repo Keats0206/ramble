@@ -346,6 +346,7 @@
 		402F5485244F91A900FD899F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "Peter Keating";
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Peter Keating";
@@ -622,7 +623,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Ramble/Preview Content\"";
-				DEVELOPMENT_TEAM = Z47B6ALQWW;
+				DEVELOPMENT_TEAM = VU9FW6DFBM;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Ramble/Info.plist;
@@ -705,7 +706,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Ramble/Preview Content\"";
-				DEVELOPMENT_TEAM = Z47B6ALQWW;
+				DEVELOPMENT_TEAM = VU9FW6DFBM;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Ramble/Info.plist;

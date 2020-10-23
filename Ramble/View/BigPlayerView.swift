@@ -17,7 +17,7 @@ struct BigPlayerView: View {
     var body: some View {
         
         VStack{
-                        
+            
             VStack{
                 
                 Spacer(minLength: 0)

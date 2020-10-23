@@ -33,13 +33,13 @@ struct FeedView: View {
     var body: some View {
         ZStack{
             RambFeed(dataToggle: $dataToggle)
+            
             if globalPlayer.globalRamb != nil {
                 FloatingPlayerView(hideNav: $hideNav)
                     .edgesIgnoringSafeArea(.all)
-                    .clipped()
-                    .shadow(color: .gray, radius: 2, x: 0.0, y: -3)
             }
-        }.navigationBarHidden(hideNav)
+        }
+        .navigationBarHidden(hideNav)
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarItems(
             leading:

@@ -64,7 +64,6 @@ struct RambUserCell: View {
                         }
                 }.buttonStyle(BorderlessButtonStyle())
             } else {
-                
                 Button(action: {
                     self.showingActionSheet.toggle()
                 }){
