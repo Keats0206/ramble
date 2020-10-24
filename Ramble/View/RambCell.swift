@@ -34,7 +34,7 @@ struct RambCell : View {
                     WebImage(url: URL(string: ramb.user.profileImageUrl))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
-                        .overlay(Circle().stroke(globalPlayer.globalRamb?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
+                        .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
                     
                     Spacer()
@@ -94,7 +94,7 @@ struct RambCell : View {
     }
     
     func play() {
-        globalPlayer.globalRamb = [self.ramb]
+        globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)
         globalPlayer.play()
     }

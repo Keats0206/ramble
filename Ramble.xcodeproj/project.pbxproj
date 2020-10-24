@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		400A7069251E1EAB00A0DD8D /* FeedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400A7068251E1EAB00A0DD8D /* FeedHeaderView.swift */; };
 		400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400A706A251E43A300A0DD8D /* GlobalPlayer.swift */; };
 		40122F6F251FB0E100A3BDD6 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40122F6E251FB0E100A3BDD6 /* RecorderView.swift */; };
 		40122F832521015F00A3BDD6 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40122F822521015F00A3BDD6 /* TestData.swift */; };
@@ -39,10 +38,8 @@
 		406FAD172450B55200223873 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD162450B55200223873 /* ContentView.swift */; };
 		406FAD1F2450D6D200223873 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD1E2450D6D200223873 /* AuthView.swift */; };
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
-		406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD2C2451F0C800223873 /* RecordPopOverView.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
-		40B1474D250174BA00A2781A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474C250174BA00A2781A /* SettingsView.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
 		40B3385E25267F54009321F2 /* RambService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385D25267F54009321F2 /* RambService2.swift */; };
 		40B3386025267F64009321F2 /* UserService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385F25267F64009321F2 /* UserService2.swift */; };
@@ -55,7 +52,7 @@
 		40FFDEDF251BEA1F0025799C /* FloatingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */; };
 		40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF04251BF94F0025799C /* AudioPlayer.swift */; };
 		40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF06251BFC100025799C /* RambUserCell.swift */; };
-		57991328E7CB7B211CC47CFE /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660913489296DEBCA2856061 /* Pods_Ramble.framework */; };
+		BBBA7CEE09F9B793809F2F84 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E757B022011EEC2434B3D81B /* Pods_Ramble.framework */; };
 		EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +71,6 @@
 
 /* Begin PBXFileReference section */
 		18260E38251A67E0004FFF9B /* Ramble-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ramble-Bridging-Header.h"; sourceTree = "<group>"; };
-		400A7068251E1EAB00A0DD8D /* FeedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeaderView.swift; sourceTree = "<group>"; };
 		400A706A251E43A300A0DD8D /* GlobalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlayer.swift; sourceTree = "<group>"; };
 		40122F6E251FB0E100A3BDD6 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		40122F822521015F00A3BDD6 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -106,10 +102,8 @@
 		406FAD162450B55200223873 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		406FAD1E2450D6D200223873 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
-		406FAD2C2451F0C800223873 /* RecordPopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopOverView.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40B1474A25016C5F00A2781A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		40B1474C250174BA00A2781A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		40B3385B25267E90009321F2 /* Constants2.0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants2.0.swift; sourceTree = "<group>"; };
 		40B3385D25267F54009321F2 /* RambService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService2.swift; sourceTree = "<group>"; };
 		40B3385F25267F64009321F2 /* UserService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService2.swift; sourceTree = "<group>"; };
@@ -122,9 +116,9 @@
 		40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPlayerView.swift; sourceTree = "<group>"; };
 		40FFDF04251BF94F0025799C /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		40FFDF06251BFC100025799C /* RambUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RambUserCell.swift; sourceTree = "<group>"; };
-		660913489296DEBCA2856061 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		876D5044B5AAC2E4E780DE9E /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
-		94798487FBAE67DE4BA41F0C /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
+		78EE9F5A3FCD41F33C23676B /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
+		C46F06BBBBF141E7DFFB3082 /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
+		E757B022011EEC2434B3D81B /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderPostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,18 +129,26 @@
 			files = (
 				406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */,
 				402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */,
-				57991328E7CB7B211CC47CFE /* Pods_Ramble.framework in Frameworks */,
+				BBBA7CEE09F9B793809F2F84 /* Pods_Ramble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F29B5FEBE4D424D915C7767 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E757B022011EEC2434B3D81B /* Pods_Ramble.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2D268D9C788D4B05278E39F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				876D5044B5AAC2E4E780DE9E /* Pods-Ramble.debug.xcconfig */,
-				94798487FBAE67DE4BA41F0C /* Pods-Ramble.release.xcconfig */,
+				78EE9F5A3FCD41F33C23676B /* Pods-Ramble.debug.xcconfig */,
+				C46F06BBBBF141E7DFFB3082 /* Pods-Ramble.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -158,7 +160,7 @@
 				402F548F244F91A900FD899F /* Ramble */,
 				402F548E244F91A900FD899F /* Products */,
 				2D268D9C788D4B05278E39F4 /* Pods */,
-				52A40C5D1E385DFDEB005BFF /* Frameworks */,
+				1F29B5FEBE4D424D915C7767 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -235,13 +237,10 @@
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
-				400A7068251E1EAB00A0DD8D /* FeedHeaderView.swift */,
-				40B1474C250174BA00A2781A /* SettingsView.swift */,
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
 				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
 				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
-				406FAD2C2451F0C800223873 /* RecordPopOverView.swift */,
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
@@ -305,14 +304,6 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
-		52A40C5D1E385DFDEB005BFF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				660913489296DEBCA2856061 /* Pods_Ramble.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,12 +311,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 402F54A1244F91AA00FD899F /* Build configuration list for PBXNativeTarget "Ramble" */;
 			buildPhases = (
-				40884922FA1179F354C64433 /* [CP] Check Pods Manifest.lock */,
+				B5ECA53529BED24AFE8A3A22 /* [CP] Check Pods Manifest.lock */,
 				402F5489244F91A900FD899F /* Sources */,
 				402F548A244F91A900FD899F /* Frameworks */,
 				402F548B244F91A900FD899F /* Resources */,
 				40F3FA5D248EC20D00F3CE02 /* Embed Frameworks */,
-				D0DECAF828A0CE596C4BA679 /* [CP] Embed Pods Frameworks */,
+				C616FB0CC4BECA44D6770448 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -396,7 +387,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		40884922FA1179F354C64433 /* [CP] Check Pods Manifest.lock */ = {
+		B5ECA53529BED24AFE8A3A22 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -418,7 +409,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D0DECAF828A0CE596C4BA679 /* [CP] Embed Pods Frameworks */ = {
+		C616FB0CC4BECA44D6770448 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -467,7 +458,6 @@
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
 				4056E9A4252404E10004E598 /* Extensions.swift in Sources */,
 				405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */,
-				40B1474D250174BA00A2781A /* SettingsView.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
@@ -476,9 +466,7 @@
 				40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
 				403390F525311CBC0041BF68 /* BigPlayerView.swift in Sources */,
-				406FAD2D2451F0C800223873 /* RecordPopOverView.swift in Sources */,
 				406FAD132450ABF300223873 /* SessionStore.swift in Sources */,
-				400A7069251E1EAB00A0DD8D /* FeedHeaderView.swift in Sources */,
 				406FAD1F2450D6D200223873 /* AuthView.swift in Sources */,
 				40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */,
 				40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */,
@@ -618,7 +606,7 @@
 		};
 		402F54A2244F91AA00FD899F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 876D5044B5AAC2E4E780DE9E /* Pods-Ramble.debug.xcconfig */;
+			baseConfigurationReference = 78EE9F5A3FCD41F33C23676B /* Pods-Ramble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -667,8 +655,6 @@
 					"\"GoogleAppMeasurement\"",
 					"-framework",
 					"\"GoogleDataTransport\"",
-					"-framework",
-					"\"GoogleDataTransportCCTSupport\"",
 					"-framework",
 					"\"GoogleUtilities\"",
 					"-framework",
@@ -701,7 +687,7 @@
 		};
 		402F54A3244F91AA00FD899F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94798487FBAE67DE4BA41F0C /* Pods-Ramble.release.xcconfig */;
+			baseConfigurationReference = C46F06BBBBF141E7DFFB3082 /* Pods-Ramble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -750,8 +736,6 @@
 					"\"GoogleAppMeasurement\"",
 					"-framework",
 					"\"GoogleDataTransport\"",
-					"-framework",
-					"\"GoogleDataTransportCCTSupport\"",
 					"-framework",
 					"\"GoogleUtilities\"",
 					"-framework",

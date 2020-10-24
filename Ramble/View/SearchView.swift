@@ -12,27 +12,20 @@ import SDWebImageSwiftUI
 
 struct SearchView: View {
     @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject var viewModel = UserService2()
     
     @State var searchText = ""
     @State var isSearching = false
     
     var body: some View {
-        
-        ZStack {
-            
+        ZStack{
             VStack(alignment: .center) {
-                
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
-                            
                 List{
-                    
                     ForEach(self.viewModel.users.filter{($0.username.lowercased()).contains(self.searchText.lowercased()) || ($0.displayname.lowercased()).contains(self.searchText.lowercased())}, id: \.self) { user in
                         SearchCell(user: user)
                     }
                 }
-                
                 Spacer()
             }
         }
@@ -51,42 +44,29 @@ struct SearchView: View {
 }
 
 struct SearchCell: View {
-    
     var user: User
     
     var body: some View {
-        
         HStack {
             WebImage(url: URL(string: user.profileImageUrl))
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
-            
             VStack(alignment: .leading) {
                 Text(user.username)
                     .font(.title)
                     .bold()
-                
                 Text(user.displayname)
                     .font(.subheadline)
-                
             }
-            
             Spacer()
-            
             Spacer()
-            
-            
             Button(action: {
-                                
 //                UserService.shared.followUser(uid: self.user.uid)
-                
             }){
-                
                 Image(systemName: "person.badge.plus.fill")
                     .foregroundColor(.red)
                     .frame(width: 30, height: 30)
-                
             }.buttonStyle(BorderlessButtonStyle())
             
         }.padding()

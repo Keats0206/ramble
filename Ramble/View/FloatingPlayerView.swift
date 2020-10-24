@@ -18,32 +18,27 @@ struct FloatingPlayerView: View {
     
     @Binding var hideNav: Bool
                 
-    var body : some View{
-        
+    var body : some View{        
         GeometryReader{ geo in
-            
             ZStack{
-                
                 Color.white
                     .shadow(color: Color.blue, radius: 20, x: 100, y:0)
-
-        
                 VStack{
                     // SMALL PLAYER
                     if floating == true {
                         VStack{
                             HStack(spacing: 5){
                                                             
-                            WebImage(url: URL(string: "\(globalPlayer.globalRamb?.first?.user.profileImageUrl ?? "")"))
+                            WebImage(url: URL(string: "\(globalPlayer.globalRambs?.first?.user.profileImageUrl ?? "")"))
                                 .frame(width: 45, height: 45)
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
                             
                             VStack(alignment : .leading){
-                                Text(globalPlayer.globalRamb?.first?.caption ?? "No ramb")
+                                Text(globalPlayer.globalRambs?.first?.caption ?? "No ramb")
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
                                 
-                                Text(globalPlayer.globalRamb?.first?.user.username ?? "No ramb")
+                                Text(globalPlayer.globalRambs?.first?.user.username ?? "No ramb")
                                     .font(.system(size: 16, weight: .regular, design: .rounded))
                             }
                             
@@ -78,10 +73,8 @@ struct FloatingPlayerView: View {
                             self.height = geo.size.height - 60
                         }
                     } else {
-                        
                         VStack{
-
-                            BigPlayerView(ramb: (globalPlayer.globalRamb?.first!)!, player: globalPlayer.globalRambPlayer!)
+                            BigPlayerView(ramb: (globalPlayer.globalRambs?.first!)!, player: globalPlayer.globalRambPlayer!)
                             
                         }
                     }
@@ -122,7 +115,7 @@ struct FloatingPlayerView: View {
                 }
             })
         ).offset(y: self.height)
-        .animation(.spring())
+            .animation(.spring())
         }
     }
 }

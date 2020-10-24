@@ -37,7 +37,7 @@ class RambService2: ObservableObject {
             FB_REF_USER_RAMBS.document(userId!).setData(["rambId":rambId], merge: true)
         }
         catch {
-            print("There was an error while trying to save a task \(error.localizedDescription).")
+            print("There was an error while trying to save a ramb \(error.localizedDescription).")
         }
     }
     
@@ -50,19 +50,18 @@ class RambService2: ObservableObject {
                 }
                 if isInitialFetch {
                     self.allRambs.sort(by: { $0.plays > $1.plays })
-                    if let ramb = self.allRambs.first {
-                        self.globalPlayer?.globalRamb = [ramb]
+                    if let ramb = self.allRambs.first{
+                        self.globalPlayer?.globalRambs = [ramb]
                         self.globalPlayer?.setGlobalPlayer(ramb: ramb)
+                        print("DEBUG: Set global ramb")
                     }
-//                    globalPlayer.globalRambPlayer?.play()
-//                    globalPlayer.isPlaying = true
+//                    self.globalPlayer.globalRambPlayer?.play()
+//                    self.globalPlayer.isPlaying = true
                 }
             }
         }
     }
 
-//  Fetch user specific rambs by getting following uid's, then getting user rambs
-    
 //  Fetch user rambs
     func fetchUserRambs(user: User) {
         let userId = user.uid
@@ -98,31 +97,4 @@ class RambService2: ObservableObject {
             }
         })
     }
-
-//    private func uploadRamb(caption: String, rambUrl: String, rambFileId: String) {
-//
-//    }
-//
-//    func fetchRamb() {
-//
-//    }
-//
-//     Note about claps - firebase is only capable of supporting ordering by "ascending". As a work around for this, claps is being stored as a negative value in the database, so we can use it as a sorting key... TLDR; -2 claps in the DB = 2 claps in the UI - user clicking Clap = -1
-    
-//    func handleClap(ramb: Ramb, didClap: Bool){
-//
-//    }
-//
-//    func checkIfUserLikedRamb(_ ramb: Ramb, completion: @escaping(Bool) -> Void) {
-//
-//    }
-//    func removeRamb(_ ramb: Ramb2) {
-//        if let rambID = ramb.id {
-//          FB_REF_RAMBS.document(rambID).delete { (error) in // (1)
-//            if let error = error {
-//              print("Error removing document: \(error.localizedDescription)")
-//            }
-//          }
-//        }
-//      }
 }

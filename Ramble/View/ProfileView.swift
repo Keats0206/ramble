@@ -72,55 +72,46 @@ struct ProfileView: View {
                                     
                 }.offset(offset)
                     .padding(0)
-                                                        
-                if globalPlayer.globalRamb != nil{
-                    FloatingPlayerView(hideNav: $hideNav)
-                        .edgesIgnoringSafeArea(.all)
+//
+//                if globalPlayer.globalRamb != nil{
+//                    FloatingPlayerView(hideNav: $hideNav)
+//                        .edgesIgnoringSafeArea(.all)
+//                }
+                
+        }.navigationBarHidden(hideNav)
+        .navigationBarItems(trailing:
+            HStack{
+                Button(action: {
+                    self.searchModal_shown.toggle()
+                }){
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .padding(5)
+                }.sheet(isPresented: $searchModal_shown, onDismiss: {
+                    print("Modal dismisses")
+                }) {
+                    NavigationView{
+                        SearchView()
+                    }
                 }
                 
-            }.navigationBarHidden(hideNav)
-            .navigationBarItems(trailing:
-                                    
-                HStack{
-                                    
+                if Auth.auth().currentUser?.uid == user.id {
                     Button(action: {
-                        self.searchModal_shown.toggle()
+                        self.editModal_shown.toggle()
                     }){
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .frame(width: 25, height: 25)
+                        Image(systemName: "ellipsis")
                             .padding(5)
-                    }.sheet(isPresented: $searchModal_shown, onDismiss: {
+                    }.background(Capsule().fill(Color.black).opacity(0.2))
+                    .sheet(isPresented: $editModal_shown, onDismiss: {
                         print("Modal dismisses")
                     }) {
-                        
-                        NavigationView{
-                            
-                            SearchView()
-                        }
-                    
+                        EditProfileView(user: $user)
                     }
-                    
-                    if Auth.auth().currentUser?.uid == user.id {
-                        
-                        Button(action: {
-                            self.editModal_shown.toggle()
-                        }){
-                            Image(systemName: "ellipsis")
-                                .padding(5)
-                            
-                        }.background(Capsule().fill(Color.black).opacity(0.2))
-                        .sheet(isPresented: $editModal_shown, onDismiss: {
-                            print("Modal dismisses")
-                        }) {
-                            EditProfileView(user: $user)
-                        }
-                        
-                    } else {
-                        
-                        Spacer()
-                }
-        })
+                } else {
+                    Spacer()
+            }
+    })
     }
 }
 

@@ -19,18 +19,17 @@ struct RambUserCell: View {
     
     var body: some View {
         HStack{
-            //              Center of Cell VStack
+//              Center of Cell VStack
             VStack(alignment: .leading){
-                
                 Button(action:{
-                    globalPlayer.globalRamb = [self.ramb]
+                    globalPlayer.globalRambs = [self.ramb]
                     globalPlayer.setGlobalPlayer(ramb: self.ramb)
                     globalPlayer.play()
                 }){
                     Text(ramb.caption)
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .multilineTextAlignment(TextAlignment.leading)
-                        .foregroundColor(globalPlayer.globalRamb?.first?.id == self.ramb.id ? .accent4 : .primary)
+                        .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent4 : .primary)
                     
                 }.buttonStyle(BorderlessButtonStyle())
                 

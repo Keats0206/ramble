@@ -12,5 +12,6 @@ target 'Ramble' do
 	pod 'Firebase/Storage'
 	pod 'PRTween'
 	pod 'FirebaseFirestoreSwift'
+	pod 'MinimizableView'
 
 end

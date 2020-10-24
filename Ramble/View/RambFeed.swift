@@ -40,8 +40,7 @@ struct RambFeed : View {
         .pullToRefresh(isShowing: $isShowing) {
             self.viewModel.fetchRambs()
             self.isShowing = false
-        }
-        .onAppear{
+        }.onAppear{
             self.dataToggle = 1
             if self.globalPlayer.globalRambPlayer == nil {
                 viewModel.setUp(globalPlayer: self.globalPlayer)
