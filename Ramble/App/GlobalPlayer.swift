@@ -1,5 +1,5 @@
 //
-//  globalPlayer.swift
+//  GlobalPlayer.swift
 //  Ramble
 //
 //  Created by Peter Keating on 9/25/20.

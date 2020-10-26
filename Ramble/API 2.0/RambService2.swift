@@ -28,13 +28,13 @@ class RambService2: ObservableObject {
     
     //  This function is working!
     func addRamb(_ ramb: Ramb2) {
-        let newRamb = FB_REF_RAMBS.document()
+        let newRamb = FBRefRambs.document()
         let userId = ramb.user.id
         let rambId = newRamb.documentID
         
         do {
             let _ = try newRamb.setData(from: ramb)
-            FB_REF_USER_RAMBS.document(userId!).setData(["rambId":rambId], merge: true)
+            FBRefUserRambs.document(userId!).setData(["rambId":rambId], merge: true)
         }
         catch {
             print("There was an error while trying to save a ramb \(error.localizedDescription).")
@@ -43,7 +43,7 @@ class RambService2: ObservableObject {
     
 //  Fetch all rambs for the for you page
     func fetchRambs(isInitialFetch : Bool = false) {
-        FB_REF_RAMBS.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
+        FBRefRambs.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
             if let querySnapshot = querySnapshot {
                 self.allRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                     try? document.data(as: Ramb2.self) // (4)
@@ -66,7 +66,7 @@ class RambService2: ObservableObject {
     func fetchUserRambs(user: User) {
         let userId = user.uid
         
-        FB_REF_RAMBS.whereField("uid", isEqualTo: userId)
+        FBRefRambs.whereField("uid", isEqualTo: userId)
             .addSnapshotListener { (querySnapshot, error) in // (2)
                 if let querySnapshot = querySnapshot {
                     self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
@@ -86,7 +86,7 @@ class RambService2: ObservableObject {
             "uid" : user.uid,
             "username" : user.username
         ] as [String : Any]
-        FB_REF_RAMBS.whereField("uid", isEqualTo: user.uid).getDocuments(completion: { (snapshots, error) in
+        FBRefRambs.whereField("uid", isEqualTo: user.uid).getDocuments(completion: { (snapshots, error) in
             if let error = error {
                 print("Error " + error.localizedDescription)
                 return

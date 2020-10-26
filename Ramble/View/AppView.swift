@@ -18,7 +18,7 @@ struct MainView: View {
     @State var user: User
     @State var hidNav = false
     
-    @State private var currentView: Tab = .Tab1
+    @State private var currentView: Tab = .tab1
     @State private var showModal: Bool = false
     
     var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
@@ -35,20 +35,22 @@ struct MainView: View {
         GeometryReader { proxy in
             NavigationView{
                 VStack(spacing: 0) {
-                    if self.currentView == .Tab1 {
+                    if self.currentView == .tab1 {
                         FeedView(user: user)
                     } else {
                         ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                     }
                     TabBar(currentView: self.$currentView, showModal: self.$showModal)
-                }.onAppear{
+                }.onAppear {
                         self.getUser()
-                        self.minimizableViewHandler.settings.backgroundColor = Color.black
+                        self.minimizableViewHandler.settings.backgroundColor = Color.white
+                        self.minimizableViewHandler.settings.shadowColor = Color.clear
                         self.minimizableViewHandler.settings.bottomMargin = 60
                         self.minimizableViewHandler.settings.minimizedHeight = 60
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             if globalPlayer.didSet{
                                 self.minimizableViewHandler.present()
+                                self.minimizableViewHandler.minimize()
                                 print("DEBUG: presenting miniview handler")
                             } else {
                                 print("DEBUG: No song ready")
@@ -63,11 +65,39 @@ struct MainView: View {
             }
             .minimizableView(
                 content: {
-                    EmptyView()
+                    BigPlayerView(ramb: testRamb, player: testPlayer)
                 }, compactView: {
-                    BigPlayerView(ramb: (globalPlayer.globalRambs?.first)!, player: globalPlayer.globalRambPlayer!)
+                    SmallPlayerView(ramb: testRamb)
                 }, geometry: proxy)
             .environmentObject(self.minimizableViewHandler)
+        }
+    }
+}
+
+struct CompactViewExample: View {
+    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
+    
+    var body: some View {
+        GeometryReader { proxy in
+            HStack {
+                Text("Compact View")
+            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
+                self.minimizableViewHandler.expand()
+            }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 40)
+        }
+    }
+}
+
+struct ContentViewExample: View {
+    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
+    
+    var body: some View {
+        GeometryReader { proxy in
+            VStack {
+                Text("Fuck it")
+            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
+                self.minimizableViewHandler.expand()
+            }.background(Color(.secondarySystemBackground)).verticalDragGesture(translationHeightTriggerValue: 40)
         }
     }
 }
@@ -78,15 +108,14 @@ struct TabBar: View {
 
     var body: some View {
         HStack {
-            TabBarItem(currentView: self.$currentView, imageName: "list.bullet", title: "FEED", paddingEdges: .leading, tab: .Tab1)
+            TabBarItem(currentView: self.$currentView, imageName: "list.bullet", title: "FEED", paddingEdges: .leading, tab: .tab1)
             Spacer()
             ShowModalTabBarItem(radius: 55) { self.showModal.toggle() }
             Spacer()
-            TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "PROFILE", paddingEdges: .trailing, tab: .Tab2)
+            TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "PROFILE", paddingEdges: .trailing, tab: .tab2)
         }.frame(minHeight: 70)
     }
 }
-
 
 struct CurrentScreen: View {
     @Binding var currentView: Tab
@@ -94,12 +123,12 @@ struct CurrentScreen: View {
 
     var body: some View {
         VStack {
-            if self.currentView == .Tab1 {
-                NavigationView{
+            if self.currentView == .tab1 {
+                NavigationView {
                     FeedView(user: user)
                 }
             } else {
-                NavigationView{
+                NavigationView {
                     ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                 }
             }
@@ -108,8 +137,8 @@ struct CurrentScreen: View {
 }
 
 enum Tab {
-    case Tab1
-    case Tab2
+    case tab1
+    case tab2
     case profile
 }
 
@@ -121,7 +150,7 @@ struct TabBarItem: View {
     let tab: Tab
 
     var body: some View {
-        HStack(spacing:5) {
+        HStack(spacing: 5) {
             Image(systemName: imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -149,7 +178,7 @@ public struct ShowModalTabBarItem: View {
     }
 
     public var body: some View {
-        VStack(spacing:0) {
+        VStack(spacing: 0) {
             Image(systemName: "plus.rectangle")
                 .resizable()
                 .padding(5)
@@ -160,34 +189,5 @@ public struct ShowModalTabBarItem: View {
         }
         .frame(width: radius, height: radius)
         .onTapGesture(perform: action)
-    }
-}
-
-struct CompactViewExample: View {
-    
-    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
-    
-    var body: some View {
-        GeometryReader { proxy in
-            HStack {
-                Text("Compact View")
-            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
-                self.minimizableViewHandler.expand()
-            }.background(Color(.secondarySystemBackground)).verticalDragGesture(translationHeightTriggerValue: 40)
-        }
-    }
-}
-
-struct ContentViewExample: View {
-    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
-    
-    var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                Text("Fuck it")
-            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
-                self.minimizableViewHandler.expand()
-            }.background(Color(.secondarySystemBackground)).verticalDragGesture(translationHeightTriggerValue: 40)
-        }
     }
 }

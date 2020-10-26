@@ -8,14 +8,17 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import MinimizableView
 import AVKit
 
 struct BigPlayerView: View {
+    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
+
     var ramb: Ramb2
     var player: AVPlayer
     
     var body: some View {
-        VStack{
+        GeometryReader { proxy in
             VStack{
                     Spacer(minLength: 0)
 
@@ -40,17 +43,15 @@ struct BigPlayerView: View {
                     
                     Spacer(minLength: 0)
                 }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color("bg"))
-            .cornerRadius(35)
-            
-        }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color("bg"))
+        }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 30)
     }
 }
 
 struct BigPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        BigPlayerView(ramb: _ramb2, player: _player)
+        BigPlayerView(ramb: testRamb, player: testPlayer)
     }
 }

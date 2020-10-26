@@ -18,9 +18,9 @@ struct ProfileView: View {
     @State private var isShowing = false
     @State private var isPresented = false
     @State private var isFollowed = true
-    @State private var editModal_shown = false
-    @State private var settingsModal_shown = false
-    @State private var searchModal_shown = false
+    @State private var editModalShown = false
+    @State private var settingsModalShown = false
+    @State private var searchModalShown = false
     @State var hideNav = false
     
     @State var userDataToggle = 0
@@ -82,13 +82,13 @@ struct ProfileView: View {
         .navigationBarItems(trailing:
             HStack{
                 Button(action: {
-                    self.searchModal_shown.toggle()
+                    self.searchModalShown.toggle()
                 }){
                     Image(systemName: "magnifyingglass")
                         .resizable()
                         .frame(width: 25, height: 25)
                         .padding(5)
-                }.sheet(isPresented: $searchModal_shown, onDismiss: {
+                }.sheet(isPresented: $searchModalShown, onDismiss: {
                     print("Modal dismisses")
                 }) {
                     NavigationView{
@@ -98,12 +98,12 @@ struct ProfileView: View {
                 
                 if Auth.auth().currentUser?.uid == user.id {
                     Button(action: {
-                        self.editModal_shown.toggle()
+                        self.editModalShown.toggle()
                     }){
                         Image(systemName: "ellipsis")
                             .padding(5)
                     }.background(Capsule().fill(Color.black).opacity(0.2))
-                    .sheet(isPresented: $editModal_shown, onDismiss: {
+                    .sheet(isPresented: $editModalShown, onDismiss: {
                         print("Modal dismisses")
                     }) {
                         EditProfileView(user: $user)
@@ -117,7 +117,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(_user2))
+        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(testUser))
             .environmentObject(SessionStore())
     }
 }

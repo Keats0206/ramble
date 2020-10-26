@@ -217,7 +217,6 @@ struct SignUpView : View {
                             .font(.system(size: 18, weight: .bold))
                             .disabled(loading)
                     }
-                    
                     NavigationLink(destination: SignInView()) {
                         HStack {
                             Text("Already have an account? Sign In")
@@ -232,8 +231,8 @@ struct SignUpView : View {
 }
 
 
-struct AuthView : View {
-    var body : some View {
+struct AuthView: View {
+    var body: some View {
         NavigationView {
             SignInView()
         }
@@ -241,7 +240,7 @@ struct AuthView : View {
 }
 
 #if DEBUG
-struct AuthView_Previews : PreviewProvider {
+struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         AuthView()
             .environmentObject(SessionStore())
@@ -252,43 +251,34 @@ struct AuthView_Previews : PreviewProvider {
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var isShown: Bool
     @Binding var uiImage: UIImage?
-    
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        
         @Binding var isShown: Bool
         @Binding var uiImage: UIImage?
-        
         init(isShown: Binding<Bool>, uiImage: Binding<UIImage?>) {
             _isShown = isShown
             _uiImage = uiImage
         }
-        
         func imagePickerController(_ picker: UIImagePickerController,
-                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+//            swiftlint:disable force_cast
             let imagePicked = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+//            swiftlint:enable force_cast
             uiImage = imagePicked
             isShown = false
         }
-        
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             isShown = false
         }
-        
     }
-    
     func makeCoordinator() -> Coordinator {
         return Coordinator(isShown: $isShown, uiImage: $uiImage)
     }
-    
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         return picker
     }
-    
     func updateUIViewController(_ uiViewController: UIImagePickerController,
                                 context: UIViewControllerRepresentableContext<ImagePicker>) {
-        
     }
 }
-

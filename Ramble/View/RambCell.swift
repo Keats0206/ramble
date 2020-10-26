@@ -102,6 +102,6 @@ struct RambCell : View {
 
 struct RambCell_Previews: PreviewProvider {
     static var previews: some View {
-        RambCell(ramb: _ramb2)
+        RambCell(ramb: testRamb)
     }
 }

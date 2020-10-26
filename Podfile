@@ -13,5 +13,7 @@ target 'Ramble' do
 	pod 'PRTween'
 	pod 'FirebaseFirestoreSwift'
 	pod 'MinimizableView'
+	pod 'SDWebImageSwiftUI'
+	pod 'SwiftUIRefresh'
 
 end

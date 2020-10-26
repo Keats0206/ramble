@@ -74,7 +74,7 @@ struct RecorderPostView: View {
 
 struct RecorderPostView_Previews: PreviewProvider {
     static var previews: some View {
-        RecorderPostView(rambUrl: "", currentTab: .constant(Tab.Tab1), user: User(id: "1",
+        RecorderPostView(rambUrl: "", currentTab: .constant(Tab.tab1), user: User(id: "1",
                                                                                   uid: "1",
                                                                                   email: "testing@gmail.com",
                                                                                   username: "Testuser",

@@ -92,11 +92,13 @@ class AudioRecorder: NSObject, ObservableObject {
     
     // store file locally and sort the latest local recordings so newest is at the top
     
-    func sortLatestRecordings(){
+    func sortLatestRecordings() {
         recordings.removeAll()
         let fileManager = FileManager.default
         let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        // swiftlint:disable force_try
         let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+        // swiftlint:enable force_try
         for audio in directoryContents {
             let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
             recordings.append(recording)
@@ -111,10 +113,9 @@ class AudioRecorder: NSObject, ObservableObject {
     func uploadLatestRecording() {
         let localFile = recordings[0].fileURL
         let rambId = UUID().uuidString
-        let rambsRef = STORAGE_RAMBS.child(rambId)
+        let rambsRef = FBStorageProfileImages.child(rambId)
                         
-        rambsRef.putFile(from: localFile, metadata: nil
-            , completion: { (metadata, error) in
+        rambsRef.putFile(from: localFile, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
                     print("error")
                     return

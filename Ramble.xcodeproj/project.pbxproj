@@ -12,16 +12,13 @@
 		40122F832521015F00A3BDD6 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40122F822521015F00A3BDD6 /* TestData.swift */; };
 		40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D112498654D00B2E8A9 /* InlineAlert.swift */; };
 		40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1524986CB800B2E8A9 /* FeedView.swift */; };
-		40252C5F248F324600013742 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40252C5E248F324600013742 /* UserService.swift */; };
 		402F5491244F91A900FD899F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F5490244F91A900FD899F /* AppDelegate.swift */; };
 		402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F5492244F91A900FD899F /* SceneDelegate.swift */; };
 		402F5497244F91AA00FD899F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5496244F91AA00FD899F /* Assets.xcassets */; };
 		402F549A244F91AA00FD899F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5499244F91AA00FD899F /* Preview Assets.xcassets */; };
 		402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402F549B244F91AA00FD899F /* LaunchScreen.storyboard */; };
 		402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C2244F9ACC00FD899F /* RambFeed.swift */; };
-		402F54C6244F9CEB00FD899F /* RambService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F54C5244F9CEB00FD899F /* RambService.swift */; };
 		402F54C8244F9E4E00FD899F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */; };
-		402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 402F54CA244F9FD000FD899F /* SDWebImageSwiftUI */; };
 		402F54D6244FAD2A00FD899F /* Jimi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 402F54D5244FAD2A00FD899F /* Jimi.mp3 */; };
 		402F54D8244FAD2F00FD899F /* Love.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 402F54D7244FAD2F00FD899F /* Love.mp3 */; };
 		403390F525311CBC0041BF68 /* BigPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403390F425311CBC0041BF68 /* BigPlayerView.swift */; };
@@ -30,7 +27,6 @@
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
 		4056E9A4252404E10004E598 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056E9A3252404E10004E598 /* Extensions.swift */; };
 		405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A5DE1250802F4009F9C6B /* SearchView.swift */; };
-		406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 406EF19F24B51CCF009D224F /* SwiftUIRefresh */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
 		406FAD09244FF15D00223873 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD08244FF15D00223873 /* Helpers.swift */; };
 		406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0A244FF17600223873 /* RecordingModel.swift */; };
@@ -39,6 +35,7 @@
 		406FAD1F2450D6D200223873 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD1E2450D6D200223873 /* AuthView.swift */; };
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
+		40AFCEFE2544BA3000B34A3D /* SmallPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AFCEFD2544BA2F00B34A3D /* SmallPlayerView.swift */; };
 		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
 		40B3385E25267F54009321F2 /* RambService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385D25267F54009321F2 /* RambService2.swift */; };
@@ -52,9 +49,23 @@
 		40FFDEDF251BEA1F0025799C /* FloatingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */; };
 		40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF04251BF94F0025799C /* AudioPlayer.swift */; };
 		40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF06251BFC100025799C /* RambUserCell.swift */; };
-		BBBA7CEE09F9B793809F2F84 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E757B022011EEC2434B3D81B /* Pods_Ramble.framework */; };
+		DFF310CE52592EC77392BA41 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */; };
 		EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		40C228AE2547876B008CEB9A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		40F3FA5D248EC20D00F3CE02 /* Embed Frameworks */ = {
@@ -71,12 +82,12 @@
 
 /* Begin PBXFileReference section */
 		18260E38251A67E0004FFF9B /* Ramble-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ramble-Bridging-Header.h"; sourceTree = "<group>"; };
+		3CD168CAB85F0D360A7E797B /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
 		400A706A251E43A300A0DD8D /* GlobalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPlayer.swift; sourceTree = "<group>"; };
 		40122F6E251FB0E100A3BDD6 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		40122F822521015F00A3BDD6 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		40150D112498654D00B2E8A9 /* InlineAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		40150D1524986CB800B2E8A9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
-		40252C5E248F324600013742 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		402F548D244F91A900FD899F /* Ramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ramble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402F5490244F91A900FD899F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		402F5492244F91A900FD899F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,7 +96,6 @@
 		402F549C244F91AA00FD899F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		402F549E244F91AA00FD899F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		402F54C2244F9ACC00FD899F /* RambFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambFeed.swift; sourceTree = "<group>"; };
-		402F54C5244F9CEB00FD899F /* RambService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService.swift; sourceTree = "<group>"; };
 		402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		402F54D5244FAD2A00FD899F /* Jimi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jimi.mp3; sourceTree = "<group>"; };
 		402F54D7244FAD2F00FD899F /* Love.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Love.mp3; sourceTree = "<group>"; };
@@ -103,6 +113,7 @@
 		406FAD1E2450D6D200223873 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		40AFCEFD2544BA2F00B34A3D /* SmallPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPlayerView.swift; sourceTree = "<group>"; };
 		40B1474A25016C5F00A2781A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		40B3385B25267E90009321F2 /* Constants2.0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants2.0.swift; sourceTree = "<group>"; };
 		40B3385D25267F54009321F2 /* RambService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService2.swift; sourceTree = "<group>"; };
@@ -116,9 +127,8 @@
 		40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPlayerView.swift; sourceTree = "<group>"; };
 		40FFDF04251BF94F0025799C /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		40FFDF06251BFC100025799C /* RambUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RambUserCell.swift; sourceTree = "<group>"; };
-		78EE9F5A3FCD41F33C23676B /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
-		C46F06BBBBF141E7DFFB3082 /* Pods-Ramble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.release.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.release.xcconfig"; sourceTree = "<group>"; };
-		E757B022011EEC2434B3D81B /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DCF38C8F46BD21CC27C541 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
+		958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderPostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,28 +137,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				406EF1A024B51CCF009D224F /* SwiftUIRefresh in Frameworks */,
-				402F54CB244F9FD000FD899F /* SDWebImageSwiftUI in Frameworks */,
-				BBBA7CEE09F9B793809F2F84 /* Pods_Ramble.framework in Frameworks */,
+				DFF310CE52592EC77392BA41 /* Pods_Ramble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F29B5FEBE4D424D915C7767 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E757B022011EEC2434B3D81B /* Pods_Ramble.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2D268D9C788D4B05278E39F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				78EE9F5A3FCD41F33C23676B /* Pods-Ramble.debug.xcconfig */,
-				C46F06BBBBF141E7DFFB3082 /* Pods-Ramble.release.xcconfig */,
+				49DCF38C8F46BD21CC27C541 /* Pods-Ramble.debug.xcconfig */,
+				3CD168CAB85F0D360A7E797B /* Pods-Ramble.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -160,7 +160,7 @@
 				402F548F244F91A900FD899F /* Ramble */,
 				402F548E244F91A900FD899F /* Products */,
 				2D268D9C788D4B05278E39F4 /* Pods */,
-				1F29B5FEBE4D424D915C7767 /* Frameworks */,
+				9AEB1E0769C8036DF3075BFF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -179,7 +179,6 @@
 				40F3FA32248EA15B00F3CE02 /* Utils */,
 				40B3388C25268D05009321F2 /* ViewModel */,
 				40B3385A25267E6B009321F2 /* API 2.0 */,
-				40F3FA31248EA13B00F3CE02 /* API */,
 				408E258124849FF100C0C6A5 /* App */,
 				408E25832484A01F00C0C6A5 /* View */,
 				408E258224849FF800C0C6A5 /* Model */,
@@ -248,6 +247,7 @@
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
 				40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */,
 				403390F425311CBC0041BF68 /* BigPlayerView.swift */,
+				40AFCEFD2544BA2F00B34A3D /* SmallPlayerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,15 +269,6 @@
 				40B3388F25268E0A009321F2 /* RambListViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		40F3FA31248EA13B00F3CE02 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				402F54C5244F9CEB00FD899F /* RambService.swift */,
-				40252C5E248F324600013742 /* UserService.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		40F3FA32248EA15B00F3CE02 /* Utils */ = {
@@ -304,6 +295,14 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
+		9AEB1E0769C8036DF3075BFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -311,21 +310,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 402F54A1244F91AA00FD899F /* Build configuration list for PBXNativeTarget "Ramble" */;
 			buildPhases = (
-				B5ECA53529BED24AFE8A3A22 /* [CP] Check Pods Manifest.lock */,
+				3361F936BCA46B9901AC4A33 /* [CP] Check Pods Manifest.lock */,
 				402F5489244F91A900FD899F /* Sources */,
 				402F548A244F91A900FD899F /* Frameworks */,
 				402F548B244F91A900FD899F /* Resources */,
 				40F3FA5D248EC20D00F3CE02 /* Embed Frameworks */,
-				C616FB0CC4BECA44D6770448 /* [CP] Embed Pods Frameworks */,
+				40C228AF254787E7008CEB9A /* ShellScript */,
+				0D66A2D80F0611E0788BBC27 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				40C228AE2547876B008CEB9A /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
 			name = Ramble;
 			packageProductDependencies = (
-				402F54CA244F9FD000FD899F /* SDWebImageSwiftUI */,
-				406EF19F24B51CCF009D224F /* SwiftUIRefresh */,
 			);
 			productName = Ramble;
 			productReference = 402F548D244F91A900FD899F /* Ramble.app */;
@@ -387,7 +386,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B5ECA53529BED24AFE8A3A22 /* [CP] Check Pods Manifest.lock */ = {
+		0D66A2D80F0611E0788BBC27 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3361F936BCA46B9901AC4A33 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -409,22 +425,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C616FB0CC4BECA44D6770448 /* [CP] Embed Pods Frameworks */ = {
+		40C228AF254787E7008CEB9A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ramble/Pods-Ramble-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -438,11 +454,9 @@
 				40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */,
 				40FFDEDF251BEA1F0025799C /* FloatingPlayerView.swift in Sources */,
 				404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */,
-				40252C5F248F324600013742 /* UserService.swift in Sources */,
 				40B3389025268E0A009321F2 /* RambListViewModel.swift in Sources */,
 				402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */,
 				406FAD212450D7FA00223873 /* AppView.swift in Sources */,
-				402F54C6244F9CEB00FD899F /* RambService.swift in Sources */,
 				40122F832521015F00A3BDD6 /* TestData.swift in Sources */,
 				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
@@ -451,6 +465,7 @@
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
+				40AFCEFE2544BA3000B34A3D /* SmallPlayerView.swift in Sources */,
 				40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */,
 				40B3388E25268D2A009321F2 /* RambCellViewModel.swift in Sources */,
 				40B3385E25267F54009321F2 /* RambService2.swift in Sources */,
@@ -606,7 +621,7 @@
 		};
 		402F54A2244F91AA00FD899F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78EE9F5A3FCD41F33C23676B /* Pods-Ramble.debug.xcconfig */;
+			baseConfigurationReference = 49DCF38C8F46BD21CC27C541 /* Pods-Ramble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -687,7 +702,7 @@
 		};
 		402F54A3244F91AA00FD899F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C46F06BBBBF141E7DFFB3082 /* Pods-Ramble.release.xcconfig */;
+			baseConfigurationReference = 3CD168CAB85F0D360A7E797B /* Pods-Ramble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -815,19 +830,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		402F54CA244F9FD000FD899F /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 402F54C9244F9FD000FD899F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
-		};
-		406EF19F24B51CCF009D224F /* SwiftUIRefresh */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 406EF19E24B51CCF009D224F /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
-			productName = SwiftUIRefresh;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 402F5485244F91A900FD899F /* Project object */;
 }

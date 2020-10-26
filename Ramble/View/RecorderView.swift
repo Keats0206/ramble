@@ -86,7 +86,7 @@ struct RecorderView: View {
         }.onAppear{
             animateUploading = false
             if currentTab == .profile {
-                currentTab = .Tab2
+                currentTab = .tab2
                 presentationMode.wrappedValue.dismiss()
             }
         }
@@ -114,7 +114,7 @@ private extension RecorderView {
 
 struct RecorderView_Previews: PreviewProvider {    
     static var previews: some View {
-        RecorderView(currentTab: .constant(Tab.Tab1), user: _user2)
+        RecorderView(currentTab: .constant(Tab.tab1), user: testUser)
     }
 }
 

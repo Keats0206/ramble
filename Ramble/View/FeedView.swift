@@ -15,8 +15,8 @@ struct FeedView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var userModel = UserService2()
     
-    @State var recordingModal_shown = false
-    @State var searchModal_shown = false
+    @State var recordingModalShown = false
+    @State var searchModalShown = false
     @State var dataToggle = 0
     @State var ramb: Ramb2?
     
@@ -76,7 +76,7 @@ struct FeedView: View {
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView(user: _user2)
+        FeedView(user: testUser)
             .environmentObject(SessionStore())
             .environmentObject(GlobalPlayer())
     }

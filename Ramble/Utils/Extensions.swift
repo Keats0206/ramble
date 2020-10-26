@@ -20,6 +20,9 @@ extension Color {
 
     static let flatDarkCardBackground = Color(red: 77/255, green: 77/255, blue: 77/255) /* #4d4d4d */
  
+// swiftlint:disable identifier_name
+// swiftlint:disable large_tuple
+    
     func ToUIColor() -> UIColor {
 
         let components = self.components()
@@ -42,3 +45,5 @@ extension Color {
         return (r, g, b, a)
     }
 }
+
+// swiftlint:enable identifier_name

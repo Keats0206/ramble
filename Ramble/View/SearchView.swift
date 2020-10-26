@@ -22,24 +22,25 @@ struct SearchView: View {
             VStack(alignment: .center) {
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
                 List{
-                    ForEach(self.viewModel.users.filter{($0.username.lowercased()).contains(self.searchText.lowercased()) || ($0.displayname.lowercased()).contains(self.searchText.lowercased())}, id: \.self) { user in
+                    ForEach(self.viewModel.users.filter{($0.username.lowercased()).contains(self.searchText.lowercased())
+                                ||
+                            ($0.displayname.lowercased()).contains(self.searchText.lowercased())}, id: \.self) { user in
+                        
                         SearchCell(user: user)
                     }
                 }
                 Spacer()
             }
-        }
-        .onAppear{
-            self.viewModel.fetchUsers()
-        }
-        .navigationBarItems(leading:
+        }.navigationBarItems(leading:
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
-            }){
+            }) {
                 Text("Cancel")
                     .foregroundColor(.red)
             }
-        )
+        ).onAppear {
+            self.viewModel.fetchUsers()
+        }
     }
 }
 

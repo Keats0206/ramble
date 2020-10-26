@@ -211,6 +211,6 @@ struct EditProfileView : View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(user: .constant(_user2))
+        EditProfileView(user: .constant(testUser))
     }
 }
