@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MultiLineTF: UIViewRepresentable {
     
-    @Binding var txt : String
+    @Binding var txt: String
     
     func makeCoordinator() -> MultiLineTF.Coordinator {
         
@@ -33,19 +33,16 @@ struct MultiLineTF: UIViewRepresentable {
         
     }
     
-    class Coordinator : NSObject, UITextViewDelegate {
+    class Coordinator: NSObject, UITextViewDelegate {
         
-        var parent : MultiLineTF
+        var parent: MultiLineTF
         
-        init(parent1 : MultiLineTF) {
-            
+        init(parent1: MultiLineTF) {
             parent = parent1
         }
-        
         func textViewDidChange(_ textView: UITextView) {
             self.parent.txt = textView.text
         }
-        
         func textViewDidBeginEditing(_ textView: UITextView) {
             textView.text = ""
             textView.textColor = .label

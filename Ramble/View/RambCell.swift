@@ -21,20 +21,28 @@ struct RambCell : View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination:  // link in background
-                ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
+            HStack{
+                NavigationLink(destination:  // link in background
+                    ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
+                }.frame(width: 0, height: 0)
+                
+                Spacer()
             }
+            
             HStack(alignment: .center) {
                 VStack(alignment: .center, spacing: 10) {
                     WebImage(url: URL(string: ramb.user.profileImageUrl))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
-                        .onTapGesture { self.isActive.toggle() } // activate link on image tap
+                        .onTapGesture {
+                            self.isActive.toggle()
+                        }// activate link on image tap
                     Spacer()
                 }
+                
                 VStack(alignment: .leading) {
-                    HStack{
+                    HStack {
                         Text("@" + ramb.user.username)
                             .font(.system(.subheadline, design: .rounded))
                             .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
@@ -52,20 +60,22 @@ struct RambCell : View {
                         .multilineTextAlignment(TextAlignment.leading)
                     Spacer()
                 }.background(Color.white)
-                VStack(alignment: .center){
+                
+                VStack(alignment: .center) {
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }) {
                         Image(systemName: "ellipsis")
                             .frame(height: 10)
                             .accentColor(Color.accent4)
+                            .overlay(Circle().background(Color.accent2))
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Report this ramb?"),
-                                            buttons:[.default(
-                                                    Text("Report").foregroundColor(.red), action: {
-                                                        print("DEBUG: report ramb")
-                                                    }), .cancel()
-                                            ])
+                                    buttons: [.default(
+                                        Text("Report").foregroundColor(.red), action: {
+                                            print("DEBUG: report ramb")
+                                    }),.cancel()
+                                ])
                             }
                     }.buttonStyle(BorderlessButtonStyle())
                     Spacer()
