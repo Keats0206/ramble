@@ -31,7 +31,7 @@ struct ProfileView: View {
                 
     var body: some View {
         
-            ZStack{
+            ZStack {
                                     
                 ScrollView{
                     
@@ -53,7 +53,7 @@ struct ProfileView: View {
                         
                         Spacer()
                         
-                        HStack{
+                        HStack {
                             
                             Text("Rambles")
                                 .font(.headline)
@@ -72,18 +72,12 @@ struct ProfileView: View {
                                     
                 }.offset(offset)
                     .padding(0)
-//
-//                if globalPlayer.globalRamb != nil{
-//                    FloatingPlayerView(hideNav: $hideNav)
-//                        .edgesIgnoringSafeArea(.all)
-//                }
-                
         }.navigationBarHidden(hideNav)
         .navigationBarItems(trailing:
-            HStack{
+            HStack {
                 Button(action: {
                     self.searchModalShown.toggle()
-                }){
+                }) {
                     Image(systemName: "magnifyingglass")
                         .resizable()
                         .frame(width: 25, height: 25)
@@ -95,7 +89,6 @@ struct ProfileView: View {
                         SearchView()
                     }
                 }
-                
                 if Auth.auth().currentUser?.uid == user.id {
                     Button(action: {
                         self.editModalShown.toggle()

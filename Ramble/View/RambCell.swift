@@ -20,10 +20,10 @@ struct RambCell : View {
     var ramb: Ramb2
     
     var body: some View {
-        
         ZStack {
             NavigationLink(destination:  // link in background
-                ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()            
+                ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
+            }
             HStack(alignment: .center) {
                 VStack(alignment: .center, spacing: 10) {
                     WebImage(url: URL(string: ramb.user.profileImageUrl))
@@ -31,27 +31,21 @@ struct RambCell : View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
-                    
                     Spacer()
                 }
                 VStack(alignment: .leading) {
                     HStack{
                         Text("@" + ramb.user.username)
                             .font(.system(.subheadline, design: .rounded))
+                            .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
                             .bold()
-                            
-                        
                         Text(formatDate(timestamp: ramb.timestamp))
                             .bold()
-                        
                         Text("3:30s")
                             .font(.system(.caption, design: .rounded))
                             .bold()
-
                         Spacer()
-                        
                     }.font(.system(.caption, design: .rounded))
-                                        
                     Text(ramb.caption)
                         .font(.system(.body, design: .rounded))
                         .bold()
@@ -61,28 +55,26 @@ struct RambCell : View {
                 VStack(alignment: .center){
                     Button(action: {
                         self.showingActionSheet.toggle()
-                    }){
+                    }) {
                         Image(systemName: "ellipsis")
                             .frame(height: 10)
                             .accentColor(Color.accent4)
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Report this ramb?"),
-                                            buttons:[
-                                                .default(
+                                            buttons:[.default(
                                                     Text("Report").foregroundColor(.red), action: {
                                                         print("DEBUG: report ramb")
-                                                    }),.cancel()
+                                                    }), .cancel()
                                             ])
                             }
                     }.buttonStyle(BorderlessButtonStyle())
                     Spacer()
                 }
             }.padding()
-        }.onTapGesture(perform: {
+        }.cornerRadius(15)
+        .onTapGesture(perform: {
             play()
         })
-        .cornerRadius(15)
-        }
     }
     func play() {
         globalPlayer.globalRambs = [self.ramb]

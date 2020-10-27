@@ -42,6 +42,7 @@
 		40B3386025267F64009321F2 /* UserService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385F25267F64009321F2 /* UserService2.swift */; };
 		40B3388E25268D2A009321F2 /* RambCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3388D25268D2A009321F2 /* RambCellViewModel.swift */; };
 		40B3389025268E0A009321F2 /* RambListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3388F25268E0A009321F2 /* RambListViewModel.swift */; };
+		40BFA9F22547AD1D00423320 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BFA9F12547AD1D00423320 /* Timer.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
 		40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA2F248EA0F100F3CE02 /* RambModel.swift */; };
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
@@ -120,6 +121,7 @@
 		40B3385F25267F64009321F2 /* UserService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService2.swift; sourceTree = "<group>"; };
 		40B3388D25268D2A009321F2 /* RambCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCellViewModel.swift; sourceTree = "<group>"; };
 		40B3388F25268E0A009321F2 /* RambListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambListViewModel.swift; sourceTree = "<group>"; };
+		40BFA9F12547AD1D00423320 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */,
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
 				40FFDF04251BF94F0025799C /* AudioPlayer.swift */,
+				40BFA9F12547AD1D00423320 /* Timer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
+				40BFA9F22547AD1D00423320 /* Timer.swift in Sources */,
 				EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
 				40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */,

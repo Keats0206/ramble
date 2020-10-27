@@ -17,7 +17,7 @@ struct SmallPlayerView: View {
     var ramb: Ramb2
     
     var body: some View {
-        GeometryReader { _ in
+        GeometryReader { proxy in
             HStack(spacing: 5){
                                             
             WebImage(url: URL(string: "\(ramb.user.profileImageUrl)"))
@@ -59,7 +59,10 @@ struct SmallPlayerView: View {
                 .padding(10)
                 .padding([.leading, .trailing])
             Divider()
-        }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 30)
+        }.background(Color.white)
+        .onTapGesture {
+            self.minimizableViewHandler.expand()
+        }
     }
 }
 

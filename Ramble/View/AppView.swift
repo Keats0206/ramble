@@ -30,10 +30,9 @@ struct MainView: View {
             return
         }
     }
-    
     var body: some View {
         GeometryReader { proxy in
-            NavigationView{
+            NavigationView {
                 VStack(spacing: 0) {
                     if self.currentView == .tab1 {
                         FeedView(user: user)
@@ -41,67 +40,40 @@ struct MainView: View {
                         ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                     }
                     TabBar(currentView: self.$currentView, showModal: self.$showModal)
-                }.onAppear {
-                    self.getUser()
-                    self.minimizableViewHandler.settings.backgroundColor = Color.white
-                    self.minimizableViewHandler.settings.shadowColor = Color.clear
-                    self.minimizableViewHandler.settings.bottomMargin = 60
-                    self.minimizableViewHandler.settings.minimizedHeight = 60
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        if globalPlayer.didSet{
-                            self.minimizableViewHandler.present()
-                            self.minimizableViewHandler.minimize()
-                            print("DEBUG: presenting miniview handler")
-                        } else {
-                            print("DEBUG: No song ready")
-                        }
-                    }
                 }
-                .sheet(isPresented: self.$showModal) {
-                    NavigationView{
-                        RecorderView(currentTab: $currentView, user: user)
-                    }.tabItem {
-                        HStack {
-                            Image(systemName: "person.circle")
-                            Text("Profile")                    }
-                    }
-                }
-                .minimizableView(
-                    content: {
-                        BigPlayerView(ramb: testRamb, player: testPlayer)
-                    }, compactView: {
-                        SmallPlayerView(ramb: testRamb)
-                    }, geometry: proxy)
-                .environmentObject(self.minimizableViewHandler)
             }
-        }
-    }
-}
-
-struct CompactViewExample: View {
-    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
-    
-    var body: some View {
-        GeometryReader { proxy in
-            HStack {
-                Text("Compact View")
-            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
-                self.minimizableViewHandler.expand()
-            }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 40)
-        }
-    }
-}
-
-struct ContentViewExample: View {
-    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
-    
-    var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                Text("Fuck it")
-            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
-                self.minimizableViewHandler.expand()
-            }.background(Color(.secondarySystemBackground)).verticalDragGesture(translationHeightTriggerValue: 40)
+//            .minimizableView(
+//                content: {
+//                    BigPlayerView(ramb: testRamb, player: testPlayer)
+//                }, compactView: {
+//                    SmallPlayerView(ramb: testRamb)
+//                }, geometry: proxy)
+            .onAppear {
+                self.getUser()
+                self.minimizableViewHandler.settings.backgroundColor = Color.white
+                self.minimizableViewHandler.settings.shadowColor = Color.clear
+                self.minimizableViewHandler.settings.bottomMargin = 60
+                self.minimizableViewHandler.settings.minimizedHeight = 60
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if globalPlayer.didSet{
+                        self.minimizableViewHandler.present()
+                        self.minimizableViewHandler.minimize()
+                        print("DEBUG: presenting miniview handler")
+                    } else {
+                        print("DEBUG: No song ready")
+                    }
+                }
+            }
+            .sheet(isPresented: self.$showModal) {
+                NavigationView {
+                    RecorderView(currentTab: $currentView, user: user)
+                }.tabItem {
+                    HStack {
+                        Image(systemName: "person.circle")
+                        Text("Profile")                    }
+                }
+            }
+            .environmentObject(self.minimizableViewHandler)
         }
     }
 }

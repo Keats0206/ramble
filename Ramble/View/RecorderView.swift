@@ -10,11 +10,14 @@ import SwiftUI
 
 struct RecorderView: View {
     @Environment(\.presentationMode) var presentationMode
+    
+    @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
     
     @State private var animateRecording = false
     @State var animateUploading = false
     @Binding var currentTab: Tab
+    @State var length = 0.0
     
     @State var isActive = false
 //    @State private var wave3 = false
@@ -29,22 +32,31 @@ struct RecorderView: View {
             ZStack{
                 
                 switch audioRecorder.recorderState {
-                
                     case .ready:
-                        
-                        Button(action: {
-                            self.audioRecorder.startRecording()
-                        }) {
-                            Image(systemName: "circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 75, height: 75)
-                                .foregroundColor(.red)
+                               
+                            Text(String(format: "%.1f", timerManager.secondsElapsed))
+                                .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                .padding(.top, 300)
+                            
+                            Button(action: {
+                                self.audioRecorder.startRecording()
+                                self.timerManager.start()
+                            }) {
+                                Image(systemName: "circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 75, height: 75)
+                                    .foregroundColor(.red)
                         }
-                        
                     case .started:
+                        Text(String(format: "%.1f", timerManager.secondsElapsed))
+                            .font(.system(size: 20, weight: .heavy, design: .rounded))
+                            .padding(.top, 300)
+                        
                         Button(action: {
                             self.audioRecorder.stopRecording()
+                            self.length = self.timerManager.secondsElapsed
+                            self.timerManager.stop()
                         }) {
                             Image(systemName: "square.fill")
                                 .resizable()
@@ -74,10 +86,10 @@ struct RecorderView: View {
                         
                     case .stopped:
                         
-                        LoadingAnimation()
+                        LoadingAnimation()//leading animation
                    
                     case .uploaded:
-                        Spacer()
+                        Spacer()// Sends user to the next view
                             .onAppear {
                                 self.isActive.toggle()
                     }
@@ -105,7 +117,7 @@ struct RecorderView: View {
 private extension RecorderView {
     var previewButton: some View {
         ZStack{
-            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, currentTab: $currentTab, user: user), isActive: $isActive){
+            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, length: length, currentTab: $currentTab, user: user), isActive: $isActive){
                 Spacer()
             }
         }

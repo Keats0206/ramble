@@ -29,7 +29,7 @@ struct RambUserCell: View {
                     Text(ramb.caption)
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .multilineTextAlignment(TextAlignment.leading)
-                        .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent4 : .primary)
+                        .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
                     
                 }.buttonStyle(BorderlessButtonStyle())
                 
@@ -38,10 +38,7 @@ struct RambUserCell: View {
                     .font(.system(size: 16, weight: .regular, design: .rounded))
                 
             }
-            
-            
             Spacer()
-            
             Text("3:30")
                 .font(.system(size: 18, weight: .regular, design: .rounded))
             
@@ -54,18 +51,18 @@ struct RambUserCell: View {
                         .accentColor(Color.accent4)
                         .actionSheet(isPresented: $showingActionSheet) {
                             ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
-                                        buttons:[
+                buttons: [
                                             .default(
                                                 Text("Delete").foregroundColor(.red), action: {
                                                     print("DEBUG: delete ramb")
-                                                }),.cancel()
+                                                }), .cancel()
                                         ])
                         }
                 }.buttonStyle(BorderlessButtonStyle())
             } else {
                 Button(action: {
                     self.showingActionSheet.toggle()
-                }){
+                }) {
                     Image(systemName: "ellipsis")
                         .frame(height: 10)
                         .accentColor(Color.accent4)

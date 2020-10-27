@@ -46,7 +46,8 @@ struct BigPlayerView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color("bg"))
-        }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 30)
+        }.background(Color.white)
+        .verticalDragGesture(translationHeightTriggerValue: 40)
     }
 }
 
