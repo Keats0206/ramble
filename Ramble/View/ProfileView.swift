@@ -71,32 +71,33 @@ struct ProfileView: View {
                     Spacer()
                                     
                 }.offset(offset)
-                    .padding(0)
+            .padding(0)
         }.navigationBarHidden(hideNav)
         .navigationBarItems(trailing:
             HStack {
                 Button(action: {
                     self.searchModalShown.toggle()
                 }) {
-                    Image(systemName: "magnifyingglass")
-                        .resizable()
+                    Circle()
+                        .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
                         .frame(width: 25, height: 25)
-                        .padding(5)
+                        .overlay(Image(systemName: "magnifyingglass").foregroundColor(Color.flatDarkBackground))
                 }.sheet(isPresented: $searchModalShown, onDismiss: {
                     print("Modal dismisses")
                 }) {
-                    NavigationView{
+                    NavigationView {
                         SearchView()
                     }
                 }
                 if Auth.auth().currentUser?.uid == user.id {
                     Button(action: {
                         self.editModalShown.toggle()
-                    }){
-                        Image(systemName: "ellipsis")
-                            .padding(5)
-                    }.background(Capsule().fill(Color.black).opacity(0.2))
-                    .sheet(isPresented: $editModalShown, onDismiss: {
+                    }) {
+                        Circle()
+                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                            .frame(width: 25, height: 25)
+                            .overlay(Image(systemName: "ellipsis").foregroundColor(Color.flatDarkBackground))
+                    }.sheet(isPresented: $editModalShown, onDismiss: {
                         print("Modal dismisses")
                     }) {
                         EditProfileView(user: $user)
@@ -104,7 +105,7 @@ struct ProfileView: View {
                 } else {
                     Spacer()
             }
-     })
+        })
     }
 }
 

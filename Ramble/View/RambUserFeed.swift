@@ -27,7 +27,6 @@ struct RambUserFeed : View {
                 RambUserCell(ramb: ramb)
             }
             Spacer()
-            
         }.onAppear{
             viewModel.fetchUserRambs(user: user)
         }

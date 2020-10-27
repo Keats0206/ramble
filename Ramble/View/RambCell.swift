@@ -20,32 +20,29 @@ struct RambCell : View {
     var ramb: Ramb2
     
     var body: some View {
-        ZStack {
-            HStack{
-                NavigationLink(destination:  // link in background
-                    ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
-                }.frame(width: 0, height: 0)
-                
-                Spacer()
-            }
-            
-            HStack(alignment: .center) {
-                VStack(alignment: .center, spacing: 10) {
-                    WebImage(url: URL(string: ramb.user.profileImageUrl))
-                        .frame(width: 75, height: 75)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
-                        .onTapGesture {
-                            self.isActive.toggle()
-                        }// activate link on image tap
-                    Spacer()
+        HStack(alignment: .center) {
+                ZStack{
+                    NavigationLink(destination:  // link in background
+                        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
+                    }.frame(width: 0, height: 0)
+                        
+                    VStack(alignment: .center, spacing: 10) {
+                        WebImage(url: URL(string: ramb.user.profileImageUrl))
+                            .frame(width: 75, height: 75)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
+                            .onTapGesture {
+                                self.isActive.toggle()
+                            }// activate link on image tap
+                        Spacer()
+                    }
                 }
-                
+            
                 VStack(alignment: .leading) {
                     HStack {
                         Text("@" + ramb.user.username)
                             .font(.system(.subheadline, design: .rounded))
-                            .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
+                            .foregroundColor(.primary)
                             .bold()
                         Text(formatDate(timestamp: ramb.timestamp))
                             .bold()
@@ -56,36 +53,39 @@ struct RambCell : View {
                     }.font(.system(.caption, design: .rounded))
                     Text(ramb.caption)
                         .font(.system(.body, design: .rounded))
+                        .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
                         .bold()
                         .multilineTextAlignment(TextAlignment.leading)
                     Spacer()
                 }.background(Color.white)
-                
+            
                 VStack(alignment: .center) {
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }) {
-                        Image(systemName: "ellipsis")
-                            .frame(height: 10)
-                            .accentColor(Color.accent4)
-                            .overlay(Circle().background(Color.accent2))
+                        Circle()
+                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                            .frame(width: 25, height: 25)
+                            .overlay(Image(systemName: "ellipsis"))
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Report this ramb?"),
                                     buttons: [.default(
                                         Text("Report").foregroundColor(.red), action: {
                                             print("DEBUG: report ramb")
-                                    }),.cancel()
+                                    }), .cancel()
                                 ])
                             }
-                    }.buttonStyle(BorderlessButtonStyle())
+                    }
+                        .buttonStyle(BorderlessButtonStyle())
                     Spacer()
                 }
-            }.padding()
-        }.cornerRadius(15)
-        .onTapGesture(perform: {
-            play()
-        })
-    }
+            }
+            .padding()
+            .cornerRadius(15)
+            .onTapGesture(perform: {
+                play()
+            })
+        }
     func play() {
         globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)

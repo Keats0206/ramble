@@ -23,7 +23,7 @@ struct MainView: View {
     
     var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
     
-    func getUser(){
+    func getUser() {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
@@ -140,6 +140,7 @@ struct TabBarItem: View {
         .foregroundColor(self.currentView == tab ? .accent4 : .flatDarkCardBackground)
         .frame(width: 140, height: 50)
         .onTapGesture { self.currentView = self.tab }
+        .animation(.easeInOut)
         .padding(paddingEdges, 15)
     }
 }

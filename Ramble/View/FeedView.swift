@@ -21,8 +21,6 @@ struct FeedView: View {
     @State var ramb: Ramb2?
     
     @State var hideNav = false
-
-    private var feedtoggle = ["Hot", "New"]
     
     var user: User
         
@@ -38,36 +36,35 @@ struct FeedView: View {
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarItems(
             leading:
-                HStack{
+                HStack {
                     Text("RAMBLE")
                         .font(.system(size: 30, weight: .heavy, design: .rounded))
                         .foregroundColor(Color.accent3)
                 }, trailing:
-            HStack{
+                HStack {
+                    Button(action: {
+                        self.dataToggle = 1
+                    }) {
+                        Image(systemName: dataToggle == 1 ? "flame.fill" : "flame")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
+                            .padding(5)
+                    }
                 
-                Button(action: {
-                    self.dataToggle = 1
-                }) {
-                    Image(systemName: dataToggle == 1 ? "flame.fill" : "flame")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
-                        .padding(5)
+                    Button(action: {
+                        self.dataToggle = 0
+                    }) {
+                        Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
+                            .padding(5)
+                    }
                 }
-                
-                Button(action: {
-                    self.dataToggle = 0
-                }) {
-                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
-                        .padding(5)
-                }
-            }
-        )
+            )
+        }
     }
-}
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
