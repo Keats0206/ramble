@@ -42,48 +42,38 @@ struct MainView: View {
                     }
                     TabBar(currentView: self.$currentView, showModal: self.$showModal)
                 }.onAppear {
-                        self.getUser()
-                        self.minimizableViewHandler.settings.backgroundColor = Color.white
-                        self.minimizableViewHandler.settings.shadowColor = Color.clear
-                        self.minimizableViewHandler.settings.bottomMargin = 60
-                        self.minimizableViewHandler.settings.minimizedHeight = 60
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            if globalPlayer.didSet{
-                                self.minimizableViewHandler.present()
-                                self.minimizableViewHandler.minimize()
-                                print("DEBUG: presenting miniview handler")
-                            } else {
-                                print("DEBUG: No song ready")
-                            }
+                    self.getUser()
+                    self.minimizableViewHandler.settings.backgroundColor = Color.white
+                    self.minimizableViewHandler.settings.shadowColor = Color.clear
+                    self.minimizableViewHandler.settings.bottomMargin = 60
+                    self.minimizableViewHandler.settings.minimizedHeight = 60
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if globalPlayer.didSet{
+                            self.minimizableViewHandler.present()
+                            self.minimizableViewHandler.minimize()
+                            print("DEBUG: presenting miniview handler")
+                        } else {
+                            print("DEBUG: No song ready")
                         }
                     }
-                    .sheet(isPresented: self.$showModal) {
-                        NavigationView{
-                            RecorderView(currentTab: $currentView, user: user)
-                }.tag(0)
-                
-                Text("Second Screen")
-                    .tabItem {
-                        Image(systemName: "plus.circle")
-                            .resizable()
-                            .frame(width: 50)
-                }.tag(1)
-                
-                NavigationView{
-                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
-                }.tabItem {
-                    HStack {
-                        Image(systemName: "person.circle")
-                        Text("Profile")                    }
                 }
+                .sheet(isPresented: self.$showModal) {
+                    NavigationView{
+                        RecorderView(currentTab: $currentView, user: user)
+                    }.tabItem {
+                        HStack {
+                            Image(systemName: "person.circle")
+                            Text("Profile")                    }
+                    }
+                }
+                .minimizableView(
+                    content: {
+                        BigPlayerView(ramb: testRamb, player: testPlayer)
+                    }, compactView: {
+                        SmallPlayerView(ramb: testRamb)
+                    }, geometry: proxy)
+                .environmentObject(self.minimizableViewHandler)
             }
-            .minimizableView(
-                content: {
-                    BigPlayerView(ramb: testRamb, player: testPlayer)
-                }, compactView: {
-                    SmallPlayerView(ramb: testRamb)
-                }, geometry: proxy)
-            .environmentObject(self.minimizableViewHandler)
         }
     }
 }

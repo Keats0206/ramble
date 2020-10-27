@@ -45,7 +45,7 @@ class GlobalPlayer: ObservableObject {
     func setupNowPlaying(){
 // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = globalRamb?.first?.caption
+        nowPlayingInfo[MPMediaItemPropertyTitle] = globalRambs?.first?.caption
 //        if let image = UIImage(named: "Play-button") {
 //            nowPlayingInfo[MPMediaItemPropertyArtwork] =
 //                MPMediaItemArtwork(boundsSize: image.size) { size in

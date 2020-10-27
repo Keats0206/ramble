@@ -22,12 +22,10 @@ struct RambCell : View {
     var body: some View {
         
         ZStack {
-            
             NavigationLink(destination:  // link in background
                 ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()            
             HStack(alignment: .center) {
-                
-                VStack(alignment: .center, spacing: 10) {       
+                VStack(alignment: .center, spacing: 10) {
                     WebImage(url: URL(string: ramb.user.profileImageUrl))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
@@ -60,9 +58,7 @@ struct RambCell : View {
                         .multilineTextAlignment(TextAlignment.leading)
                     Spacer()
                 }.background(Color.white)
-                
                 VStack(alignment: .center){
-                
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }){
@@ -79,17 +75,15 @@ struct RambCell : View {
                                             ])
                             }
                     }.buttonStyle(BorderlessButtonStyle())
-                    
                     Spacer()
                 }
             }.padding()
-            
         }.onTapGesture(perform: {
             play()
         })
         .cornerRadius(15)
+        }
     }
-    
     func play() {
         globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)
