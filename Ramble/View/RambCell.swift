@@ -22,53 +22,68 @@ struct RambCell : View {
     var body: some View {
         
         ZStack {
+            
             NavigationLink(destination:  // link in background
-                            ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
-            }
+                ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()            
             HStack(alignment: .center) {
                 
-                VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 10) {       
                     WebImage(url: URL(string: ramb.user.profileImageUrl))
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
-                        .overlay(Circle().stroke(globalPlayer.globalRamb?.first?.id == self.ramb.id ? Color.accent3 : .primary, lineWidth: 3))
+                        .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
                         .onTapGesture { self.isActive.toggle() } // activate link on image tap
+                    
                     Spacer()
                 }
                 VStack(alignment: .leading) {
                     HStack{
                         Text("@" + ramb.user.username)
-                            .font(.system(size: 18, weight: .heavy, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded))
                             .bold()
+                            
+                        
                         Text(formatDate(timestamp: ramb.timestamp))
-                            .font(.system(.body, design: .rounded))
+                            .bold()
+                        
+                        Text("3:30s")
+                            .font(.system(.caption, design: .rounded))
+                            .bold()
+
                         Spacer()
-                    }
-                    
+                        
+                    }.font(.system(.caption, design: .rounded))
+                                        
                     Text(ramb.caption)
-                        .font(.system(size: 22,weight: .regular, design: .rounded))
+                        .font(.system(.body, design: .rounded))
                         .bold()
                         .multilineTextAlignment(TextAlignment.leading)
                     Spacer()
                 }.background(Color.white)
                 
                 VStack(alignment: .center){
-                    
+                
                     Button(action: {
-                        play()
+                        self.showingActionSheet.toggle()
                     }){
-                        Image(systemName: "play.circle")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(globalPlayer.globalRamb?.first?.id == self.ramb.id ? .accent4 : .primary)
-
+                        Image(systemName: "ellipsis")
+                            .frame(height: 10)
+                            .accentColor(Color.accent4)
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text("Report this ramb?"),
+                                            buttons:[
+                                                .default(
+                                                    Text("Report").foregroundColor(.red), action: {
+                                                        print("DEBUG: report ramb")
+                                                    }),.cancel()
+                                            ])
+                            }
                     }.buttonStyle(BorderlessButtonStyle())
                     
-                    Text("3:30")
-                        .font(.system(size: 18, weight: .regular, design: .rounded))
+                    Spacer()
                 }
             }.padding()
-        
+            
         }.onTapGesture(perform: {
             play()
         })
@@ -76,17 +91,14 @@ struct RambCell : View {
     }
     
     func play() {
-        globalPlayer.globalRamb = [self.ramb]
+        globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)
         globalPlayer.play()
     }
 }
 
-
-//struct RambCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RambCell(ramb: _ramb)
-//            .environmentObject(SessionStore())
-//            .environmentObject(GlobalPlayer())
-//    }
-//}
+struct RambCell_Previews: PreviewProvider {
+    static var previews: some View {
+        RambCell(ramb: testRamb)
+    }
+}

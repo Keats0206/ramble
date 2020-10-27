@@ -5,6 +5,7 @@
 //  Created by Peter Keating on 10/1/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
+
 import SwiftUI
 import Firebase
 import Combine
@@ -15,7 +16,7 @@ class UserService2: ObservableObject {
     @Published var users = [User]()
             
     func fetchUser(uid: String, completion: @escaping(User) -> Void) {
-        let userRef = FB_REF_USERS.document(uid)
+        let userRef = FBRefUsers.document(uid)
 
         userRef.getDocument { (document, error) in
             let result = Result {
@@ -35,7 +36,7 @@ class UserService2: ObservableObject {
     }
     
     func fetchUsers() {
-        FB_REF_USERS.addSnapshotListener { (querySnapshot, error) in // (2)
+        FBRefUsers.addSnapshotListener { (querySnapshot, _) in // (2)
             if let querySnapshot = querySnapshot {
                 self.users = querySnapshot.documents.compactMap { document -> User? in // (3)
                     try? document.data(as: User.self) // (4)
@@ -45,9 +46,16 @@ class UserService2: ObservableObject {
     }
     
     func saveUserProfile(user: User) {
-        let userRef = FB_REF_USERS.document(user.uid)
-        let newUser = User(id: user.id, uid: user.uid, email: user.email, username: user.username, displayname: user.displayname, profileImageUrl: user.profileImageUrl, bio: user.bio, isFollowed: user.isFollowed)
-        
+        let userRef = FBRefUsers.document(user.uid)
+        let newUser = User(
+            id: user.id,
+            uid: user.uid,
+            email: user.email,
+            username: user.username,
+            displayname: user.displayname,
+            profileImageUrl: user.profileImageUrl,
+            bio: user.bio, isFollowed:
+            user.isFollowed)
         do {
             try userRef.setData(from: newUser)
         } catch let error {

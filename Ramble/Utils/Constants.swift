@@ -9,13 +9,13 @@
 import Foundation
 import Firebase
 
-let STORAGE_REF = Storage.storage().reference(forURL:"gs://ramb-ecce1.appspot.com")
-let STORAGE_RAMBS = STORAGE_REF.child("rambs")
-let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile-images")
+//let storageRef = Storage.storage().reference(forURL:"gs://ramb-ecce1.appspot.com")
+//let storageRambs = storageRef.child("rambs")
+//let storageProfileImages = storageRef.child("profile-images")
 //
 //let DB_REF = Database.database().reference()
-////let GEO_REF_USERS = GeoFire(firebaseRef: REF_USERS_LOCATIONS)
-////let GEO_REF_RAMBS = GeoFire(firebaseRef: REF_RAMBS_LOCATIONS)
+//let GEO_REF_USERS = GeoFire(firebaseRef: REF_USERS_LOCATIONS)
+//let GEO_REF_RAMBS = GeoFire(firebaseRef: REF_RAMBS_LOCATIONS)
 //
 //let REF_USERS = DB_REF.child("user")
 //let REF_USERS_LOCATIONS = DB_REF.child("user-locations")

@@ -36,6 +36,6 @@ struct RambUserFeed : View {
 
 struct RambUserFeed_Previews: PreviewProvider {
     static var previews: some View {
-        RambUserFeed(user: _user2)
+        RambUserFeed(user: testUser)
     }
 }

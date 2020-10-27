@@ -8,55 +8,51 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import MinimizableView
 import AVKit
 
 struct BigPlayerView: View {
+    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
+
     var ramb: Ramb2
     var player: AVPlayer
     
     var body: some View {
-        
-        VStack{
-            
-            // TopView....
-            
+        GeometryReader { proxy in
             VStack{
-                
-                Spacer(minLength: 0)
+                    Spacer(minLength: 0)
 
-                WebImage(url: URL(string: ramb.user.profileImageUrl))
-                    .frame(width: 150, height: 150)
-                    .clipShape(Circle())
-                
-                Text("@ \(ramb.user.displayname)")
-                    .foregroundColor(.gray)
-                    .padding(.top,20)
-                
-                Text(ramb.user.username)
-                    .foregroundColor(.gray)
-                    .padding(.top,20)
-                
-                Text(ramb.caption)
-                    .font(.system(size: 22,weight: .regular, design: .rounded))
-                    .padding(.top,10)
-                    .padding(.horizontal)
-                
-                AudioView(player: player)
-                
-                Spacer(minLength: 0)
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color("bg"))
-            .cornerRadius(35)
-            
+                    WebImage(url: URL(string: ramb.user.profileImageUrl))
+                        .frame(width: 150, height: 150)
+                        .clipShape(Circle())
+                    
+                    Text("@ \(ramb.user.displayname)")
+                        .foregroundColor(.gray)
+                        .padding(.top,20)
+                    
+                    Text(ramb.user.username)
+                        .foregroundColor(.gray)
+                        .padding(.top,20)
+                    
+                    Text(ramb.caption)
+                        .font(.system(size: 22,weight: .regular, design: .rounded))
+                        .padding(.top,10)
+                        .padding(.horizontal)
+                    
+                    AudioView(player: player)
+                    
+                    Spacer(minLength: 0)
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color("bg"))
+        }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 30)
         }
     }
-    var buttons = ["suit.heart.fill","star.fill","eye.fill","square.and.arrow.up.fill"]
 }
 
 struct BigPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        BigPlayerView(ramb: _ramb2, player: _player)
+        BigPlayerView(ramb: testRamb, player: testPlayer)
     }
 }

@@ -7,8 +7,9 @@
 
 import SwiftUI
 import Foundation
+import MinimizableView
 
-struct AppView: View {
+struct MainView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()
@@ -16,21 +17,12 @@ struct AppView: View {
     
     @State var user: User
     @State var hidNav = false
-    @State var recordingModal_shown = false
-    @State private var selection = 0
     
-    private var actionSelection: Binding<Int> {
-        Binding<Int>(get: {
-            self.selection
-        }) { (newValue: Int) in
-            if newValue == 1 {
-                self.recordingModal_shown = true
-            } else {
-                self.selection = newValue
-            }
-        }
-    }
-        
+    @State private var currentView: Tab = .tab1
+    @State private var showModal: Bool = false
+    
+    var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
+    
     func getUser(){
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
@@ -40,15 +32,34 @@ struct AppView: View {
     }
     
     var body: some View {
-        ZStack{
-            TabView(selection: actionSelection){
-                NavigationView{
-                    FeedView(user: user)
-                }.tabItem {
-                    HStack{
-                        Image(systemName: "dot.radiowaves.left.and.right")
-                        Text("Feed")
+        GeometryReader { proxy in
+            NavigationView{
+                VStack(spacing: 0) {
+                    if self.currentView == .tab1 {
+                        FeedView(user: user)
+                    } else {
+                        ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                     }
+                    TabBar(currentView: self.$currentView, showModal: self.$showModal)
+                }.onAppear {
+                        self.getUser()
+                        self.minimizableViewHandler.settings.backgroundColor = Color.white
+                        self.minimizableViewHandler.settings.shadowColor = Color.clear
+                        self.minimizableViewHandler.settings.bottomMargin = 60
+                        self.minimizableViewHandler.settings.minimizedHeight = 60
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            if globalPlayer.didSet{
+                                self.minimizableViewHandler.present()
+                                self.minimizableViewHandler.minimize()
+                                print("DEBUG: presenting miniview handler")
+                            } else {
+                                print("DEBUG: No song ready")
+                            }
+                        }
+                    }
+                    .sheet(isPresented: self.$showModal) {
+                        NavigationView{
+                            RecorderView(currentTab: $currentView, user: user)
                 }.tag(0)
                 
                 Text("Second Screen")
@@ -63,67 +74,44 @@ struct AppView: View {
                 }.tabItem {
                     HStack {
                         Image(systemName: "person.circle")
-                        Text("Profile")
-                    }
-                }.tag(2)
-                
-            }.sheet(isPresented: $recordingModal_shown, onDismiss: {
-                print("Modal dismisses")
-            }) {
-                NavigationView{
-                    RecorderView(currentTab: .constant(Tab.Tab1), user: user)
+                        Text("Profile")                    }
                 }
             }
-                .onAppear{
-                self.getUser()
-            }.accentColor(.primary)
-            
-            }
+            .minimizableView(
+                content: {
+                    BigPlayerView(ramb: testRamb, player: testPlayer)
+                }, compactView: {
+                    SmallPlayerView(ramb: testRamb)
+                }, geometry: proxy)
+            .environmentObject(self.minimizableViewHandler)
+        }
     }
 }
 
-//struct AppView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppView(user: _user2)
-//    }
-//}
-
-struct MainView: View {
-    @EnvironmentObject var session: SessionStore
-    @EnvironmentObject var globalPlayer: GlobalPlayer
-    @ObservedObject var audioRecorder = AudioRecorder()
-    @ObservedObject var viewModel = RambService2()
-    
-    @State var user: User
-    @State var hidNav = false
-    
-    @State private var currentView: Tab = .Tab1
-    @State private var showModal: Bool = false
-    
-    func getUser(){
-        let uid = session.session!.id!
-        UserService2.shared.fetchUser(uid: uid) { user in
-            self.user = user
-            return
-        }
-    }
+struct CompactViewExample: View {
+    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                if self.currentView == .Tab1 {
-                    FeedView(user: user)
-                } else {
-                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
-                }
-                TabBar(currentView: self.$currentView, showModal: self.$showModal)
-            }.onAppear{
-                    self.getUser()
-                }.sheet(isPresented: self.$showModal) {
-                    NavigationView{
-                        RecorderView(currentTab: $currentView, user: user)
-                }
-            }
+        GeometryReader { proxy in
+            HStack {
+                Text("Compact View")
+            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
+                self.minimizableViewHandler.expand()
+            }.background(Color.white).verticalDragGesture(translationHeightTriggerValue: 40)
+        }
+    }
+}
+
+struct ContentViewExample: View {
+    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
+    
+    var body: some View {
+        GeometryReader { proxy in
+            VStack {
+                Text("Fuck it")
+            }.frame(width: proxy.size.width, height: proxy.size.height).onTapGesture {
+                self.minimizableViewHandler.expand()
+            }.background(Color(.secondarySystemBackground)).verticalDragGesture(translationHeightTriggerValue: 40)
         }
     }
 }
@@ -134,15 +122,14 @@ struct TabBar: View {
 
     var body: some View {
         HStack {
-            TabBarItem(currentView: self.$currentView, imageName: "list.bullet", title: "FEED", paddingEdges: .leading, tab: .Tab1)
+            TabBarItem(currentView: self.$currentView, imageName: "list.bullet", title: "FEED", paddingEdges: .leading, tab: .tab1)
             Spacer()
             ShowModalTabBarItem(radius: 55) { self.showModal.toggle() }
             Spacer()
-            TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "PROFILE", paddingEdges: .trailing, tab: .Tab2)
+            TabBarItem(currentView: self.$currentView, imageName: "person.circle", title: "PROFILE", paddingEdges: .trailing, tab: .tab2)
         }.frame(minHeight: 70)
     }
 }
-
 
 struct CurrentScreen: View {
     @Binding var currentView: Tab
@@ -150,12 +137,12 @@ struct CurrentScreen: View {
 
     var body: some View {
         VStack {
-            if self.currentView == .Tab1 {
-                NavigationView{
+            if self.currentView == .tab1 {
+                NavigationView {
                     FeedView(user: user)
                 }
             } else {
-                NavigationView{
+                NavigationView {
                     ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
                 }
             }
@@ -164,8 +151,8 @@ struct CurrentScreen: View {
 }
 
 enum Tab {
-    case Tab1
-    case Tab2
+    case tab1
+    case tab2
     case profile
 }
 
@@ -177,7 +164,7 @@ struct TabBarItem: View {
     let tab: Tab
 
     var body: some View {
-        HStack(spacing:5) {
+        HStack(spacing: 5) {
             Image(systemName: imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -205,7 +192,7 @@ public struct ShowModalTabBarItem: View {
     }
 
     public var body: some View {
-        VStack(spacing:0) {
+        VStack(spacing: 0) {
             Image(systemName: "plus.rectangle")
                 .resizable()
                 .padding(5)

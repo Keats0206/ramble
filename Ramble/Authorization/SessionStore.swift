@@ -42,7 +42,7 @@ class SessionStore : ObservableObject {
     ){
         guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
         let filename = NSUUID().uuidString
-        let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
+        let storageRef = FBStorageProfileImages.child(filename)
         
         storageRef.putData(imageData, metadata: nil) { (meta, error) in
             if error != nil {
@@ -66,7 +66,7 @@ class SessionStore : ObservableObject {
                         }
                         
                         let uid = result?.user.uid
-                        let userRef = FB_REF_USERS.document(uid!)
+                        let userRef = FBRefUsers.document(uid!)
                         let user = User(id: uid, uid: uid!, email: email, username: username, displayname: fullname, profileImageUrl: profileImageUrl, bio: "", isFollowed: false)
  
                         do {

@@ -15,8 +15,8 @@ struct FeedView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var userModel = UserService2()
     
-    @State var recordingModal_shown = false
-    @State var searchModal_shown = false
+    @State var recordingModalShown = false
+    @State var searchModalShown = false
     @State var dataToggle = 0
     @State var ramb: Ramb2?
     
@@ -33,13 +33,12 @@ struct FeedView: View {
     var body: some View {
         ZStack{
             RambFeed(dataToggle: $dataToggle)
-            if globalPlayer.globalRamb != nil {
-                FloatingPlayerView(hideNav: $hideNav)
-                    .edgesIgnoringSafeArea(.all)
-                    .clipped()
-                    .shadow(color: .gray, radius: 2, x: 0.0, y: -3)
-            }
-        }.navigationBarHidden(hideNav)
+//            if globalPlayer.globalRamb != nil {
+//                FloatingPlayerView(hideNav: $hideNav)
+//                    .edgesIgnoringSafeArea(.all)
+//            }
+        }
+        .navigationBarHidden(hideNav)
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarItems(
             leading:
@@ -49,16 +48,7 @@ struct FeedView: View {
                         .foregroundColor(Color.accent3)
                 }, trailing:
             HStack{
-                Button(action: {
-                    self.dataToggle = 0
-                }) { 
-                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
-                        .padding(5)
-                }
-            
+                
                 Button(action: {
                     self.dataToggle = 1
                 }) {
@@ -68,6 +58,16 @@ struct FeedView: View {
                         .foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
                         .padding(5)
                 }
+                
+                Button(action: {
+                    self.dataToggle = 0
+                }) {
+                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(dataToggle == 0 ? Color.accent4 : Color.flatDarkCardBackground)
+                        .padding(5)
+                }
             }
         )
     }
@@ -75,7 +75,7 @@ struct FeedView: View {
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView(user: _user2)
+        FeedView(user: testUser)
             .environmentObject(SessionStore())
             .environmentObject(GlobalPlayer())
     }

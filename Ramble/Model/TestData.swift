@@ -20,7 +20,7 @@ import AVKit
 //                 "isFollowed": true
 //])
 
-let _user2 = User(id: "1",
+let testUser = User(id: "1",
                   uid: "1",
                   email: "testing@gmail.com",
                   username: "Testuser",
@@ -42,16 +42,16 @@ let _user2 = User(id: "1",
 //                    "user": _user,
 //])
 
-let _ramb2 = Ramb2(id: "1",
+let testRamb = Ramb2(id: "1",
                    caption: "I love music wow this is so fun",
                    length: 30,
                    rambUrl: "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/rambs%2F049D2988-6618-458E-9A70-8EDBDAB70BDC?alt=media&token=8b3004a8-76fd-4050-9bce-c1c79eaabf6d",
                    fileId: "257671983",
-                   timestamp:-1601176781,
+                   timestamp: -1601176781,
                    plays: 23023,
-                   user: _user2,
-                   uid: _user2.id!,
+                   user: testUser,
+                   uid: testUser.id!,
                    isSelected: false
 )
 
-let _player = AVPlayer(url: URL(string: "\(_ramb2.rambUrl)")!)
+let testPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)

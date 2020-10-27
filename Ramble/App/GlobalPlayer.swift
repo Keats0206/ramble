@@ -1,5 +1,5 @@
 //
-//  globalPlayer.swift
+//  GlobalPlayer.swift
 //  Ramble
 //
 //  Created by Peter Keating on 9/25/20.
@@ -9,14 +9,18 @@
 import Foundation
 import AVKit
 import MediaPlayer
+import MinimizableView
 
 class GlobalPlayer: ObservableObject {
-    @Published var globalRamb: [Ramb2]?
+    @Published var globalRambs: [Ramb2]?
     @Published var rambQue: [Ramb2] = []
     @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
+    @Published var didSet = false
     let session = AVAudioSession.sharedInstance()
     
+    var minimizableViewHandler = MinimizableViewHandler()
+        
     func setGlobalPlayer(ramb: Ramb2) {
         do {
             try session.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longFormAudio, options: [])
@@ -27,6 +31,7 @@ class GlobalPlayer: ObservableObject {
         rambQue.append(ramb)
         let url = URL(string: "\(ramb.rambUrl)")
         self.globalRambPlayer = AVPlayer(url: url!)
+        self.didSet = true
         return
     }
     
@@ -37,11 +42,10 @@ class GlobalPlayer: ObservableObject {
         setupRemoteTransportControls()
     }
     
-    func setupNowPlaying() {
-        // Define Now Playing Info
+    func setupNowPlaying(){
+// Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = globalRamb?.first?.caption
-
 //        if let image = UIImage(named: "Play-button") {
 //            nowPlayingInfo[MPMediaItemPropertyArtwork] =
 //                MPMediaItemArtwork(boundsSize: image.size) { size in
@@ -51,7 +55,6 @@ class GlobalPlayer: ObservableObject {
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = globalRambPlayer?.currentItem?.currentTime().seconds
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = globalRambPlayer?.currentItem?.asset.duration.seconds
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = globalRambPlayer?.rate
-
         // Set the metadata
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }

@@ -11,7 +11,6 @@ import FirebaseAuth
 import SDWebImageSwiftUI
 
 //TODO: Bring a user into this view...pass that same user down into the profile header and profile feed
-
 struct ProfileView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
@@ -19,9 +18,9 @@ struct ProfileView: View {
     @State private var isShowing = false
     @State private var isPresented = false
     @State private var isFollowed = true
-    @State private var editModal_shown = false
-    @State private var settingsModal_shown = false
-    @State private var searchModal_shown = false
+    @State private var editModalShown = false
+    @State private var settingsModalShown = false
+    @State private var searchModalShown = false
     @State var hideNav = false
     
     @State var userDataToggle = 0
@@ -73,61 +72,52 @@ struct ProfileView: View {
                                     
                 }.offset(offset)
                     .padding(0)
-                                                        
-                if globalPlayer.globalRamb != nil{
-                    FloatingPlayerView(hideNav: $hideNav)
-                        .edgesIgnoringSafeArea(.all)
+//
+//                if globalPlayer.globalRamb != nil{
+//                    FloatingPlayerView(hideNav: $hideNav)
+//                        .edgesIgnoringSafeArea(.all)
+//                }
+                
+        }.navigationBarHidden(hideNav)
+        .navigationBarItems(trailing:
+            HStack{
+                Button(action: {
+                    self.searchModalShown.toggle()
+                }){
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .padding(5)
+                }.sheet(isPresented: $searchModalShown, onDismiss: {
+                    print("Modal dismisses")
+                }) {
+                    NavigationView{
+                        SearchView()
+                    }
                 }
                 
-            }.navigationBarHidden(hideNav)
-            .navigationBarItems(trailing:
-                                    
-                HStack{
-                                    
+                if Auth.auth().currentUser?.uid == user.id {
                     Button(action: {
-                        self.searchModal_shown.toggle()
+                        self.editModalShown.toggle()
                     }){
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .frame(width: 25, height: 25)
+                        Image(systemName: "ellipsis")
                             .padding(5)
-                    }.sheet(isPresented: $searchModal_shown, onDismiss: {
+                    }.background(Capsule().fill(Color.black).opacity(0.2))
+                    .sheet(isPresented: $editModalShown, onDismiss: {
                         print("Modal dismisses")
                     }) {
-                        
-                        NavigationView{
-                            
-                            SearchView()
-                        }
-                    
+                        EditProfileView(user: $user)
                     }
-                    
-                    if Auth.auth().currentUser?.uid == user.id {
-                        
-                        Button(action: {
-                            self.editModal_shown.toggle()
-                        }){
-                            Image(systemName: "ellipsis")
-                                .padding(5)
-                            
-                        }.background(Capsule().fill(Color.black).opacity(0.2))
-                        .sheet(isPresented: $editModal_shown, onDismiss: {
-                            print("Modal dismisses")
-                        }) {
-                            EditProfileView(user: $user)
-                        }
-                        
-                    } else {
-                        
-                        Spacer()
-                }
-        })
+                } else {
+                    Spacer()
+            }
+     })
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(_user2))
+        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(testUser))
             .environmentObject(SessionStore())
     }
 }

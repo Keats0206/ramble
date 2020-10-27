@@ -37,7 +37,6 @@ import FirebaseFirestoreSwift
 //        }
 //    }
 //}
-
 struct User: Identifiable, Codable, Hashable{
     @DocumentID var id: String?
     var uid: String
