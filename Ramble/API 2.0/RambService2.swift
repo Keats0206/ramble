@@ -50,8 +50,10 @@ class RambService2: ObservableObject {
                 }
                 if isInitialFetch {
                     self.allRambs.sort(by: { $0.plays > $1.plays })
-                    if let ramb = self.allRambs.first{
-                        self.globalPlayer?.globalRambs = [ramb]
+
+                    if let ramb = self.allRambs.first {
+                        self.globalPlayer?.globalRamb = [ramb]
+
                         self.globalPlayer?.setGlobalPlayer(ramb: ramb)
                         print("DEBUG: Set global ramb")
                     }
@@ -74,8 +76,7 @@ class RambService2: ObservableObject {
                 }
             }
         }
-    }
-    
+    }    
     func updateUserData(user: User) {
         let dict = [
             "bio" : user.bio,
@@ -86,6 +87,7 @@ class RambService2: ObservableObject {
             "uid" : user.uid,
             "username" : user.username
         ] as [String : Any]
+      
         FBRefRambs.whereField("uid", isEqualTo: user.uid).getDocuments(completion: { (snapshots, error) in
             if let error = error {
                 print("Error " + error.localizedDescription)

@@ -111,7 +111,7 @@ struct ProfileView: View {
                 } else {
                     Spacer()
             }
-    })
+     })
     }
 }
 

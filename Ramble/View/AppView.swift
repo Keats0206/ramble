@@ -60,7 +60,21 @@ struct MainView: View {
                     .sheet(isPresented: self.$showModal) {
                         NavigationView{
                             RecorderView(currentTab: $currentView, user: user)
-                    }
+                }.tag(0)
+                
+                Text("Second Screen")
+                    .tabItem {
+                        Image(systemName: "plus.circle")
+                            .resizable()
+                            .frame(width: 50)
+                }.tag(1)
+                
+                NavigationView{
+                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
+                }.tabItem {
+                    HStack {
+                        Image(systemName: "person.circle")
+                        Text("Profile")                    }
                 }
             }
             .minimizableView(

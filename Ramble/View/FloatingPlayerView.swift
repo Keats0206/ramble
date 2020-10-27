@@ -74,8 +74,7 @@ struct FloatingPlayerView: View {
                         }
                     } else {
                         VStack{
-                            BigPlayerView(ramb: (globalPlayer.globalRambs?.first!)!, player: globalPlayer.globalRambPlayer!)
-                            
+                            BigPlayerView(ramb: (globalPlayer.globalRambs?.first!)!, player: globalPlayer.globalRambPlayer!)                            
                         }
                     }
                     // your music player.....
