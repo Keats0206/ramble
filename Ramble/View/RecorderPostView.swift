@@ -43,7 +43,7 @@ struct RecorderPostView: View {
             
             Button(action: {
                 print("Play ramb")
-            }){
+            }) {
                 Image(systemName: "play.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -76,7 +76,7 @@ struct RecorderPostView: View {
                 self.currentTab = Tab.profile
                 presentationMode.wrappedValue.dismiss()
             }) {
-                HStack{
+                HStack {
                     Text("POST")
                         .font(.system(.headline, design: .rounded))
                         .bold()
@@ -89,7 +89,6 @@ struct RecorderPostView: View {
             )
         }
     }
-
 
 struct RecorderPostView_Previews: PreviewProvider {
     static var previews: some View {

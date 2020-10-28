@@ -47,3 +47,15 @@ extension Color {
 }
 
 // swiftlint:enable identifier_name
+//
+//extension UINavigationController {
+//    override open func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//        let appearance = UINavigationBarAppearance()
+//
+//        // update the appearance
+//
+//        navigationBar.standardAppearance = appearance
+//    }
+//}

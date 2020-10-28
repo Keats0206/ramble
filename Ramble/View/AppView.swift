@@ -37,7 +37,7 @@ struct MainView: View {
                     if self.currentView == .tab1 {
                         FeedView(user: user)
                     } else {
-                        ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
+                        ProfileView(user: $user)
                     }
                     TabBar(currentView: self.$currentView, showModal: self.$showModal)
                 }
@@ -105,7 +105,7 @@ struct CurrentScreen: View {
                 }
             } else {
                 NavigationView {
-                    ProfileView(offset: CGSize(width: 0, height: -50), user: $user)
+                    ProfileView(user: $user)
                 }
             }
         }

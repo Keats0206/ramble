@@ -27,7 +27,7 @@ struct RambUserCell: View {
                     globalPlayer.play()
                 }){
                     Text(ramb.caption)
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .font(.system(.body, design: .rounded))
                         .multilineTextAlignment(TextAlignment.leading)
                         .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
                     
@@ -35,7 +35,7 @@ struct RambUserCell: View {
                 
                 //               Username + timestamp
                 Text(formatDate(timestamp: ramb.timestamp) + " ago")
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
+                    .font(.system(.caption, design: .rounded))
                 
             }
             Spacer()

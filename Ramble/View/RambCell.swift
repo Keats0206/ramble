@@ -23,10 +23,10 @@ struct RambCell : View {
         HStack(alignment: .center) {
                 ZStack{
                     NavigationLink(destination:  // link in background
-                        ProfileView(offset: CGSize(width: 0, height: 0), user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
+                        ProfileView(user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
                     }.frame(width: 0, height: 0)
                         
-                    VStack(alignment: .center, spacing: 10) {
+                    VStack(alignment: .center) {
                         WebImage(url: URL(string: ramb.user.profileImageUrl))
                             .frame(width: 75, height: 75)
                             .clipShape(Circle())
@@ -53,8 +53,8 @@ struct RambCell : View {
                     }.font(.system(.caption, design: .rounded))
                     Text(ramb.caption)
                         .font(.system(.body, design: .rounded))
-                        .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent3 : .primary)
                         .bold()
+                        .opacity(0.8)
                         .multilineTextAlignment(TextAlignment.leading)
                     Spacer()
                 }.background(Color.white)
