@@ -28,12 +28,16 @@ struct RecorderPostView: View {
         RambService2().addRamb(ramb)
     }
     var body: some View {
-        VStack(alignment: .center){
+        VStack(alignment: .center) {
+            
+            Spacer()
+            
             TextField("Untitled ramb", text: $caption)
-                .font(.system(.largeTitle,design: .rounded))
+                .frame(width: 300)
+                .multilineTextAlignment(.leading)
+                .font(.system(.body, design: .rounded))
                 .fixedSize(horizontal: true, vertical: false)
                 .multilineTextAlignment(.leading)
-            Spacer()
             
             Spacer()
             
@@ -51,9 +55,17 @@ struct RecorderPostView: View {
                 .font(.system(size: 20, weight: .heavy, design: .rounded))
                 .padding(.top, 300)
 
-            Spacer()
         }.padding()
-        .navigationBarItems(trailing:
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "arrowshape.turn.up.left")
+                        .foregroundColor(.accent3)
+                        .frame(width: 25, height: 25)
+
+                    }, trailing:
             Button(action: {
                 self.uploadRamb2(
                     user: user,
@@ -64,13 +76,19 @@ struct RecorderPostView: View {
                 self.currentTab = Tab.profile
                 presentationMode.wrappedValue.dismiss()
             }) {
-                Text("Post")
-                    .font(.system(size: 20, weight: .heavy, design: .rounded))
-                    .foregroundColor(.accent4)
-            }
-        )
+                HStack{
+                    Text("POST")
+                        .font(.system(.headline, design: .rounded))
+                        .bold()
+                        .foregroundColor(.accent4)
+                    Image(systemName: "plus")
+                        .foregroundColor(.accent4)
+                        .frame(width: 25, height: 25)
+                    }
+                }
+            )
+        }
     }
-}
 
 
 struct RecorderPostView_Previews: PreviewProvider {

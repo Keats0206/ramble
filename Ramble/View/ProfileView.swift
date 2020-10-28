@@ -75,20 +75,6 @@ struct ProfileView: View {
         }.navigationBarHidden(hideNav)
         .navigationBarItems(trailing:
             HStack {
-                Button(action: {
-                    self.searchModalShown.toggle()
-                }) {
-                    Circle()
-                        .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
-                        .frame(width: 25, height: 25)
-                        .overlay(Image(systemName: "magnifyingglass").foregroundColor(Color.flatDarkBackground))
-                }.sheet(isPresented: $searchModalShown, onDismiss: {
-                    print("Modal dismisses")
-                }) {
-                    NavigationView {
-                        SearchView()
-                    }
-                }
                 if Auth.auth().currentUser?.uid == user.id {
                     Button(action: {
                         self.editModalShown.toggle()
@@ -105,7 +91,28 @@ struct ProfileView: View {
                 } else {
                     Spacer()
             }
-        })
+        }
+        )
+    }
+}
+
+private extension ProfileView {
+    var searchButton: some View {
+        Button(action: {
+            self.searchModalShown.toggle()
+        }) {
+            Circle()
+                .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                .frame(width: 25, height: 25)
+                .overlay(Image(systemName: "magnifyingglass").foregroundColor(Color.flatDarkBackground))
+        }.sheet(isPresented: $searchModalShown, onDismiss: {
+            print("Modal dismisses")
+        }) {
+            NavigationView {
+                SearchView()
+            }
+        }
+
     }
 }
 

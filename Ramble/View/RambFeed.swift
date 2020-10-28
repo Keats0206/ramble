@@ -36,8 +36,7 @@ struct RambFeed : View {
                     }
                 }
             }
-        }
-        .pullToRefresh(isShowing: $isShowing) {
+        }.pullToRefresh(isShowing: $isShowing) {
             self.viewModel.fetchRambs()
             self.isShowing = false
         }.onAppear{
