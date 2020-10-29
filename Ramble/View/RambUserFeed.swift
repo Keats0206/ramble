@@ -25,9 +25,9 @@ struct RambUserFeed : View {
         VStack(alignment: .leading){
             HStack {
                 Text("Rambles")
-                    .font(.system(.headline, design: .rounded))
+                    .font(.system(.title, design: .rounded))
+                    .bold()
                 Spacer()
-
             }
             Divider()
             ForEach(viewModel.userRambs){ramb in

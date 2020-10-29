@@ -12,9 +12,9 @@ import SDWebImageSwiftUI
 
 //TODO: Bring a user into this view...pass that same user down into the profile header and profile feed
 struct ProfileView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var isShowing = false
     @State private var isPresented = false
@@ -53,10 +53,8 @@ struct ProfileView: View {
                         Spacer()
                         HStack(alignment: .bottom){
                             Text("\(user.displayname)")
-                                .font(.system(.largeTitle, design: .rounded))
-                                .bold()
+                                .font(.system(size: 50, weight: .heavy, design: .rounded))
                                 .foregroundColor(.white)
-
                             Spacer()
                         }
                     }.padding()
@@ -69,37 +67,26 @@ struct ProfileView: View {
                 .frame(width: 350)
         }
         .navigationBarTitle("", displayMode: .large)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading:
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }) {
-                Circle()
-                    .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
-                    .frame(width: 25, height: 25)
-                    .overlay(Image(systemName: "arrowshape.turn.up.left")
-                    .foregroundColor(Color.secondary))
-            },
-            trailing:
-                HStack {
-                    if Auth.auth().currentUser?.uid == user.id {
-                        Button(action: {
-                            self.editModalShown.toggle()
-                        }) {
-                            Circle()
-                                .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
-                                .frame(width: 25, height: 25)
-                                .overlay(Image(systemName: "ellipsis")
-                                .foregroundColor(Color.secondary))
-                        }.sheet(isPresented: $editModalShown, onDismiss: {
-                            print("Modal dismisses")
-                        }) {
-                            EditProfileView(user: $user)
-                        }
-                    } else {
-                        Spacer()
-                }
+        .navigationBarItems(trailing:
+            HStack {
+                if Auth.auth().currentUser?.uid == user.id {
+                    Button(action: {
+                        self.editModalShown.toggle()
+                    }) {
+                        Circle()
+                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                            .frame(width: 25, height: 25)
+                            .overlay(Image(systemName: "ellipsis")
+                            .foregroundColor(Color.secondary))
+                    }.sheet(isPresented: $editModalShown, onDismiss: {
+                        print("Modal dismisses")
+                    }) {
+                        EditProfileView(user: $user)
+                    }
+                } else {
+                    Spacer()
             }
+        }
         )
         .edgesIgnoringSafeArea(.top)
     }
@@ -118,7 +105,7 @@ struct UserAbout: View {
                 .opacity(0.8)
                 .padding(.bottom)
             Divider()
-        }.padding()
+        }.padding([.leading, .trailing])
     }
 }
 

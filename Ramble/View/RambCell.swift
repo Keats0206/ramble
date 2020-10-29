@@ -13,7 +13,7 @@ import AVKit
 struct RambCell : View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    
+
     @State private var showingActionSheet = false
     @State private var isActive = false
     
@@ -23,21 +23,24 @@ struct RambCell : View {
         HStack(alignment: .center) {
                 ZStack{
                     NavigationLink(destination:  // link in background
-                        ProfileView(user: .constant(ramb.user)), isActive: $isActive) { EmptyView()
-                    }.frame(width: 0, height: 0)
-                        
+                            ProfileView(user: .constant(ramb.user)), isActive: $isActive)
+                        { EmptyView() }.frame(width: 0, height: 0)
                     VStack(alignment: .center) {
                         WebImage(url: URL(string: ramb.user.profileImageUrl))
                             .frame(width: 75, height: 75)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear, lineWidth: 3))
+                            .clipShape(Rectangle())
+                            .cornerRadius(15)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                    .fill(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear)
+                                    .frame(width: 80, height: 80)
+                            )
                             .onTapGesture {
                                 self.isActive.toggle()
                             }// activate link on image tap
                         Spacer()
                     }
                 }
-            
                 VStack(alignment: .leading) {
                     HStack {
                         Text("@" + ramb.user.username)
@@ -57,8 +60,8 @@ struct RambCell : View {
                         .opacity(0.8)
                         .multilineTextAlignment(TextAlignment.leading)
                     Spacer()
-                }.background(Color.white)
-            
+                }
+                    .background(Color.white)
                 VStack(alignment: .center) {
                     Button(action: {
                         self.showingActionSheet.toggle()
@@ -79,13 +82,13 @@ struct RambCell : View {
                         .buttonStyle(BorderlessButtonStyle())
                     Spacer()
                 }
-            }
-            .padding()
-            .cornerRadius(15)
-            .onTapGesture(perform: {
-                play()
-            })
         }
+        .padding()
+        .cornerRadius(15)
+        .onTapGesture(perform: {
+            play()
+        })
+    }
     func play() {
         globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)

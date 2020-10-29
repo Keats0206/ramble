@@ -73,3 +73,21 @@ struct FeedView_Previews: PreviewProvider {
             .environmentObject(GlobalPlayer())
     }
 }
+
+struct BackButton: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    var body: some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Circle()
+                    .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                    .frame(width: 25, height: 25)
+                    .overlay(Image(systemName: "arrowshape.turn.up.left")
+                        .foregroundColor(Color.flatDarkBackground))
+            }
+        }
+    }
+}

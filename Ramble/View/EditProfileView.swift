@@ -26,12 +26,11 @@ struct EditProfileView : View {
         RambService2.shared.updateUserData(user: user)
     }
     
-    func openThing(){
+    func openThing() {
         print("Open link to review")
     }
     
     var sheet: ActionSheet {
-        
         ActionSheet(
             title: Text("Action"),
             message: Text("Quotemark"),
@@ -51,161 +50,133 @@ struct EditProfileView : View {
     }
     
     var body : some View {
-        
-        NavigationView{
-            
+        NavigationView {
             ZStack{
-                        
-            VStack(spacing: 20){
-                
-                VStack{
-                    
-                    WebImage(url: URL(string: user.profileImageUrl))
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.accent3, lineWidth: 5))
-                    
-                        Button(action: {
-                        
-                        self.showImagePicker = true
-                        
-                    })
-                        {
-                        
-                        Text("Change")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                            .padding(5)
-                            .padding([.trailing,.leading])
-                        
-                    }.background(Capsule().stroke(lineWidth: 2))
-                        .sheet(isPresented: $showImagePicker, onDismiss: {
-                    
-                    self.showImagePicker = false
-                    
-                }, content: {
-                        
-                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                        
-                    }).actionSheet(isPresented: $showAction) {
-                        sheet
-
-                    }
-                                            
-                }.frame(height: 100)
-                                            
-                VStack(alignment: .leading, spacing: 5){
-                    
-                    Text("Username")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                    
-                    TextField(self.user.username, text: $user.username)
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .padding(5)
-                    
-                    Divider()
-
-                }
-                
-                VStack(alignment: .leading, spacing: 5){
-                    
-                    Text("Fullname")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                    
-                    TextField(self.user.displayname, text: $user.displayname)
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .padding(5)
-                    
-                    Divider()
-                }
-                
-                VStack(alignment: .leading, spacing: 5){
-                    
-                    Text("Bio")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                    
-                    TextField(self.user.bio, text: $user.bio)
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .padding(5)
-                    
-                    Divider()
-                    
-                }
-                
-                HStack{
-
-                        Button(action: {
-
-                        UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
-
-                    }) {
-
-                        Text("Privacy & Terms")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                    }
-
+                VStack(spacing: 20) {
+                    changeProfileImage
+                        .font(.system(.subheadline, design: .rounded))
+                    editUserInfo
+                    settingsLinks
                     Spacer()
+                    logoutDelete
+                        .font(.system(.subheadline, design: .rounded))
                 }
-
-                Divider()
-
-                HStack{
-
-                        Button(action: {
-
-                        UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
-
-                    }) {
-
-                        Text("Give Feedback")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-
-                    }
-
-                    Spacer()
-                }
-
-                Divider()
-
-                HStack{
-
-                    Button(action: {
-
-                        UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
-
-                    }) {
-
-                        Text("Rate Us")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-
-                    }
-
-                    Spacer()
-
-                }
-     
-                }
+                .font(.system(.headline, design: .rounded))
+                .foregroundColor(.flatDarkBackground)
                 .padding()
-            
-            }
-            .navigationBarItems(leading:
+            }.navigationBarItems(leading:
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
-                        }){
+                        }) {
                     Text("Cancel")
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundColor(Color.accent2)
                 }, trailing:
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     self.saveProfile()
                 }){
                     Text("Save")
-                        .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundColor(Color.accent1)
                 }
-            )
+            ).font(.system(.headline, design: .rounded))
+            .foregroundColor(.flatDarkBackground)
         }
+    }
+}
+
+private extension EditProfileView {
+    var changeProfileImage: some View {
+        VStack {
+            WebImage(url: URL(string: user.profileImageUrl))
+                .frame(width: 200, height: 200)
+                .cornerRadius(10)
+                .shadow(radius: 10)
+                
+            Button(action: {
+                self.showImagePicker = true
+            }) {
+                Text("Change Photo")
+                    .padding(5)
+                    .padding([.trailing,.leading])
+            }.sheet(isPresented: $showImagePicker, onDismiss: {
+            self.showImagePicker = false
+                }, content: {
+                ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                }).actionSheet(isPresented: $showAction) {
+                    sheet
+            }
+        }
+    }
+    var editUserInfo: some View {
+        VStack(spacing: 20){
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Username")
+                TextField(self.user.username, text: $user.username)
+                    .padding(5)
+                    .opacity(0.5)
+                Divider()
+            }
+        
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Fullname")
+                TextField(self.user.displayname, text: $user.displayname)
+                    .padding(5)
+                    .opacity(0.5)
+                Divider()
+            }
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Bio")
+                TextField(self.user.bio, text: $user.bio)
+                    .padding(5)
+                    .opacity(0.5)
+                Divider()
+            }
+        }
+    }
+    
+    var settingsLinks: some View {
+        VStack(spacing: 20) {
+            HStack {
+                Button(action: {
+                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+                }) {
+                    Text("Privacy & Terms")
+                }
+                Spacer()
+            }
+            HStack {
+                Button(action: {
+                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+                }) {
+                    Text("Give Feedback")
+                }
+                Spacer()
+            }
+            HStack {
+                Button(action: {
+                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+                }) {
+                    Text("Rate Us")
+                }
+                Spacer()
+            }
+        }.foregroundColor(Color.accent3)
+    }
+    
+    var logoutDelete: some View {
+        HStack {
+            Spacer()
+                Button(action: {
+                    self.session.signOut()
+                }) {
+                    Text("Logout")
+                }
+            Spacer()
+                Button(action: {
+                    print("")
+                }) {
+                    Text("Delete")
+                }
+            Spacer()
+        }.foregroundColor(Color.red)
     }
 }
 
