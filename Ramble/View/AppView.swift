@@ -9,135 +9,112 @@ import SwiftUI
 import Foundation
 import MinimizableView
 
-//struct MainView: View {
-//    @EnvironmentObject var session: SessionStore
-//    @EnvironmentObject var globalPlayer: GlobalPlayer
-//    @ObservedObject var audioRecorder = AudioRecorder()
-//    @ObservedObject var viewModel = RambService2()
-//    @ObservedObject var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
-//
-//    @State var user: User
-//    @State var hidNav = false
-//    @State var recordingModalShown = false
-//    @State private var selection = 0
-//
-//    private var actionSelection: Binding<Int> {
-//        Binding<Int>(get: {
-//            self.selection
-//        }) { (newValue: Int) in
-//            //            .sheet(isPresented: $recordingModal_shown, onDismiss: {
-//            //                    print("Modal dismisses")
-//            //                }) {
-//            //                    NavigationView{
-//            //                        RecorderView(currentTab: .constant(Tab.Tab1), user: user)
-//            //                    }
-//            //                }
-//            if newValue == 1 {
-//                self.recordingModalShown = true
-//            } else {
-//                self.selection = newValue
-//            }
-//        }
-//    }
-//
-//    func getUser(){
-//        let uid = session.session!.id!
-//        UserService2.shared.fetchUser(uid: uid) { user in
-//            self.user = user
-//            return
-//        }
-//    }
-//
-//    var body: some View {
-//        GeometryReader { proxy in
-//            TabView(selection: actionSelection){
-//                    FeedView(user: user, availableWidth: proxy.size.width)
-//                .tabItem {
-//                    HStack{
-//                        Image(systemName: "dot.radiowaves.left.and.right")
-//                        Text("Feed")
-//                    }
-//                }.tag(0)
-//                NavigationView{
-//                    ProfileView(user: $user)
-//                }
-//                .tabItem {
-//                    HStack {
-//                        Image(systemName: "person.circle")
-//                        Text("Profile")
-//                    }
-//                }.tag(1)
-//            }
-//
-//            .onAppear {
-//                self.getUser()
-//                self.minimizableViewHandler.settings.backgroundColor = Color.white
-//                self.minimizableViewHandler.settings.shadowColor = Color.clear
-//                self.minimizableViewHandler.settings.bottomMargin = 60
-//                self.minimizableViewHandler.settings.minimizedHeight = 60
-//                self.minimizableViewHandler.settings.lateralMargin = 10
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                    if globalPlayer.didSet{
-//                        self.minimizableViewHandler.present()
-//                        self.minimizableViewHandler.minimize()
-//                        print("DEBUG: presenting miniview handler")
-//                    } else {
-//                        print("DEBUG: No song ready")
-//                    }
-//                }
-//            }.environmentObject(self.minimizableViewHandler)
-//        }
-//    }
-//}
-
+@available(iOS 14.0, *)
 struct MainView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var viewModel = RambService2()
-    @ObservedObject var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
-    
+
     @State var user: User
     @State var hidNav = false
-    
-    @State private var currentView: Tab = .tab1
-    @State private var showModal: Bool = false
-    
-    func getUser() {
+    @State var recordingModalShown = false
+    @State private var selection = 0
+
+    private var actionSelection: Binding<Int> {
+        Binding<Int>(get: {
+            self.selection
+        }) { (newValue: Int) in
+            if newValue == 1 {
+                self.recordingModalShown = true
+            } else {
+                self.selection = newValue
+            }
+        }
+    }
+
+    func getUser(){
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
             return
         }
     }
+
     var body: some View {
         ZStack {
-            NavigationView {
-                VStack(spacing: 0) {
-                    if self.currentView == .tab1 {
-                        FeedView(user: user)
-                    } else {
-                        ProfileView(user: $user)
+            TabView(selection: actionSelection){
+                    NowPlayingBar(content: FeedView(user: user))
+                .tabItem {
+                    HStack{
+                        Image(systemName: "dot.radiowaves.left.and.right")
+                        Text("Feed")
                     }
-                    TabBar(currentView: self.$currentView, showModal: self.$showModal)
-                }
-                .onAppear {
-                    self.getUser()
-                }
-                .sheet(isPresented: self.$showModal) {
-                    NavigationView {
-                        RecorderView(currentTab: $currentView, user: user)
-                    }.tabItem {
-                        HStack {
-                            Image(systemName: "person.circle")
-                            Text("Profile")                    }
+                }.tag(0)
+                    NowPlayingBar(content:  ProfileView(user: $user))
+                .tabItem {
+                    HStack {
+                        Image(systemName: "person.circle")
+                        Text("Profile")
                     }
-                }
+                }.tag(1)
+            }
+
+            .onAppear {
+                self.getUser()
             }
         }
     }
 }
+
+@available(iOS 14.0, *)
+//struct MainView: View {
+//    @EnvironmentObject var session: SessionStore
+//    @EnvironmentObject var globalPlayer: GlobalPlayer
+//    @ObservedObject var audioRecorder = AudioRecorder()
+//    @ObservedObject var viewModel = RambService2()
+//
+//    @State var user: User
+//    @State var hidNav = false
+//
+//    @State private var currentView: Tab = .tab1
+//    @State private var showModal: Bool = false
+//
+//    func getUser() {
+//        let uid = session.session!.id!
+//        UserService2.shared.fetchUser(uid: uid) { user in
+//            self.user = user
+//            return
+//        }
+//    }
+//    var body: some View {
+//        ZStack {
+//            NavigationView {
+//                VStack(spacing: 0) {
+//                    if self.currentView == .tab1 {
+//                        NowPlayingBar(content: FeedView(user: user))
+//                    } else {
+//                        NowPlayingBar(content:  ProfileView(user: $user))
+//                    }
+//                    TabBar(currentView: self.$currentView, showModal: self.$showModal)
+//                }
+//                .onAppear {
+//                    self.getUser()
+//                }
+//                .sheet(isPresented: self.$showModal) {
+//                    NavigationView {
+//                        RecorderView(currentTab: $currentView, user: user)
+//                    }.tabItem {
+//                        HStack {
+//                            Image(systemName: "person.circle")
+//                            Text("Profile")                    }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
 struct TabBar: View {
     @Binding var currentView: Tab
     @Binding var showModal: Bool
@@ -153,24 +130,24 @@ struct TabBar: View {
     }
 }
 
-//struct CurrentScreen: View {
-//    @Binding var currentView: Tab
-//    @State var user: User
-//
-//    var body: some View {
-//        VStack {
-//            if self.currentView == .tab1 {
-//                NavigationView {
-//                    FeedView(user: user, availableWidth: proxy.width.size)
-//                }
-//            } else {
-//                NavigationView {
-//                    ProfileView(user: $user)
-//                }
-//            }
-//        }
-//    }
-//}
+struct CurrentScreen: View {
+    @Binding var currentView: Tab
+    @State var user: User
+
+    var body: some View {
+        VStack {
+            if self.currentView == .tab1 {
+                NavigationView {
+                    FeedView(user: user)
+                }
+            } else {
+                NavigationView {
+                    ProfileView(user: $user)
+                }
+            }
+        }
+    }
+}
 
 enum Tab {
     case tab1

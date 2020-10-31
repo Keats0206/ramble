@@ -61,3 +61,27 @@ extension UINavigationController {
         navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrowshape.up.and.left")
     }
 }
+
+struct CornerShape: Shape {
+    
+    var corner: UIRectCorner
+    var size: CGSize
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corner, cornerRadii: size)
+        
+        return Path(path.cgPath)
+    }
+}
+
+struct Blur: UIViewRepresentable {
+    var style: UIBlurEffect.Style = .systemChromeMaterial
+    
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: UIBlurEffect(style: style))
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = UIBlurEffect(style: style)
+    }
+}

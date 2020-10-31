@@ -11,20 +11,21 @@ import SDWebImageSwiftUI
 import MinimizableView
 
 struct SmallPlayerView: View {
-    @EnvironmentObject var minimizableViewHandler: MinimizableViewHandler
     @EnvironmentObject var globalPlayer: GlobalPlayer
 
     var ramb: Ramb2
     
     var body: some View {
-        GeometryReader { proxy in
+        
             HStack{
+                
                 WebImage(url: URL(string: "\(ramb.user.profileImageUrl)"))
                     .frame(width: 45, height: 45)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 2))
                 
                 VStack(alignment: .leading){
+                   
                     Text(ramb.caption)
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     
@@ -55,14 +56,8 @@ struct SmallPlayerView: View {
                         }
                         
                     }
-            .frame(width: proxy.size.width, height: proxy.size.height)
-            .onTapGesture {
-                self.minimizableViewHandler.expand()
-            }.background(Color(.secondarySystemBackground))
-            .verticalDragGesture(translationHeightTriggerValue: 40)
         }
     }
-}
 
 struct SmallPlayerView_Previews: PreviewProvider {
     static var previews: some View {
