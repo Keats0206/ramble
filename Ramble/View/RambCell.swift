@@ -9,6 +9,8 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import AVKit
+import MinimizableView
+
 
 struct RambCell : View {
     @EnvironmentObject var session: SessionStore
@@ -21,7 +23,7 @@ struct RambCell : View {
     
     var body: some View {
         HStack(alignment: .center) {
-                ZStack{
+                ZStack {
                     NavigationLink(destination:  // link in background
                             ProfileView(user: .constant(ramb.user)), isActive: $isActive)
                         { EmptyView() }.frame(width: 0, height: 0)
@@ -41,28 +43,29 @@ struct RambCell : View {
                         Spacer()
                     }
                 }
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("@" + ramb.user.username)
-                            .font(.system(.subheadline, design: .rounded))
-                            .foregroundColor(.primary)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("@" + ramb.user.username)
+                                .font(.system(.subheadline, design: .rounded))
+                                .foregroundColor(.primary)
+                                .bold()
+                            Text(formatDate(timestamp: ramb.timestamp))
+                                .bold()
+                            Text("3:30s")
+                                .font(.system(.caption, design: .rounded))
+                                .bold()
+                            Spacer()
+                        }.font(.system(.caption, design: .rounded))
+                        Text(ramb.caption)
+                            .font(.system(.body, design: .rounded))
                             .bold()
-                        Text(formatDate(timestamp: ramb.timestamp))
-                            .bold()
-                        Text("3:30s")
-                            .font(.system(.caption, design: .rounded))
-                            .bold()
+                            .opacity(0.8)
+                            .multilineTextAlignment(TextAlignment.leading)
                         Spacer()
-                    }.font(.system(.caption, design: .rounded))
-                    Text(ramb.caption)
-                        .font(.system(.body, design: .rounded))
-                        .bold()
-                        .opacity(0.8)
-                        .multilineTextAlignment(TextAlignment.leading)
-                    Spacer()
-                }
+                    }
                     .background(Color.white)
-                VStack(alignment: .center) {
+                
+            VStack(alignment: .center) {
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }) {
@@ -83,12 +86,13 @@ struct RambCell : View {
                     Spacer()
                 }
         }
-        .padding()
-        .cornerRadius(15)
-        .onTapGesture(perform: {
-            play()
-        })
-    }
+            .frame(height: 100)
+            .padding()
+            .cornerRadius(15)
+            .onTapGesture(perform: {
+                play()
+            })
+        }
     func play() {
         globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)

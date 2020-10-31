@@ -9,14 +9,16 @@
 import SwiftUI
 import SwiftUIRefresh
 import UIKit
+import MinimizableView
 import SDWebImageSwiftUI
 
 struct RambFeed : View {
+    @EnvironmentObject var miniHandler: MinimizableViewHandler
     @EnvironmentObject var globalPlayer : GlobalPlayer
     @ObservedObject var viewModel = RambService2()
     @Binding var dataToggle: Int
     @State private var isShowing = false
-    
+        
     var body: some View {
         ZStack{
             VStack{
@@ -50,6 +52,7 @@ struct RambFeed : View {
 
 struct RambFeed_Previews: PreviewProvider {
     @State static var dataToggle = 0
+    @State static var availableWidth = UIScreen.main.bounds.width
     
     static var previews: some View {
         RambFeed(viewModel: RambService2(), dataToggle: $dataToggle)

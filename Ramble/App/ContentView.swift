@@ -14,7 +14,6 @@ struct ContentView : View {
     func getUser () {
         session.listen()
     }
-
     var body: some View {
         Group {
             if (session.session != nil) {

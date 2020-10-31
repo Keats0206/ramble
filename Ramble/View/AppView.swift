@@ -9,19 +9,100 @@ import SwiftUI
 import Foundation
 import MinimizableView
 
+//struct MainView: View {
+//    @EnvironmentObject var session: SessionStore
+//    @EnvironmentObject var globalPlayer: GlobalPlayer
+//    @ObservedObject var audioRecorder = AudioRecorder()
+//    @ObservedObject var viewModel = RambService2()
+//    @ObservedObject var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
+//
+//    @State var user: User
+//    @State var hidNav = false
+//    @State var recordingModalShown = false
+//    @State private var selection = 0
+//
+//    private var actionSelection: Binding<Int> {
+//        Binding<Int>(get: {
+//            self.selection
+//        }) { (newValue: Int) in
+//            //            .sheet(isPresented: $recordingModal_shown, onDismiss: {
+//            //                    print("Modal dismisses")
+//            //                }) {
+//            //                    NavigationView{
+//            //                        RecorderView(currentTab: .constant(Tab.Tab1), user: user)
+//            //                    }
+//            //                }
+//            if newValue == 1 {
+//                self.recordingModalShown = true
+//            } else {
+//                self.selection = newValue
+//            }
+//        }
+//    }
+//
+//    func getUser(){
+//        let uid = session.session!.id!
+//        UserService2.shared.fetchUser(uid: uid) { user in
+//            self.user = user
+//            return
+//        }
+//    }
+//
+//    var body: some View {
+//        GeometryReader { proxy in
+//            TabView(selection: actionSelection){
+//                    FeedView(user: user, availableWidth: proxy.size.width)
+//                .tabItem {
+//                    HStack{
+//                        Image(systemName: "dot.radiowaves.left.and.right")
+//                        Text("Feed")
+//                    }
+//                }.tag(0)
+//                NavigationView{
+//                    ProfileView(user: $user)
+//                }
+//                .tabItem {
+//                    HStack {
+//                        Image(systemName: "person.circle")
+//                        Text("Profile")
+//                    }
+//                }.tag(1)
+//            }
+//
+//            .onAppear {
+//                self.getUser()
+//                self.minimizableViewHandler.settings.backgroundColor = Color.white
+//                self.minimizableViewHandler.settings.shadowColor = Color.clear
+//                self.minimizableViewHandler.settings.bottomMargin = 60
+//                self.minimizableViewHandler.settings.minimizedHeight = 60
+//                self.minimizableViewHandler.settings.lateralMargin = 10
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                    if globalPlayer.didSet{
+//                        self.minimizableViewHandler.present()
+//                        self.minimizableViewHandler.minimize()
+//                        print("DEBUG: presenting miniview handler")
+//                    } else {
+//                        print("DEBUG: No song ready")
+//                    }
+//                }
+//            }.environmentObject(self.minimizableViewHandler)
+//        }
+//    }
+//}
+
 struct MainView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var viewModel = RambService2()
+    @ObservedObject var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
     
     @State var user: User
     @State var hidNav = false
     
     @State private var currentView: Tab = .tab1
     @State private var showModal: Bool = false
-    
-    var minimizableViewHandler: MinimizableViewHandler = MinimizableViewHandler()
     
     func getUser() {
         let uid = session.session!.id!
@@ -31,7 +112,7 @@ struct MainView: View {
         }
     }
     var body: some View {
-        GeometryReader { proxy in
+        ZStack {
             NavigationView {
                 VStack(spacing: 0) {
                     if self.currentView == .tab1 {
@@ -41,43 +122,22 @@ struct MainView: View {
                     }
                     TabBar(currentView: self.$currentView, showModal: self.$showModal)
                 }
-            }
-//            .minimizableView(
-//                content: {
-//                    BigPlayerView(ramb: testRamb, player: testPlayer)
-//                }, compactView: {
-//                    SmallPlayerView(ramb: testRamb)
-//                }, geometry: proxy)
-            .onAppear {
-                self.getUser()
-                self.minimizableViewHandler.settings.backgroundColor = Color.white
-                self.minimizableViewHandler.settings.shadowColor = Color.clear
-                self.minimizableViewHandler.settings.bottomMargin = 60
-                self.minimizableViewHandler.settings.minimizedHeight = 60
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    if globalPlayer.didSet{
-                        self.minimizableViewHandler.present()
-                        self.minimizableViewHandler.minimize()
-                        print("DEBUG: presenting miniview handler")
-                    } else {
-                        print("DEBUG: No song ready")
+                .onAppear {
+                    self.getUser()
+                }
+                .sheet(isPresented: self.$showModal) {
+                    NavigationView {
+                        RecorderView(currentTab: $currentView, user: user)
+                    }.tabItem {
+                        HStack {
+                            Image(systemName: "person.circle")
+                            Text("Profile")                    }
                     }
                 }
             }
-            .sheet(isPresented: self.$showModal) {
-                NavigationView {
-                    RecorderView(currentTab: $currentView, user: user)
-                }.tabItem {
-                    HStack {
-                        Image(systemName: "person.circle")
-                        Text("Profile")                    }
-                }
-            }
-            .environmentObject(self.minimizableViewHandler)
         }
     }
 }
-
 struct TabBar: View {
     @Binding var currentView: Tab
     @Binding var showModal: Bool
@@ -93,24 +153,24 @@ struct TabBar: View {
     }
 }
 
-struct CurrentScreen: View {
-    @Binding var currentView: Tab
-    @State var user: User
-
-    var body: some View {
-        VStack {
-            if self.currentView == .tab1 {
-                NavigationView {
-                    FeedView(user: user)
-                }
-            } else {
-                NavigationView {
-                    ProfileView(user: $user)
-                }
-            }
-        }
-    }
-}
+//struct CurrentScreen: View {
+//    @Binding var currentView: Tab
+//    @State var user: User
+//
+//    var body: some View {
+//        VStack {
+//            if self.currentView == .tab1 {
+//                NavigationView {
+//                    FeedView(user: user, availableWidth: proxy.width.size)
+//                }
+//            } else {
+//                NavigationView {
+//                    ProfileView(user: $user)
+//                }
+//            }
+//        }
+//    }
+//}
 
 enum Tab {
     case tab1
@@ -168,3 +228,4 @@ public struct ShowModalTabBarItem: View {
         .onTapGesture(perform: action)
     }
 }
+
