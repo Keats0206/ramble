@@ -20,6 +20,8 @@ struct FeedView: View {
     @State var dataToggle = 0
     @State var ramb: Ramb2?
     
+    @State var showActionSheet = false
+    
     @State var hideNav = false
     
     var user: User
@@ -30,7 +32,7 @@ struct FeedView: View {
     
     var body: some View {
         NavigationView{
-            ZStack{
+            ZStack {
                 RambFeed(dataToggle: $dataToggle)
             }
             .navigationBarHidden(hideNav)
@@ -43,38 +45,25 @@ struct FeedView: View {
                             .foregroundColor(Color.accent3)
                     },
                 trailing:
-                    HStack {
+                    Button(action: {
+                        self.showActionSheet.toggle()
+                    }) {
                         Circle()
                             .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
                             .frame(width: 25, height: 25)
-                            .overlay(Image(systemName: "line.horizontal.3.decrease.circle").foregroundColor(Color.flatDarkBackground))
-                            .contextMenu {
-                                Button(action: {
-                                    self.dataToggle = 1
-                                // Action will goes here
-                                }) {
-                                    Text("Most Plays")
-                                    Image(systemName: dataToggle == 1 ? "flame.fill" : "flame")
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
-                                        .padding(5)
-                                }.foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
-                                Button(action: {
-                                    self.dataToggle = 0
-                                }) {
-                                    Text("Most Recent")
-                                    Image(systemName: dataToggle == 0 ? "clock.fill" : "clock")
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
-                                        .padding(5)
-                                    
-                                    }.foregroundColor(dataToggle == 1 ? Color.accent4 : Color.flatDarkCardBackground)
-                        }
+                            .overlay(Image(systemName: "line.horizontal.3.decrease.circle")
+                                        .foregroundColor(Color.flatDarkBackground))
+                    }.actionSheet(isPresented: self.$showActionSheet, content: {
+                        ActionSheet(title: Text("Select an option"), buttons: [
+                                        .default(Text("Most Recent")) {self.dataToggle = 0},
+                                        .default(Text("Most Plays")) {self.dataToggle = 1},
+                                        .cancel()])
                     }
                 )
-            }
+            )
         }
     }
+}
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {

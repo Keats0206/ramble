@@ -11,6 +11,7 @@ import FirebaseAuth
 import SDWebImageSwiftUI
 
 //TODO: Bring a user into this view...pass that same user down into the profile header and profile feed
+
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var session: SessionStore
@@ -29,53 +30,51 @@ struct ProfileView: View {
     @Binding var user: User
     
     var body: some View {
-        NavigationView{
-            ScrollView {
-                GeometryReader { geometry in
-                    ZStack {
-                        if geometry.frame(in: .global).minY <= 0 {
-                            WebImage(url: URL(string: user.profileImageUrl))
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                                .offset(y: geometry.frame(in: .global).minY/9)
-                                .clipped()
-                        } else {
-                            WebImage(url: URL(string: user.profileImageUrl))
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geometry.size.width, height: geometry.size.height + geometry.frame(in: .global).minY)
-                                .clipped()
-                                .offset(y: -geometry.frame(in: .global).minY)
+        ScrollView {
+            GeometryReader { geometry in
+                ZStack {
+                    if geometry.frame(in: .global).minY <= 0 {
+                        WebImage(url: URL(string: user.profileImageUrl))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .offset(y: geometry.frame(in: .global).minY/9)
+                            .clipped()
+                    } else {
+                        WebImage(url: URL(string: user.profileImageUrl))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width, height: geometry.size.height + geometry.frame(in: .global).minY)
+                            .clipped()
+                            .offset(y: -geometry.frame(in: .global).minY)
+                    }
+                    VStack(alignment: .leading){
+                        Spacer()
+                        HStack(alignment: .bottom){
+                            Text("\(user.displayname)")
+                                .font(.system(size: 50, weight: .heavy, design: .rounded))
+                                .foregroundColor(.white)
+                            Spacer()
                         }
-                        VStack(alignment: .leading){
-                            Spacer()
-                            HStack(alignment: .bottom){
-                                Text("\(user.displayname)")
-                                    .font(.system(size: 50, weight: .heavy, design: .rounded))
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
-                        }.padding()
-                    }
-                }.frame(height: 400)
-                    UserAbout(user: user)
-                    RambUserFeed(user: user)
-                        .frame(width: 350)
+                    }.padding()
                 }
-                .navigationBarTitle("", displayMode: .large)
-                .navigationBarItems(trailing:
-                    HStack {
-                        if Auth.auth().currentUser?.uid == user.id {
-                            editProfileButton
-                        } else {
-                            Spacer()
-                    }
-                })
-                .edgesIgnoringSafeArea(.top)
-            }
+            }.frame(height: 400)
+            UserAbout(user: user)
+            RambUserFeed(user: user)
+                .frame(width: 350)
         }
+        .navigationBarTitle("", displayMode: .large)
+        .navigationBarItems(trailing:
+                                HStack {
+                                    if Auth.auth().currentUser?.uid == user.id {
+                                        editProfileButton
+                                    } else {
+                                        Spacer()
+                                    }
+                                })
+        .edgesIgnoringSafeArea(.top)
     }
+}
 
 struct UserAbout: View {
     var user: User
