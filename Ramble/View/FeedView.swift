@@ -19,9 +19,8 @@ struct FeedView: View {
     @State var searchModalShown = false
     @State var dataToggle = 0
     @State var ramb: Ramb2?
-    
+    @State var currentTab = Tab.tab1
     @State var showActionSheet = false
-    
     @State var hideNav = false
     
     var user: User
@@ -42,24 +41,37 @@ struct FeedView: View {
                     HStack {
                         Text("RAMBLE")
                             .font(.system(size: 30, weight: .heavy, design: .rounded))
-                            .foregroundColor(Color.accent3)
+                            .foregroundColor(Color.primary)
                     },
                 trailing:
-                    Button(action: {
-                        self.showActionSheet.toggle()
-                    }) {
-                        Circle()
-                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
-                            .frame(width: 25, height: 25)
-                            .overlay(Image(systemName: "line.horizontal.3.decrease.circle")
-                                        .foregroundColor(Color.flatDarkBackground))
-                    }.actionSheet(isPresented: self.$showActionSheet, content: {
-                        ActionSheet(title: Text("Select an option"), buttons: [
-                                        .default(Text("Most Recent")) {self.dataToggle = 0},
-                                        .default(Text("Most Plays")) {self.dataToggle = 1},
-                                        .cancel()])
+                    HStack{
+                        
+                        Button(action: {
+                            self.recordingModalShown.toggle()
+                        }) {
+                            Image(systemName: "music.mic")
+                                .resizable()
+                                .foregroundColor(Color.accent4)
+                                .frame(width: 25, height: 25)
+                        }.sheet(isPresented: self.$recordingModalShown, content: {
+                            RecorderView(currentTab: $currentTab, user: user)
+                        })
+                        
+                        Button(action: {
+                            self.showActionSheet.toggle()
+                        }) {
+                            Image(systemName: "music.note.list")
+                                .resizable()
+                                .foregroundColor(Color.accent4)
+                                .frame(width: 25, height: 25)
+                        }.actionSheet(isPresented: self.$showActionSheet, content: {
+                            ActionSheet(title: Text("Select an option"), buttons: [
+                                            .default(Text("Most Recent")) {self.dataToggle = 0},
+                                            .default(Text("Most Plays")) {self.dataToggle = 1},
+                                            .cancel()])
+                        }
+                        )
                     }
-                )
             )
         }
     }

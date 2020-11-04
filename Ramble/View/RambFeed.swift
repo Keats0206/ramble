@@ -20,8 +20,10 @@ struct RambFeed : View {
     @State private var isShowing = false
         
     var body: some View {
-        ZStack{
-            VStack{
+        ZStack {
+            
+            VStack {
+                
                 if dataToggle == 1 {
                     List{
                         ForEach(viewModel.allRambs.sorted(by: { $0.plays > $1.plays })){ ramb in
@@ -41,7 +43,7 @@ struct RambFeed : View {
         }.pullToRefresh(isShowing: $isShowing) {
             self.viewModel.fetchRambs()
             self.isShowing = false
-        }.onAppear{
+        }.onAppear {
             self.dataToggle = 1
             if self.globalPlayer.globalRambPlayer == nil {
                 viewModel.setUp(globalPlayer: self.globalPlayer)

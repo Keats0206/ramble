@@ -38,4 +38,3 @@ class TimerManager: ObservableObject {
         mode = .stopped
     }
 }
-

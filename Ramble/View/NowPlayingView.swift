@@ -16,7 +16,7 @@ struct NowPlayingBar<Content: View>: View {
     @Namespace private var expandAnimation
     @State private var isExpanded = false
     @State var volume = 50.0
-
+    @State private var isActive = false
     
     var ramb: Ramb2 = testRamb
     
@@ -104,19 +104,25 @@ struct NowPlayingBar<Content: View>: View {
                         if isExpanded {
                                 
                             VStack {
-                                                            
-                                VStack(alignment: .leading) {
-                                    
-                                    Text("\(ramb.user.username))")
-                                        .font(.system(.caption, design: .rounded))
-                                        .matchedGeometryEffect(id: "Username", in: expandAnimation)
-                                    
-                                    Text("\(ramb.caption)")
-                                        .font(.system(.body, design: .rounded))
-                                        .bold()
-                                        .matchedGeometryEffect(id: "Caption", in: expandAnimation)
-                                }
                                 
+                                ZStack{
+                                    
+//                                    NavigationLink(destination: ProfileView(user: .constant(ramb.user)), isActive: $isActive)
+//                                    { EmptyView() }.frame(width: 0, height: 0)
+                                    
+                                    VStack(alignment: .leading) {
+                                        
+                                        Text("\(ramb.user.username)")
+                                            .font(.system(.caption, design: .rounded))
+                                            .matchedGeometryEffect(id: "Username", in: expandAnimation)
+                                                                              
+                                        Text("\(ramb.caption)")
+                                            .font(.system(.body, design: .rounded))
+                                            .bold()
+                                            .matchedGeometryEffect(id: "Caption", in: expandAnimation)
+                                    }
+                                }
+                                                                                            
                                 Spacer()
                                 
                                 VStack {

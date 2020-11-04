@@ -17,16 +17,12 @@ struct RambCell : View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
 
     @State private var showingActionSheet = false
-    @State private var isActive = false
     
     var ramb: Ramb2
     
     var body: some View {
         HStack(alignment: .center) {
                 ZStack {
-                    NavigationLink(destination:  // link in background
-                            ProfileView(user: .constant(ramb.user)), isActive: $isActive)
-                        { EmptyView() }.frame(width: 0, height: 0)
                     VStack(alignment: .center) {
                         WebImage(url: URL(string: ramb.user.profileImageUrl))
                             .frame(width: 75, height: 75)
@@ -37,9 +33,6 @@ struct RambCell : View {
                                     .fill(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear)
                                     .frame(width: 80, height: 80)
                             )
-                            .onTapGesture {
-                                self.isActive.toggle()
-                            }// activate link on image tap
                         Spacer()
                     }
                 }

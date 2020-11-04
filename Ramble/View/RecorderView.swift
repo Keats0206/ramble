@@ -26,11 +26,8 @@ struct RecorderView: View {
 
     var body: some View {
         ZStack{
-            
             previewButton
-            
             ZStack{
-                
                 switch audioRecorder.recorderState {
                     case .ready:
                                
@@ -52,7 +49,6 @@ struct RecorderView: View {
                         Text(String(format: "%.1f", timerManager.secondsElapsed))
                             .font(.system(size: 20, weight: .heavy, design: .rounded))
                             .padding(.top, 300)
-                        
                         Button(action: {
                             self.audioRecorder.stopRecording()
                             self.length = self.timerManager.secondsElapsed
@@ -95,7 +91,7 @@ struct RecorderView: View {
                     }
                 }
             }
-        }.onAppear{
+        }.onAppear {
             animateUploading = false
             if currentTab == .profile {
                 currentTab = .tab2
