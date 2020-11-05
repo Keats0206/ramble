@@ -76,7 +76,8 @@ class RambService2: ObservableObject {
                 }
             }
         }
-    }    
+    }
+    
     func updateUserData(user: User) {
         let dict = [
             "bio" : user.bio,
@@ -98,5 +99,17 @@ class RambService2: ObservableObject {
                 }
             }
         })
+    }
+    
+    func addPlay(ramb: Ramb2) {
+        let plays = ramb.plays + 1
+        
+        FBRefRambs.document(ramb.id!).updateData(["plays": plays]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
     }
 }

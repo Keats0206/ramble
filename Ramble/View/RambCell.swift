@@ -22,20 +22,15 @@ struct RambCell : View {
     
     var body: some View {
         HStack(alignment: .center) {
-                ZStack {
                     VStack(alignment: .center) {
-                        WebImage(url: URL(string: ramb.user.profileImageUrl))
-                            .frame(width: 75, height: 75)
-                            .clipShape(Rectangle())
-                            .cornerRadius(15)
-                            .background(
-                                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .fill(globalPlayer.globalRambs?.first?.id == self.ramb.id ? Color.accent3 : .clear)
-                                    .frame(width: 80, height: 80)
-                            )
+                        ZStack {
+                            WebImage(url: URL(string: ramb.user.profileImageUrl))
+                                .frame(width: 75, height: 75)
+                                .clipShape(Rectangle())
+                                .cornerRadius(8)
+                            }
                         Spacer()
                     }
-                }
                     VStack(alignment: .leading) {
                         HStack {
                             Text("@" + ramb.user.username)
@@ -57,7 +52,6 @@ struct RambCell : View {
                         Spacer()
                     }
                     .background(Color.white)
-                
             VStack(alignment: .center) {
                     Button(action: {
                         self.showingActionSheet.toggle()
@@ -69,23 +63,25 @@ struct RambCell : View {
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Report this ramb?"),
                                     buttons: [.default(
-                                        Text("Report").foregroundColor(.red), action: {
+                                        Text("Report")
+                                            .foregroundColor(.red),
+                                        action: {
                                             print("DEBUG: report ramb")
                                     }), .cancel()
                                 ])
-                            }
-                    }
-                        .buttonStyle(BorderlessButtonStyle())
+                            }.accentColor(.secondary)
+                    }.buttonStyle(BorderlessButtonStyle())
                     Spacer()
                 }
-        }
-            .frame(height: 100)
-            .padding()
-            .cornerRadius(15)
-            .onTapGesture(perform: {
-                play()
-            })
-        }
+        }.frame(height: 100)
+        .padding()
+        .cornerRadius(15)
+        .onTapGesture(perform: {
+            play()
+            print(ramb.id)
+        })
+    }
+    
     func play() {
         globalPlayer.globalRambs = [self.ramb]
         globalPlayer.setGlobalPlayer(ramb: self.ramb)

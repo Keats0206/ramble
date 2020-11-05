@@ -29,6 +29,7 @@ struct FeedView: View {
         self.user = user
     }
     
+  
     var body: some View {
         NavigationView{
             ZStack {
@@ -45,7 +46,6 @@ struct FeedView: View {
                     },
                 trailing:
                     HStack{
-                        
                         Button(action: {
                             self.recordingModalShown.toggle()
                         }) {
@@ -53,25 +53,51 @@ struct FeedView: View {
                                 .resizable()
                                 .foregroundColor(Color.accent4)
                                 .frame(width: 25, height: 25)
-                        }.sheet(isPresented: self.$recordingModalShown, content: {
-                            RecorderView(currentTab: $currentTab, user: user)
+                        }
+                        .sheet(isPresented: self.$recordingModalShown, content: {
+                            NavigationView {
+                                RecorderView(currentTab: $currentTab, user: user)
+                            }
                         })
                         
-                        Button(action: {
-                            self.showActionSheet.toggle()
-                        }) {
-                            Image(systemName: "music.note.list")
-                                .resizable()
-                                .foregroundColor(Color.accent4)
-                                .frame(width: 25, height: 25)
-                        }.actionSheet(isPresented: self.$showActionSheet, content: {
-                            ActionSheet(title: Text("Select an option"), buttons: [
-                                            .default(Text("Most Recent")) {self.dataToggle = 0},
-                                            .default(Text("Most Plays")) {self.dataToggle = 1},
-                                            .cancel()])
-                        }
+                        if #available(iOS 14.0, *) {
+                            Menu {
+                                Picker(selection: $dataToggle, label: Text("Sorting options")) {
+                                    HStack{
+                                        Image(systemName: "clock.fill")
+                                        Text("Most Recent")
+                                    }.tag(0)
+                                    
+                                    HStack{
+                                        Image(systemName: "flame.fill")
+                                        Text("Most Plays")
+                                    }.tag(1)
+                                }
+                            }
+                            label: {
+                                Image(systemName: "music.note.list")
+                                    .resizable()
+                                    .foregroundColor(Color.accent4)
+                                    .frame(width: 25, height: 25)
+                            }
+                        } else {
+                            // Fallback on earlier versions
+                            Button(action: {
+                                self.showActionSheet.toggle()
+                            }) {
+                                Image(systemName: "music.note.list")
+                                    .resizable()
+                                    .foregroundColor(Color.accent4)
+                                    .frame(width: 25, height: 25)
+                            }.actionSheet(isPresented: self.$showActionSheet, content: {
+                                ActionSheet(title: Text("Select an option"), buttons: [
+                                    .default(Text("Most Recent")) {self.dataToggle = 0},
+                                    .default(Text("Most Plays")) {self.dataToggle = 1},
+                                    .cancel()])
+                            }
                         )
                     }
+                }
             )
         }
     }

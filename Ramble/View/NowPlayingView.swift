@@ -27,7 +27,7 @@ struct NowPlayingBar<Content: View>: View {
     }
     
     var playFrame: CGFloat {
-        isExpanded ? 65 : 35
+        isExpanded ? 65 : 25
     }
     
     var cornerRadius: CGFloat {
@@ -53,32 +53,32 @@ struct NowPlayingBar<Content: View>: View {
                         .clipShape(CornerShape(corner: [.topLeft, .topRight], size: CGSize(width: cornerRadius, height: cornerRadius)))
                         .background(Blur())
 
-                    
                     VStack {
                         
                         HStack {
-                           
                             if #available(iOS 14.0, *) {
-                                
                                 WebImage(url: URL(string: "\(ramb.user.profileImageUrl)"))
                                     .resizable()
                                     .scaleEffect()
                                     .frame(width: imageFrame, height: imageFrame)
                                     .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
+                                    .clipShape(Rectangle())
+                                    .cornerRadius(8)
                                 
-                               
                             } else {
                                 // Fallback on earlier versions
                                 WebImage(url: URL(string: "\(ramb.user.profileImageUrl)"))
                                     .resizable()
                                     .frame(width: imageFrame, height: imageFrame)
+                                    .clipShape(Rectangle())
+                                    .cornerRadius(8)
                             }
                             
                             if !isExpanded {
                                 
                                 VStack(alignment: .leading) {
                                     
-                                    Text("\(ramb.user.username))")
+                                    Text("@\(ramb.user.username)")
                                         .font(.system(.caption, design: .rounded))
                                         .matchedGeometryEffect(id: "Username", in: expandAnimation)
                                     
@@ -93,8 +93,9 @@ struct NowPlayingBar<Content: View>: View {
                                 Button(action: {
                                     print("Fuck YEA")
                                 }){
-                                    Image(systemName: "play.circle")
+                                    Image(systemName: "play.fill")
                                         .resizable()
+                                        .foregroundColor(.primary)
                                         .frame(width: playFrame, height: playFrame)
                                 }
                             }
@@ -102,20 +103,14 @@ struct NowPlayingBar<Content: View>: View {
                         }
                         
                         if isExpanded {
-                                
                             VStack {
-                                
-                                ZStack{
-                                    
+                                ZStack {
 //                                    NavigationLink(destination: ProfileView(user: .constant(ramb.user)), isActive: $isActive)
 //                                    { EmptyView() }.frame(width: 0, height: 0)
-                                    
                                     VStack(alignment: .leading) {
-                                        
-                                        Text("\(ramb.user.username)")
-                                            .font(.system(.caption, design: .rounded))
+                                        Text("@\(ramb.user.username)")
+                                            .font(.system(.title, design: .rounded))
                                             .matchedGeometryEffect(id: "Username", in: expandAnimation)
-                                                                              
                                         Text("\(ramb.caption)")
                                             .font(.system(.body, design: .rounded))
                                             .bold()
@@ -126,33 +121,24 @@ struct NowPlayingBar<Content: View>: View {
                                 Spacer()
                                 
                                 VStack {
-                                    
                                     Rectangle()
                                         .frame(height: 3)
-                                        .foregroundColor(Color(UIColor.tertiaryLabel))
                                         .cornerRadius(3)
+                                        .foregroundColor(Color.accent4)
                                     HStack {
-                                        
                                         Text("0:00")
                                             .font(.caption)
-                                            .foregroundColor(Color(UIColor.tertiaryLabel))
                                         Spacer()
-                                        
                                         Text("-3:26")
                                             .font(.caption)
-                                            .foregroundColor(Color(UIColor.tertiaryLabel))
                                     }
-                                    
-                                }
+                                }.foregroundColor(Color.primary)
                                 
                                 Spacer()
                                 
                                 HStack {
-                                    
                                     Button(action: {
-                                        
                                         print("Fuck YEA")
-                                        
                                     }){
                                         Image(systemName: "backward.fill")
                                             .font(.system(size: 20))
@@ -161,9 +147,7 @@ struct NowPlayingBar<Content: View>: View {
                                     Spacer()
                                   
                                     Button(action: {
-                                        
                                         print("Fuck YEA")
-                                        
                                     }){
                                         Image(systemName: "play.fill")
                                             .font(.system(size: 36))
@@ -174,26 +158,25 @@ struct NowPlayingBar<Content: View>: View {
                                     Button(action: {
                                         print("Fuck YEA")
                                     }){
-                                        Image(systemName: "forward.fill").font(.system(size: 24))
-              
+                                        Image(systemName: "forward.fill")
+                                            .font(.system(size: 24))
                                     }
-                                    
-                                }
+                                }.foregroundColor(.primary)
                                 
                                 Spacer()
                                 
                                 // Volume
-                                HStack (spacing: 32) {
+                                HStack(spacing: 32) {
                                     Image(systemName: "volume.fill")
                                     Slider(value: $volume, in: 0...100)
-                                        .accentColor(.pink)
+                                        .accentColor(Color.secondary)
                                     Image(systemName: "volume.3.fill")
                                 }
                                 
                                 Spacer()
                                     
-                            } .padding(.horizontal, 40)
-                        
+                            }.padding(.top, 20)
+                            .padding(.horizontal, 40)
                         }
                     }
                     .padding(.top, isExpanded ? 55 : 16)

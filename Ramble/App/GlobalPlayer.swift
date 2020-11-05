@@ -40,6 +40,11 @@ class GlobalPlayer: ObservableObject {
         isPlaying = true
         setupNowPlaying()
         setupRemoteTransportControls()
+        addPlay(ramb: globalRambs![0])
+    }
+    
+    func addPlay(ramb: Ramb2) {
+        RambService2.shared.addPlay(ramb: ramb)
     }
     
     func setupNowPlaying(){

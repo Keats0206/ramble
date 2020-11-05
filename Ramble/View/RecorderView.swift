@@ -30,11 +30,9 @@ struct RecorderView: View {
             ZStack{
                 switch audioRecorder.recorderState {
                     case .ready:
-                               
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
                                 .font(.system(size: 20, weight: .heavy, design: .rounded))
                                 .padding(.top, 300)
-                            
                             Button(action: {
                                 self.audioRecorder.startRecording()
                                 self.timerManager.start()

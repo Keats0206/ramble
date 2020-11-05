@@ -47,7 +47,7 @@ struct MainView: View {
                     NowPlayingBar(content: FeedView(user: user))
                 .tabItem {
                     HStack{
-                        Image(systemName: "dot.radiowaves.left.and.right")
+                        Image(systemName: "music.house")
                         Text("Feed")
                     }
                 }.tag(0)
@@ -64,10 +64,12 @@ struct MainView: View {
                 self.getUser()
             }
         }
+            .accentColor(Color.accent4)
     }
 }
 
 @available(iOS 14.0, *)
+
 //struct MainView: View {
 //    @EnvironmentObject var session: SessionStore
 //    @EnvironmentObject var globalPlayer: GlobalPlayer
