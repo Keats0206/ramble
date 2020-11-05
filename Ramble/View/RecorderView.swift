@@ -27,7 +27,7 @@ struct RecorderView: View {
     var body: some View {
         ZStack{
             previewButton
-            ZStack{
+            ZStack {
                 switch audioRecorder.recorderState {
                     case .ready:
                             Text(String(format: "%.1f", timerManager.secondsElapsed))

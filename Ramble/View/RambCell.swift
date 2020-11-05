@@ -25,60 +25,61 @@ struct RambCell : View {
                     VStack(alignment: .center) {
                         ZStack {
                             WebImage(url: URL(string: ramb.user.profileImageUrl))
-                                .frame(width: 75, height: 75)
+                                .frame(width: 50, height: 50)
                                 .clipShape(Rectangle())
                                 .cornerRadius(8)
                             }
-                        Spacer()
                     }
                     VStack(alignment: .leading) {
                         HStack {
                             Text("@" + ramb.user.username)
-                                .font(.system(.subheadline, design: .rounded))
+                                .font(.headline)
                                 .foregroundColor(.primary)
                                 .bold()
-                            Text(formatDate(timestamp: ramb.timestamp))
-                                .bold()
-                            Text("3:30s")
-                                .font(.system(.caption, design: .rounded))
-                                .bold()
+                            
+                            Text("\(formatDate(timestamp: ramb.timestamp)) ago")
+                                .font(.system(.subheadline, design: .rounded))
+                                .opacity(0.7)
+                            
+//                            Text("\(TimeHelper.formatSecondsToHMS(ramb.length))")
+//                                .font(.system(.caption, design: .rounded))
+//                                .bold()
+                            
                             Spacer()
+                            
                         }.font(.system(.caption, design: .rounded))
+                        
                         Text(ramb.caption)
                             .font(.system(.body, design: .rounded))
-                            .bold()
-                            .opacity(0.8)
                             .multilineTextAlignment(TextAlignment.leading)
-                        Spacer()
+                        
                     }
                     .background(Color.white)
             VStack(alignment: .center) {
-                    Button(action: {
-                        self.showingActionSheet.toggle()
-                    }) {
-                        Circle()
-                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
-                            .frame(width: 25, height: 25)
-                            .overlay(Image(systemName: "ellipsis"))
-                            .actionSheet(isPresented: $showingActionSheet) {
-                                ActionSheet(title: Text("Report this ramb?"),
-                                    buttons: [.default(
-                                        Text("Report")
-                                            .foregroundColor(.red),
-                                        action: {
-                                            print("DEBUG: report ramb")
-                                    }), .cancel()
-                                ])
-                            }.accentColor(.secondary)
-                    }.buttonStyle(BorderlessButtonStyle())
-                    Spacer()
-                }
-        }.frame(height: 100)
-        .padding()
+                Button(action: {
+                    self.showingActionSheet.toggle()
+                }) {
+                    Circle()
+                        .foregroundColor(Color.flatDarkBackground.opacity(0.2))
+                        .frame(width: 25, height: 25)
+                        .overlay(
+                            Image(systemName: "ellipsis")
+                        )
+                        .actionSheet(isPresented: $showingActionSheet) {
+                            ActionSheet(title: Text("Report this ramb?"),
+                                buttons: [.default(
+                                    Text("Report")
+                                ,action: {
+                                    print("DEBUG: report ramb")
+                                }), .cancel()
+                            ])
+                        }
+                }.buttonStyle(BorderlessButtonStyle())
+            }
+        }.padding()
         .cornerRadius(15)
         .onTapGesture(perform: {
             play()
-            print(ramb.id)
         })
     }
     

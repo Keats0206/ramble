@@ -43,7 +43,7 @@ struct MainView: View {
 
     var body: some View {
         ZStack {
-            TabView(selection: actionSelection){
+            TabView(selection: actionSelection) {
                     NowPlayingBar(content: FeedView(user: user))
                 .tabItem {
                     HStack{
@@ -51,7 +51,7 @@ struct MainView: View {
                         Text("Feed")
                     }
                 }.tag(0)
-                    NowPlayingBar(content:  ProfileView(user: $user))
+                    NowPlayingBar(content: ProfileView(user: $user))
                 .tabItem {
                     HStack {
                         Image(systemName: "person.circle")
@@ -63,8 +63,7 @@ struct MainView: View {
             .onAppear {
                 self.getUser()
             }
-        }
-            .accentColor(Color.accent4)
+        }.accentColor(Color.accent4)
     }
 }
 

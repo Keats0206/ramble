@@ -41,11 +41,11 @@ struct FeedView: View {
                 leading:
                     HStack {
                         Text("RAMBLE")
-                            .font(.system(size: 30, weight: .heavy, design: .rounded))
+                            .font(.system(size: 30, weight: .heavy))
                             .foregroundColor(Color.primary)
                     },
                 trailing:
-                    HStack{
+                    HStack {
                         Button(action: {
                             self.recordingModalShown.toggle()
                         }) {
@@ -59,7 +59,6 @@ struct FeedView: View {
                                 RecorderView(currentTab: $currentTab, user: user)
                             }
                         })
-                        
                         if #available(iOS 14.0, *) {
                             Menu {
                                 Picker(selection: $dataToggle, label: Text("Sorting options")) {

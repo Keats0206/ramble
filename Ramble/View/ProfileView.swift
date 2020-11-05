@@ -50,9 +50,9 @@ struct ProfileView: View {
                     }
                     VStack(alignment: .leading){
                         Spacer()
-                        HStack(alignment: .bottom){
-                            Text("\(user.displayname)")
-                                .font(.system(size: 50, weight: .heavy, design: .rounded))
+                        HStack(alignment: .bottom) {
+                            Text("\(user.displayname.uppercased())")
+                                .font(.system(size: 50, weight: .heavy))
                                 .foregroundColor(.white)
                             Spacer()
                         }
@@ -80,16 +80,21 @@ struct UserAbout: View {
     var user: User
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
+            
             Text("@\(user.username)")
-                .font(.system(.headline, design: .rounded))
+                .font(.system(.title, design: .rounded))
                 .bold()
+            
+            
             Text("\(user.bio)")
-                .font(.system(.body, design: .rounded))
-                .opacity(0.8)
+                .font(.system(.headline, design: .rounded))
+                .opacity(0.4)
                 .padding(.bottom)
+            
             Divider()
-        }.padding([.leading, .trailing])
+            
+        }.padding()
     }
 }
 

@@ -19,10 +19,10 @@ struct RecorderPostView: View {
     
     var user: User
     
-    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String){
+    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double){
         let timestamp = Int(NSDate().timeIntervalSince1970) * -1
         let isSelected = false
-        let length = Double(0)
+        let length = length
         let uid = user.id!
         let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, plays: 0, user: user, uid: uid, isSelected: isSelected)
         RambService2().addRamb(ramb)
@@ -71,7 +71,8 @@ struct RecorderPostView: View {
                     user: user,
                     caption: caption,
                     rambUrl: rambUrl,
-                    fileId: ""
+                    fileId: "",
+                    length: length
                 )
                 self.currentTab = Tab.profile
                 presentationMode.wrappedValue.dismiss()
