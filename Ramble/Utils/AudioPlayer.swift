@@ -67,61 +67,6 @@ struct AudioPlayerControlsView: View {
     }
 }
 
-struct AudioView: View {
-    @State var isPlaying = false
-    var player: AVPlayer
-     
-    var body: some View {
-        VStack {
-            
-            AudioPlayerControlsView(player: player,
-                                    timeObserver: PlayerTimeObserver(player: player),
-                                    durationObserver: PlayerDurationObserver(player: player))
-            
-            HStack {
-                
-                Button(action: {
-                    print("Go back to previous song")
-                }) {
-                    
-                    Image(systemName: "backward.fill")
-                        .font(.system(size: 20))
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    if self.isPlaying {
-                        self.player.pause()
-                        self.isPlaying.toggle()
-                    } else {
-                        self.player.play()
-                        self.isPlaying.toggle()
-                    }
-                 }) {
-                    Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: 36))
-                    
-                }.buttonStyle(BorderlessButtonStyle())
-                
-                Spacer()
-                
-                Button(action: {
-                    print("Skip ahead to next song")
-                }) {
-                    
-                    Image(systemName: "forward.fill")
-                        .font(.system(size: 20))
-                }
-            }
-                .foregroundColor(.primary)
-            
-        }.onAppear {
-            self.isPlaying = true
-        }
-    }
-}
-
 class PlayerTimeObserver {
     let publisher = PassthroughSubject<TimeInterval, Never>()
     private weak var player: AVPlayer?

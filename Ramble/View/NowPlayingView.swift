@@ -125,8 +125,10 @@ struct NowPlayingBar<Content: View>: View {
                                         // Volume
                                         HStack(spacing: 32) {
                                             Image(systemName: "volume.fill")
+                                            
                                             Slider(value: $volume, in: 0...100)
                                                 .accentColor(Color.secondary)
+                                            
                                             Image(systemName: "volume.3.fill")
                                         }
                                         
