@@ -32,16 +32,18 @@ struct SignInView : View {
     
     var body: some View {
         ZStack {
-            Color.red.edgesIgnoringSafeArea(.all)
+            
+            Color.accent3.edgesIgnoringSafeArea(.all)
+            
             VStack{
                 
                 Spacer()
                 
-                Image(systemName: "waveform")
+                Image(systemName: "music.mic")
                     .resizable()
-                    .frame(width: 100, height: 100)
+                    .scaledToFit()
+                    .frame(width: 100)
                     .foregroundColor(.white)
-                
                 
                 VStack {
                     TextField("Email Addesss", text: $email)
@@ -136,7 +138,8 @@ struct SignUpView : View {
     var body : some View {
         
         ZStack {
-            Color.red.edgesIgnoringSafeArea(.all)
+            
+            Color.accent3.edgesIgnoringSafeArea(.all)
             
             VStack {
                 

@@ -29,13 +29,11 @@ struct FeedView: View {
         self.user = user
     }
     
-  
     var body: some View {
         NavigationView{
             ZStack {
                 RambFeed(dataToggle: $dataToggle)
             }
-            .navigationBarHidden(hideNav)
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(
                 leading:
@@ -62,12 +60,15 @@ struct FeedView: View {
                         if #available(iOS 14.0, *) {
                             Menu {
                                 Picker(selection: $dataToggle, label: Text("Sorting options")) {
-                                    HStack{
+                                    HStack {
                                         Image(systemName: "clock.fill")
+                                            .foregroundColor(Color.accent4)
                                         Text("Most Recent")
-                                    }.tag(0)
+                                            .foregroundColor(Color.accent4)
+                                    }
+                                    .tag(0)
                                     
-                                    HStack{
+                                    HStack {
                                         Image(systemName: "flame.fill")
                                         Text("Most Plays")
                                     }.tag(1)

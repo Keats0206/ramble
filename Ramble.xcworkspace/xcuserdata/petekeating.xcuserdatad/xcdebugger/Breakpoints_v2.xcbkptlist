@@ -3,4 +3,54 @@
    uuid = "6D89665B-45AE-4395-BD9C-E4ED2F24FDFF"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28D9BF8A-7CBA-4A0C-A5D3-89C12E22DC0A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ramble/View/AppView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "actionSelection"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "28D9BF8A-7CBA-4A0C-A5D3-89C12E22DC0A - 4d70ea2e5a29ed5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ramble.MainView.(actionSelection in _1147136DE959E5C4FF88B3BD98648579).getter : SwiftUI.Binding&lt;Swift.Int&gt;"
+                  moduleName = "Ramble"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petekeating/Desktop/Ramble/Ramble/View/AppView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "28D9BF8A-7CBA-4A0C-A5D3-89C12E22DC0A - b042fa430c30561d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.Int in Ramble.MainView.(actionSelection in _1147136DE959E5C4FF88B3BD98648579).getter : SwiftUI.Binding&lt;Swift.Int&gt;"
+                  moduleName = "Ramble"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petekeating/Desktop/Ramble/Ramble/View/AppView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

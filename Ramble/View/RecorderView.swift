@@ -29,7 +29,9 @@ struct RecorderView: View {
             previewButton
             ZStack {
                 switch audioRecorder.recorderState {
-                    case .ready:
+                case .ready:
+                        VStack{
+                            Spacer()
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
                                 .font(.system(size: 20, weight: .heavy, design: .rounded))
                                 .padding(.top, 300)
@@ -42,51 +44,50 @@ struct RecorderView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 75, height: 75)
                                     .foregroundColor(.red)
-                        }
-                    case .started:
-                        Text(String(format: "%.1f", timerManager.secondsElapsed))
-                            .font(.system(size: 20, weight: .heavy, design: .rounded))
-                            .padding(.top, 300)
-                        Button(action: {
-                            self.audioRecorder.stopRecording()
-                            self.length = self.timerManager.secondsElapsed
-                            self.timerManager.stop()
-                        }) {
-                            Image(systemName: "square.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.red)
-                                .overlay(
-                                    ZStack {
-                                        Circle()
-                                            .stroke(Color.red, lineWidth: 100)
-                                                        .scaleEffect(animateRecording ? 1 : 0)
-                                                    Circle()
-                                                        .stroke(Color.red, lineWidth: 100)
-                                                        .scaleEffect(animateRecording ? 1.5 : 0)
-                                                    Circle()
-                                                        .stroke(Color.red, lineWidth: 100)
-                                                        .scaleEffect(animateRecording ? 2 : 0)
-                                                }
-                                                .opacity(animateRecording ? 0.0 : 0.2)
-                                                .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: false))
-                                        )
-                                        .onAppear {
-                                            self.animateRecording = true
-                                        }
-
-                        }
-                        
-                    case .stopped:
-                        
-                        LoadingAnimation()//leading animation
-                   
-                    case .uploaded:
-                        Spacer()// Sends user to the next view
+                            }
+                        }.padding()
+                case .started:
+                        VStack {
+                            Spacer()
+                            Text(String(format: "%.1f", timerManager.secondsElapsed))
+                                .font(.system(size: 20, weight: .heavy, design: .rounded))
+                            Button(action: {
+                                self.audioRecorder.stopRecording()
+                                self.length = self.timerManager.secondsElapsed
+                                self.timerManager.stop()
+                            }) {
+                                Image(systemName: "pause.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 75, height: 75)
+                                    .foregroundColor(.red)
+                                    .background(
+                                        ZStack {
+                                            Circle()
+                                                .stroke(Color.red, lineWidth: 100)
+                                                            .scaleEffect(animateRecording ? 1 : 0)
+                                                        Circle()
+                                                            .stroke(Color.red, lineWidth: 100)
+                                                            .scaleEffect(animateRecording ? 1.5 : 0)
+                                                        Circle()
+                                                            .stroke(Color.red, lineWidth: 100)
+                                                            .scaleEffect(animateRecording ? 2 : 0)
+                                                    }
+                                                    .opacity(animateRecording ? 0.0 : 0.2)
+                                                    .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: false))
+                                            )
                             .onAppear {
-                                self.isActive.toggle()
-                    }
+                                self.animateRecording = true
+                                }
+                            }
+                        }.padding()
+                case .stopped:
+                    LoadingAnimation()//leading animation
+                case .uploaded:
+                    Spacer()// Sends user to the next view
+                        .onAppear {
+                            self.isActive.toggle()
+                }
                 }
             }
         }.onAppear {
@@ -100,7 +101,7 @@ struct RecorderView: View {
         .navigationBarItems(leading:
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
-            }){
+            }) {
                 Text("Cancel")
                     .font(.system(size: 20, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.accent4)
@@ -124,7 +125,7 @@ struct RecorderView_Previews: PreviewProvider {
     }
 }
 
-struct LoadingAnimation: View{
+struct LoadingAnimation: View {
     @State var animateUploading = false
 
     var body: some View {

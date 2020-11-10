@@ -25,6 +25,7 @@
 		40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C7E2492777700C0C39A /* HalfModelView.swift */; };
 		40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* EditProfileView.swift */; };
 		404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404821D524A3BB7200BD63A3 /* RambUserFeed.swift */; };
+		40531BFF2555A927005FEBE3 /* SwimplyPlayIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */; };
 		4056E9A4252404E10004E598 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056E9A3252404E10004E598 /* Extensions.swift */; };
 		405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A5DE1250802F4009F9C6B /* SearchView.swift */; };
 		406C43D32553582700C6E7DE /* NowPlayingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406C43D22553582700C6E7DE /* NowPlayingAnimation.swift */; };
@@ -143,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40531BFF2555A927005FEBE3 /* SwimplyPlayIndicator in Frameworks */,
 				DFF310CE52592EC77392BA41 /* Pods_Ramble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +336,7 @@
 			);
 			name = Ramble;
 			packageProductDependencies = (
+				40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */,
 			);
 			productName = Ramble;
 			productReference = 402F548D244F91A900FD899F /* Ramble.app */;
@@ -368,6 +371,7 @@
 				402F54C9244F9FD000FD899F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				40B1F965249C03B4008A3F37 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 				406EF19E24B51CCF009D224F /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
+				40531BFD2555A927005FEBE3 /* XCRemoteSwiftPackageReference "SwimplyPlayIndicator" */,
 			);
 			productRefGroup = 402F548E244F91A900FD899F /* Products */;
 			projectDirPath = "";
@@ -825,6 +829,14 @@
 				minimumVersion = 1.3.3;
 			};
 		};
+		40531BFD2555A927005FEBE3 /* XCRemoteSwiftPackageReference "SwimplyPlayIndicator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/docterd/SwimplyPlayIndicator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		406EF19E24B51CCF009D224F /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/timbersoftware/SwiftUIRefresh.git";
@@ -842,6 +854,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40531BFD2555A927005FEBE3 /* XCRemoteSwiftPackageReference "SwimplyPlayIndicator" */;
+			productName = SwimplyPlayIndicator;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 402F5485244F91A900FD899F /* Project object */;
 }

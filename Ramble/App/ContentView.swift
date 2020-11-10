@@ -27,10 +27,12 @@ struct ContentView : View {
 }
 
 #if DEBUG
+
 @available(iOS 14.0, *)
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(SessionStore())
+        ContentView()
+            .environmentObject(SessionStore())
     }
 }
 #endif

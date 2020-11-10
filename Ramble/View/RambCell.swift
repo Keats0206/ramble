@@ -10,20 +10,24 @@ import SwiftUI
 import SDWebImageSwiftUI
 import AVKit
 import MinimizableView
-
+import SwimplyPlayIndicator
 
 struct RambCell : View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
 
     @State private var showingActionSheet = false
-    
+        
     var ramb: Ramb2
     
     var body: some View {
         HStack(alignment: .center) {
                     VStack(alignment: .center) {
                         ZStack {
+                            
+                            SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
+                                           .frame(width: 20, height: 20)
+                            
                             WebImage(url: URL(string: ramb.user.profileImageUrl))
                                 .frame(width: 50, height: 50)
                                 .clipShape(Rectangle())

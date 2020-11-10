@@ -30,7 +30,8 @@ struct AudioPlayerControlsView: View {
                    maximumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentDuration))")) {
 // This seems to be required but not sure when it would ever show in the UI
                     Text("Duration")
-            }.font(.system(size: 14))
+            }.font(.caption)
+            .foregroundColor(Color.accent4)
         }.padding()
 // Listen out for the time observer publishing changes to the player's time
         .onReceive(timeObserver.publisher) { time in
@@ -73,13 +74,21 @@ struct AudioView: View {
     var body: some View {
         VStack {
             
-            HStack(spacing: 55){
+            AudioPlayerControlsView(player: player,
+                                    timeObserver: PlayerTimeObserver(player: player),
+                                    durationObserver: PlayerDurationObserver(player: player))
+            
+            HStack {
                 
-                Button(action: {}) {
+                Button(action: {
+                    print("Go back to previous song")
+                }) {
                     
                     Image(systemName: "backward.fill")
-                        .font(.title)
+                        .font(.system(size: 20))
                 }
+                
+                Spacer()
                 
                 Button(action: {
                     if self.isPlaying {
@@ -91,21 +100,23 @@ struct AudioView: View {
                     }
                  }) {
                     Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                        .font(.system(size: 36))
+                    
                 }.buttonStyle(BorderlessButtonStyle())
                 
-                Button(action: {}) {
+                Spacer()
+                
+                Button(action: {
+                    print("Skip ahead to next song")
+                }) {
                     
                     Image(systemName: "forward.fill")
-                        .font(.title)
+                        .font(.system(size: 20))
                 }
-            }.padding(.top,25)
+            }
+                .foregroundColor(.primary)
             
-            AudioPlayerControlsView(player: player,
-                                    timeObserver: PlayerTimeObserver(player: player),
-                                    durationObserver: PlayerDurationObserver(player: player))
-        }.onAppear{
+        }.onAppear {
             self.isPlaying = true
         }
     }

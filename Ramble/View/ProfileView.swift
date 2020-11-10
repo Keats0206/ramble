@@ -10,8 +10,6 @@ import SwiftUI
 import FirebaseAuth
 import SDWebImageSwiftUI
 
-//TODO: Bring a user into this view...pass that same user down into the profile header and profile feed
-
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var session: SessionStore

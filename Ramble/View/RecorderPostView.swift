@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct RecorderPostView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -28,18 +29,16 @@ struct RecorderPostView: View {
         RambService2().addRamb(ramb)
     }
     var body: some View {
+        
         VStack(alignment: .center) {
             
             Spacer()
             
-            TextField("Untitled ramb", text: $caption)
-                .frame(width: 300)
-                .multilineTextAlignment(.leading)
-                .font(.system(.body, design: .rounded))
-                .fixedSize(horizontal: true, vertical: false)
-                .multilineTextAlignment(.leading)
+            MultiLineTF(txt: $caption)
             
             Spacer()
+            
+            AudioView(player: AVPlayer(url: URL(string: rambUrl)!))
             
             Button(action: {
                 print("Play ramb")
@@ -50,12 +49,11 @@ struct RecorderPostView: View {
                     .frame(width: 75, height: 75)
                     .foregroundColor(Color.accent3)
             }
-            
             Text(String(format: "%.1f", length))
                 .font(.system(size: 20, weight: .heavy, design: .rounded))
                 .padding(.top, 300)
-
-        }.padding()
+        }
+        .padding()
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
             Button(action: {

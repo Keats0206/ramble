@@ -17,6 +17,7 @@ struct BigPlayerView: View {
     
     var body: some View {
             VStack {
+                
                 WebImage(url: URL(string: ramb.user.profileImageUrl))
                     .frame(width: 150, height: 150)
                     .clipShape(Circle())

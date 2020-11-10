@@ -16,7 +16,7 @@ struct MainView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var viewModel = RambService2()
 
-    @State var user: User
+    @State var user: User    
     @State var hidNav = false
     @State var recordingModalShown = false
     @State private var selection = 0
@@ -44,14 +44,17 @@ struct MainView: View {
     var body: some View {
         ZStack {
             TabView(selection: actionSelection) {
-                    NowPlayingBar(content: FeedView(user: user))
+                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user))
                 .tabItem {
-                    HStack{
+                    HStack {
                         Image(systemName: "music.house")
                         Text("Feed")
                     }
                 }.tag(0)
-                    NowPlayingBar(content: ProfileView(user: $user))
+               
+                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: NavigationView {
+                        ProfileView(user: $user)
+                    })
                 .tabItem {
                     HStack {
                         Image(systemName: "person.circle")
@@ -59,15 +62,12 @@ struct MainView: View {
                     }
                 }.tag(1)
             }
-
             .onAppear {
                 self.getUser()
             }
         }.accentColor(Color.accent4)
     }
 }
-
-@available(iOS 14.0, *)
 
 //struct MainView: View {
 //    @EnvironmentObject var session: SessionStore
@@ -88,6 +88,7 @@ struct MainView: View {
 //            return
 //        }
 //    }
+//
 //    var body: some View {
 //        ZStack {
 //            NavigationView {

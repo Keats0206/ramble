@@ -10,6 +10,7 @@ import Foundation
 import AVKit
 import MediaPlayer
 import MinimizableView
+import SwimplyPlayIndicator
 
 class GlobalPlayer: ObservableObject {
     @Published var globalRambs: [Ramb2]?
@@ -17,6 +18,8 @@ class GlobalPlayer: ObservableObject {
     @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
     @Published var didSet = false
+    @Published var playState: SwimplyPlayIndicator.AudioState = .stop
+    
     let session = AVAudioSession.sharedInstance()
     
     var minimizableViewHandler = MinimizableViewHandler()
@@ -40,14 +43,15 @@ class GlobalPlayer: ObservableObject {
         isPlaying = true
         setupNowPlaying()
         setupRemoteTransportControls()
-        addPlay(ramb: globalRambs![0])
+        addPlay(ramb: (globalRambs!.first!))
+        playState = .play
     }
     
     func addPlay(ramb: Ramb2) {
         RambService2.shared.addPlay(ramb: ramb)
     }
     
-    func setupNowPlaying(){
+    func setupNowPlaying( ){
 // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = globalRambs?.first?.caption
