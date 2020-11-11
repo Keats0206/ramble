@@ -33,7 +33,7 @@ struct RecorderView: View {
                         VStack{
                             Spacer()
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
-                                .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .padding(.top, 300)
                             Button(action: {
                                 self.audioRecorder.startRecording()
@@ -42,7 +42,7 @@ struct RecorderView: View {
                                 Image(systemName: "circle.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 75, height: 75)
+                                    .frame(width: 60, height: 60)
                                     .foregroundColor(.red)
                             }
                         }.padding()
@@ -50,7 +50,7 @@ struct RecorderView: View {
                         VStack {
                             Spacer()
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
-                                .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
                             Button(action: {
                                 self.audioRecorder.stopRecording()
                                 self.length = self.timerManager.secondsElapsed
@@ -59,7 +59,7 @@ struct RecorderView: View {
                                 Image(systemName: "pause.circle.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 75, height: 75)
+                                    .frame(width: 60, height: 60)
                                     .foregroundColor(.red)
                                     .background(
                                         ZStack {
@@ -103,8 +103,8 @@ struct RecorderView: View {
                 presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Cancel")
-                    .font(.system(size: 20, weight: .heavy, design: .rounded))
-                    .foregroundColor(Color.accent4)
+                    .font(.system(.headline, design: .rounded))
+                    .foregroundColor(.flatDarkBackground)
             })
     }
 }

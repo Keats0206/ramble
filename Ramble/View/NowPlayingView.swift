@@ -100,18 +100,13 @@ struct NowPlayingBar<Content: View>: View {
                                 }
                                 
                                 if isExpanded {
-                                    
                                     VStack {
-                                        
                                         ZStack {
-                                            
                                             VStack(alignment: .leading) {
-                                                
                                                 NavigationLink(destination: ProfileView(user: .constant(ramb!.user)), isActive: $isActive){
                                                     Text("@\(ramb!.user.username)")
                                                         .font(.system(.title, design: .rounded))
                                                 }
-                                                
                                                 Text("\(ramb!.caption)")
                                                     .font(.system(.body, design: .rounded))
                                                     .bold()

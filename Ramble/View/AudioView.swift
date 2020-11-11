@@ -16,18 +16,19 @@ struct AudioView: View {
     var body: some View {
         
         VStack {
-            
+                        
             AudioPlayerControlsView(player: player,
                                     timeObserver: PlayerTimeObserver(player: player),
                                     durationObserver: PlayerDurationObserver(player: player))
             
-            HStack {
+            HStack{
+                
+                Spacer()
                 
                 Button(action: {
                     print("Go back to previous song")
                 }) {
-                    
-                    Image(systemName: "goforward.15")
+                    Image(systemName: "gobackward.15")
                         .font(.system(size: 20))
                 }
                 
@@ -44,7 +45,6 @@ struct AudioView: View {
                  }) {
                     Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 36))
-                    
                 }.buttonStyle(BorderlessButtonStyle())
                 
                 Spacer()
@@ -53,16 +53,23 @@ struct AudioView: View {
                     print("Skip ahead to next song")
                 }) {
                     
-                    Image(systemName: "gobackward.15")
+                    Image(systemName: "goforward.15")
                         .font(.system(size: 20))
                 }
+                
+                Spacer()
             }
+                .padding(.horizontal, 30)
                 .foregroundColor(.primary)
-            
-            
-            
-        }.onAppear {
+        }
+        .onAppear {
             self.isPlaying = true
         }
+    }
+}
+
+struct AudioView_Previews: PreviewProvider {
+    static var previews: some View {
+        AudioView(player: testPlayer)
     }
 }

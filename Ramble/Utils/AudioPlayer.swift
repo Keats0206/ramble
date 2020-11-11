@@ -31,7 +31,7 @@ struct AudioPlayerControlsView: View {
 // This seems to be required but not sure when it would ever show in the UI
                     Text("Duration")
             }.font(.caption)
-            .foregroundColor(Color.accent4)
+            .foregroundColor(Color.accent3)
         }.padding()
 // Listen out for the time observer publishing changes to the player's time
         .onReceive(timeObserver.publisher) { time in

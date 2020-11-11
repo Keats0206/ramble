@@ -49,7 +49,7 @@ struct FeedView: View {
                         }) {
                             Image(systemName: "music.mic")
                                 .resizable()
-                                .foregroundColor(Color.accent4)
+                                .foregroundColor(Color.accent3)
                                 .frame(width: 25, height: 25)
                         }
                         .sheet(isPresented: self.$recordingModalShown, content: {
@@ -77,7 +77,7 @@ struct FeedView: View {
                             label: {
                                 Image(systemName: "music.note.list")
                                     .resizable()
-                                    .foregroundColor(Color.accent4)
+                                    .foregroundColor(Color.accent3)
                                     .frame(width: 25, height: 25)
                             }
                         } else {
@@ -87,7 +87,7 @@ struct FeedView: View {
                             }) {
                                 Image(systemName: "music.note.list")
                                     .resizable()
-                                    .foregroundColor(Color.accent4)
+                                    .foregroundColor(Color.accent3)
                                     .frame(width: 25, height: 25)
                             }.actionSheet(isPresented: self.$showActionSheet, content: {
                                 ActionSheet(title: Text("Select an option"), buttons: [

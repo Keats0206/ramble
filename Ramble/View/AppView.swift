@@ -65,7 +65,7 @@ struct MainView: View {
             .onAppear {
                 self.getUser()
             }
-        }.accentColor(Color.accent4)
+        }.accentColor(Color.accent3)
     }
 }
 

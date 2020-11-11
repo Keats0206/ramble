@@ -11,6 +11,7 @@ import SwiftUI
 struct MultiLineTF: UIViewRepresentable {
     
     @Binding var txt: String
+    @State var placeholder: String
     
     func makeCoordinator() -> MultiLineTF.Coordinator {
         
@@ -23,7 +24,7 @@ struct MultiLineTF: UIViewRepresentable {
         tview.isEditable = true
         tview.isUserInteractionEnabled = true
         tview.isScrollEnabled = true
-        tview.text = "Type your bio here"
+        tview.text = placeholder
         tview.font = .systemFont(ofSize: 18, weight: .bold)
         tview.delegate = context.coordinator
         return tview
