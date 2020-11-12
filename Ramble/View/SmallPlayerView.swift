@@ -62,6 +62,7 @@ struct SmallPlayerView: View {
 struct SmallPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         SmallPlayerView(ramb: testRamb)
+            .environmentObject(GlobalPlayer())
     }
 }
 
