@@ -76,11 +76,9 @@ struct ProfileView: View {
                 }
             ,
             trailing:
-                HStack {
+                ZStack {
                     if Auth.auth().currentUser?.uid == user.id {
                         editProfileButton
-                    } else {
-                        Spacer()
                     }
                 }
         )

@@ -61,7 +61,7 @@ struct MainView: View {
                     }.tag(0)
                    
                     NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: NavigationView {
-                        ProfileView(user: $user, openProfile: .constant(false))
+                            ProfileView(user: $user, openProfile: .constant(false))
                         })
                     .tabItem {
                         HStack {
