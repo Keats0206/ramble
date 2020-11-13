@@ -32,6 +32,14 @@ struct RecorderPostView: View {
         RambService2().addRamb(ramb)
     }
     
+    static let rambDateFormat: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            return formatter
+        }()
+
+        var postDate = Date()
+    
     var body: some View {
         VStack(alignment: .center) {
             
@@ -42,13 +50,18 @@ struct RecorderPostView: View {
                 .clipShape(Rectangle())
                 .cornerRadius(8)
             
-            TextField("Untitled Ramb", text: $caption)
+            Spacer()
+            
+            TextField("Untitled Ramb - \(postDate, formatter: Self.rambDateFormat)", text: $caption)
                 .multilineTextAlignment(.center)
+                .font(.system(.body, design: .rounded))
             
             Spacer()
             
             AudioView(player: AVPlayer(url: URL(string: rambUrl)!))
                 .padding()
+            
+            Spacer()
             
             Button(action: {
                 self.uploadRamb2(

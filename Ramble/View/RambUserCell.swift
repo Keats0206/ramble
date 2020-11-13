@@ -50,12 +50,9 @@ struct RambUserCell: View {
                     Button(action: {
                         self.showingActionSheet.toggle()
                     }){
-                        Circle()
-                            .foregroundColor(Color.flatDarkBackground.opacity(0.2))
-                            .frame(width: 25, height: 25)
-                            .overlay(
-                                Image(systemName: "ellipsis")
-                            )
+                        Image(systemName: "ellipsis")
+                            .font(.body)
+                            .foregroundColor(Color.secondary)
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Are you sure you want to delete this ramble?"),
                                         buttons: [
@@ -72,11 +69,11 @@ struct RambUserCell: View {
                         self.showingActionSheet.toggle()
                     }) {
                         Image(systemName: "ellipsis")
-                            .frame(height: 10)
-                            .accentColor(Color.accent4)
+                            .font(.body)
+                            .foregroundColor(Color.secondary)
                             .actionSheet(isPresented: $showingActionSheet) {
                                 ActionSheet(title: Text("Report this ramb?"),
-                                            buttons:[
+                                            buttons: [
                                                 .default(
                                                     Text("Report").foregroundColor(.red), action: {
                                                         print("DEBUG: report ramb")

@@ -81,8 +81,7 @@ struct ProfileView: View {
                         editProfileButton
                     }
                 }
-        )
-        .edgesIgnoringSafeArea(.top)
+        ).edgesIgnoringSafeArea(.top)
     }
 }
 
@@ -91,19 +90,14 @@ struct UserAbout: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            
             Text("@\(user.username)")
                 .font(.system(.title, design: .rounded))
                 .bold()
-            
-            
             Text("\(user.bio)")
                 .font(.system(.headline, design: .rounded))
                 .opacity(0.4)
                 .padding(.bottom)
-            
             Divider()
-            
         }.padding()
     }
 }

@@ -24,9 +24,8 @@ struct RambCell : View {
         HStack(alignment: .center) {
                     VStack(alignment: .center) {
                         ZStack {
-                            
-                            SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
-                                           .frame(width: 20, height: 20)
+//                            SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
+//                                           .frame(width: 20, height: 20)
                             
                             WebImage(url: URL(string: ramb.user.profileImageUrl))
                                 .resizable()
@@ -59,18 +58,14 @@ struct RambCell : View {
                             .font(.system(.body, design: .rounded))
                             .multilineTextAlignment(TextAlignment.leading)
                         
-                    }
-                    .background(Color.white)
+                    }.foregroundColor(.primary)
             VStack(alignment: .center) {
                 Button(action: {
                     self.showingActionSheet.toggle()
                 }) {
-                    Circle()
-                        .foregroundColor(Color.flatDarkBackground.opacity(0.2))
-                        .frame(width: 25, height: 25)
-                        .overlay(
-                            Image(systemName: "ellipsis")
-                        )
+                    Image(systemName: "ellipsis")
+                        .font(.body)
+                        .foregroundColor(Color.secondary)
                         .actionSheet(isPresented: $showingActionSheet) {
                             ActionSheet(title: Text("Report this ramb?"),
                                 buttons: [.default(
@@ -82,7 +77,8 @@ struct RambCell : View {
                         }
                 }.buttonStyle(BorderlessButtonStyle())
             }
-        }.padding()
+        }
+        .padding()
         .cornerRadius(15)
         .onTapGesture(perform: {
             play()
