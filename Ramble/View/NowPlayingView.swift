@@ -19,7 +19,6 @@ struct NowPlayingBar<Content: View>: View {
     
     @State private var isExpanded = false
     @State var volume = 50.0
-    @State private var isActive = false
     
     @State var height : CGFloat = 0
     @State var floating = true
@@ -38,8 +37,10 @@ struct NowPlayingBar<Content: View>: View {
         isExpanded ? 20 : 0
     }
     
-    var content: Content
+    @Binding var selectedProfile: User
+    @Binding var openProfile: Bool
     
+    var content: Content
     @ViewBuilder var body: some View {
         ZStack(alignment: .bottom) {
             content
@@ -79,6 +80,10 @@ struct NowPlayingBar<Content: View>: View {
                                             
                                             Text("@\(ramb!.user.username)")
                                                 .font(.system(.caption, design: .rounded))
+                                                .onTapGesture(perform: {
+                                                    self.selectedProfile = ramb!.user
+                                                    self.openProfile = true
+                                                })
                                             
                                             Text("\(ramb!.caption)")
                                                 .font(.system(.body, design: .rounded))
@@ -103,10 +108,12 @@ struct NowPlayingBar<Content: View>: View {
                                     VStack {
                                         ZStack {
                                             VStack(alignment: .leading) {
-                                                NavigationLink(destination: ProfileView(user: .constant(ramb!.user)), isActive: $isActive){
-                                                    Text("@\(ramb!.user.username)")
-                                                        .font(.system(.title, design: .rounded))
-                                                }
+                                                Text("@\(ramb!.user.username)")
+                                                    .font(.system(.title, design: .rounded))
+                                                    .onTapGesture(perform: {
+                                                        self.selectedProfile = ramb!.user
+                                                        self.openProfile = true
+                                                    })
                                                 Text("\(ramb!.caption)")
                                                     .font(.system(.body, design: .rounded))
                                                     .bold()

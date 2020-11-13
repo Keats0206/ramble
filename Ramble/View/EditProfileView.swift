@@ -21,7 +21,22 @@ struct EditProfileView : View {
     
     @Binding var user: User
     
-    func saveProfile(){
+    func saveProfile() {
+        if let image = profileImage {
+            self.loading = true
+            UserService2.shared.updateProfileImage(image: image) { url in
+                self.loading = false
+                self.user.profileImageUrl = url
+                self.updateUserData()
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        } else {
+            updateUserData()
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    func updateUserData() {
         UserService2.shared.saveUserProfile(user: user)
         RambService2.shared.updateUserData(user: user)
     }
@@ -51,27 +66,29 @@ struct EditProfileView : View {
     
     var body : some View {
         NavigationView {
-            ZStack{
-                VStack(spacing: 20) {
-                    changeProfileImage
-                        .font(.system(.subheadline, design: .rounded))
-                    editUserInfo
-                    settingsLinks
-                    Spacer()
-                    logoutDelete
-                        .font(.system(.subheadline, design: .rounded))
+            LoadingView(isShowing: $loading, content: {
+                ZStack {
+                    VStack(spacing: 20) {
+                        changeProfileImage
+                            .font(.system(.subheadline, design: .rounded))
+                        editUserInfo
+                        settingsLinks
+                        Spacer()
+                        logoutDelete
+                            .font(.system(.subheadline, design: .rounded))
+                    }
+                    .font(.system(.headline, design: .rounded))
+                    .foregroundColor(.flatDarkBackground)
+                    .padding()
                 }
-                .font(.system(.headline, design: .rounded))
-                .foregroundColor(.flatDarkBackground)
-                .padding()
-            }.navigationBarItems(leading:
+            })
+            .navigationBarItems(leading:
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                         }) {
                     Text("Cancel")
                 }, trailing:
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
                     self.saveProfile()
                 }){
                     Text("Save")
@@ -85,7 +102,7 @@ struct EditProfileView : View {
 private extension EditProfileView {
     var changeProfileImage: some View {
         VStack {
-            WebImage(url: URL(string: user.profileImageUrl))
+            NetworkImage(url: URL(string: user.profileImageUrl), image: profileImage)
                 .frame(width: 200, height: 200)
                 .cornerRadius(10)
                 .shadow(radius: 10)
@@ -183,5 +200,27 @@ private extension EditProfileView {
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView(user: .constant(testUser))
+    }
+}
+
+struct NetworkImage: View {
+    let url: URL?
+    let image: UIImage?
+    var body: some View {
+        Group {
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else if let url = url, let imageData = try? Data(contentsOf: url), let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Image(uiImage: #imageLiteral(resourceName: "Compose"))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
+        }
     }
 }

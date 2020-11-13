@@ -18,8 +18,7 @@ struct AudioView: View {
         VStack {
                         
             AudioPlayerControlsView(player: player,
-                                    timeObserver: PlayerTimeObserver(player: player),
-                                    durationObserver: PlayerDurationObserver(player: player))
+                                    timeObserver: PlayerTimeObserver(player: player))
             
             HStack{
                 
@@ -59,8 +58,8 @@ struct AudioView: View {
                 
                 Spacer()
             }
-                .padding(.horizontal, 30)
-                .foregroundColor(.primary)
+            .padding(.horizontal, 30)
+            .foregroundColor(.primary)
         }
         .onAppear {
             self.isPlaying = true

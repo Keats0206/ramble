@@ -40,30 +40,39 @@ struct MainView: View {
             return
         }
     }
+    
+    @State var selectedProfile: User = testUser
+    @State var openProfile: Bool = false
 
     var body: some View {
         ZStack {
-            TabView(selection: actionSelection) {
-                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user))
-                .tabItem {
-                    HStack {
-                        Image(systemName: "music.house")
-                        Text("Feed")
-                    }
-                }.tag(0)
-               
-                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: NavigationView {
-                        ProfileView(user: $user)
-                    })
-                .tabItem {
-                    HStack {
-                        Image(systemName: "person.circle")
-                        Text("Profile")
-                    }
-                }.tag(1)
-            }
-            .onAppear {
-                self.getUser()
+            if openProfile {
+                NavigationView {
+                    ProfileView(user: $selectedProfile, showBackBtn: true, openProfile: $openProfile)
+                }
+            } else {
+                TabView(selection: actionSelection) {
+                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: FeedView(user: user))
+                    .tabItem {
+                        HStack {
+                            Image(systemName: "music.house")
+                            Text("Feed")
+                        }
+                    }.tag(0)
+                   
+                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: NavigationView {
+                        ProfileView(user: $user, openProfile: .constant(false))
+                        })
+                    .tabItem {
+                        HStack {
+                            Image(systemName: "person.circle")
+                            Text("Profile")
+                        }
+                    }.tag(1)
+                }
+                .onAppear {
+                    self.getUser()
+                }
             }
         }.accentColor(Color.accent3)
     }
@@ -144,7 +153,7 @@ struct CurrentScreen: View {
                 }
             } else {
                 NavigationView {
-                    ProfileView(user: $user)
+                    ProfileView(user: $user, openProfile: .constant(false))
                 }
             }
         }

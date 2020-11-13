@@ -63,6 +63,30 @@ class UserService2: ObservableObject {
         }
 
     }
+    
+    func updateProfileImage(image: UIImage, completion: @escaping(String) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        let ref = Storage.storage().reference().child("profileImage-\(uid)")
+        ref.putData(image.jpegData(compressionQuality: 0.42)!, metadata: metadata) { (metadata, error) in
+            if error != nil {
+                print((error?.localizedDescription)!)
+//                self.parent.isLoading = false
+                return
+            }
+            ref.downloadURL { (url, error) in
+//            self.parent.isLoading = false
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    return
+                }
+                completion(url?.absoluteString ?? "")
+            }
+        }
+    }
         
     func followUser(uid: String) {
 //        guard let currentUid = Auth.auth().currentUser?.uid else { return }

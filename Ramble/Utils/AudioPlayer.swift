@@ -16,7 +16,7 @@ struct AudioPlayerControlsView: View {
     
 //  Observing the time / duration of the current audio player
     let timeObserver: PlayerTimeObserver
-    let durationObserver: PlayerDurationObserver
+//    let durationObserver: PlayerDurationObserver
     @State private var currentTime: TimeInterval = 0
     @State private var currentDuration: TimeInterval = 0
     @State private var finished = false
@@ -39,10 +39,10 @@ struct AudioPlayerControlsView: View {
             self.currentTime = time
         }
 // Listen out for the duration observer publishing changes to the player's item duration
-        .onReceive(durationObserver.publisher) { duration in
+//        .onReceive(durationObserver.publisher) { duration in
             // Update the local var
-            self.currentDuration = duration
-        }
+//            self.currentDuration = duration
+//        }
     }
 
 // MARK: Private functions
@@ -91,10 +91,7 @@ class PlayerTimeObserver {
     }
         
     deinit {
-        if let player = player,
-            let observer = timeObservation {
-            player.removeTimeObserver(observer)
-        }
+        player?.removeTimeObserver(timeObservation as Any)
     }
     
     func pause(_ pause: Bool) {
@@ -120,9 +117,9 @@ class PlayerDurationObserver {
         }
     }
     
-    deinit {
-        cancellable?.cancel()
-    }
+//    deinit {
+//        cancellable?.cancel()
+//    }
 }
 
 
