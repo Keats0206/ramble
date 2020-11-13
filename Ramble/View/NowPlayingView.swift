@@ -19,7 +19,6 @@ struct NowPlayingBar<Content: View>: View {
     
     @State private var isExpanded = false
     @State var volume = 50.0
-    @State private var isActive = false
     
     @State var height : CGFloat = 0
     @State var floating = true
@@ -38,8 +37,10 @@ struct NowPlayingBar<Content: View>: View {
         isExpanded ? 20 : 0
     }
     
-    var content: Content
+    @Binding var selectedProfile: User
+    @Binding var openProfile: Bool
     
+    var content: Content
     @ViewBuilder var body: some View {
         ZStack(alignment: .bottom) {
             content
@@ -80,7 +81,8 @@ struct NowPlayingBar<Content: View>: View {
                                             Text("@\(ramb!.user.username)")
                                                 .font(.system(.caption, design: .rounded))
                                                 .onTapGesture(perform: {
-                                                    //Open profile view from here.
+                                                    self.selectedProfile = ramb!.user
+                                                    self.openProfile = true
                                                 })
                                             
                                             Text("\(ramb!.caption)")
@@ -106,10 +108,12 @@ struct NowPlayingBar<Content: View>: View {
                                     VStack {
                                         ZStack {
                                             VStack(alignment: .leading) {
-                                                NavigationLink(destination: ProfileView(user: .constant(ramb!.user)), isActive: $isActive){
-                                                    Text("@\(ramb!.user.username)")
-                                                        .font(.system(.title, design: .rounded))
-                                                }
+                                                Text("@\(ramb!.user.username)")
+                                                    .font(.system(.title, design: .rounded))
+                                                    .onTapGesture(perform: {
+                                                        self.selectedProfile = ramb!.user
+                                                        self.openProfile = true
+                                                    })
                                                 Text("\(ramb!.caption)")
                                                     .font(.system(.body, design: .rounded))
                                                     .bold()
@@ -191,17 +195,6 @@ struct NowPlayingBar<Content: View>: View {
             } else {
                 EmptyView()
             }
-        }
-    }
-}
-
-struct NowPlayingView_Previews: PreviewProvider {
-    static var previews: some View {
-        if #available(iOS 14.0, *) {
-            NowPlayingBar(ramb: Ramb2(id: "uSxc3OvHtHhk2dZGtK8i", caption: "I fuck w dominic fike", length: 12, rambUrl: "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/rambs%2F1FF073C0-620D-4227-932E-EAEBA5A2CF49?alt=media&token=f42ef81d-9da5-4c07-82e8-6ec841d20be0", fileId: "FieldId", timestamp: -1601682969, plays: 783, user: User(id: "uSxc3OvHtHhk2dZGtK8i", uid: "aNPWqgCxeuhVGnft9ccQWIqTzNk1", email: "Pete@pekeating.com", username: "NewUser", displayname: "Petek", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/profile-images%2F6CD80D5B-464B-4664-98E1-9A3C59A5601A?alt=media&token=328ab7ad-15d6-4e6a-b1d4-d2acda634f4f", bio: "I like classic rock songs", isFollowed: false), uid: "aNPWqgCxeuhVGnft9ccQWIqTzNk1", isSelected: false), content: Text("Hello"))
-                .padding(.bottom, 64)
-        } else {
-            // Fallback on earlier versions
         }
     }
 }

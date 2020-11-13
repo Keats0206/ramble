@@ -27,49 +27,63 @@ struct ProfileView: View {
         
     @Binding var user: User
     
+    var showBackBtn: Bool = false
+    @Binding var openProfile: Bool
+    
     var body: some View {
-        ScrollView {
-            GeometryReader { geometry in
-                ZStack {
-                    if geometry.frame(in: .global).minY <= 0 {
-                        WebImage(url: URL(string: user.profileImageUrl))
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .offset(y: geometry.frame(in: .global).minY/9)
-                            .clipped()
-                    } else {
-                        WebImage(url: URL(string: user.profileImageUrl))
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width, height: geometry.size.height + geometry.frame(in: .global).minY)
-                            .clipped()
-                            .offset(y: -geometry.frame(in: .global).minY)
-                    }
-                    VStack(alignment: .leading){
-                        Spacer()
-                        HStack(alignment: .bottom) {
-                            Text("\(user.displayname.uppercased())")
-                                .font(.system(size: 50, weight: .heavy))
-                                .foregroundColor(.white)
-                            Spacer()
+        ZStack(alignment: .topLeading) {
+            ScrollView {
+                GeometryReader { geometry in
+                    ZStack {
+                        if geometry.frame(in: .global).minY <= 0 {
+                            WebImage(url: URL(string: user.profileImageUrl))
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .offset(y: geometry.frame(in: .global).minY/9)
+                                .clipped()
+                        } else {
+                            WebImage(url: URL(string: user.profileImageUrl))
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width, height: geometry.size.height + geometry.frame(in: .global).minY)
+                                .clipped()
+                                .offset(y: -geometry.frame(in: .global).minY)
                         }
-                    }.padding()
-                }
-            }.frame(height: 400)
-            UserAbout(user: user)
-            RambUserFeed(user: user)
-                .frame(width: 350)
+                        VStack(alignment: .leading){
+                            Spacer()
+                            HStack(alignment: .bottom) {
+                                Text("\(user.displayname.uppercased())")
+                                    .font(.system(size: 50, weight: .heavy))
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                        }.padding()
+                    }
+                }.frame(height: 400)
+                UserAbout(user: user)
+                RambUserFeed(user: user)
+                    .frame(width: 350)
+            }
         }
         .navigationBarTitle("", displayMode: .large)
-        .navigationBarItems(trailing:
-                                HStack {
-                                    if Auth.auth().currentUser?.uid == user.id {
-                                        editProfileButton
-                                    } else {
-                                        Spacer()
-                                    }
-                                })
+        .navigationBarItems(
+            leading:
+                ZStack {
+                    if showBackBtn {
+                        backButton
+                    }
+                }
+            ,
+            trailing:
+                HStack {
+                    if Auth.auth().currentUser?.uid == user.id {
+                        editProfileButton
+                    } else {
+                        Spacer()
+                    }
+                }
+        )
         .edgesIgnoringSafeArea(.top)
     }
 }
@@ -112,6 +126,7 @@ private extension ProfileView {
             EditProfileView(user: $user)
         }
     }
+    
     var searchButton: some View {
         Button(action: {
             self.searchModalShown.toggle()
@@ -129,11 +144,24 @@ private extension ProfileView {
         }
 
     }
+    
+    var backButton: some View {
+        Button(action: {
+            self.openProfile = false
+        }) {
+            Image(systemName: "chevron.left")
+                .foregroundColor(Color.black)
+                .frame(width:30, height: 30)
+                .background(Color.secondary.colorInvert())
+                .foregroundColor(Color.primary)
+                .cornerRadius(15)
+        }
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: .constant(testUser))
+        ProfileView(user: .constant(testUser), openProfile: .constant(false))
             .environmentObject(SessionStore())
     }
 }
