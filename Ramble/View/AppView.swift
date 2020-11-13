@@ -9,8 +9,7 @@ import SwiftUI
 import Foundation
 import MinimizableView
 
-@available(iOS 14.0, *)
-struct MainView: View {
+struct AppView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()

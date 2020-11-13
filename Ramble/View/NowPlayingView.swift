@@ -10,12 +10,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 import AVKit
 
-@available(iOS 14.0, *)
-
 struct NowPlayingBar<Content: View>: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
    
-    @Namespace private var expandAnimation
+//    @Namespace private var expandAnimation
     
     @State private var isExpanded = false
     @State var volume = 50.0
@@ -46,15 +44,10 @@ struct NowPlayingBar<Content: View>: View {
             content
             
             if ramb != nil {
-                
                 VStack {
-                    
                     Spacer()
-                    
                     GeometryReader { geo in
-                        
                         ZStack(alignment: .top) {
-                            
                             Color.white
                                 .edgesIgnoringSafeArea(.top)
                                 .opacity(0.0)
@@ -65,14 +58,27 @@ struct NowPlayingBar<Content: View>: View {
                             VStack {
                                 
                                 HStack {
-                                    
-                                    WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
-                                        .resizable()
-                                        .scaleEffect()
-                                        .frame(width: imageFrame, height: imageFrame)
-                                        .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
-                                        .clipShape(Rectangle())
-                                        .cornerRadius(8)
+                                                                        
+                                    if #available(iOS 14.0, *) {
+                                        
+                                        WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
+                                            .resizable()
+                                            .scaleEffect()
+                                            .frame(width: imageFrame, height: imageFrame)
+//                                            .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
+                                            .clipShape(Rectangle())
+                                            .cornerRadius(8)
+                                        
+                                    } else {
+                                        // Fallback on earlier versions
+                                        WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
+                                            .resizable()
+                                            .scaleEffect()
+                                            .frame(width: imageFrame, height: imageFrame)
+                                            .clipShape(Rectangle())
+                                            .cornerRadius(8)
+                                        
+                                    }
                                     
                                     if !isExpanded {
                                         

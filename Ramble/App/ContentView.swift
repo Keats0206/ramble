@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct ContentView : View {
     @EnvironmentObject var session: SessionStore
 
@@ -18,7 +17,7 @@ struct ContentView : View {
     var body: some View {
         Group {
             if (session.session != nil) {
-                MainView(user: session.session!)
+                AppView(user: session.session!)
             } else {
                 AuthView()
             }
@@ -28,7 +27,6 @@ struct ContentView : View {
 
 #if DEBUG
 
-@available(iOS 14.0, *)
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         ContentView()
