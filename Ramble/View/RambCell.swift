@@ -29,6 +29,8 @@ struct RambCell : View {
                                            .frame(width: 20, height: 20)
                             
                             WebImage(url: URL(string: ramb.user.profileImageUrl))
+                                .resizable()
+                                .scaleEffect()
                                 .frame(width: 50, height: 50)
                                 .clipShape(Rectangle())
                                 .cornerRadius(8)
