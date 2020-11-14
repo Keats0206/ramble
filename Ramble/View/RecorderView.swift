@@ -104,7 +104,7 @@ struct RecorderView: View {
             }) {
                 Text("Cancel")
                     .font(.system(.headline, design: .rounded))
-                    .foregroundColor(.flatDarkBackground)
+                    .foregroundColor(Color.accent3)
             })
     }
 }

@@ -93,7 +93,7 @@ struct RecorderPostView: View {
                 }) {
                     Image(systemName: "arrowshape.turn.up.left")
                         .frame(width: 25, height: 25)
-                        .foregroundColor(Color.flatDarkBackground)
+                        .foregroundColor(Color.accent3)
                 }
             )
         }

@@ -28,7 +28,7 @@ struct AudioView: View {
                     print("Go back to previous song")
                 }) {
                     Image(systemName: "gobackward.15")
-                        .font(.system(size: 20))
+                        .font(.system(size: 30))
                 }
                 
                 Spacer()
@@ -43,23 +43,27 @@ struct AudioView: View {
                     }
                  }) {
                     Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: 36))
+                        .font(.system(size: 50))
+                
                 }.buttonStyle(BorderlessButtonStyle())
                 
                 Spacer()
                 
                 Button(action: {
+                    
                     print("Skip ahead to next song")
+                
                 }) {
                     
                     Image(systemName: "goforward.15")
-                        .font(.system(size: 20))
+                        .font(.system(size: 30))
                 }
                 
                 Spacer()
+                
             }
-            .padding(.horizontal, 30)
-            .foregroundColor(.primary)
+                .padding(.vertical)
+                .foregroundColor(.primary)
         }
         .onAppear {
             self.isPlaying = true

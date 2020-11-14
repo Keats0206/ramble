@@ -94,7 +94,7 @@ struct EditProfileView : View {
                     Text("Save")
                 }
             ).font(.system(.headline, design: .rounded))
-            .foregroundColor(.flatDarkBackground)
+            .foregroundColor(Color.accent3)
         }
     }
 }
