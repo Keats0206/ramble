@@ -15,10 +15,16 @@ import SDWebImageSwiftUI
 struct RambFeed : View {
     @EnvironmentObject var miniHandler: MinimizableViewHandler
     @EnvironmentObject var globalPlayer : GlobalPlayer
+    @Environment(\.colorScheme) var colorScheme
+    
     @ObservedObject var viewModel = RambService2()
     @Binding var dataToggle: Int
     @State private var isShowing = false
         
+    var backgroundColor: Color {
+        colorScheme == .dark ? Color.black : Color.white
+    }
+    
     var body: some View {
         ZStack {
                         
@@ -28,7 +34,8 @@ struct RambFeed : View {
                         ForEach(viewModel.allRambs.sorted(by: { $0.plays > $1.plays })){ ramb in
                             RambCell(ramb: ramb)
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-                                .listRowBackground(Color.clear)
+                                .listRowBackground(backgroundColor)
+                                .background(backgroundColor)
                         }
                     }
                 } else {
@@ -36,8 +43,8 @@ struct RambFeed : View {
                         ForEach(viewModel.allRambs.sorted(by: { $0.timestamp < $1.timestamp })){ ramb in
                             RambCell(ramb: ramb)
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-                                .listRowBackground(Color.clear)
-                            
+                                .listRowBackground(backgroundColor)
+                                .background(backgroundColor)
                         }
                     }
                 }
