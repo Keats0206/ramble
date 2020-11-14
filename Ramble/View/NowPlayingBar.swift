@@ -124,7 +124,7 @@ struct NowPlayingBar<Content: View>: View {
                                                 
                                             }) {
                                                 
-                                                Image(systemName: "gobackward.15")
+                                                Image(systemName: "goforward.15")
                                                     .resizable()
                                                     .foregroundColor(.primary)
                                                     .frame(width: playFrame, height: playFrame)
@@ -159,17 +159,7 @@ struct NowPlayingBar<Content: View>: View {
                                         
                                         Spacer()
                                         
-                                        // Volume
-                                        HStack(spacing: 45) {
-                                            
-                                            Image(systemName: "volume.fill")
-                                            
-                                            Slider(value: $volume, in: 0...100)
-                                                .accentColor(Color.secondary)
-                                            
-                                            Image(systemName: "volume.3.fill")
-                                        }
-                                        
+                                        // Volume                                        
                                         Spacer()
                                         
                                         Spacer()

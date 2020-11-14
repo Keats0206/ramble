@@ -90,7 +90,7 @@ struct EditProfileView : View {
                 }, trailing:
                 Button(action: {
                     self.saveProfile()
-                }){
+                }) {
                     Text("Save")
                 }
             ).font(.system(.headline, design: .rounded))
@@ -200,6 +200,7 @@ private extension EditProfileView {
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView(user: .constant(testUser))
+            .environment(\.colorScheme, .dark)
     }
 }
 
