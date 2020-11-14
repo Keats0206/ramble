@@ -111,6 +111,7 @@ private extension EditProfileView {
                 self.showImagePicker = true
             }) {
                 Text("Change Photo")
+                    .foregroundColor(.primary)
                     .padding(5)
                     .padding([.trailing,.leading])
             }.sheet(isPresented: $showImagePicker, onDismiss: {
@@ -146,7 +147,7 @@ private extension EditProfileView {
                     .opacity(0.5)
                 Divider()
             }
-        }
+        }.foregroundColor(.primary)
     }
     
     var settingsLinks: some View {
@@ -193,6 +194,7 @@ private extension EditProfileView {
                     Text("Delete")
                 }
             Spacer()
+            
         }.foregroundColor(Color.red)
     }
 }
