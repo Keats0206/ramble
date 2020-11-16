@@ -62,10 +62,10 @@
             filePath = "Ramble/App/GlobalPlayer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "setupRemoteTransportControls()"
-            landmarkType = "7">
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "GlobalPlayer"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,8 +78,8 @@
             filePath = "Ramble/View/RambCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>

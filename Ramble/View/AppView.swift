@@ -32,7 +32,7 @@ struct AppView: View {
         }
     }
 
-    func getUser(){
+    func getUser() {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user

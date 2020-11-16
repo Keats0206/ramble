@@ -36,7 +36,9 @@ struct RambCell : View {
                             }
                     }
                     VStack(alignment: .leading) {
+                        
                         HStack {
+                            
                             Text("@" + ramb.user.username)
                                 .font(.headline)
                                 .foregroundColor(.primary)

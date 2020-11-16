@@ -66,7 +66,6 @@ struct NowPlayingBar<Content: View>: View {
                                     
                                 }
                                     HStack {
-                                        
                                         if #available(iOS 14.0, *) {
                                             WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
                                                 .resizable()
@@ -88,27 +87,20 @@ struct NowPlayingBar<Content: View>: View {
                                         }
                                         
                                         if !isExpanded {
-                                            
                                             VStack(alignment: .leading) {
-                                                
                                                 Text("@\(ramb!.user.username)")
                                                     .font(.system(.caption, design: .rounded))
                                                     .onTapGesture(perform: {
                                                         self.selectedProfile = ramb!.user
                                                         self.openProfile = true
                                                     })
-                                                
                                                 Text("\(ramb!.caption)")
                                                     .font(.system(.body, design: .rounded))
                                                     .bold()
                                             }
-                                            
                                             Spacer()
-                                            
                                             Button(action: {
-                                                
                                                 print("DEBUG: Play")
-                                                
                                             }) {
                                                 
                                                 Image(systemName: "play.fill")
@@ -141,6 +133,7 @@ struct NowPlayingBar<Content: View>: View {
                                         Spacer()
                                                                                 
                                         VStack {
+                                            
                                             Text("@\(ramb!.user.username)")
                                                 .font(.system(.title))
                                                 .bold()
@@ -155,7 +148,7 @@ struct NowPlayingBar<Content: View>: View {
                                             
                                         }.padding(.horizontal)
                                                                                 
-                                        AudioView(player: AVPlayer(url: URL(string: ramb!.rambUrl)!))
+                                        AudioView(player: globalPlayer.globalRambPlayer!)
                                         
                                         Spacer()
                                         
@@ -231,6 +224,8 @@ struct NowPlayingBar<Content: View>: View {
         }
     }
 }
+
+
 
 //struct NowPlayingBar_Previews: PreviewProvider {
 //    static var previews: some View {
