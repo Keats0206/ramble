@@ -58,7 +58,7 @@ struct RecorderPostView: View {
             
             Spacer()
             
-            AudioView(player: AVPlayer(url: URL(string: rambUrl)!))
+            GlobalPlayerView(player: AVPlayer(url: URL(string: rambUrl)!))
                 .padding()
             
             Spacer()

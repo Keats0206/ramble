@@ -13,7 +13,6 @@ import AVFoundation
 
 struct AudioPlayerControlsView: View {
     let player: AVPlayer
-    
 //  Observing the time / duration of the current audio player
     let timeObserver: PlayerTimeObserver
 //    let durationObserver: PlayerDurationObserver

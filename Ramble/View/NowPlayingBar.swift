@@ -99,29 +99,32 @@ struct NowPlayingBar<Content: View>: View {
                                                     .bold()
                                             }
                                             Spacer()
+                                            
                                             Button(action: {
-                                                print("DEBUG: Play")
-                                            }) {
-                                                
-                                                Image(systemName: "play.fill")
+                                                if self.globalPlayer.isPlaying {
+                                                    self.globalPlayer.globalRambPlayer!.pause()
+                                                    self.globalPlayer.isPlaying.toggle()
+                                                } else {
+                                                    self.globalPlayer.globalRambPlayer!.play()
+                                                    self.globalPlayer.isPlaying.toggle()
+                                                }
+                                             }) {
+                                                Image(systemName: self.globalPlayer.isPlaying ? "pause.fill" : "play.fill")
                                                     .resizable()
                                                     .foregroundColor(.primary)
                                                     .frame(width: playFrame, height: playFrame)
-                                                
+
                                             }.padding(.trailing)
+                                            .buttonStyle(BorderlessButtonStyle())
                                             
                                             Button(action: {
-                                                
                                                 print("DEBUG: Forward 15")
-                                                
                                             }) {
-                                                
                                                 Image(systemName: "goforward.15")
                                                     .resizable()
                                                     .foregroundColor(.primary)
                                                     .frame(width: playFrame, height: playFrame)
                                             }
-                                            
                                         }
                                         
                                     }
@@ -147,8 +150,8 @@ struct NowPlayingBar<Content: View>: View {
                                                     .bold()
                                             
                                         }.padding(.horizontal)
-                                                                                
-                                        AudioView(player: globalPlayer.globalRambPlayer!)
+                                                                                                                        
+                                        GlobalPlayerView(player: globalPlayer.globalRambPlayer!)
                                         
                                         Spacer()
                                         

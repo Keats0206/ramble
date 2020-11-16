@@ -36,30 +36,22 @@ struct RambCell : View {
                             }
                     }
                     VStack(alignment: .leading) {
-                        
                         HStack {
-                            
                             Text("@" + ramb.user.username)
                                 .font(.headline)
                                 .foregroundColor(.primary)
                                 .bold()
-                            
                             Text("\(formatDate(timestamp: ramb.timestamp)) ago")
                                 .font(.system(.subheadline, design: .rounded))
                                 .opacity(0.7)
-                            
 //                            Text("\(TimeHelper.formatSecondsToHMS(ramb.length))")
 //                                .font(.system(.caption, design: .rounded))
 //                                .bold()
-                            
                             Spacer()
-                            
                         }.font(.system(.caption, design: .rounded))
-                        
                         Text(ramb.caption)
                             .font(.system(.body, design: .rounded))
                             .multilineTextAlignment(TextAlignment.leading)
-                        
                     }.foregroundColor(.primary)
             VStack(alignment: .center) {
                 Button(action: {
@@ -82,9 +74,9 @@ struct RambCell : View {
         }
         .padding()
         .cornerRadius(15)
-        .onTapGesture(perform: {
+        .onTapGesture(count: 1) {
             play()
-        })
+        }
     }
     
     func play() {
