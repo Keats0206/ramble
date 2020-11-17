@@ -33,6 +33,7 @@ struct FeedView: View {
         NavigationView{
             ZStack {
                 RambFeed(dataToggle: $dataToggle)
+                    .environmentObject(globalPlayer)
             }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(

@@ -26,6 +26,7 @@ struct AudioView: View {
                 
                 Button(action: {
                     print("Go back to previous song")
+                    rewindBtn()
                 }) {
                     Image(systemName: "gobackward.15")
                         .font(.system(size: 20))
@@ -50,8 +51,8 @@ struct AudioView: View {
                 
                 Button(action: {
                     print("Skip ahead to next song")
+                    fastForwardBtn()
                 }) {
-                    
                     Image(systemName: "goforward.15")
                         .font(.system(size: 20))
                 }
@@ -64,6 +65,33 @@ struct AudioView: View {
         .onAppear {
             self.isPlaying = true
         }
+    }
+    
+    func fastForwardBtn() {
+        let moveForword : Float64 = 15
+        if let duration  = player.currentItem?.duration {
+            let playerCurrentTime = CMTimeGetSeconds(player.currentTime())
+            let newTime = playerCurrentTime + moveForword
+            if newTime < CMTimeGetSeconds(duration) {
+                let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+                player.seek(to: selectedTime)
+            }
+            player.pause()
+            player.play()
+        }
+    }
+
+    func rewindBtn() {
+        let moveBackword: Float64 = 15
+        let playerCurrenTime = CMTimeGetSeconds(player.currentTime())
+        var newTime = playerCurrenTime - moveBackword
+        if newTime < 0 {
+            newTime = 0
+        }
+        player.pause()
+        let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+        player.seek(to: selectedTime)
+        player.play()
     }
 }
 

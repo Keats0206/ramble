@@ -32,6 +32,16 @@ class SessionStore : ObservableObject {
         }
     }
     
+    func checkUsername(username: String, completion: @escaping(Bool) -> Void) {
+        FBRefUsers.whereField("username", isEqualTo: username).getDocuments { (snapshot, error) in
+            if let _ = error {
+                completion(false)
+            } else {
+                completion(snapshot?.count != 0)
+            }
+        }
+    }
+    
     func signUp(
         email: String,
         password: String,
