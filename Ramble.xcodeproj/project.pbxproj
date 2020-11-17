@@ -55,8 +55,15 @@
 		40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF04251BF94F0025799C /* AudioPlayer.swift */; };
 		40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF06251BFC100025799C /* RambUserCell.swift */; };
 		DFF310CE52592EC77392BA41 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */; };
+		EE1E0DC4255E5B3400DCA17C /* Publisher+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DC3255E5B3400DCA17C /* Publisher+Validation.swift */; };
+		EE1E0DC6255E5B4400DCA17C /* SwiftUI+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DC5255E5B4400DCA17C /* SwiftUI+Validation.swift */; };
+		EE1E0DC8255E5B5400DCA17C /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DC7255E5B5400DCA17C /* Validation.swift */; };
+		EE1E0DCA255E5B6700DCA17C /* ValidationPublishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DC9255E5B6700DCA17C /* ValidationPublishers.swift */; };
+		EE1E0DCC255E5B7600DCA17C /* ErrorBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DCB255E5B7600DCA17C /* ErrorBubbleView.swift */; };
+		EE1E0DCE255E5C9400DCA17C /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DCD255E5C9400DCA17C /* RegisterModel.swift */; };
 		EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */; };
 		EEC8DDF5255BD8A00050E9DF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */; };
+		EEFCE0FD255EDC2E002EF077 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -139,8 +146,15 @@
 		40FFDF06251BFC100025799C /* RambUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RambUserCell.swift; sourceTree = "<group>"; };
 		49DCF38C8F46BD21CC27C541 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
 		958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE1E0DC3255E5B3400DCA17C /* Publisher+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Validation.swift"; sourceTree = "<group>"; };
+		EE1E0DC5255E5B4400DCA17C /* SwiftUI+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Validation.swift"; sourceTree = "<group>"; };
+		EE1E0DC7255E5B5400DCA17C /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		EE1E0DC9255E5B6700DCA17C /* ValidationPublishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationPublishers.swift; sourceTree = "<group>"; };
+		EE1E0DCB255E5B7600DCA17C /* ErrorBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBubbleView.swift; sourceTree = "<group>"; };
+		EE1E0DCD255E5C9400DCA17C /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderPostView.swift; sourceTree = "<group>"; };
 		EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +304,7 @@
 		40F3FA32248EA15B00F3CE02 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				EE1E0DC2255E5B2900DCA17C /* validations */,
 				4056E9A3252404E10004E598 /* Extensions.swift */,
 				406FAD08244FF15D00223873 /* Helpers.swift */,
 				40F3FA51248EB69900F3CE02 /* Constants.swift */,
@@ -299,6 +314,7 @@
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
 				40FFDF04251BF94F0025799C /* AudioPlayer.swift */,
 				40BFA9F12547AD1D00423320 /* Timer.swift */,
+				EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -318,6 +334,19 @@
 				958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE1E0DC2255E5B2900DCA17C /* validations */ = {
+			isa = PBXGroup;
+			children = (
+				EE1E0DC3255E5B3400DCA17C /* Publisher+Validation.swift */,
+				EE1E0DC5255E5B4400DCA17C /* SwiftUI+Validation.swift */,
+				EE1E0DC7255E5B5400DCA17C /* Validation.swift */,
+				EE1E0DC9255E5B6700DCA17C /* ValidationPublishers.swift */,
+				EE1E0DCB255E5B7600DCA17C /* ErrorBubbleView.swift */,
+				EE1E0DCD255E5C9400DCA17C /* RegisterModel.swift */,
+			);
+			path = validations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,6 +497,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE1E0DC6255E5B4400DCA17C /* SwiftUI+Validation.swift in Sources */,
+				406D0003254D07DF00A82E66 /* NowPlayingView.swift in Sources */,
 				406D0003254D07DF00A82E66 /* NowPlayingBar.swift in Sources */,
 				400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */,
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
@@ -480,20 +511,26 @@
 				406FAD212450D7FA00223873 /* AppView.swift in Sources */,
 				40122F832521015F00A3BDD6 /* TestData.swift in Sources */,
 				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
+				EE1E0DCA255E5B6700DCA17C /* ValidationPublishers.swift in Sources */,
+				EE1E0DC8255E5B5400DCA17C /* Validation.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */,
 				40122F6F251FB0E100A3BDD6 /* RecorderView.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
+				EE1E0DCE255E5C9400DCA17C /* RegisterModel.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
 				40AFCEFE2544BA3000B34A3D /* SmallPlayerView.swift in Sources */,
 				40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */,
+				EE1E0DC4255E5B3400DCA17C /* Publisher+Validation.swift in Sources */,
 				40B3388E25268D2A009321F2 /* RambCellViewModel.swift in Sources */,
 				40B3385E25267F54009321F2 /* RambService2.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
+				EE1E0DCC255E5B7600DCA17C /* ErrorBubbleView.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
 				4056E9A4252404E10004E598 /* Extensions.swift in Sources */,
 				405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */,
+				EEFCE0FD255EDC2E002EF077 /* AppHelper.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,

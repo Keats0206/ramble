@@ -51,7 +51,7 @@ struct AppView: View {
                 }
             } else {
                 TabView(selection: actionSelection) {
-                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: FeedView(user: user))
+                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: FeedView(user: user).environmentObject(globalPlayer))
                     .tabItem {
                         HStack {
                             Image(systemName: "music.house")
