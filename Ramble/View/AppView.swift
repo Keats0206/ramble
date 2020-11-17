@@ -9,8 +9,7 @@ import SwiftUI
 import Foundation
 import MinimizableView
 
-@available(iOS 14.0, *)
-struct MainView: View {
+struct AppView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()
@@ -33,7 +32,7 @@ struct MainView: View {
         }
     }
 
-    func getUser(){
+    func getUser() {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
@@ -61,7 +60,7 @@ struct MainView: View {
                     }.tag(0)
                    
                     NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: NavigationView {
-                        ProfileView(user: $user, openProfile: .constant(false))
+                            ProfileView(user: $user, openProfile: .constant(false))
                         })
                     .tabItem {
                         HStack {

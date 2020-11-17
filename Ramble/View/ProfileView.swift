@@ -76,15 +76,12 @@ struct ProfileView: View {
                 }
             ,
             trailing:
-                HStack {
+                ZStack {
                     if Auth.auth().currentUser?.uid == user.id {
                         editProfileButton
-                    } else {
-                        Spacer()
                     }
                 }
-        )
-        .edgesIgnoringSafeArea(.top)
+        ).edgesIgnoringSafeArea(.top)
     }
 }
 
@@ -93,19 +90,14 @@ struct UserAbout: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            
             Text("@\(user.username)")
                 .font(.system(.title, design: .rounded))
                 .bold()
-            
-            
             Text("\(user.bio)")
                 .font(.system(.headline, design: .rounded))
                 .opacity(0.4)
                 .padding(.bottom)
-            
             Divider()
-            
         }.padding()
     }
 }
@@ -119,7 +111,7 @@ private extension ProfileView {
                 .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
                 .frame(width: 25, height: 25)
                 .overlay(Image(systemName: "ellipsis")
-                .foregroundColor(Color.secondary))
+                .foregroundColor(Color.accent3))
         }.sheet(isPresented: $editModalShown, onDismiss: {
             print("Modal dismisses")
         }) {
@@ -150,7 +142,7 @@ private extension ProfileView {
             self.openProfile = false
         }) {
             Image(systemName: "chevron.left")
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.accent3)
                 .frame(width:30, height: 30)
                 .background(Color.secondary.colorInvert())
                 .foregroundColor(Color.primary)

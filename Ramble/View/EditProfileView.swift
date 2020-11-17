@@ -90,11 +90,11 @@ struct EditProfileView : View {
                 }, trailing:
                 Button(action: {
                     self.saveProfile()
-                }){
+                }) {
                     Text("Save")
                 }
             ).font(.system(.headline, design: .rounded))
-            .foregroundColor(.flatDarkBackground)
+            .foregroundColor(Color.accent3)
         }
     }
 }
@@ -111,6 +111,7 @@ private extension EditProfileView {
                 self.showImagePicker = true
             }) {
                 Text("Change Photo")
+                    .foregroundColor(.primary)
                     .padding(5)
                     .padding([.trailing,.leading])
             }.sheet(isPresented: $showImagePicker, onDismiss: {
@@ -146,7 +147,7 @@ private extension EditProfileView {
                     .opacity(0.5)
                 Divider()
             }
-        }
+        }.foregroundColor(.primary)
     }
     
     var settingsLinks: some View {
@@ -193,6 +194,7 @@ private extension EditProfileView {
                     Text("Delete")
                 }
             Spacer()
+            
         }.foregroundColor(Color.red)
     }
 }
@@ -200,6 +202,7 @@ private extension EditProfileView {
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView(user: .constant(testUser))
+            .environment(\.colorScheme, .dark)
     }
 }
 

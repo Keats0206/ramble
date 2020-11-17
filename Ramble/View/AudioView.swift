@@ -9,62 +9,65 @@
 import SwiftUI
 import AVKit
 
-struct AudioView: View {
+struct GlobalPlayerView: View {
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @State var isPlaying = false
     var player: AVPlayer
-     
+
     var body: some View {
-        
+
         VStack {
-                        
+
             AudioPlayerControlsView(player: player,
                                     timeObserver: PlayerTimeObserver(player: player))
-            
+
             HStack{
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     print("Go back to previous song")
                     rewindBtn()
                 }) {
                     Image(systemName: "gobackward.15")
-                        .font(.system(size: 20))
+                        .font(.system(size: 30))
                 }
-                
+
                 Spacer()
-                
+
                 Button(action: {
-                    if self.isPlaying {
-                        self.player.pause()
-                        self.isPlaying.toggle()
+                    if self.globalPlayer.isPlaying {
+                        self.globalPlayer.globalRambPlayer!.pause()
+                        self.globalPlayer.isPlaying.toggle()
                     } else {
-                        self.player.play()
-                        self.isPlaying.toggle()
+                        self.globalPlayer.globalRambPlayer!.play()
+                        self.globalPlayer.isPlaying.toggle()
                     }
                  }) {
-                    Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: 36))
+                    Image(systemName: self.globalPlayer.isPlaying ? "pause.fill" : "play.fill")
+                        .font(.system(size: 50))
+
                 }.buttonStyle(BorderlessButtonStyle())
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     print("Skip ahead to next song")
                     fastForwardBtn()
                 }) {
                     Image(systemName: "goforward.15")
-                        .font(.system(size: 20))
+                        .font(.system(size: 30))
                 }
-                
+
                 Spacer()
+
             }
-            .padding(.horizontal, 30)
-            .foregroundColor(.primary)
+                .padding(.vertical)
+                .foregroundColor(.primary)
         }
-        .onAppear {
-            self.isPlaying = true
-        }
+//        .onAppear {
+//            self.isPlaying = true
+//        }
     }
     
     func fastForwardBtn() {
@@ -95,8 +98,8 @@ struct AudioView: View {
     }
 }
 
-struct AudioView_Previews: PreviewProvider {
+struct GlobalPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        AudioView(player: testPlayer)
+        GlobalPlayerView(player: testPlayer)
     }
 }

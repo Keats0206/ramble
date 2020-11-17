@@ -13,7 +13,6 @@ import AVFoundation
 
 struct AudioPlayerControlsView: View {
     let player: AVPlayer
-    
 //  Observing the time / duration of the current audio player
     let timeObserver: PlayerTimeObserver
 //    let durationObserver: PlayerDurationObserver
@@ -30,9 +29,10 @@ struct AudioPlayerControlsView: View {
                    maximumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentDuration))")) {
 // This seems to be required but not sure when it would ever show in the UI
                     Text("Duration")
-            }.font(.caption)
-            .foregroundColor(Color.accent3)
-        }.padding()
+            }
+            .font(.caption)
+            .foregroundColor(.primary)
+        }
 // Listen out for the time observer publishing changes to the player's time
         .onReceive(timeObserver.publisher) { time in
             // Update the local var
@@ -55,7 +55,6 @@ struct AudioPlayerControlsView: View {
             timeObserver.pause(true)
         }
         else {
-            
 // Start the seek
             let targetTime = CMTime(seconds: currentTime,
                                     preferredTimescale: 600)

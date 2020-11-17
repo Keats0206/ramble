@@ -45,6 +45,7 @@ class GlobalPlayer: ObservableObject {
         setupRemoteTransportControls()
         addPlay(ramb: (globalRambs!.first!))
         playState = .play
+        print(globalRambs?.first)
     }
     
     func addPlay(ramb: Ramb2) {
