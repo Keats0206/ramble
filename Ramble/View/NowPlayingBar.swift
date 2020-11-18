@@ -12,7 +12,6 @@ import AVKit
 
 struct NowPlayingBar<Content: View>: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-//    @Namespace private var expandAnimation
     @State private var isExpanded = false
     @State var volume = 50.0
     
@@ -37,7 +36,6 @@ struct NowPlayingBar<Content: View>: View {
     @ViewBuilder var body: some View {
         ZStack(alignment: .bottom) {
             content
-            
             if ramb != nil {
                 VStack {
                     GeometryReader { geo in
@@ -94,7 +92,9 @@ struct NowPlayingBar<Content: View>: View {
                                             
                                             Spacer()
                                             
-                                            AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
+                                            AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: isExpanded)
+                                                                                    
+//                                            AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
                                             
                                         }
                                         
@@ -121,8 +121,8 @@ struct NowPlayingBar<Content: View>: View {
                                         Spacer()
                                         
                                         //swiftlint:enable identifier_name
-                                        AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
-                                        
+                                        AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: isExpanded)
+
                                         Spacer()
                                         
                                         // Volume                                        
@@ -197,3 +197,5 @@ struct NowPlayingBar<Content: View>: View {
         }
     }    
 }
+
+

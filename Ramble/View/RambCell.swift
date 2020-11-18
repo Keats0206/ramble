@@ -24,16 +24,15 @@ struct RambCell : View {
         HStack(alignment: .center) {
                     VStack(alignment: .center) {
                         ZStack {
-//                            SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
-//                                           .frame(width: 20, height: 20)
-                            
-                            WebImage(url: URL(string: ramb.user.profileImageUrl))
-                                .resizable()
-                                .scaleEffect()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Rectangle())
-                                .cornerRadius(8)
-                            }
+//                       SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
+//                           .frame(width: 20, height: 20)
+                        WebImage(url: URL(string: ramb.user.profileImageUrl))
+                            .resizable()
+                            .scaleEffect()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Rectangle())
+                            .cornerRadius(8)
+                        }
                     }
                     VStack(alignment: .leading) {
                         HStack {
@@ -53,24 +52,24 @@ struct RambCell : View {
                             .font(.system(.body, design: .rounded))
                             .multilineTextAlignment(TextAlignment.leading)
                     }.foregroundColor(.primary)
-            VStack(alignment: .center) {
-                Button(action: {
-                    self.showingActionSheet.toggle()
-                }) {
-                    Image(systemName: "ellipsis")
-                        .font(.body)
-                        .foregroundColor(Color.secondary)
-                        .actionSheet(isPresented: $showingActionSheet) {
-                            ActionSheet(title: Text("Report this ramb?"),
-                                buttons: [.default(
-                                    Text("Report")
-                                ,action: {
-                                    print("DEBUG: report ramb")
-                                }), .cancel()
-                            ])
-                        }
-                }.buttonStyle(BorderlessButtonStyle())
-            }
+                    VStack(alignment: .center) {
+                        Button(action: {
+                            self.showingActionSheet.toggle()
+                        }) {
+                            Image(systemName: "ellipsis")
+                                .font(.body)
+                                .foregroundColor(Color.secondary)
+                                .actionSheet(isPresented: $showingActionSheet) {
+                                    ActionSheet(title: Text("New features coming - likes, comments, audio que, more!"),
+                                        buttons: [.default(
+                                            Text("Wahooo")
+                                        ,action: {
+                                            print("DEBUG: report ramb")
+                                        }), .cancel()
+                                    ])
+                                }
+                        }.buttonStyle(BorderlessButtonStyle())
+                    }
         }
         .padding()
         .cornerRadius(15)

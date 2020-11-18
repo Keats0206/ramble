@@ -22,9 +22,7 @@ struct RambUserCell: View {
             HStack{
     //              Center of Cell VStack
                 VStack(alignment: .leading) {
-                    
                     Button(action:{
-                        globalPlayer.globalRambs = [self.ramb]
                         globalPlayer.setGlobalPlayer(ramb: self.ramb)
                         globalPlayer.play()
                     }) {
