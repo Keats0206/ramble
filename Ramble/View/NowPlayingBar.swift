@@ -28,9 +28,7 @@ struct NowPlayingBar<Content: View>: View {
     var imageFrame: CGFloat {
         isExpanded ? screenBounds.width * 0.7 : 48
     }
-    var playFrame: CGFloat {
-        isExpanded ? 65 : 25
-    }
+
     var cornerRadius: CGFloat {
         isExpanded ? 20 : 0
     }
@@ -93,31 +91,8 @@ struct NowPlayingBar<Content: View>: View {
                                             
                                             Spacer()
                                             
-                                            Button(action: {
-                                                if self.globalPlayer.isPlaying {
-                                                    self.globalPlayer.globalRambPlayer!.pause()
-                                                    self.globalPlayer.isPlaying.toggle()
-                                                } else {
-                                                    self.globalPlayer.globalRambPlayer!.play()
-                                                    self.globalPlayer.isPlaying.toggle()
-                                                }
-                                             }) {
-                                                Image(systemName: self.globalPlayer.isPlaying ? "pause.fill" : "play.fill")
-                                                    .resizable()
-                                                    .foregroundColor(.primary)
-                                                    .frame(width: playFrame, height: playFrame)
-
-                                            }.padding(.trailing)
-                                            .buttonStyle(BorderlessButtonStyle())
+                                            AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
                                             
-                                            Button(action: {
-                                                print("DEBUG: Forward 15")
-                                            }) {
-                                                Image(systemName: "goforward.15")
-                                                    .resizable()
-                                                    .foregroundColor(.primary)
-                                                    .frame(width: playFrame, height: playFrame)
-                                            }
                                         }
                                         
                                     }
@@ -146,7 +121,7 @@ struct NowPlayingBar<Content: View>: View {
                                         
                                         //swiftlint:enable identifier_name
                                                                                                                         
-                                        AudioControlView(player: globalPlayer.globalRambPlayer!)
+                                        AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
                                         
                                         Spacer()
                                         
@@ -227,7 +202,7 @@ struct NowPlayingBar<Content: View>: View {
                 EmptyView()
             }
         }
-    }
+    }    
 }
 
 

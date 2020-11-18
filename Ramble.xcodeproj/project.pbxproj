@@ -52,7 +52,6 @@
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
 		40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA53248EB86900F3CE02 /* RambCell.swift */; };
 		40FFDEDF251BEA1F0025799C /* FloatingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */; };
-		40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF04251BF94F0025799C /* AudioPlayer.swift */; };
 		40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FFDF06251BFC100025799C /* RambUserCell.swift */; };
 		DFF310CE52592EC77392BA41 /* Pods_Ramble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */; };
 		EE1E0DC4255E5B3400DCA17C /* Publisher+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DC3255E5B3400DCA17C /* Publisher+Validation.swift */; };
@@ -142,7 +141,6 @@
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40F3FA53248EB86900F3CE02 /* RambCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCell.swift; sourceTree = "<group>"; };
 		40FFDEDE251BEA1F0025799C /* FloatingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPlayerView.swift; sourceTree = "<group>"; };
-		40FFDF04251BF94F0025799C /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		40FFDF06251BFC100025799C /* RambUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RambUserCell.swift; sourceTree = "<group>"; };
 		49DCF38C8F46BD21CC27C541 /* Pods-Ramble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ramble.debug.xcconfig"; path = "Target Support Files/Pods-Ramble/Pods-Ramble.debug.xcconfig"; sourceTree = "<group>"; };
 		958C6E13C72F2C22D478CF60 /* Pods_Ramble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ramble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,7 +310,6 @@
 				40150D112498654D00B2E8A9 /* InlineAlert.swift */,
 				40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */,
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
-				40FFDF04251BF94F0025799C /* AudioPlayer.swift */,
 				40BFA9F12547AD1D00423320 /* Timer.swift */,
 				EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */,
 			);
@@ -538,7 +535,6 @@
 				40BFA9F22547AD1D00423320 /* Timer.swift in Sources */,
 				EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */,
 				40353C7F2492777700C0C39A /* HalfModelView.swift in Sources */,
-				40FFDF05251BF94F0025799C /* AudioPlayer.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
 				40E56A0F255B508100BEA192 /* AudioControlView.swift in Sources */,
 				403390F525311CBC0041BF68 /* BigPlayerView.swift in Sources */,

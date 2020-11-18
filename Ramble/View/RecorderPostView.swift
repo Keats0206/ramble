@@ -28,7 +28,16 @@ struct RecorderPostView: View {
         let isSelected = false
         let length = length
         let uid = user.id!
-        let ramb = Ramb2(caption: caption, length: length, rambUrl: rambUrl, fileId: fileId, timestamp: timestamp, plays: 0, user: user, uid: uid, isSelected: isSelected)
+        let ramb = Ramb2(
+            caption: caption,
+            length: length,
+            rambUrl: rambUrl,
+            fileId: fileId,
+            timestamp: timestamp,
+            plays: 0,
+            user: user,
+            uid: uid,
+            isSelected: isSelected)
         RambService2().addRamb(ramb)
     }
     
@@ -44,7 +53,6 @@ struct RecorderPostView: View {
             
             WebImage(url: URL(string: "\(user.profileImageUrl)"))
                 .resizable()
-                .scaleEffect()
                 .frame(width: imageScale, height: imageScale)
                 .clipShape(Rectangle())
                 .cornerRadius(8)
@@ -57,7 +65,7 @@ struct RecorderPostView: View {
             
             Spacer()
             
-            AudioControlView(player: AVPlayer(url: URL(string: rambUrl)!))
+            AudioControlView(isExpanded: true, player: AVPlayer(url: URL(string: rambUrl)!))
                 .padding()
             
             Spacer()

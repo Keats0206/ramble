@@ -11,7 +11,7 @@ import AVKit
 import Combine
 import AVFoundation
 
-struct AudioPlayerControlsView: View {
+struct AudioSlider: View {
     let player: AVPlayer
 //  Observing the time / duration of the current audio player
     let timeObserver: PlayerTimeObserver
@@ -114,10 +114,9 @@ class PlayerDurationObserver {
             self.publisher.send(duration.seconds)
         }
     }
-    
-//    deinit {
-//        cancellable?.cancel()
-//    }
+    deinit {
+        cancellable?.cancel()
+    }
 }
 
 
