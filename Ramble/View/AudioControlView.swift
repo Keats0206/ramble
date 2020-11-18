@@ -12,7 +12,6 @@ import Foundation
 import Combine
 
 struct AudioControlView: View {
-    @EnvironmentObject var globalPlayer: GlobalPlayer
     @State var isPlaying = false
     @State var isExpanded: Bool
     var player: AVPlayer
@@ -21,18 +20,21 @@ struct AudioControlView: View {
         
         if isExpanded {
             VStack {
+                
                 AudioSlider(player: player,
                             timeObserver: PlayerTimeObserver(player: player),
                             durationObserver: PlayerDurationObserver(player: player)
                 )
-                HStack{
+                
+                HStack {
                     Spacer()
                     Button(action: {
                         rewindBtn()
                     }) {
                         Image(systemName: "gobackward.15")
                             .font(.system(size: 30))
-                    }.buttonStyle(BorderlessButtonStyle())
+                    }
+                        .buttonStyle(BorderlessButtonStyle())
                     Spacer()
                     Button(action: {
                         playPause()
@@ -40,7 +42,8 @@ struct AudioControlView: View {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 50))
 
-                    }.buttonStyle(BorderlessButtonStyle())
+                    }
+                        .buttonStyle(BorderlessButtonStyle())
                     Spacer()
                     Button(action: {
                         fastForwardBtn()
@@ -188,9 +191,9 @@ class PlayerTimeObserver {
         }
     }
         
-    deinit {
-        player?.removeTimeObserver(timeObservation as Any)
-    }
+//    deinit {
+//        player?.removeTimeObserver(timeObservation as Any)
+//    }
     
     func pause(_ pause: Bool) {
         paused = pause
@@ -214,7 +217,7 @@ class PlayerDurationObserver {
             self.publisher.send(duration.seconds)
         }
     }
-    deinit {
-        cancellable?.cancel()
-    }
+//    deinit {
+//        cancellable?.cancel()
+//    }
 }
