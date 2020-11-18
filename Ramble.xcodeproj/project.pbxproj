@@ -48,6 +48,7 @@
 		40BFA9F22547AD1D00423320 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BFA9F12547AD1D00423320 /* Timer.swift */; };
 		40E56A0F255B508100BEA192 /* AudioControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E56A0E255B508100BEA192 /* AudioControlView.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
+		40ECF89E2564B5760090F618 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ECF89D2564B5760090F618 /* LoadingAnimation.swift */; };
 		40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA2F248EA0F100F3CE02 /* RambModel.swift */; };
 		40F3FA52248EB69900F3CE02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA51248EB69900F3CE02 /* Constants.swift */; };
 		40F3FA54248EB86900F3CE02 /* RambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3FA53248EB86900F3CE02 /* RambCell.swift */; };
@@ -137,6 +138,7 @@
 		40BFA9F12547AD1D00423320 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		40E56A0E255B508100BEA192 /* AudioControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioControlView.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
+		40ECF89D2564B5760090F618 /* LoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
 		40F3FA51248EB69900F3CE02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40F3FA53248EB86900F3CE02 /* RambCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambCell.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
 				40BFA9F12547AD1D00423320 /* Timer.swift */,
 				EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */,
+				40ECF89D2564B5760090F618 /* LoadingAnimation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				40122F832521015F00A3BDD6 /* TestData.swift in Sources */,
 				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
 				EE1E0DCA255E5B6700DCA17C /* ValidationPublishers.swift in Sources */,
+				40ECF89E2564B5760090F618 /* LoadingAnimation.swift in Sources */,
 				EE1E0DC8255E5B5400DCA17C /* Validation.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */,
