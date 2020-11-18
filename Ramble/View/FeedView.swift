@@ -24,19 +24,21 @@ struct FeedView: View {
     @State var hideNav = false
     
     @Binding var actionState: Int?
+    @Binding var selectedUser: User
     
     var user: User
 
-    init(user: User, actionState: Binding<Int?>) {
+    init(user: User, actionState: Binding<Int?>, selectedUser: Binding<User>) {
         self.user = user
         self._actionState = actionState
+        self._selectedUser = selectedUser
     }
     
     var body: some View {
         NavigationView{
             ZStack {
                 
-                NavigationLink(destination: ProfileView(user: user), tag: 1, selection: $actionState) {
+                NavigationLink(destination: ProfileView(user: selectedUser), tag: 1, selection: $actionState) {
                     EmptyView()
                 }
                 

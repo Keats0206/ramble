@@ -23,6 +23,7 @@ struct NowPlayingCard: View {
     @State var width : CGFloat = 20
     
     @Binding var actionState: Int?
+    @Binding var selectedUser: User
     
     var ramb: Ramb2?
     
@@ -78,6 +79,9 @@ struct NowPlayingCard: View {
 
                         Spacer()
 
+                    }.onTapGesture {
+                        self.actionState = 1
+                        self.selectedUser = ramb!.user
                     }
                     if position == CardPosition.middle {
                         HStack {
