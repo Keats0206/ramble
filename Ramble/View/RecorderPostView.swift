@@ -18,6 +18,7 @@ struct RecorderPostView: View {
     @State var rambUrl: String
     @State var length: Double
     @Binding var currentTab: Tab
+    @Binding var position: CardPosition
     
     var imageScale = UIScreen.main.bounds.width * 0.7
     
@@ -66,7 +67,7 @@ struct RecorderPostView: View {
             Spacer()
             
             
-            AudioControlView(player: AVPlayer(url: URL(string: rambUrl)!), isExpanded: false)
+            AudioControlView(player: AVPlayer(url: URL(string: rambUrl)!))
                 .padding()
             
             Spacer()
@@ -104,8 +105,8 @@ struct RecorderPostView: View {
                         .foregroundColor(Color.accent3)
                 }
             )
-        }
     }
+}
 
 struct RecorderPostView_Previews: PreviewProvider {
     static var previews: some View {
@@ -113,6 +114,7 @@ struct RecorderPostView_Previews: PreviewProvider {
             rambUrl: testRamb.rambUrl,
             length: testRamb.length,
             currentTab: .constant(Tab.tab1),
+            position: .constant(CardPosition.middle),
             user: testUser
         )
     }

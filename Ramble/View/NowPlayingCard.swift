@@ -14,7 +14,6 @@ struct NowPlayingCard: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @Binding var position: CardPosition
     
-    @State private var isExpanded = false
     @State var volume = 50.0
     
     @State var height : CGFloat = 0
@@ -28,76 +27,84 @@ struct NowPlayingCard: View {
     var ramb: Ramb2?
     
     let screenBounds = UIScreen.main.bounds
-    
-    var imageFrame: CGFloat {
-        isExpanded ? screenBounds.width * 0.7 : 48
-    }
-
-    var cornerRadius: CGFloat {
-        isExpanded ? 20 : 0
-    }
-    
+        
     var offset: CGFloat {
-        position == CardPosition.bottom ? 200 : 400
+        position == CardPosition.bottom ? 165 : 335
     }
-    
+        
     var body: some View {
         ZStack(alignment: .top) {
             if ramb != nil {
                 VStack {
                     HStack {
-                        if #available(iOS 14.0, *) {
-
-                            WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
-                                .resizable()
-                                .scaleEffect()
-                                .frame(width: imageFrame, height: imageFrame)
-    //                                            .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
-                                .clipShape(Rectangle())
-                                .cornerRadius(8)
-
-                        } else {
-                            // Fallback on earlier versions
-                            WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
-                                .resizable()
-                                .scaleEffect()
-                                .frame(width: imageFrame, height: imageFrame)
-                                .clipShape(Rectangle())
-                                .cornerRadius(8)
-                                .shadow(radius: 10)
-                        }
-
+                        WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
+                            .resizable()
+                            .scaleEffect()
+                            .frame(width: 48, height: 48)
+                            .clipShape(Rectangle())
+                            .cornerRadius(8)
+                            .shadow(radius: 10)
                         VStack(alignment: .leading) {
-
-                            Text("@\(ramb!.user.username)")
-                                .font(.system(.caption, design: .rounded))
-
+                            Button(action: {
+                                self.actionState = 1
+                                self.selectedUser = ramb!.user
+                            }){
+                                Text("@\(ramb!.user.username)")
+                                    .font(.system(.caption))
+                                    .bold()
+                                
+                            }.foregroundColor(.primary)
+                            
                             Text("\(ramb!.caption)")
                                 .font(.system(.body, design: .rounded))
                                 .bold()
                         }
-
                         Spacer()
-
-                    }.onTapGesture {
-                        self.actionState = 1
-                        self.selectedUser = ramb!.user
-                    }
-                    if position == CardPosition.middle {
-                        HStack {
-                            Text("User Bio")
-                                .font(.title)
-                                .onTapGesture {
-                                    self.actionState = 1
-                                }
-                            
-                        }.frame(height: 50)
                     }
                     Spacer()
-                    AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: true)
+                    VStack {
+                        if position == CardPosition.middle {
+                            VStack(alignment: .leading) {
+                                Divider()
+                                HStack(alignment: .bottom) {
+                                    Text("@\(ramb!.user.username)")
+                                        .font(.system(.headline))
+                                        .bold()
+                                    Text("\(ramb!.user.displayname)")
+                                        .font(.system(.subheadline, design: .rounded))
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        print("Follow")
+                                    }) {
+                                        Circle()
+                                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                                            .frame(width: 25, height: 25)
+                                            .overlay(Image(systemName: "plus")
+                                                        .foregroundColor(Color.accent3))
+                                    }
+                                }
+                                Text("\(ramb!.user.bio)")
+                                    .font(.system(.body, design: .rounded))
+                                    .opacity(0.4)
+                                Divider()
+                            }
+                        } else {
+                            Spacer()
+                        }
+                    }
+                    .frame(height: position == CardPosition.middle ? 100 : 10)
+                    .background(Color.red)
+                    
+                    Spacer()
+                    
+                    AudioControlView(player: globalPlayer.globalRambPlayer!)
+                        .padding(.bottom, 25)
+                    
                 }
+                .foregroundColor(.primary)
+                .padding()
                 .frame(height: offset)
-                .padding(.horizontal)
 //                    HStack {
 //
 //                        if #available(iOS 14.0, *) {

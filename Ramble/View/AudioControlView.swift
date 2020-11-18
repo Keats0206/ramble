@@ -16,13 +16,12 @@ struct AudioControlView: View {
     @State var isPlaying = false
     @State var showControls = false
     @State var value: Float = 0
-    @State var isExpanded: Bool
     
     var body: some View {
         VStack{
             ZStack{
 //                AudioPlayer(player: self.$player)
-                Controls(player: self.$player, isPlaying: self.$isPlaying, pannel: self.$showControls,value: self.$value, isExpanded: isExpanded)
+                Controls(player: self.$player, isPlaying: self.$isPlaying, pannel: self.$showControls, value: self.$value)
             }
         }
         .onAppear {
@@ -37,16 +36,15 @@ struct Controls : View {
     @Binding var isPlaying: Bool
     @Binding var pannel: Bool
     @Binding var value: Float
-    
-    @State var isExpanded: Bool
 
     var body : some View {
         ZStack {
-            if isExpanded {
+//            if isExpanded {
                 VStack {
+                    
                     CustomProgressBar(value: self.$value, player: self.$player, isplaying: self.$isPlaying)
                         .padding(.bottom, 10)
-                    
+                                                            
                     HStack {
                         
                         Spacer()
@@ -55,7 +53,7 @@ struct Controls : View {
                             self.player.seek(to: CMTime(seconds: self.getSeconds() - 10, preferredTimescale: 1))
                         }) {
                             Image(systemName: "gobackward.15")
-                                .font(.system(size: 30))
+                                .font(.system(size: 20))
                         }.buttonStyle(BorderlessButtonStyle())
                         
                         Spacer()
@@ -71,51 +69,53 @@ struct Controls : View {
                             }
                         }) {
                             Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                                .font(.system(size: 50))
+                                .font(.system(size: 30))
                         }.buttonStyle(BorderlessButtonStyle())
                         
                         Spacer()
+                        
                         Button(action: {
                             self.player.seek(to: CMTime(seconds: self.getSeconds() + 10, preferredTimescale: 1))
                         }) {
                             Image(systemName: "goforward.15")
-                                .font(.system(size: 30))
+                                .font(.system(size: 20))
                         }.buttonStyle(BorderlessButtonStyle())
-                        Spacer()
-                    }.foregroundColor(.primary)
-                    
-                }
-                .padding()
-            } else {
-                HStack {
-                    Button(action: {
-                        if self.isPlaying {
-                            self.player.pause()
-                            self.isPlaying = false
-                        }
-                        else{
-                            self.player.play()
-                            self.isPlaying = true
-                        }
-                    }) {
-                        Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                            .resizable()
-                            .foregroundColor(.primary)
-                            .frame(width: 25, height: 25)
                         
-                    }.padding(.trailing)
-                    .buttonStyle(BorderlessButtonStyle())
-                    
-                    Button(action: {
-                        self.player.seek(to: CMTime(seconds: self.getSeconds() + 10, preferredTimescale: 1))
-                    }) {
-                        Image(systemName: "goforward.15")
-                            .resizable()
-                            .foregroundColor(.primary)
-                            .frame(width: 25, height: 25)
-                    }
+                        Spacer()
+                        
+                    }.foregroundColor(.primary)
+            
                 }
-            }
+//            } else {
+//                HStack {
+//                    Button(action: {
+//                        if self.isPlaying {
+//                            self.player.pause()
+//                            self.isPlaying = false
+//                        }
+//                        else{
+//                            self.player.play()
+//                            self.isPlaying = true
+//                        }
+//                    }) {
+//                        Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
+//                            .resizable()
+//                            .foregroundColor(.primary)
+//                            .frame(width: 25, height: 25)
+//
+//                    }.padding(.trailing)
+//                    .buttonStyle(BorderlessButtonStyle())
+//
+//                    Button(action: {
+//                        self.player.seek(to: CMTime(seconds: self.getSeconds() + 10, preferredTimescale: 1))
+//                    }) {
+//                        Image(systemName: "goforward.15")
+//                            .resizable()
+//                            .foregroundColor(.primary)
+//                            .frame(width: 25, height: 25)
+//                    }
+//                }
+//            }
         }
         .onAppear {
             self.player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
@@ -146,8 +146,8 @@ struct CustomProgressBar: UIViewRepresentable {
 
     func makeUIView(context: UIViewRepresentableContext<CustomProgressBar>) -> UISlider {
         let slider = UISlider()
-        slider.minimumTrackTintColor = .white
-        slider.maximumTrackTintColor = .gray
+        slider.minimumTrackTintColor = .systemGray3
+        slider.maximumTrackTintColor = .systemGray4
         slider.thumbTintColor = .gray
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
         slider.value = value

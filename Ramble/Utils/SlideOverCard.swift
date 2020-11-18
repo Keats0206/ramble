@@ -34,9 +34,9 @@ public enum CardPosition: CGFloat {
     func offsetFromTop() -> CGFloat {
         switch self {
         case .bottom:
-            return UIScreen.main.bounds.height - 300
+            return UIScreen.main.bounds.height - 250
         case .middle:
-            return UIScreen.main.bounds.height - 500
+            return UIScreen.main.bounds.height / 1.8
         case .top:
             return 70
         }
@@ -139,7 +139,11 @@ struct Card: ViewModifier {
         
         // Determining whether drawer is above or below `.partiallyRevealed` threshold for snapping behavior.
         if offsetFromTopOfView <= CardPosition.middle.offsetFromTop() {
-            higherStop = .top
+            
+//          toggle this for three card postions
+            higherStop = .middle
+//            higherStop = .top
+            
             lowerStop = .middle
         } else {
             higherStop = .middle

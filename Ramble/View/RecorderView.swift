@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RecorderView: View {
     @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
     
@@ -112,7 +111,13 @@ struct RecorderView: View {
 private extension RecorderView {
     var previewButton: some View {
         ZStack{
-            NavigationLink(destination: RecorderPostView(rambUrl: audioRecorder.rambUrl, length: length, currentTab: $currentTab, user: user), isActive: $isActive){
+            NavigationLink(destination: RecorderPostView(
+                            rambUrl: audioRecorder.rambUrl,
+                            length: length,
+                            currentTab: $currentTab,
+                            position: .constant(CardPosition.middle),
+                            user: user),
+                           isActive: $isActive){
                 Spacer()
             }
         }
