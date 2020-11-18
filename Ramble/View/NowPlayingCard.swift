@@ -22,6 +22,8 @@ struct NowPlayingCard: View {
     
     @State var width : CGFloat = 20
     
+    @Binding var actionState: Int?
+    
     var ramb: Ramb2?
     
     let screenBounds = UIScreen.main.bounds
@@ -34,15 +36,17 @@ struct NowPlayingCard: View {
         isExpanded ? 20 : 0
     }
     
+    var offset: CGFloat {
+        position == CardPosition.bottom ? 200 : 400
+    }
+    
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .top) {
             if ramb != nil {
-                VStack{
-
+                VStack {
                     HStack {
-                        
                         if #available(iOS 14.0, *) {
-                            
+
                             WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
                                 .resizable()
                                 .scaleEffect()
@@ -50,7 +54,7 @@ struct NowPlayingCard: View {
     //                                            .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
                                 .clipShape(Rectangle())
                                 .cornerRadius(8)
-                            
+
                         } else {
                             // Fallback on earlier versions
                             WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
@@ -61,38 +65,71 @@ struct NowPlayingCard: View {
                                 .cornerRadius(8)
                                 .shadow(radius: 10)
                         }
-                        
+
                         VStack(alignment: .leading) {
-                            
+
                             Text("@\(ramb!.user.username)")
                                 .font(.system(.caption, design: .rounded))
-                    
+
                             Text("\(ramb!.caption)")
                                 .font(.system(.body, design: .rounded))
                                 .bold()
                         }
-                        
+
                         Spacer()
-                        
-                        if position == CardPosition.bottom {
-                            AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: false)
-                        }
+
                     }
-                    
-                    if position != CardPosition.bottom {
-                        AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: true)
+                    if position == CardPosition.middle {
+                        HStack {
+                            Text("User Bio")
+                                .font(.title)
+                                .onTapGesture {
+                                    self.actionState = 1
+                                }
+                            
+                        }.frame(height: 50)
                     }
-                                        
-                    Divider()
-                    
-                    Text("Profile About Section")
-                    
-                    Divider()
-                    
-                    Text("Song Que Coming Soon")
-                    
+                    Spacer()
+                    AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: true)
                 }
+                .frame(height: offset)
                 .padding(.horizontal)
+//                    HStack {
+//
+//                        if #available(iOS 14.0, *) {
+//
+//                            WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
+//                                .resizable()
+//                                .scaleEffect()
+//                                .frame(width: imageFrame, height: imageFrame)
+//    //                                            .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
+//                                .clipShape(Rectangle())
+//                                .cornerRadius(8)
+//
+//                        } else {
+//                            // Fallback on earlier versions
+//                            WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
+//                                .resizable()
+//                                .scaleEffect()
+//                                .frame(width: imageFrame, height: imageFrame)
+//                                .clipShape(Rectangle())
+//                                .cornerRadius(8)
+//                                .shadow(radius: 10)
+//                        }
+//
+//                        VStack(alignment: .leading) {
+//
+//                            Text("@\(ramb!.user.username)")
+//                                .font(.system(.caption, design: .rounded))
+//
+//                            Text("\(ramb!.caption)")
+//                                .font(.system(.body, design: .rounded))
+//                                .bold()
+//                        }
+//
+//                        Spacer()
+//
+//                    }
             } else {
                 EmptyView()
             }

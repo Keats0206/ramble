@@ -22,7 +22,8 @@ struct AppView: View {
     
     @State private var position = CardPosition.bottom
     @State private var background = BackgroundStyle.blur
-    @State var actionState: Int?
+    
+    @State var actionState: Int? = 0
 
     private var actionSelection: Binding<Int> {
         Binding<Int>(get: {
@@ -49,12 +50,13 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            FeedView(user: user)
+            
+            FeedView(user: user, actionState: $actionState)
                 .environmentObject(globalPlayer)
             
             SlideOverCard($position, backgroundStyle: $background) {
                 ZStack(alignment: .top){
-                    NowPlayingCard(position: $position, ramb: globalPlayer.globalRambs?.first)
+                    NowPlayingCard(position: $position, actionState: $actionState, ramb: globalPlayer.globalRambs?.first)
 //                    switch position {
 //
 //                    case CardPosition.bottom:
@@ -102,15 +104,16 @@ struct AppView: View {
 
 struct CurrentScreen: View {
     @Binding var currentView: Tab
+    @Binding var actionState: Int?
     @State var user: User
 
     var body: some View {
         VStack {
             if self.currentView == .tab1 {
                 NavigationView {
-                    FeedView(user: user)
+                    FeedView(user: user, actionState: $actionState)
                 }
-            } else {
+            } else {    
                 NavigationView {
                     ProfileView(user: user)
                 }

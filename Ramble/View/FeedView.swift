@@ -23,15 +23,23 @@ struct FeedView: View {
     @State var showActionSheet = false
     @State var hideNav = false
     
+    @Binding var actionState: Int?
+    
     var user: User
 
-    init(user: User) {
+    init(user: User, actionState: Binding<Int?>) {
         self.user = user
+        self._actionState = actionState
     }
     
     var body: some View {
         NavigationView{
             ZStack {
+                
+                NavigationLink(destination: ProfileView(user: user), tag: 1, selection: $actionState) {
+                    EmptyView()
+                }
+                
                 RambFeed(dataToggle: $dataToggle)
                     .environmentObject(globalPlayer)
             }
@@ -109,14 +117,14 @@ struct FeedView: View {
         }
     }
 }
-
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView(user: testUser)
-            .environmentObject(SessionStore())
-            .environmentObject(GlobalPlayer())
-    }
-}
+//
+//struct FeedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FeedView(user: testUser, actionState: Binding<0>)
+//            .environmentObject(SessionStore())
+//            .environmentObject(GlobalPlayer())
+//    }
+//}
 
 struct BackButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
