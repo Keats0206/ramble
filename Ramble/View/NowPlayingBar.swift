@@ -59,6 +59,7 @@ struct NowPlayingBar<Content: View>: View {
                                     
                                 }
                                     HStack {
+                                        
                                         if #available(iOS 14.0, *) {
                                             WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
                                                 .resizable()
@@ -80,7 +81,9 @@ struct NowPlayingBar<Content: View>: View {
                                         }
                                         
                                         if !isExpanded {
+                                            
                                             VStack(alignment: .leading) {
+                                                
                                                 Text("@\(ramb!.user.username)")
                                                     .font(.system(.caption, design: .rounded))
                                         
@@ -99,7 +102,7 @@ struct NowPlayingBar<Content: View>: View {
                                 
                                 if isExpanded {
                                     
-                                    VStack(alignment: .leading) {
+                                    VStack(alignment: .center) {
                                         
                                         Spacer()
                                                                                 
@@ -108,19 +111,16 @@ struct NowPlayingBar<Content: View>: View {
                                             Text("@\(ramb!.user.username)")
                                                 .font(.system(.title))
                                                 .bold()
-                                                .onTapGesture(perform: {
-                                                    self.isExpanded.toggle()
-                                                })
-                                        
+                                               
                                             Text("\(ramb!.caption)")
-                                                    .font(.system(.body, design: .rounded))
-                                                    .bold()
+                                                .font(.system(.body, design: .rounded))
+                                                .bold()
                                             
                                         }.padding(.horizontal)
                                         
+                                        Spacer()
                                         
                                         //swiftlint:enable identifier_name
-                                                                                                                        
                                         AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
                                         
                                         Spacer()
@@ -186,13 +186,6 @@ struct NowPlayingBar<Content: View>: View {
                         )
                         .onAppear {
                             self.height = geo.size.height - 75
-                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                                if self.globalPlayer.isPlaying{
-                                    let screen = UIScreen.main.bounds.width - 30
-//                                    let value = self.globalPlayer.globalRambPlayer?.currentTime().value! / self.globalPlayer.globalRambPlayer?.currentItem.asset.duration!
-                                    self.width = screen * CGFloat(0.5)
-                                }
-                            }
                         }
                         .offset(y: self.height)
                         .animation(.spring())
@@ -204,11 +197,3 @@ struct NowPlayingBar<Content: View>: View {
         }
     }    
 }
-
-
-
-//struct NowPlayingBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NowPlayingBar(selectedProfile: testUser, openProfile: false, content: EmptyView())
-//    }
-//}

@@ -18,7 +18,6 @@ class GlobalPlayer: ObservableObject {
     @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
     @Published var didSet = false
-    @Published var playState: SwimplyPlayIndicator.AudioState = .stop
     @Published var duration = false
     
     let session = AVAudioSession.sharedInstance()
@@ -39,14 +38,12 @@ class GlobalPlayer: ObservableObject {
         return
     }
     
-    
     func play() {
         globalRambPlayer?.play()
         isPlaying = true
         setupNowPlaying()
         setupRemoteTransportControls()
         addPlay(ramb: (globalRambs!.first!))
-        playState = .play
     }
     
     func addPlay(ramb: Ramb2) {

@@ -20,7 +20,6 @@ struct AudioControlView: View {
         
         if isExpanded {
             VStack {
-                
                 AudioSlider(player: player,
                             timeObserver: PlayerTimeObserver(player: player),
                             durationObserver: PlayerDurationObserver(player: player)
