@@ -24,7 +24,7 @@ struct FeedView: View {
     @State var hideNav = false
     
     var user: User
-    
+
     init(user: User) {
         self.user = user
     }
@@ -52,12 +52,12 @@ struct FeedView: View {
                                 .resizable()
                                 .foregroundColor(Color.accent3)
                                 .frame(width: 25, height: 25)
-                        }
-                        .sheet(isPresented: self.$recordingModalShown, content: {
+                        }.sheet(isPresented: self.$recordingModalShown, content: {
                             NavigationView {
                                 RecorderView(currentTab: $currentTab, user: user)
                             }
                         })
+                        
                         if #available(iOS 14.0, *) {
                             Menu {
                                 Picker(selection: $dataToggle, label: Text("Sorting options")) {
@@ -98,6 +98,12 @@ struct FeedView: View {
                             }
                         )
                     }
+                        NavigationLink(destination: ProfileView(user: user)) {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .foregroundColor(Color.accent3)
+                                .frame(width: 25, height: 25)
+                        }
                 }
             )
         }

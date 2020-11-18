@@ -25,7 +25,7 @@ struct ProfileView: View {
     
     @State var userDataToggle = 0
         
-    @Binding var user: User
+    @State var user: User
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -130,7 +130,7 @@ private extension ProfileView {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: .constant(testUser))
+        ProfileView(user: testUser)
             .environmentObject(SessionStore())
     }
 }

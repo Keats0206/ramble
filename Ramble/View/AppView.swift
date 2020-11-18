@@ -19,6 +19,10 @@ struct AppView: View {
     @State var hidNav = false
     @State var recordingModalShown = false
     @State private var selection = 0
+    
+    @State private var position = CardPosition.bottom
+    @State private var background = BackgroundStyle.blur
+    @State var actionState: Int?
 
     private var actionSelection: Binding<Int> {
         Binding<Int>(get: {
@@ -45,25 +49,50 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            TabView(selection: actionSelection) {
-                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
-                    .tabItem {
-                        HStack {
-                            Image(systemName: "music.house")
-                            Text("Feed")
-                        }
-                    }.tag(0)
-                   
-                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: NavigationView {
-                            ProfileView(user: $user)
-                        })
-                    .tabItem {
-                        HStack {
-                            Image(systemName: "person.circle")
-                            Text("Profile")
-                        }
-                    }.tag(1)
+            FeedView(user: user)
+                .environmentObject(globalPlayer)
+            
+            SlideOverCard($position, backgroundStyle: $background) {
+                ZStack(alignment: .top){
+                    NowPlayingCard(position: $position, ramb: globalPlayer.globalRambs?.first)
+//                    switch position {
+//
+//                    case CardPosition.bottom:
+//                        Text("Bottom")
+//                            .font(.title)
+//
+//                    case CardPosition.middle:
+//                        Text("Middle")
+//                            .font(.title)
+//                            .onTapGesture {
+//                                self.actionState = 1
+//                            }
+//                    case CardPosition.top:
+//                        Text("Top")
+//                            .font(.title)
+//                    }
                 }
+            }
+                
+//            TabView(selection: actionSelection) {
+//                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
+//                    .tabItem {
+//                        HStack {
+//                            Image(systemName: "music.house")
+//                            Text("Feed")
+//                        }
+//                    }.tag(0)
+//
+//                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: NavigationView {
+//                            ProfileView(user: $user)
+//                        })
+//                    .tabItem {
+//                        HStack {
+//                            Image(systemName: "person.circle")
+//                            Text("Profile")
+//                        }
+//                    }.tag(1)
+//                }
                 .onAppear {
                     self.getUser()
                 }
@@ -83,7 +112,7 @@ struct CurrentScreen: View {
                 }
             } else {
                 NavigationView {
-                    ProfileView(user: $user)
+                    ProfileView(user: user)
                 }
             }
         }
