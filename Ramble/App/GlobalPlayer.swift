@@ -19,6 +19,7 @@ class GlobalPlayer: ObservableObject {
     @Published var isPlaying = false
     @Published var didSet = false
     @Published var playState: SwimplyPlayIndicator.AudioState = .stop
+    @Published var duration = false
     
     let session = AVAudioSession.sharedInstance()
     
@@ -38,6 +39,7 @@ class GlobalPlayer: ObservableObject {
         return
     }
     
+    
     func play() {
         globalRambPlayer?.play()
         isPlaying = true
@@ -45,14 +47,13 @@ class GlobalPlayer: ObservableObject {
         setupRemoteTransportControls()
         addPlay(ramb: (globalRambs!.first!))
         playState = .play
-        print(globalRambs?.first)
     }
     
     func addPlay(ramb: Ramb2) {
         RambService2.shared.addPlay(ramb: ramb)
     }
     
-    func setupNowPlaying( ){
+    func setupNowPlaying( ) {
 // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = globalRambs?.first?.caption
@@ -72,7 +73,6 @@ class GlobalPlayer: ObservableObject {
     func setupRemoteTransportControls() {
         // Get the shared MPRemoteCommandCenter
         let commandCenter = MPRemoteCommandCenter.shared()
-
         // Add handler for Play Command
         commandCenter.playCommand.addTarget { [unowned self] event in
             if self.globalRambPlayer?.rate == 0.0 {
@@ -81,7 +81,6 @@ class GlobalPlayer: ObservableObject {
             }
             return .commandFailed
         }
-
         // Add handler for Pause Command
         commandCenter.pauseCommand.addTarget { [unowned self] event in
             if self.globalRambPlayer?.rate == 1.0 {

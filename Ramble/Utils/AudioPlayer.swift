@@ -15,7 +15,7 @@ struct AudioPlayerControlsView: View {
     let player: AVPlayer
 //  Observing the time / duration of the current audio player
     let timeObserver: PlayerTimeObserver
-//    let durationObserver: PlayerDurationObserver
+    let durationObserver: PlayerDurationObserver
     @State private var currentTime: TimeInterval = 0
     @State private var currentDuration: TimeInterval = 0
     @State private var finished = false
@@ -39,16 +39,15 @@ struct AudioPlayerControlsView: View {
             self.currentTime = time
         }
 // Listen out for the duration observer publishing changes to the player's item duration
-//        .onReceive(durationObserver.publisher) { duration in
+        .onReceive(durationObserver.publisher) { duration in
             // Update the local var
-//            self.currentDuration = duration
-//        }
+            self.currentDuration = duration
+        }
     }
 
 // MARK: Private functions
     private func sliderEditingChanged(editingStarted: Bool) {
         if editingStarted {
-            
             // Tell the PlayerTimeObserver to stop publishing updates while the user is interacting
             // with the slider (otherwise it would keep jumping from where they've moved it to, back
             // to where the player is currently at)

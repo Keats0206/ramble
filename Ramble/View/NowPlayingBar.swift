@@ -12,14 +12,14 @@ import AVKit
 
 struct NowPlayingBar<Content: View>: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-   
 //    @Namespace private var expandAnimation
-    
     @State private var isExpanded = false
     @State var volume = 50.0
     
     @State var height : CGFloat = 0
     @State var floating = true
+    
+    @State var width : CGFloat = 20
     
     var ramb: Ramb2?
     
@@ -34,9 +34,6 @@ struct NowPlayingBar<Content: View>: View {
     var cornerRadius: CGFloat {
         isExpanded ? 20 : 0
     }
-        
-    @Binding var selectedProfile: User
-    @Binding var openProfile: Bool
     
     var content: Content
     @ViewBuilder var body: some View {
@@ -47,7 +44,6 @@ struct NowPlayingBar<Content: View>: View {
                 VStack {
                     GeometryReader { geo in
                         ZStack(alignment: .top) {
-                            
                             Color.white
                                 .edgesIgnoringSafeArea(.top)
                                 .opacity(0.0)
@@ -56,7 +52,6 @@ struct NowPlayingBar<Content: View>: View {
                                 .background(Blur())
                             
                             VStack {
-                                
                                 if isExpanded {
                                     Rectangle()
                                         .foregroundColor(Color.secondary)
@@ -90,14 +85,12 @@ struct NowPlayingBar<Content: View>: View {
                                             VStack(alignment: .leading) {
                                                 Text("@\(ramb!.user.username)")
                                                     .font(.system(.caption, design: .rounded))
-                                                    .onTapGesture(perform: {
-                                                        self.selectedProfile = ramb!.user
-                                                        self.openProfile = true
-                                                    })
+                                        
                                                 Text("\(ramb!.caption)")
                                                     .font(.system(.body, design: .rounded))
                                                     .bold()
                                             }
+                                            
                                             Spacer()
                                             
                                             Button(action: {
@@ -141,8 +134,7 @@ struct NowPlayingBar<Content: View>: View {
                                                 .font(.system(.title))
                                                 .bold()
                                                 .onTapGesture(perform: {
-                                                    self.selectedProfile = ramb!.user
-                                                    self.openProfile = true
+                                                    self.isExpanded.toggle()
                                                 })
                                         
                                             Text("\(ramb!.caption)")
@@ -150,8 +142,11 @@ struct NowPlayingBar<Content: View>: View {
                                                     .bold()
                                             
                                         }.padding(.horizontal)
+                                        
+                                        
+                                        //swiftlint:enable identifier_name
                                                                                                                         
-                                        GlobalPlayerView(player: globalPlayer.globalRambPlayer!)
+                                        AudioControlView(player: globalPlayer.globalRambPlayer!)
                                         
                                         Spacer()
                                         
@@ -216,6 +211,13 @@ struct NowPlayingBar<Content: View>: View {
                         )
                         .onAppear {
                             self.height = geo.size.height - 75
+                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+                                if self.globalPlayer.isPlaying{
+                                    let screen = UIScreen.main.bounds.width - 30
+//                                    let value = self.globalPlayer.globalRambPlayer?.currentTime().value! / self.globalPlayer.globalRambPlayer?.currentItem.asset.duration!
+                                    self.width = screen * CGFloat(0.5)
+                                }
+                            }
                         }
                         .offset(y: self.height)
                         .animation(.spring())

@@ -37,7 +37,6 @@ struct RecorderPostView: View {
             formatter.dateStyle = .short
             return formatter
         }()
-
         var postDate = Date()
     
     var body: some View {
@@ -58,7 +57,7 @@ struct RecorderPostView: View {
             
             Spacer()
             
-            GlobalPlayerView(player: AVPlayer(url: URL(string: rambUrl)!))
+            AudioControlView(player: AVPlayer(url: URL(string: rambUrl)!))
                 .padding()
             
             Spacer()

@@ -19,6 +19,7 @@ class ValidationPublishers {
     static func nonEmptyValidation(for publisher: Published<String>.Publisher,
                                    errorMessage: @autoclosure @escaping ValidationErrorClosure) -> ValidationPublisher {
         return publisher.map { value in
+//            swiftlint:disable empty_count
             guard value.count > 0 else {
                 return .failure(message: errorMessage())
             }
@@ -26,6 +27,8 @@ class ValidationPublishers {
         }
         .dropFirst()
         .eraseToAnyPublisher()
+//            swiftlint:enable force_try
+
     }
     
     // Validates whether a string matches a regular expression.

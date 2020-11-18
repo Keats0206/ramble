@@ -27,9 +27,6 @@ struct ProfileView: View {
         
     @Binding var user: User
     
-    var showBackBtn: Bool = false
-    @Binding var openProfile: Bool
-    
     var body: some View {
         ZStack(alignment: .topLeading) {
             ScrollView {
@@ -50,7 +47,7 @@ struct ProfileView: View {
                                 .clipped()
                                 .offset(y: -geometry.frame(in: .global).minY)
                         }
-                        VStack(alignment: .leading){
+                        VStack(alignment: .leading) {
                             Spacer()
                             HStack(alignment: .bottom) {
                                 Text("\(user.displayname.uppercased())")
@@ -68,13 +65,6 @@ struct ProfileView: View {
         }
         .navigationBarTitle("", displayMode: .large)
         .navigationBarItems(
-            leading:
-                ZStack {
-                    if showBackBtn {
-                        backButton
-                    }
-                }
-            ,
             trailing:
                 ZStack {
                     if Auth.auth().currentUser?.uid == user.id {
@@ -136,24 +126,11 @@ private extension ProfileView {
         }
 
     }
-    
-    var backButton: some View {
-        Button(action: {
-            self.openProfile = false
-        }) {
-            Image(systemName: "chevron.left")
-                .foregroundColor(Color.accent3)
-                .frame(width:30, height: 30)
-                .background(Color.secondary.colorInvert())
-                .foregroundColor(Color.primary)
-                .cornerRadius(15)
-        }
-    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: .constant(testUser), openProfile: .constant(false))
+        ProfileView(user: .constant(testUser))
             .environmentObject(SessionStore())
     }
 }

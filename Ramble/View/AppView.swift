@@ -45,13 +45,8 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            if openProfile {
-                NavigationView {
-                    ProfileView(user: $selectedProfile, showBackBtn: true, openProfile: $openProfile)
-                }
-            } else {
-                TabView(selection: actionSelection) {
-                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: FeedView(user: user).environmentObject(globalPlayer))
+            TabView(selection: actionSelection) {
+                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
                     .tabItem {
                         HStack {
                             Image(systemName: "music.house")
@@ -59,8 +54,8 @@ struct AppView: View {
                         }
                     }.tag(0)
                    
-                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, selectedProfile: $selectedProfile, openProfile: $openProfile, content: NavigationView {
-                            ProfileView(user: $user, openProfile: .constant(false))
+                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: NavigationView {
+                            ProfileView(user: $user)
                         })
                     .tabItem {
                         HStack {
@@ -72,7 +67,6 @@ struct AppView: View {
                 .onAppear {
                     self.getUser()
                 }
-            }
         }.accentColor(Color.accent3)
     }
 }
@@ -152,7 +146,7 @@ struct CurrentScreen: View {
                 }
             } else {
                 NavigationView {
-                    ProfileView(user: $user, openProfile: .constant(false))
+                    ProfileView(user: $user)
                 }
             }
         }

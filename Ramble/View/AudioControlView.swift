@@ -9,7 +9,7 @@
 import SwiftUI
 import AVKit
 
-struct GlobalPlayerView: View {
+struct AudioControlView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @State var isPlaying = false
     var player: AVPlayer
@@ -19,14 +19,15 @@ struct GlobalPlayerView: View {
         VStack {
 
             AudioPlayerControlsView(player: player,
-                                    timeObserver: PlayerTimeObserver(player: player))
+                                    timeObserver: PlayerTimeObserver(player: player),
+                                    durationObserver: PlayerDurationObserver(player: player)
+            )
 
             HStack{
-
+                
                 Spacer()
-
+                
                 Button(action: {
-                    print("Go back to previous song")
                     rewindBtn()
                 }) {
                     Image(systemName: "gobackward.15")
@@ -36,15 +37,15 @@ struct GlobalPlayerView: View {
                 Spacer()
 
                 Button(action: {
-                    if self.globalPlayer.isPlaying {
-                        self.globalPlayer.globalRambPlayer!.pause()
-                        self.globalPlayer.isPlaying.toggle()
+                    if self.isPlaying {
+                        self.player.pause()
+                        self.isPlaying.toggle()
                     } else {
-                        self.globalPlayer.globalRambPlayer!.play()
-                        self.globalPlayer.isPlaying.toggle()
+                        self.player.play()
+                        self.isPlaying.toggle()
                     }
                  }) {
-                    Image(systemName: self.globalPlayer.isPlaying ? "pause.fill" : "play.fill")
+                    Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 50))
 
                 }.buttonStyle(BorderlessButtonStyle())
@@ -61,15 +62,11 @@ struct GlobalPlayerView: View {
 
                 Spacer()
 
-            }
-                .padding(.vertical)
-                .foregroundColor(.primary)
+            }.padding(.vertical)
+            .foregroundColor(.primary)
         }
-//        .onAppear {
-//            self.isPlaying = true
-//        }
     }
-    
+
     func fastForwardBtn() {
         let moveForword : Float64 = 15
         if let duration  = player.currentItem?.duration {
@@ -95,11 +92,5 @@ struct GlobalPlayerView: View {
         let selectedTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
         player.seek(to: selectedTime)
         player.play()
-    }
-}
-
-struct GlobalPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        GlobalPlayerView(player: testPlayer)
     }
 }

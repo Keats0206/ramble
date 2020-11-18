@@ -20,6 +20,7 @@ class SessionStore : ObservableObject {
     
     var handle: AuthStateDidChangeListenerHandle?
     
+    
     func listen(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
@@ -32,6 +33,7 @@ class SessionStore : ObservableObject {
         }
     }
     
+    //            swiftlint:disable empty_count
     func checkUsername(username: String, completion: @escaping(Bool) -> Void) {
         FBRefUsers.whereField("username", isEqualTo: username).getDocuments { (snapshot, error) in
             if let _ = error {
@@ -41,6 +43,7 @@ class SessionStore : ObservableObject {
             }
         }
     }
+    //            swiftlint:enable empty_count
     
     func signUp(
         email: String,
