@@ -54,10 +54,7 @@ struct RambFeed : View {
             self.viewModel.fetchRambs()
             self.isShowing = false
         }.onAppear {
-            self.dataToggle = 1
-            if self.globalPlayer.globalRambPlayer == nil {
-                viewModel.setUp(globalPlayer: self.globalPlayer)
-            }
+            viewModel.setUp(globalPlayer: self.globalPlayer)
         }
     }
 }

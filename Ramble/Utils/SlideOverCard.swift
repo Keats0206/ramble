@@ -44,7 +44,6 @@ public enum CardPosition: CGFloat {
 }
 
 enum DragState {
-    
     case inactive
     case dragging(translation: CGSize)
     

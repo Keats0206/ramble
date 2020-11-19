@@ -52,27 +52,28 @@ struct AppView: View {
             FeedView(user: user, actionState: $actionState, selectedUser: $selectedUser)
                 .environmentObject(globalPlayer)
             
-            SlideOverCard($position, backgroundStyle: $background) {
-                ZStack(alignment: .top){
-                    NowPlayingCard(position: $position, actionState: $actionState, selectedUser: $selectedUser, ramb: globalPlayer.globalRambs?.first)
-//                    switch position {
-//
-//                    case CardPosition.bottom:
-//                        Text("Bottom")
-//                            .font(.title)
-//
-//                    case CardPosition.middle:
-//                        Text("Middle")
-//                            .font(.title)
-//                            .onTapGesture {
-//                                self.actionState = 1
-//                            }
-//                    case CardPosition.top:
-//                        Text("Top")
-//                            .font(.title)
-//                    }
+                SlideOverCard($position, backgroundStyle: $background) {
+                    ZStack(alignment: .top){
+                        NowPlayingCard(position: $position, actionState: $actionState, selectedUser: $selectedUser, ramb: globalPlayer.globalRambs?.first)
+    //                    switch position {
+    //
+    //                    case CardPosition.bottom:
+    //                        Text("Bottom")
+    //                            .font(.title)
+    //
+    //                    case CardPosition.middle:
+    //                        Text("Middle")
+    //                            .font(.title)
+    //                            .onTapGesture {
+    //                                self.actionState = 1
+    //                            }
+    //                    case CardPosition.top:
+    //                        Text("Top")
+    //                            .font(.title)
+    //                    }
                 }
             }
+            
                 
 //            TabView(selection: actionSelection) {
 //                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
@@ -93,10 +94,10 @@ struct AppView: View {
 //                        }
 //                    }.tag(1)
 //                }
-                .onAppear {
-                    self.getUser()
-                }
         }.accentColor(Color.accent3)
+        .onAppear {
+            self.getUser()
+        }
     }
 }
 

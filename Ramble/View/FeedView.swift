@@ -67,7 +67,6 @@ struct FeedView: View {
                                 RecorderView(currentTab: $currentTab, user: user)
                             }
                         })
-                        
                         if #available(iOS 14.0, *) {
                             Menu {
                                 Picker(selection: $dataToggle, label: Text("Sorting options")) {

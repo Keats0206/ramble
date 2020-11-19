@@ -67,7 +67,7 @@ struct RecorderPostView: View {
             Spacer()
             
             
-            AudioControlView(player: AVPlayer(url: URL(string: rambUrl)!))
+            AudioControlView(player: AVPlayer(url: URL(string: rambUrl)!), showSlider: .constant(true))
                 .padding()
             
             Spacer()

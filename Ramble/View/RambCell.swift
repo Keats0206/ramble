@@ -20,38 +20,52 @@ struct RambCell : View {
         
     var ramb: Ramb2
     
+    var isSelected: Bool {
+        globalPlayer.globalRambs?.first?.id == ramb.id ? true : false
+    }
+    
     var body: some View {
         HStack(alignment: .center) {
-                    VStack(alignment: .center) {
-                        ZStack {
-//                       SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
-//                           .frame(width: 20, height: 20)
-                        WebImage(url: URL(string: ramb.user.profileImageUrl))
-                            .resizable()
-                            .scaleEffect()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Rectangle())
-                            .cornerRadius(8)
-                        }
+                VStack(alignment: .center) {
+                    ZStack {
+//                    if isSelected {
+//                        SwimplyPlayIndicator(state: $globalPlayer.playState, lineColor: Color.accent3)
+//                            .frame(width: 20, height: 20)
+//                    }
+                        
+                    WebImage(url: URL(string: ramb.user.profileImageUrl))
+                        .resizable()
+                        .scaleEffect()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Rectangle())
+                        .cornerRadius(8)
                     }
+                }
                     VStack(alignment: .leading) {
                         HStack {
                             Text("@" + ramb.user.username)
-                                .font(.headline)
-                                .foregroundColor(.primary)
+                                .font(.system(.subheadline))
                                 .bold()
+                            
                             Text("\(formatDate(timestamp: ramb.timestamp)) ago")
                                 .font(.system(.subheadline, design: .rounded))
-                                .opacity(0.7)
+                            
 //                            Text("\(TimeHelper.formatSecondsToHMS(ramb.length))")
 //                                .font(.system(.caption, design: .rounded))
 //                                .bold()
+                            
                             Spacer()
-                        }.font(.system(.caption, design: .rounded))
-                        Text(ramb.caption)
-                            .font(.system(.body, design: .rounded))
-                            .multilineTextAlignment(TextAlignment.leading)
-                    }.foregroundColor(.primary)
+                        }.opacity(0.7)
+
+                        Button(action: {
+                            play(ramb: ramb)
+                        }){
+                            Text(ramb.caption)
+                                .font(.system(.body, design: .rounded))
+                                .multilineTextAlignment(TextAlignment.leading)
+                                .foregroundColor(isSelected ? .accent3 : .primary)
+                        }
+                    }
                     VStack(alignment: .center) {
                         Button(action: {
                             self.showingActionSheet.toggle()
@@ -70,17 +84,13 @@ struct RambCell : View {
                                 }
                         }.buttonStyle(BorderlessButtonStyle())
                     }
-        }
-        .padding()
-        .cornerRadius(15)
-        .onTapGesture(count: 1) {
-            play()
-        }
-    }
-    
-    func play() {
-        globalPlayer.globalRambs = [self.ramb]
-        globalPlayer.setGlobalPlayer(ramb: self.ramb)
+                }
+                .padding()
+                .cornerRadius(15)
+            }
+    func play(ramb: Ramb2) {
+        globalPlayer.globalRambs = [ramb]
+        globalPlayer.setGlobalPlayer(ramb: ramb)
         globalPlayer.play()
     }
 }

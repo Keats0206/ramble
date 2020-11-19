@@ -17,19 +17,22 @@ struct RambUserCell: View {
     
     var ramb: Ramb2
     
+    var isSelected: Bool {
+        globalPlayer.globalRambs?.first?.id == self.ramb.id ? true : false
+    }
+    
     var body: some View {
         VStack{
             HStack{
     //              Center of Cell VStack
                 VStack(alignment: .leading) {
-                    Button(action:{
-                        globalPlayer.setGlobalPlayer(ramb: self.ramb)
-                        globalPlayer.play()
+                    Button(action: {
+                        play(ramb: ramb)
                     }) {
                         Text(ramb.caption)
                             .font(.system(.body, design: .rounded))
                             .multilineTextAlignment(TextAlignment.leading)
-                            .foregroundColor(globalPlayer.globalRambs?.first?.id == self.ramb.id ? .accent4 : .primary)
+                            .foregroundColor(isSelected ? .accent4 : .primary)
                         
                     }.buttonStyle(BorderlessButtonStyle())
                     
@@ -85,6 +88,11 @@ struct RambUserCell: View {
             }
             Divider()
         }
+    }
+    func play(ramb: Ramb2) {
+        globalPlayer.globalRambs = [ramb]
+        globalPlayer.setGlobalPlayer(ramb: ramb)
+        globalPlayer.play()
     }
 }
 

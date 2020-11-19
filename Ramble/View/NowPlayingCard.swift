@@ -31,7 +31,9 @@ struct NowPlayingCard: View {
     var offset: CGFloat {
         position == CardPosition.bottom ? 165 : 335
     }
-        
+    
+    @State var showSlider: Bool = false
+    
     var body: some View {
         ZStack(alignment: .top) {
             if ramb != nil {
@@ -44,10 +46,11 @@ struct NowPlayingCard: View {
                             .clipShape(Rectangle())
                             .cornerRadius(8)
                             .shadow(radius: 10)
+                        
                         VStack(alignment: .leading) {
                             Button(action: {
-                                self.actionState = 1
                                 self.selectedUser = ramb!.user
+                                self.actionState = 1
                             }){
                                 Text("@\(ramb!.user.username)")
                                     .font(.system(.caption))
@@ -59,6 +62,7 @@ struct NowPlayingCard: View {
                                 .font(.system(.body, design: .rounded))
                                 .bold()
                         }
+                        
                         Spacer()
                     }
                     Spacer()
@@ -75,13 +79,13 @@ struct NowPlayingCard: View {
                                     Spacer()
                                     
                                     Button(action: {
-                                        print("Follow")
+                                        self.selectedUser = ramb!.user
+                                        self.actionState = 1
                                     }) {
-                                        Circle()
-                                            .foregroundColor(Color.flatDarkCardBackground.opacity(0.2))
+                                        Image(systemName: "arrow.right.circle.fill")
+                                            .resizable()
                                             .frame(width: 25, height: 25)
-                                            .overlay(Image(systemName: "plus")
-                                                        .foregroundColor(Color.accent3))
+                                            .foregroundColor(Color.accent3)
                                     }
                                 }
                                 Text("\(ramb!.user.bio)")
@@ -89,60 +93,30 @@ struct NowPlayingCard: View {
                                     .opacity(0.4)
                                 Divider()
                             }
+                                .animation(.easeInOut)
+                                .onAppear{
+                                    showSlider.toggle()
+                                }.onDisappear{
+                                    showSlider.toggle()
+                                }
                         } else {
                             Spacer()
                         }
-                    }
-                    .frame(height: position == CardPosition.middle ? 100 : 10)
-                    .background(Color.red)
-                    
+                    }.frame(height: position == CardPosition.middle ? 100 : 10)
                     Spacer()
-                    
-                    AudioControlView(player: globalPlayer.globalRambPlayer!)
-                        .padding(.bottom, 25)
+                    AudioControlView(player: globalPlayer.globalRambPlayer!, showSlider: $showSlider)
+                        .padding(.bottom, 35)
                     
                 }
                 .foregroundColor(.primary)
                 .padding()
                 .frame(height: offset)
-//                    HStack {
-//
-//                        if #available(iOS 14.0, *) {
-//
-//                            WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
-//                                .resizable()
-//                                .scaleEffect()
-//                                .frame(width: imageFrame, height: imageFrame)
-//    //                                            .matchedGeometryEffect(id: "AlbumImage", in: expandAnimation)
-//                                .clipShape(Rectangle())
-//                                .cornerRadius(8)
-//
-//                        } else {
-//                            // Fallback on earlier versions
-//                            WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
-//                                .resizable()
-//                                .scaleEffect()
-//                                .frame(width: imageFrame, height: imageFrame)
-//                                .clipShape(Rectangle())
-//                                .cornerRadius(8)
-//                                .shadow(radius: 10)
-//                        }
-//
-//                        VStack(alignment: .leading) {
-//
-//                            Text("@\(ramb!.user.username)")
-//                                .font(.system(.caption, design: .rounded))
-//
-//                            Text("\(ramb!.caption)")
-//                                .font(.system(.body, design: .rounded))
-//                                .bold()
-//                        }
-//
-//                        Spacer()
-//
-//                    }
             } else {
-                EmptyView()
+                VStack{
+                    Spacer()
+                    LoadingAnimation()
+                    Spacer()
+                }
             }
         }
     }

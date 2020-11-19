@@ -53,12 +53,9 @@ class RambService2: ObservableObject {
 
                     if let ramb = self.allRambs.first {
                         self.globalPlayer?.globalRambs = [ramb]
-
                         self.globalPlayer?.setGlobalPlayer(ramb: ramb)
-                        print("DEBUG: Set global ramb")
+                        
                     }
-//                    self.globalPlayer.globalRambPlayer?.play()
-//                    self.globalPlayer.isPlaying = true
                 }
             }
         }
