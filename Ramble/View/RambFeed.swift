@@ -34,7 +34,6 @@ struct RambFeed : View {
                         ForEach(viewModel.allRambs.sorted(by: { $0.plays > $1.plays })){ ramb in
                             RambCell(ramb: ramb)
                                 .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-                                .environmentObject(globalPlayer)
                                 .listRowBackground(backgroundColor)
                                 .background(backgroundColor)
                         }
@@ -53,8 +52,11 @@ struct RambFeed : View {
         }.pullToRefresh(isShowing: $isShowing) {
             self.viewModel.fetchRambs()
             self.isShowing = false
-        }.onAppear {
-            viewModel.setUp(globalPlayer: self.globalPlayer)
+        }
+        .onAppear {
+            if globalPlayer.didSet == false {
+                viewModel.setUp(globalPlayer: self.globalPlayer)
+            }
         }
     }
 }

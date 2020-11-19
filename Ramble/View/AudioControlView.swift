@@ -20,8 +20,7 @@ struct AudioControlView: View {
     
     var body: some View {
         VStack{
-            ZStack{
-//                AudioPlayer(player: self.$player)
+            ZStack {
                 Controls(player: self.$player, isPlaying: self.$isPlaying, pannel: self.$showControls, value: self.$value, showSlider: $showSlider)
             }
         }
@@ -42,11 +41,12 @@ struct Controls : View {
     var body : some View {
         ZStack {
             VStack {
-                
-                if showSlider {
-                    CustomProgressBar(value: self.$value, player: self.$player, isPlaying: self.$isPlaying)
-                        .padding(.bottom, 25)
-                }
+//                if showSlider {
+//                    ZStack {
+//                        CustomProgressBar(value: self.$value, player: self.$player, isPlaying: self.$isPlaying)
+//                            .padding(.bottom, 25)
+//                    }
+//                }
                 
                 HStack {
                     
@@ -65,8 +65,7 @@ struct Controls : View {
                         if self.isPlaying {
                             self.player.pause()
                             self.isPlaying = false
-                        }
-                        else{
+                        } else {
                             self.player.play()
                             self.isPlaying = true
                         }
@@ -153,7 +152,7 @@ struct CustomProgressBar: UIViewRepresentable {
     }
 }
 
-class Host : UIHostingController<ContentView> {
+class Host: UIHostingController<ContentView> {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

@@ -38,7 +38,9 @@ struct NowPlayingCard: View {
         ZStack(alignment: .top) {
             if ramb != nil {
                 VStack {
+                    
                     HStack {
+                        
                         WebImage(url: URL(string: "\(ramb!.user.profileImageUrl)"))
                             .resizable()
                             .scaleEffect()
@@ -64,46 +66,66 @@ struct NowPlayingCard: View {
                         }
                         
                         Spacer()
+                        
+                        Text("\((globalPlayer.globalRambPlayer?.currentItem!.currentTime().seconds)!)")
+                    
                     }
+                    
                     Spacer()
+                    
                     VStack {
-                        if position == CardPosition.middle {
-                            VStack(alignment: .leading) {
-                                Divider()
-                                HStack(alignment: .bottom) {
-                                    Text("@\(ramb!.user.username)")
-                                        .font(.system(.headline))
-                                        .bold()
-                                    Text("\(ramb!.user.displayname)")
-                                        .font(.system(.subheadline, design: .rounded))
-                                    Spacer()
-                                    
-                                    Button(action: {
-                                        self.selectedUser = ramb!.user
-                                        self.actionState = 1
-                                    }) {
-                                        Image(systemName: "arrow.right.circle.fill")
-                                            .resizable()
-                                            .frame(width: 25, height: 25)
-                                            .foregroundColor(Color.accent3)
-                                    }
-                                }
-                                Text("\(ramb!.user.bio)")
-                                    .font(.system(.body, design: .rounded))
-                                    .opacity(0.4)
-                                Divider()
-                            }
-                                .animation(.easeInOut)
-                                .onAppear{
-                                    showSlider.toggle()
-                                }.onDisappear{
-                                    showSlider.toggle()
-                                }
-                        } else {
+//                        if position == CardPosition.middle {
+//
+//                            VStack(alignment: .leading) {
+//
+//                                Divider()
+//
+//                                HStack(alignment: .bottom) {
+//
+//                                    Text("@\(ramb!.user.username)")
+//                                        .font(.system(.headline))
+//                                        .bold()
+//
+//                                    Text("\(ramb!.user.displayname)")
+//                                        .font(.system(.subheadline, design: .rounded))
+//
+//                                    Spacer()
+//
+//                                    Button(action: {
+//                                        self.selectedUser = ramb!.user
+//                                        self.actionState = 1
+//                                    }) {
+//                                        Image(systemName: "arrow.right.circle.fill")
+//                                            .resizable()
+//                                            .frame(width: 25, height: 25)
+//                                            .foregroundColor(Color.accent3)
+//                                    }
+//                                }
+//
+//                                Text("\(ramb!.user.bio)")
+//                                    .font(.system(.body, design: .rounded))
+//                                    .opacity(0.4)
+//
+//                                Divider()
+//
+//                            }
+//                            .animation(.easeInOut)
+//                            .onAppear{
+//
+//                                showSlider.toggle()
+//
+//                            }.onDisappear {
+//
+//                                showSlider.toggle()
+//
+//                            }
+//                        } else {
                             Spacer()
-                        }
+//                        }
                     }.frame(height: position == CardPosition.middle ? 100 : 10)
+                    
                     Spacer()
+                    
                     AudioControlView(player: globalPlayer.globalRambPlayer!, showSlider: $showSlider)
                         .padding(.bottom, 35)
                     
@@ -111,6 +133,7 @@ struct NowPlayingCard: View {
                 .foregroundColor(.primary)
                 .padding()
                 .frame(height: offset)
+                
             } else {
                 VStack{
                     Spacer()
