@@ -118,8 +118,8 @@ struct Card: ViewModifier {
             .scaleEffect(x: 1, y: 1, anchor: .center)
         }
         .offset(y:  max(0, self.position.offsetFromTop() + self.dragState.translation.height))
-        .animation((self.dragState.isDragging ? nil : animation))
-        .gesture(drag)
+//        .animation((self.dragState.isDragging ? nil : animation))
+//        .gesture(drag)
     }
     
     private func onDragEnded(drag: DragGesture.Value) {
