@@ -55,6 +55,7 @@ struct RambCell : View {
 //                                .bold()
                             
                             Spacer()
+                            
                         }.opacity(0.7)
 
                         Button(action: {
@@ -64,6 +65,7 @@ struct RambCell : View {
                                 .font(.system(.body, design: .rounded))
                                 .multilineTextAlignment(TextAlignment.leading)
                                 .foregroundColor(isSelected ? .accent3 : .primary)
+                            
                         }.buttonStyle(BorderlessButtonStyle())
                     }
                     VStack(alignment: .center) {

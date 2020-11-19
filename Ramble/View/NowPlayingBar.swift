@@ -94,7 +94,7 @@
 //                                            
 //                                            AudioControlView(player: globalPlayer.globalRambPlayer!, isExpanded: $isExpanded)
 //                                                                                    
-////                                            AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
+//                                            AudioControlView(isExpanded: isExpanded, player: globalPlayer.globalRambPlayer!)
 //                                            
 //                                        }
 //                                        

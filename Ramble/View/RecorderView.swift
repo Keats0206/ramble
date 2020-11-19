@@ -19,6 +19,8 @@ struct RecorderView: View {
     @State var length = 0.0
     
     @State var isActive = false
+    @State var didCancel = false
+    
 //    @State private var wave3 = false
     
     var user: User
@@ -86,7 +88,7 @@ struct RecorderView: View {
                     Spacer()// Sends user to the next view
                         .onAppear {
                             self.isActive.toggle()
-                }
+                        }
                 }
             }
         }.onAppear {
@@ -94,6 +96,9 @@ struct RecorderView: View {
             if currentTab == .profile {
                 currentTab = .tab2
                 presentationMode.wrappedValue.dismiss()
+            }
+            if didCancel {
+                self.audioRecorder.recorderState = .ready
             }
         }
         .navigationBarHidden(false)
@@ -116,8 +121,9 @@ private extension RecorderView {
                             length: length,
                             currentTab: $currentTab,
                             position: .constant(CardPosition.middle),
+                            didCancel: $didCancel,
                             user: user),
-                           isActive: $isActive){
+                            isActive: $isActive){
                 Spacer()
             }
         }

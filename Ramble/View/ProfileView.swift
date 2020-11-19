@@ -57,13 +57,17 @@ struct ProfileView: View {
                             }
                         }.padding()
                     }
-                }.frame(height: 400)
+                }
+                .frame(height: 400)
+                
                 UserAbout(user: user)
+                
                 RambUserFeed(user: user)
                     .frame(width: 350)
             }
         }
-        .navigationBarTitle("", displayMode: .large)
+        .navigationBarTitle("@\(user.username)", displayMode: .inline)
+//        .navigationBarTitle("", displayMode: .large)
         .navigationBarItems(
             trailing:
                 ZStack {

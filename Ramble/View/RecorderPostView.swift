@@ -20,6 +20,13 @@ struct RecorderPostView: View {
     @Binding var currentTab: Tab
     @Binding var position: CardPosition
     
+    @Binding var didCancel: Bool
+    @State var showAlert: Bool = false
+    
+    var buttonDisabled: Bool {
+        caption != "" ? false : true
+    }
+    
     var imageScale = UIScreen.main.bounds.width * 0.7
     
     var user: User
@@ -87,22 +94,32 @@ struct RecorderPostView: View {
                     .font(.system(.headline, design: .rounded))
                     .bold()
                 
-            }.padding()
+            }.disabled(buttonDisabled)
+            .padding()
             .padding(.horizontal, 30)
             .foregroundColor(.white)
-            .background(Color.accent3)
+            .background(buttonDisabled ? .gray : Color.accent3)
             .cornerRadius(40)
-                            
         }
         .padding()
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
             Button(action: {
-                presentationMode.wrappedValue.dismiss()
+                    self.showAlert.toggle()
                 }) {
                     Image(systemName: "arrowshape.turn.up.left")
                         .frame(width: 25, height: 25)
                         .foregroundColor(Color.accent3)
+                }.alert(isPresented: $showAlert) {
+                    Alert(title: Text("Rerecord?"),
+                          message: Text("Your last recording will be deleted!"),
+                          primaryButton: .default (Text("OK")) {
+                            self.didCancel = true
+                            presentationMode.wrappedValue.dismiss()
+                            print("Delete Ramb")
+                          },
+                          secondaryButton: .cancel()
+                    )
                 }
             )
     }
@@ -115,6 +132,7 @@ struct RecorderPostView_Previews: PreviewProvider {
             length: testRamb.length,
             currentTab: .constant(Tab.tab1),
             position: .constant(CardPosition.middle),
+            didCancel: .constant(false),
             user: testUser
         )
     }
