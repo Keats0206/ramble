@@ -67,8 +67,16 @@ struct NowPlayingCard: View {
                         
                         Spacer()
                         
-                        Text("\((globalPlayer.globalRambPlayer?.currentItem!.currentTime().seconds)!)")
-                    
+                        Button(action: {
+                            self.selectedUser = ramb!.user
+                            self.actionState = 1
+                        }) {
+                            Image(systemName: "arrow.right.circle")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(Color.accent3)
+                        }
+                        
                     }
                     
                     Spacer()
@@ -133,13 +141,9 @@ struct NowPlayingCard: View {
                 .foregroundColor(.primary)
                 .padding()
                 .frame(height: offset)
-                
             } else {
-                VStack{
-                    Spacer()
-                    LoadingAnimation()
-                    Spacer()
-                }
+                LoadingAnimation()
+                    .padding(.top, 50)
             }
         }
     }

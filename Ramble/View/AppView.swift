@@ -52,9 +52,12 @@ struct AppView: View {
             FeedView(user: user, actionState: $actionState, selectedUser: $selectedUser)
                 .environmentObject(globalPlayer)
             
-                SlideOverCard($position, backgroundStyle: $background) {
-                    ZStack(alignment: .top){
-                        NowPlayingCard(position: $position, actionState: $actionState, selectedUser: $selectedUser, ramb: globalPlayer.globalRambs?.first)
+            SlideOverCard($position, backgroundStyle: $background) {
+                ZStack(alignment: .top){
+                    NowPlayingCard(position: $position,
+                                   actionState: $actionState,
+                                   selectedUser: $selectedUser,
+                                   ramb: globalPlayer.globalRambs?.first)
     //                    switch position {
     //
     //                    case CardPosition.bottom:
@@ -73,8 +76,6 @@ struct AppView: View {
     //                    }
                 }
             }
-            
-                
 //            TabView(selection: actionSelection) {
 //                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
 //                    .tabItem {
@@ -94,9 +95,11 @@ struct AppView: View {
 //                        }
 //                    }.tag(1)
 //                }
-        }.accentColor(Color.accent3)
+        }
+        .accentColor(Color.accent3)
         .onAppear {
             self.getUser()
+            viewModel.setUp(globalPlayer: self.globalPlayer)
         }
     }
 }
