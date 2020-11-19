@@ -14,6 +14,8 @@ struct RecorderView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     
     @State private var animateRecording = false
+    @State var openAudioUpload = false
+    
     @State var animateUploading = false
     @Binding var currentTab: Tab
     @State var length = 0.0
@@ -36,22 +38,52 @@ struct RecorderView: View {
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .padding(.top, 300)
-                            Button(action: {
-                                self.audioRecorder.startRecording()
-                                self.timerManager.start()
-                            }) {
-                                Image(systemName: "circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 60, height: 60)
-                                    .foregroundColor(.red)
-                            }
+                            
+//                            HStack(alignment: .bottom){
+                                
+//                                Button(action: {
+//                                    self.openAudioUpload.toggle()
+//                                }) {
+//                                    Image(systemName: "square.and.arrow.up")
+//                                        .resizable()
+//                                        .frame(width: 25, height: 25)
+//                                        .foregroundColor(Color.accent3)
+//                                        .actionSheet(isPresented: $openAudioUpload) {
+//                                            ActionSheet(title: Text("Upload existing audio coming soon"),
+//                                                buttons: [.default(
+//                                                    Text("Request")
+//                                                ), .cancel()
+//                                            ])
+//                                        }
+//                                }.buttonStyle(BorderlessButtonStyle())
+//                                .frame(width: 60)
+                                                                
+                                Button(action: {
+                                    self.audioRecorder.startRecording()
+                                    self.timerManager.start()
+                                }) {
+                                    Image(systemName: "circle.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 60, height: 60)
+                                        .foregroundColor(.red)
+                                    
+                                }.padding(.horizontal, 50)
+//                                
+//                                Spacer()
+//                                .frame(width: 60)
+//                                
+//                            }
+                            
                         }.padding()
                 case .started:
-                        VStack {
+                    VStack(alignment: .center){
+                            
                             Spacer()
+                            
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
+                        
                             Button(action: {
                                 self.audioRecorder.stopRecording()
                                 self.length = self.timerManager.secondsElapsed
