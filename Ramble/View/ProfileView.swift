@@ -67,7 +67,6 @@ struct ProfileView: View {
             }
         }
         .navigationBarTitle("@\(user.username)", displayMode: .inline)
-//        .navigationBarTitle("", displayMode: .large)
         .navigationBarItems(
             trailing:
                 ZStack {

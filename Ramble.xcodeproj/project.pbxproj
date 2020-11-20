@@ -30,8 +30,6 @@
 		405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A5DE1250802F4009F9C6B /* SearchView.swift */; };
 		405EBBB625657A7200FB0B97 /* SlideOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405EBBB525657A7200FB0B97 /* SlideOverCard.swift */; };
 		405EBBB825657E3F00FB0B97 /* NowPlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */; };
-		406C43D32553582700C6E7DE /* NowPlayingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406C43D22553582700C6E7DE /* NowPlayingAnimation.swift */; };
-		406D0003254D07DF00A82E66 /* NowPlayingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406D0002254D07DF00A82E66 /* NowPlayingBar.swift */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
 		406FAD09244FF15D00223873 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD08244FF15D00223873 /* Helpers.swift */; };
 		406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0A244FF17600223873 /* RecordingModel.swift */; };
@@ -39,6 +37,9 @@
 		406FAD172450B55200223873 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD162450B55200223873 /* ContentView.swift */; };
 		406FAD1F2450D6D200223873 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD1E2450D6D200223873 /* AuthView.swift */; };
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
+		4070B85125674F34006D6630 /* RambUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85025674F34006D6630 /* RambUserList.swift */; };
+		4070B85325675207006D6630 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85225675207006D6630 /* RecordView.swift */; };
+		4070B85525675605006D6630 /* RecordPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85425675605006D6630 /* RecordPostView.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
@@ -120,8 +121,6 @@
 		405A5DE1250802F4009F9C6B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		405EBBB525657A7200FB0B97 /* SlideOverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverCard.swift; sourceTree = "<group>"; };
 		405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingCard.swift; sourceTree = "<group>"; };
-		406C43D22553582700C6E7DE /* NowPlayingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingAnimation.swift; sourceTree = "<group>"; };
-		406D0002254D07DF00A82E66 /* NowPlayingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingBar.swift; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		406FAD08244FF15D00223873 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		406FAD0A244FF17600223873 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
@@ -129,6 +128,9 @@
 		406FAD162450B55200223873 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		406FAD1E2450D6D200223873 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		4070B85025674F34006D6630 /* RambUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserList.swift; sourceTree = "<group>"; };
+		4070B85225675207006D6630 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		4070B85425675605006D6630 /* RecordPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPostView.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40B1474A25016C5F00A2781A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		40B3385B25267E90009321F2 /* Constants2.0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants2.0.swift; sourceTree = "<group>"; };
@@ -261,6 +263,10 @@
 			isa = PBXGroup;
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
+				4014BE3C25674CA7009D9823 /* HomeView.swift */,
+				4070B85025674F34006D6630 /* RambUserList.swift */,
+				4070B85225675207006D6630 /* RecordView.swift */,
+				4070B85425675605006D6630 /* RecordPostView.swift */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
@@ -271,12 +277,9 @@
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
-				406D0002254D07DF00A82E66 /* NowPlayingBar.swift */,
-				406C43D22553582700C6E7DE /* NowPlayingAnimation.swift */,
 				40E56A0E255B508100BEA192 /* AudioControlView.swift */,
 				EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */,
 				405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */,
-				4014BE3C25674CA7009D9823 /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -497,9 +500,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4070B85125674F34006D6630 /* RambUserList.swift in Sources */,
+				4070B85525675605006D6630 /* RecordPostView.swift in Sources */,
 				EE1E0DC6255E5B4400DCA17C /* SwiftUI+Validation.swift in Sources */,
-				406D0003254D07DF00A82E66 /* NowPlayingBar.swift in Sources */,
-				406D0003254D07DF00A82E66 /* NowPlayingBar.swift in Sources */,
 				4014BE3D25674CA7009D9823 /* HomeView.swift in Sources */,
 				400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */,
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
@@ -529,13 +532,13 @@
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				EE1E0DCC255E5B7600DCA17C /* ErrorBubbleView.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
+				4070B85325675207006D6630 /* RecordView.swift in Sources */,
 				4056E9A4252404E10004E598 /* Extensions.swift in Sources */,
 				405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */,
 				EEFCE0FD255EDC2E002EF077 /* AppHelper.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				402F54C3244F9ACC00FD899F /* RambFeed.swift in Sources */,
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
-				406C43D32553582700C6E7DE /* NowPlayingAnimation.swift in Sources */,
 				405EBBB825657E3F00FB0B97 /* NowPlayingCard.swift in Sources */,
 				40BFA9F22547AD1D00423320 /* Timer.swift in Sources */,
 				EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */,

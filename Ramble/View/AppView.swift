@@ -19,12 +19,13 @@ struct AppView: View {
     @State var hidNav = false
     @State var recordingModalShown = false
     @State private var selection = 0
-    
     @State private var position = CardPosition.bottom
     @State private var background = BackgroundStyle.blur
-    
     @State var actionState: Int? = 0
     @State var selectedUser: User = testUser
+        
+    @State var rambUrl: String = ""
+    @State var length: Double = 0.0
 
     private var actionSelection: Binding<Int> {
         Binding<Int>(get: {
@@ -48,62 +49,28 @@ struct AppView: View {
     
     var body: some View {
         ZStack {
-            
-            HomeView()
-            
-//            FeedView(user: user, actionState: $actionState, selectedUser: $selectedUser)
-//                .environmentObject(globalPlayer)
-            
+            NavigationView{
+                HomeView(user: user)
+            }
             SlideOverCard($position, backgroundStyle: $background) {
                 ZStack(alignment: .top){
-                    NowPlayingCard(position: $position,
-                                   actionState: $actionState,
-                                   selectedUser: $selectedUser,
-                                   ramb: globalPlayer.globalRambs?.first)
-    //                    switch position {
-    //
-    //                    case CardPosition.bottom:
-    //                        Text("Bottom")
-    //                            .font(.title)
-    //
-    //                    case CardPosition.middle:
-    //                        Text("Middle")
-    //                            .font(.title)
-    //                            .onTapGesture {
-    //                                self.actionState = 1
-    //                            }
-    //                    case CardPosition.top:
-    //                        Text("Top")
-    //                            .font(.title)
-    //                    }
+                    switch position {
+                    case CardPosition.bottom:
+                        RecordView(position: $position, length: $length, rambUrl: $rambUrl, user: user)
+                    case CardPosition.middle:
+                        RecordPostView(position: $position, rambUrl: $rambUrl, length: $length, user: user)
+                    case CardPosition.top:
+                        Text("Top")
+                            .font(.title)
+                        }
+                    }
                 }
             }
-            
-//            TabView(selection: actionSelection) {
-//                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
-//                    .tabItem {
-//                        HStack {
-//                            Image(systemName: "music.house")
-//                            Text("Feed")
-//                        }
-//                    }.tag(0)
-//
-//                    NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: NavigationView {
-//                            ProfileView(user: $user)
-//                        })
-//                    .tabItem {
-//                        HStack {
-//                            Image(systemName: "person.circle")
-//                            Text("Profile")
-//                        }
-//                    }.tag(1)
-//                }
-        }
-        .accentColor(Color.accent3)
-        .onAppear {
-            self.getUser()
-            viewModel.setUp(globalPlayer: self.globalPlayer)
-        }
+            .accentColor(Color.accent3)
+            .onAppear {
+                self.getUser()
+                viewModel.setUp(globalPlayer: self.globalPlayer)
+            }
     }
 }
 

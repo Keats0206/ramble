@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct RecorderView: View {
+struct RecorderView: View{
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
@@ -78,9 +78,7 @@ struct RecorderView: View {
                         }.padding()
                 case .started:
                     VStack(alignment: .center){
-                            
                             Spacer()
-                            
                             Text(String(format: "%.1f", timerManager.secondsElapsed))
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
                         
@@ -147,7 +145,7 @@ struct RecorderView: View {
 
 private extension RecorderView {
     var previewButton: some View {
-        ZStack{
+        ZStack {
             NavigationLink(destination: RecorderPostView(
                             rambUrl: audioRecorder.rambUrl,
                             length: length,

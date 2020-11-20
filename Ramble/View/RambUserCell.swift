@@ -24,7 +24,6 @@ struct RambUserCell: View {
     var body: some View {
         VStack{
             HStack{
-    //              Center of Cell VStack
                 VStack(alignment: .leading) {
                     Button(action: {
                         play(ramb: ramb)
@@ -41,12 +40,9 @@ struct RambUserCell: View {
                         .font(.system(.caption, design: .rounded))
                     
                 }
-                
                 Spacer()
-                
                 Text("3:30")
                     .font(.system(size: 18, weight: .regular, design: .rounded))
-                
                 if ramb.user.isCurrentUser {
                     Button(action: {
                         self.showingActionSheet.toggle()
@@ -84,9 +80,7 @@ struct RambUserCell: View {
                     }.buttonStyle(BorderlessButtonStyle())
                     
                 }
-                
             }
-            Divider()
         }
     }
     func play(ramb: Ramb2) {
