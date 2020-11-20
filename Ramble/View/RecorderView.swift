@@ -28,7 +28,7 @@ struct RecorderView: View {
     var user: User
 
     var body: some View {
-        ZStack{
+        ZStack {
             previewButton
             ZStack {
                 switch audioRecorder.recorderState {

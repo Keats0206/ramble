@@ -49,8 +49,10 @@ struct AppView: View {
     var body: some View {
         ZStack {
             
-            FeedView(user: user, actionState: $actionState, selectedUser: $selectedUser)
-                .environmentObject(globalPlayer)
+            HomeView()
+            
+//            FeedView(user: user, actionState: $actionState, selectedUser: $selectedUser)
+//                .environmentObject(globalPlayer)
             
             SlideOverCard($position, backgroundStyle: $background) {
                 ZStack(alignment: .top){
@@ -76,6 +78,7 @@ struct AppView: View {
     //                    }
                 }
             }
+            
 //            TabView(selection: actionSelection) {
 //                NowPlayingBar(ramb: globalPlayer.globalRambs?.first, content: FeedView(user: user).environmentObject(globalPlayer))
 //                    .tabItem {
