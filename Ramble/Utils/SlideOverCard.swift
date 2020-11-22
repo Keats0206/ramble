@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 @available(iOS 13.0, *)
 public struct SlideOverCard<Content> : View where Content : View {
     @Binding var defaultPosition : CardPosition
@@ -30,20 +31,23 @@ public enum BackgroundStyle {
 }
 
 public enum CardPosition: CGFloat {
-    case bottom, middle, top
+    
+    case bottom , middle, top
+    
     func offsetFromTop() -> CGFloat {
         switch self {
         case .bottom:
-            return UIScreen.main.bounds.height - 220
+            return UIScreen.main.bounds.height
         case .middle:
             return UIScreen.main.bounds.height / 1.8
         case .top:
-            return 70
+            return 40
         }
     }
 }
 
 enum DragState {
+    
     case inactive
     case dragging(translation: CGSize)
     
@@ -111,15 +115,16 @@ struct Card: ViewModifier {
                 if backgroundStyle == .solid {
                     colorScheme == .dark ? Color.black : Color.white
                 }
-//                Handle()
+
+                Handle()
                 content.padding(.top, 15)
             }
             .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .scaleEffect(x: 1, y: 1, anchor: .center)
         }
         .offset(y:  max(0, self.position.offsetFromTop() + self.dragState.translation.height))
-//        .animation((self.dragState.isDragging ? nil : animation))
-//        .gesture(drag)
+        .animation((self.dragState.isDragging ? nil : animation))
+        .gesture(drag)
     }
     
     private func onDragEnded(drag: DragGesture.Value) {
@@ -137,14 +142,12 @@ struct Card: ViewModifier {
         
         // Determining whether drawer is above or below `.partiallyRevealed` threshold for snapping behavior.
         if offsetFromTopOfView <= CardPosition.middle.offsetFromTop() {
-            
-//          toggle these for three card postions
             higherStop = .bottom
+//           higherStop = .top
             lowerStop = .bottom
-//            higherStop = .top
-//            lowerStop = .middle
+//          lowerStop = .middle
         } else {
-//            higherStop = .middle
+//          higherStop = .middle
             higherStop = .bottom
             lowerStop = .bottom
         }
@@ -200,4 +203,5 @@ struct Handle : View {
             .padding(5)
     }
 }
+
 

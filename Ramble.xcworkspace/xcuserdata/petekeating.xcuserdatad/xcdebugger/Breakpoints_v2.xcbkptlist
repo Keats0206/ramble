@@ -14,8 +14,8 @@
             filePath = "Ramble/View/AppView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "actionSelection"
             landmarkType = "24">
             <Locations>
@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
-            landmarkName = "setupNowPlaying()"
+            landmarkName = "setupRemoteTransportControls()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

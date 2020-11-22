@@ -134,7 +134,7 @@ struct NowPlayingCard: View {
                     
                     Spacer()
                     
-                    AudioControlView(player: globalPlayer.globalRambPlayer!, showSlider: $showSlider)
+                    AudioControlView(player: globalPlayer.globalRambPlayer!)
                         .padding(.bottom, 35)
                     
                 }

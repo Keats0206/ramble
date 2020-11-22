@@ -15,5 +15,6 @@ target 'Ramble' do
 	pod 'MinimizableView'
 	pod 'SDWebImageSwiftUI'
 	pod 'SwiftUIRefresh'
+	pod 'SwiftVideoGenerator'
 
 end

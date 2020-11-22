@@ -351,6 +351,7 @@ PODS:
     - SDWebImage (~> 5.7)
   - SwiftUIRefresh (0.0.3):
     - Introspect (~> 0.1.0)
+  - SwiftVideoGenerator (1.4.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -362,6 +363,7 @@ DEPENDENCIES:
   - PRTween
   - SDWebImageSwiftUI
   - SwiftUIRefresh
+  - SwiftVideoGenerator
 
 SPEC REPOS:
   trunk:
@@ -392,6 +394,7 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageSwiftUI
     - SwiftUIRefresh
+    - SwiftVideoGenerator
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -421,7 +424,8 @@ SPEC CHECKSUMS:
   SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
   SDWebImageSwiftUI: 43687ffe232ddd33fe0659498b7ca9884fdd6b35
   SwiftUIRefresh: ca6ae2718d25aad5dd68bbf5d2ae36ef6ade98bf
+  SwiftVideoGenerator: 804637c18f68a4f205d806e305ebceb4adcf3d25
 
-PODFILE CHECKSUM: 97ac7ffce630110eabeeffcb6b7191ed3992f61d
+PODFILE CHECKSUM: 9c54b4465869987a62775d874a13dab4ed26778f
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0.beta.2

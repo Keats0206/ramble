@@ -12,7 +12,6 @@ import SDWebImageSwiftUI
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
     @Environment(\.presentationMode) var presentationMode
-
     @State var profileImage: UIImage?
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
