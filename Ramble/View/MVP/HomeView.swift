@@ -30,15 +30,6 @@ struct HomeView: View {
                         print("Modal dismisses")
                     }) {
                         EditProfileView(user: $user)
-                    }, trailing:
-                    
-                    Button(action: {
-                        self.position = CardPosition.top
-                    }) {
-                        Image(systemName: "music.note.list")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Color.accent3)
                 }
             )
         }

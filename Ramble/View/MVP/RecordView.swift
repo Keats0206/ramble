@@ -29,7 +29,7 @@ struct RecordView: View {
             
             if position == .bottom {
                 
-                HStack{
+                HStack {
                     
                     TextField("Record to share your voice", text: $txt)
                         .font(.headline)
@@ -71,44 +71,62 @@ struct RecordView: View {
                         Text("3:30")
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                     
-                    }.padding(.bottom)
+                    }
+                    .padding(.bottom)
                     
                     HStack {
                         
                         Button(action: {
+                        
                             position = CardPosition.bottom
                             txt = ""
                             audioRecorder.recorderState = .ready
+                        
                         }) {
+                        
                             Text("Cancel")
+                        
                         }
                         
                         Spacer()
                         
                         HStack(spacing: 50) {
+                            
                             Button(action: {
+                            
                                 print("Show share to IG menu")
+                                
                             }) {
+                                
                                 Image(systemName: "backward.end.fill")
+                            
                             }
                                 
                             recordButton
                                 
                             Button(action: {
+                                
                                 print("Show share to IG menu")
+                                
                             }) {
+                                
                                 Image(systemName: "goforward.15")
+                                
                             }
                         }
-                        .foregroundColor(Color.primary)
                         
                         Spacer()
                         
                         Button(action: {
+                            
                             print("Done")
+                        
                         }){
+                        
                             Text("Done")
+                        
                         }
+                    
                     }
                 
                 }
