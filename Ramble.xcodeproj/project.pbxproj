@@ -39,7 +39,7 @@
 		4070B85125674F34006D6630 /* RambUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85025674F34006D6630 /* RambUserList.swift */; };
 		4070B85325675207006D6630 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85225675207006D6630 /* RecordView.swift */; };
 		4070B85525675605006D6630 /* RecordPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85425675605006D6630 /* RecordPostView.swift */; };
-		407A4B5E256AE42C008F475B /* RecordingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EA6CB02568D5AB00772353 /* RecordingList.swift */; };
+		407A4B5E256AE42C008F475B /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EA6CB02568D5AB00772353 /* RecordingsList.swift */; };
 		407A4B60256AE71A008F475B /* PopOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407A4B5F256AE71A008F475B /* PopOverCard.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1474A25016C5F00A2781A /* ProfileView.swift */; };
@@ -149,7 +149,7 @@
 		40EA6C4D25687CA300772353 /* Higher Ad 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Higher Ad 1.mp4"; sourceTree = "<group>"; };
 		40EA6C5125687D2B00772353 /* video1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video1.mp4; sourceTree = "<group>"; };
 		40EA6C53256883A100772353 /* ShareVideoCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoCreator.swift; sourceTree = "<group>"; };
-		40EA6CB02568D5AB00772353 /* RecordingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingList.swift; sourceTree = "<group>"; };
+		40EA6CB02568D5AB00772353 /* RecordingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsList.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40ECF89D2564B5760090F618 /* LoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		40F3FA2F248EA0F100F3CE02 /* RambModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambModel.swift; sourceTree = "<group>"; };
@@ -276,6 +276,7 @@
 			children = (
 				40EA6CB22568D7C900772353 /* MVP */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
+				4070B85025674F34006D6630 /* RambUserList.swift */,
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
 				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
@@ -317,10 +318,9 @@
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				4014BE3C25674CA7009D9823 /* HomeView.swift */,
-				4070B85025674F34006D6630 /* RambUserList.swift */,
 				4070B85225675207006D6630 /* RecordView.swift */,
 				4070B85425675605006D6630 /* RecordPostView.swift */,
-				40EA6CB02568D5AB00772353 /* RecordingList.swift */,
+				40EA6CB02568D5AB00772353 /* RecordingsList.swift */,
 			);
 			path = MVP;
 			sourceTree = "<group>";
@@ -556,7 +556,7 @@
 				40B3388E25268D2A009321F2 /* RambCellViewModel.swift in Sources */,
 				40B3385E25267F54009321F2 /* RambService2.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
-				407A4B5E256AE42C008F475B /* RecordingList.swift in Sources */,
+				407A4B5E256AE42C008F475B /* RecordingsList.swift in Sources */,
 				EE1E0DCC255E5B7600DCA17C /* ErrorBubbleView.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
 				4070B85325675207006D6630 /* RecordView.swift in Sources */,

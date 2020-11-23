@@ -33,12 +33,10 @@ public class ShareService: ObservableObject {
 //    }
     
 // Concert this to accept a video url
-    func createVideoWithAudio(fileName: String){
-        if let audioURL4 = Bundle.main.url(forResource: "Jimi", withExtension: "mp3") {
-//          LoadingView.lockView()
+    func createVideoWithAudio(fileName: String, image: UIImage, audio: URL){
           VideoGenerator.fileName = "filename"
           VideoGenerator.shouldOptimiseImageForVideo = true
-          VideoGenerator.current.generate(withImages: [#imageLiteral(resourceName: "experienced")], andAudios: [audioURL4], andType: .single, { (progress) in
+          VideoGenerator.current.generate(withImages: [image], andAudios: [audio], andType: .single, { (progress) in
             print(progress)
           }, outcome: { (url) in
             switch url {
@@ -48,9 +46,6 @@ public class ShareService: ObservableObject {
                 print(error.localizedDescription)
             }
           })
-        } else {
-            print("Missing resource files")
-        }
     }
     
 // swiftlint:disable all

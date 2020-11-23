@@ -81,11 +81,12 @@ class AudioRecorder: NSObject,ObservableObject {
         recordings.removeAll()
         let fileManager = FileManager.default
         let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
         //swiftlint:disable force_try
         let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
         //swiftlint:enable force_try
         for audio in directoryContents {
-            let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
+            let recording = Recording(fileUrl: audio, createdAt: getCreationDate(for: audio))
             recordings.append(recording)
         }
         recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})

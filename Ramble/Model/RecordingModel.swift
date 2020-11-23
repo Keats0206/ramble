@@ -9,6 +9,6 @@
 import Foundation
 
 struct Recording {
-    let fileURL: URL
+    let fileUrl: URL
     let createdAt: Date
 }

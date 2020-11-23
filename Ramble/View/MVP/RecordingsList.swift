@@ -15,7 +15,7 @@ struct RecordingsList: View {
     var body: some View {
         List {
             ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordingRow(audioURL: recording.fileURL)
+                RecordingRow(recording: recording)
             }.onDelete(perform: delete)
         }
     }
@@ -29,32 +29,26 @@ struct RecordingRow: View {
     @State var openCell: Bool = false
     @State var date: Date = Date()
     @State var showShareMenu: Bool = false
-    var audioURL: URL
+    @State var caption = ""
+
+    var recording: Recording
     
     var body: some View {
-        ZStack(alignment: .top){
+        ZStack(alignment: .top) {
             VStack(alignment: .leading) {
-            
                 HStack {
-                
                     VStack(alignment: .leading){
-                    
                         Text("11/12")
                             .font(.subheadline)
                             .bold()
                             .opacity(0.5)
-                        
-                        Text("Ramb Title")
+                        TextField("Untitled Ramb", text: $caption)
                             .font(.headline)
                     }
-                    
                     Spacer()
-                    
                     Text("3:30")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
-                    
                 }.padding(.bottom)
-                                                    
                 if openCell {
                     recordingRowBottom
                         .padding(.top)
@@ -71,8 +65,7 @@ struct RecordingRow: View {
 
 private extension RecordingRow {
     var actionSheet: ActionSheet {
-            ActionSheet(title: Text("Action Sheet"),
-                        message: Text("Choose Option"),
+            ActionSheet(title: Text("Share Menu"),
                         buttons: [
                             .default(Text("IG Stories")) { self.shareToIG() },
                             .destructive(Text("Cancel"))
@@ -91,33 +84,32 @@ private extension RecordingRow {
             Spacer()
             
             HStack(spacing: 20) {
-                
                 Button(action: {
                     print("Show share to IG menu")
                 }) {
                     Image(systemName: "backward.end.fill")
                 }
-                
                 Button(action: {
                     print("Show share to IG menu")
                 }) {
                     Image(systemName: "play.fill")
                 }
-                
                 Button(action: {
                     print("Show share to IG menu")
                 }) {
                     Image(systemName: "goforward.15")
                 }
             }
-            .foregroundColor(Color.white)
+            .foregroundColor(Color.primary)
+            
         }.font(.title)
         .buttonStyle(BorderlessButtonStyle())
     }
     
     func shareToIG(){
-//        ShareService.shared.instagramStoriesVideo()
-        ShareService.shared.createVideoWithAudio(fileName: "FileName")
+        ShareService.shared.createVideoWithAudio(fileName: "FileName",
+                                                 image: UIImage(imageLiteralResourceName: "experienced"),
+                                                 audio: recording.fileUrl)
     }
 }
 

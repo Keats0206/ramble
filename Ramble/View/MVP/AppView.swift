@@ -54,9 +54,8 @@ struct AppView: View {
     var body: some View {
         ZStack {
             HomeView(user: user, position: $position)
-            
             SlideOverCard($position, backgroundStyle: $background) {
-                BottomSheet()
+                RecordView(position: $position, user: user)
             }
         }
         .accentColor(Color.accent3)

@@ -32,14 +32,14 @@ public enum BackgroundStyle {
 
 public enum CardPosition: CGFloat {
     
-    case bottom , middle, top
+    case bottom, middle, top
     
     func offsetFromTop() -> CGFloat {
         switch self {
         case .bottom:
-            return UIScreen.main.bounds.height
+            return UIScreen.main.bounds.height - 175
         case .middle:
-            return UIScreen.main.bounds.height / 1.8
+            return 350
         case .top:
             return 40
         }
@@ -142,13 +142,11 @@ struct Card: ViewModifier {
         
         // Determining whether drawer is above or below `.partiallyRevealed` threshold for snapping behavior.
         if offsetFromTopOfView <= CardPosition.middle.offsetFromTop() {
-            higherStop = .bottom
-//           higherStop = .top
+//            higherStop = .top
+            higherStop = .middle
             lowerStop = .bottom
-//          lowerStop = .middle
         } else {
-//          higherStop = .middle
-            higherStop = .bottom
+            higherStop = .middle
             lowerStop = .bottom
         }
         
@@ -188,9 +186,7 @@ struct BlurView: UIViewRepresentable {
         ])
         return view
     }
-
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<BlurView>) {}
-
 }
 
 @available(iOS 13.0, *)

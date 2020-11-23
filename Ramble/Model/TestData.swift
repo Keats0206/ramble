@@ -56,4 +56,4 @@ let testRamb = Ramb2(id: "1",
 
 let testPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)
 
-let testRecording = Recording(fileURL: URL(string: "\(testRamb.rambUrl)")!, createdAt: Date())
+let testRecording = Recording(fileUrl: URL(string: "\(testRamb.rambUrl)")!, createdAt: Date())
