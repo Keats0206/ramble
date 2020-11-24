@@ -9,11 +9,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var globalPlayer: GlobalPlayer
+    
     @State var user: User
     @State var showProfile: Bool = false
     @State var showList: Bool = false
     
-    @State var viewControl: ViewControl = .recordings
+    @State var viewControl: ViewControl = .create
     
     var body: some View {
         NavigationView{
@@ -31,9 +33,9 @@ struct HomeView: View {
                         switch viewControl
                         {
                         case .create:
-                            VStack(alignment: .leading){
-                                HStack{
-                                    Text("Tap the circle to start recording!")
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text("Untitled Record #1")
                                         .font(.title)
                                         .bold()
                                     Spacer()
@@ -41,20 +43,19 @@ struct HomeView: View {
                                 Spacer()
                             }.padding()
                         case .recordings:
-                            RecordingsList()
-                                .animation(.linear(duration: 5))
+                            RambUserList(user: user)
                         }
                     }
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
 //                  AudioRecodView
                     HStack {
-                        RecordView(viewControl: $viewControl, user: user)
+                        RecordPlayerView(player: globalPlayer.globalRambPlayer, viewControl: $viewControl, user: user)
                     }
                     .frame(height: UIScreen.main.bounds.height / 5)
-//                  TabView
-                    HStack{
-                        Spacer()
                         
+//                  TabView
+                    HStack {
+                        Spacer()
                         Button(action: {
                             self.viewControl = .create
                         }){
@@ -64,9 +65,7 @@ struct HomeView: View {
                         .foregroundColor(viewControl == .create ? .gray : .white)
                         .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
                         .cornerRadius(8.0)
-                        
                         Spacer()
-                        
                         Button(action: {
                             self.viewControl = .recordings
                         }){
@@ -76,10 +75,9 @@ struct HomeView: View {
                         .foregroundColor(viewControl == .recordings ? .gray : .white)
                         .background(Color.white.opacity(viewControl == .recordings ? 0.2 : 0.0))
                         .cornerRadius(8.0)
-                        
                         Spacer()
                     }
-                    .padding(.top)
+                        .padding(.top)
                 }
             }
         }

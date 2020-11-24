@@ -20,7 +20,7 @@ struct AudioControlView: View {
     var body: some View {
         VStack{
             ZStack {
-                Controls(player: self.$player, isPlaying: self.$isPlaying, pannel: self.$showControls, value: self.$value)
+                Controls(player: self.$player, isPlaying: self.$isPlaying)
             }
         }
     }
@@ -29,8 +29,6 @@ struct AudioControlView: View {
 struct Controls : View {
     @Binding var player: AVPlayer
     @Binding var isPlaying: Bool
-    @Binding var pannel: Bool
-    @Binding var value: Float
 
     var body : some View {
         ZStack {
@@ -38,11 +36,11 @@ struct Controls : View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        self.player.seek(to: CMTime(seconds: self.getSeconds() - 10, preferredTimescale: 1))
+//                        self.player.seek(to: CMTime(seconds: self.getSeconds() - 10, preferredTimescale: 1))
                     }) {
-                        Image(systemName: "gobackward.15")
-                            .font(.system(size: 25))
-                    }
+                        Image(systemName: "backward.end.fill")
+                            .font(.system(size: 30))
+                    }.buttonStyle(PlayerButtonStyle())
                     Spacer()
                     Button(action: {
                         if self.isPlaying {
@@ -54,36 +52,36 @@ struct Controls : View {
                         }
                     }) {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
-                            .font(.system(size: 40))
-                    }
+                            .font(.system(size: 50))
+                    }.buttonStyle(PlayerButtonStyle())
                     Spacer()
                     Button(action: {
-                        self.player.seek(to: CMTime(seconds: self.getSeconds() + 10, preferredTimescale: 1))
+//                        self.player.seek(to: CMTime(seconds: self.getSeconds() + 10, preferredTimescale: 1))
                     }) {
                         Image(systemName: "goforward.15")
-                            .font(.system(size: 25))
-                    }
+                            .font(.system(size: 30))
+                    }.buttonStyle(PlayerButtonStyle())
                     Spacer()
                 }.foregroundColor(.primary)
             }
         }
-        .onAppear {
-        self.player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
-            self.value = self.getSliderValue()
-            if self.value == 1.0 {
-                self.isPlaying = false
-            }
-        }
+//        .onAppear {
+//        self.player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
+////            self.value = self.getSliderValue()
+//            if self.value == 1.0 {
+//                self.isPlaying = false
+//            }
+//        }
+//    }
     }
-    }
-
-    func getSliderValue()-> Float {
-        return Float(self.player.currentTime().seconds / (self.player.currentItem?.duration.seconds)!)
-    }
-
-    func getSeconds()-> Double {
-        return Double(Double(self.value) * (self.player.currentItem?.duration.seconds)!)
-    }
+//
+//    func getSliderValue()-> Float {
+//        return Float(self.player.currentTime().seconds / (self.player.currentItem?.duration.seconds)!)
+//    }
+//
+//    func getSeconds()-> Double {
+//        return Double(Double(self.value) * (self.player.currentItem?.duration.seconds)!)
+//    }
 }
 
 //struct CustomProgressBar: UIViewRepresentable {

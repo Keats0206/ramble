@@ -8,46 +8,33 @@
 
 import SwiftUI
 
-struct RecordingRow: View {
-    @State var openCell: Bool = false
-    @State var date: Date = Date()
+struct RambRow: View {
     @State var showShareMenu: Bool = false
-    @State var caption = ""
 
-    var recording: Recording
+    var ramb: Ramb2
     
     var body: some View {
         ZStack(alignment: .top) {
-            
             VStack(alignment: .leading) {
-                
-                HStack {
-                    
+                HStack(alignment: .center){
                     VStack(alignment: .leading){
-                        
-                        Text("11/12")
+                        Text("\(formatDate(timestamp: ramb.timestamp)) ago")
                             .font(.subheadline)
                             .bold()
                             .opacity(0.5)
-                        
-                        Text("Untitled Ramb")
+                        Text("\(ramb.caption)")
                             .font(.headline)
                     }
-                    
                     Spacer()
-                    
-                    Text("3:30")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                    
+                    Text("\(TimeHelper.formatSecondsToHMS(ramb.length))")
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
                 }.padding(.bottom)
             }
         }
-        .frame(height: openCell ? 150 : 50)
-        .animation(.easeIn(duration: 0.3))
     }
 }
 
-private extension RecordingRow {
+private extension RambRow {
     var actionSheet: ActionSheet {
             ActionSheet(title: Text("Share Menu"),
                         buttons: [
@@ -91,9 +78,10 @@ private extension RecordingRow {
     }
     
     func shareToIG(){
-        ShareService.shared.createVideoWithAudio(
-            fileName: "FileName",
-            image: UIImage(imageLiteralResourceName: "ramble"),
-            audio: recording.fileUrl)
+        print("Hello")
+//        ShareService.shared.createVideoWithAudio(
+//            fileName: "FileName",
+//            image: UIImage(imageLiteralResourceName: "ramble"),
+//            audio: recording.fileUrl)
     }
 }

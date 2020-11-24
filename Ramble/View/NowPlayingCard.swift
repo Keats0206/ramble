@@ -134,7 +134,7 @@ struct NowPlayingCard: View {
                     
                     Spacer()
                     
-                    AudioControlView(player: globalPlayer.globalRambPlayer!)
+                    AudioControlView(player: globalPlayer.globalRambPlayer)
                         .padding(.bottom, 35)
                     
                 }

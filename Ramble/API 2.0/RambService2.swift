@@ -10,7 +10,7 @@ import Firebase
 import Combine
 
 class RambService2: ObservableObject {
-    @Published var globalPlayer: GlobalPlayer?
+    @Published var globalPlayer = GlobalPlayer()
     static let shared = RambService2()
     
     @Published var allRambs = [Ramb2]()
@@ -52,8 +52,8 @@ class RambService2: ObservableObject {
                     self.allRambs.sort(by: { $0.plays > $1.plays })
 
                     if let ramb = self.allRambs.first {
-                        self.globalPlayer?.globalRambs = [ramb]
-                        self.globalPlayer?.setGlobalPlayer(ramb: ramb)
+                        self.globalPlayer.playingRamb = ramb
+                        self.globalPlayer.setGlobalPlayer(ramb: ramb)
                         
                     }
                 }

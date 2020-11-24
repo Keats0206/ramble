@@ -37,7 +37,7 @@
 		406FAD1F2450D6D200223873 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD1E2450D6D200223873 /* AuthView.swift */; };
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
 		4070B85125674F34006D6630 /* RambUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85025674F34006D6630 /* RambUserList.swift */; };
-		4070B85325675207006D6630 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85225675207006D6630 /* RecordView.swift */; };
+		4070B85325675207006D6630 /* RecordPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85225675207006D6630 /* RecordPlayerView.swift */; };
 		4070B85525675605006D6630 /* RecordPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85425675605006D6630 /* RecordPostView.swift */; };
 		407A4B5E256AE42C008F475B /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EA6CB02568D5AB00772353 /* RecordingsList.swift */; };
 		407A4B60256AE71A008F475B /* PopOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407A4B5F256AE71A008F475B /* PopOverCard.swift */; };
@@ -134,7 +134,7 @@
 		406FAD1E2450D6D200223873 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		4070B85025674F34006D6630 /* RambUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserList.swift; sourceTree = "<group>"; };
-		4070B85225675207006D6630 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		4070B85225675207006D6630 /* RecordPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayerView.swift; sourceTree = "<group>"; };
 		4070B85425675605006D6630 /* RecordPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPostView.swift; sourceTree = "<group>"; };
 		407A4B5F256AE71A008F475B /* PopOverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverCard.swift; sourceTree = "<group>"; };
 		408BA721256C874D0060265F /* RecordingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingRow.swift; sourceTree = "<group>"; };
@@ -279,7 +279,8 @@
 			children = (
 				40EA6CB22568D7C900772353 /* MVP */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
-				4070B85025674F34006D6630 /* RambUserList.swift */,
+				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
+				40EA6CB02568D5AB00772353 /* RecordingsList.swift */,
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
 				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
@@ -288,7 +289,6 @@
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
-				40E56A0E255B508100BEA192 /* AudioControlView.swift */,
 				EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */,
 				405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */,
 			);
@@ -320,11 +320,11 @@
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				4014BE3C25674CA7009D9823 /* HomeView.swift */,
-				4070B85225675207006D6630 /* RecordView.swift */,
+				4070B85225675207006D6630 /* RecordPlayerView.swift */,
 				4070B85425675605006D6630 /* RecordPostView.swift */,
-				40EA6CB02568D5AB00772353 /* RecordingsList.swift */,
 				408BA721256C874D0060265F /* RecordingRow.swift */,
-				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
+				4070B85025674F34006D6630 /* RambUserList.swift */,
+				40E56A0E255B508100BEA192 /* AudioControlView.swift */,
 			);
 			path = MVP;
 			sourceTree = "<group>";
@@ -563,7 +563,7 @@
 				408BA722256C874D0060265F /* RecordingRow.swift in Sources */,
 				EE1E0DCC255E5B7600DCA17C /* ErrorBubbleView.swift in Sources */,
 				40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */,
-				4070B85325675207006D6630 /* RecordView.swift in Sources */,
+				4070B85325675207006D6630 /* RecordPlayerView.swift in Sources */,
 				4056E9A4252404E10004E598 /* Extensions.swift in Sources */,
 				405A5DE2250802F4009F9C6B /* SearchView.swift in Sources */,
 				EEFCE0FD255EDC2E002EF077 /* AppHelper.swift in Sources */,
