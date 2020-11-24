@@ -53,12 +53,8 @@ struct AppView: View {
     
     var body: some View {
         ZStack {
-            HomeView(user: user, position: $position)
-            SlideOverCard($position, backgroundStyle: $background) {
-                RecordView(position: $position, user: user)
-            }
+            HomeView(user: user)
         }
-        .accentColor(Color.accent3)
         .onAppear {
             self.getUser()
             viewModel.setUp(globalPlayer: self.globalPlayer)

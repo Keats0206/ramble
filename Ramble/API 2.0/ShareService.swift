@@ -33,9 +33,9 @@ public class ShareService: ObservableObject {
 //    }
     
 // Concert this to accept a video url
-    func createVideoWithAudio(fileName: String, image: UIImage, audio: URL){
+    func createVideoWithAudio(fileName: String, image: UIImage, audio: URL) {
           VideoGenerator.fileName = "filename"
-          VideoGenerator.shouldOptimiseImageForVideo = true
+          VideoGenerator.shouldOptimiseImageForVideo = false
           VideoGenerator.current.generate(withImages: [image], andAudios: [audio], andType: .single, { (progress) in
             print(progress)
           }, outcome: { (url) in

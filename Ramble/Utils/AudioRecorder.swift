@@ -74,7 +74,6 @@ class AudioRecorder: NSObject,ObservableObject {
         recording = false
         fetchRecordings()
         recorderState = .stopped
-        recorderState = .uploaded
     }
     
     func fetchRecordings() {
@@ -98,5 +97,4 @@ enum RecordState {
     case ready
     case started
     case stopped
-    case uploaded
 }

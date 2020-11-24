@@ -13,124 +13,99 @@ struct RecordView: View {
     
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
-    
-    @Binding var position: CardPosition
-    
+        
     @State private var animateRecording = false
     @State var openAudioUpload = false
     @State var animateUploading = false
-    @State var isActive = false
     @State var txt = ""
+    
+    @Binding var viewControl: ViewControl
     
     var user: User
     
+    var buttonSize: CGFloat{
+        130
+    }
+    
     var body: some View {
-        ZStack {
-            
-            if position == .bottom {
-                
-                HStack {
-                    
-                    TextField("Record to share your voice", text: $txt)
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    recordButton
-                            
-                }.padding()
-            }
-            
-            if position == .middle {
-                
-                VStack(spacing: 40) {
-                    
-                    HStack {
-                        
-                        Spacer()
-                    
-                        Text("Share")
-                    
+        ZStack{
+            if viewControl == .create {
+                VStack{
+                        recordButton
                     }
-                    
-                    HStack {
-                        
-                        VStack(alignment: .leading){
+            }
+            if viewControl == .recordings {
+                VStack {
+                    HStack(alignment: .top) {
+                        VStack(alignment: .center){
+                            TextField("Record to share your voice", text: $txt)
+                                .font(.system(size: 23, weight: .bold))
+                                .multilineTextAlignment(.center)
                             
                             Text("11/12")
-                                .font(.subheadline)
+                                .font(.system(size: 18, weight: .bold))
                                 .bold()
                                 .opacity(0.5)
-                            
-                            TextField("Record to share your voice", text: $txt)
-                                .font(.headline)
-                        }
-                        
-                        Spacer()
-                        
-                        Text("3:30")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                    
+                        }.frame(width: UIScreen.main.bounds.width - 50)
                     }
-                    .padding(.bottom)
-                    
+
+                    Text(String(format: "%.1f", timerManager.secondsElapsed))
+                        .font(.system(size: 40, weight: .bold, design: .rounded))
+
                     HStack {
-                        
+                        Spacer()
                         Button(action: {
-                        
-                            position = CardPosition.bottom
-                            txt = ""
-                            audioRecorder.recorderState = .ready
-                        
+                            print("Show share to IG menu")
                         }) {
-                        
-                            Text("Cancel")
-                        
-                        }
-                        
+                            Image(systemName: "backward.end")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }.buttonStyle(PlayerButtonStyle())
                         Spacer()
-                        
-                        HStack(spacing: 50) {
-                            
-                            Button(action: {
-                            
-                                print("Show share to IG menu")
-                                
-                            }) {
-                                
-                                Image(systemName: "backward.end.fill")
-                            
-                            }
-                                
-                            recordButton
-                                
-                            Button(action: {
-                                
-                                print("Show share to IG menu")
-                                
-                            }) {
-                                
-                                Image(systemName: "goforward.15")
-                                
-                            }
-                        }
-                        
-                        Spacer()
-                        
                         Button(action: {
-                            
-                            print("Done")
-                        
-                        }){
-                        
-                            Text("Done")
-                        
-                        }
-                    
+                            print("Show share to IG menu")
+                        }) {
+                            Image(systemName: "play")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }.buttonStyle(PlayerButtonStyle())
+                        Spacer()
+                        Button(action: {
+                            print("Show share to IG menu")
+                        }) {
+                            Image(systemName: "goforward.15")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }.buttonStyle(PlayerButtonStyle())
+                        Spacer()
                     }
-                
+
+//                    HStack{
+//
+//                        Spacer()
+//
+//                        Button(action: {
+//                            print("Share")
+//                        }) {
+//                            Image(systemName: "ellipsis.circle")
+//                                .resizable()
+//                                .frame(width: 20, height: 20)
+//                        }
+//
+//                        Spacer()
+//
+//                        Button(action: {
+//                            print("Share")
+//                        }) {
+//                            Image(systemName: "square.and.arrow.up")
+//                                .resizable()
+//                                .frame(width: 20, height: 20)
+//                        }
+//
+//                        Spacer()
+//                    }
                 }
-                .padding()
+                .foregroundColor(.primary)
             }
         }
         .animation(.interactiveSpring())
@@ -142,18 +117,22 @@ struct RecordView: View {
 
 private extension RecordView {
     var recordButton: some View {
-        VStack {
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 4)
+                .foregroundColor(Color.accent3)
+                .frame(width: buttonSize + 10, height: buttonSize + 10)
+            
             switch audioRecorder.recorderState {
             case .ready:
                 Button(action: {
                     audioRecorder.startRecording()
                     timerManager.start()
                 }) {
-                    Image(systemName: "mic.circle.fill")
+                    Image(systemName: "mic.circle")
                         .resizable()
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(.red)
-                }
+                        .frame(width: buttonSize, height: buttonSize)
+                }.buttonStyle(PlayerButtonStyle())
             case .started:
 //                    Text(String(format: "%.1f", timerManager.secondsElapsed))
 //                        .font(.system(size: 16, weight: .bold, design: .rounded))
@@ -161,39 +140,32 @@ private extension RecordView {
                     audioRecorder.stopRecording()
                     timerManager.stop()
                 }) {
-                    Image(systemName: "pause.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(.red)
-//                        .background(
-//                            ZStack {
-//                                Circle()
-//                                    .stroke(Color.red, lineWidth: 100)
-//                                    .scaleEffect(animateRecording ? 1 : 0)
-//                                Circle()
-//                                    .stroke(Color.red, lineWidth: 100)
-//                                    .scaleEffect(animateRecording ? 1.5 : 0)
-//                                Circle()
-//                                    .stroke(Color.red, lineWidth: 100)
-//                                    .scaleEffect(animateRecording ? 2 : 0)
-//                            }
-//                            .opacity(animateRecording ? 0.0 : 0.2)
-//                            .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: false))
-//                        )
-                        .onAppear {
-                            self.animateRecording = true
-                        }
+                    Image(systemName: "stop.circle.fill")
+                        .frame(width: buttonSize, height: buttonSize)
                 }
             case .stopped:
-                LoadingAnimation() //leading animation
-            case .uploaded:
-                Spacer()// Sends user to the next view
-                    .onAppear {
-                        isActive.toggle()
-                        position = CardPosition.bottom
+                Button(action: {
+                    print("play recording")
+                }) {
+                    Image(systemName: "play.circle")
+                }
             }
         }
-        }
+    }
+}
+
+struct RecordingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        RecordView(viewControl: .constant(.create), user: testUser)
+    }
+}
+
+
+struct PlayerButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding()
+            .scaleEffect(configuration.isPressed ? 1.3 : 1.0)
     }
 }

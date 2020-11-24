@@ -39,7 +39,7 @@ public enum CardPosition: CGFloat {
         case .bottom:
             return UIScreen.main.bounds.height - 175
         case .middle:
-            return 350
+            return 390
         case .top:
             return 40
         }
@@ -124,7 +124,7 @@ struct Card: ViewModifier {
         }
         .offset(y:  max(0, self.position.offsetFromTop() + self.dragState.translation.height))
         .animation((self.dragState.isDragging ? nil : animation))
-        .gesture(drag)
+        .gesture(position == .middle ? drag  : nil)
     }
     
     private func onDragEnded(drag: DragGesture.Value) {
