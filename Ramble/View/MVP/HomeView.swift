@@ -19,19 +19,17 @@ struct HomeView: View {
         NavigationView{
             ZStack{
                 GeometryReader { geometry in
-                    
                     Image("gradient")
                         .resizable()
                         .aspectRatio(geometry.size, contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
-                    
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
-                    
                     VStack{
 //                  UpperView
                     HStack{
-                        switch viewControl {
+                        switch viewControl
+                        {
                         case .create:
                             VStack(alignment: .leading){
                                 HStack{
@@ -44,7 +42,7 @@ struct HomeView: View {
                             }.padding()
                         case .recordings:
                             RecordingsList()
-                                .animation(.easeInOut)
+                                .animation(.linear(duration: 5))
                         }
                     }
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
@@ -91,9 +89,7 @@ struct HomeView: View {
                         self.showProfile.toggle()
                     }) {
                         Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Color.accent3)
+                            .font(.title)
                     }.sheet(isPresented: $showProfile, onDismiss: {
                         print("Modal dismisses")
                     }) {

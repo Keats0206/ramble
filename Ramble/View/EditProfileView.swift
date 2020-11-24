@@ -19,7 +19,7 @@ struct EditProfileView : View {
     @State var error = false
     
     @Binding var user: User
-    
+
     func saveProfile() {
         if let image = profileImage {
             self.loading = true
@@ -34,16 +34,13 @@ struct EditProfileView : View {
             presentationMode.wrappedValue.dismiss()
         }
     }
-    
     func updateUserData() {
         UserService2.shared.saveUserProfile(user: user)
         RambService2.shared.updateUserData(user: user)
     }
-    
     func openThing() {
         print("Open link to review")
     }
-    
     var sheet: ActionSheet {
         ActionSheet(
             title: Text("Action"),
@@ -68,8 +65,7 @@ struct EditProfileView : View {
             LoadingView(isShowing: $loading, content: {
                 ZStack {
                     VStack(spacing: 20) {
-                        changeProfileImage
-                            .font(.system(.subheadline, design: .rounded))
+//                      changeProfileImage
                         editUserInfo
                         settingsLinks
                         Spacer()
@@ -77,7 +73,6 @@ struct EditProfileView : View {
                             .font(.system(.subheadline, design: .rounded))
                     }
                     .font(.system(.headline, design: .rounded))
-                    .foregroundColor(.flatDarkBackground)
                     .padding()
                 }
             })
@@ -92,7 +87,8 @@ struct EditProfileView : View {
                 }) {
                     Text("Save")
                 }
-            ).font(.system(.headline, design: .rounded))
+            )
+            .font(.system(.headline, design: .rounded))
             .foregroundColor(Color.accent3)
         }
     }
@@ -197,14 +193,12 @@ private extension EditProfileView {
         }.foregroundColor(Color.red)
     }
 }
-
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView(user: .constant(testUser))
             .environment(\.colorScheme, .dark)
     }
 }
-
 struct NetworkImage: View {
     let url: URL?
     let image: UIImage?

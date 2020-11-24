@@ -37,73 +37,41 @@ struct RecordView: View {
             if viewControl == .recordings {
                 VStack {
                     HStack(alignment: .top) {
-                        VStack(alignment: .center){
+                        VStack(alignment: .leading){
                             TextField("Record to share your voice", text: $txt)
                                 .font(.system(size: 23, weight: .bold))
-                                .multilineTextAlignment(.center)
-                            
                             Text("11/12")
                                 .font(.system(size: 18, weight: .bold))
                                 .bold()
                                 .opacity(0.5)
                         }.frame(width: UIScreen.main.bounds.width - 50)
-                    }
-
-                    Text(String(format: "%.1f", timerManager.secondsElapsed))
-                        .font(.system(size: 40, weight: .bold, design: .rounded))
-
+                    }.padding(.vertical)
+//                    Text(String(format: "%.1f", timerManager.secondsElapsed))
+//                        .font(.system(size: 40, weight: .bold, design: .rounded))
                     HStack {
                         Spacer()
                         Button(action: {
                             print("Show share to IG menu")
                         }) {
-                            Image(systemName: "backward.end")
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                            Image(systemName: "backward.end.fill")
+                                .font(.system(size: 30))
                         }.buttonStyle(PlayerButtonStyle())
                         Spacer()
                         Button(action: {
                             print("Show share to IG menu")
                         }) {
-                            Image(systemName: "play")
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                            Image(systemName: "play.fill")
+                                .font(.system(size: 50))
                         }.buttonStyle(PlayerButtonStyle())
                         Spacer()
                         Button(action: {
                             print("Show share to IG menu")
                         }) {
                             Image(systemName: "goforward.15")
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                                .font(.system(size: 30))
                         }.buttonStyle(PlayerButtonStyle())
                         Spacer()
                     }
-
-//                    HStack{
-//
-//                        Spacer()
-//
-//                        Button(action: {
-//                            print("Share")
-//                        }) {
-//                            Image(systemName: "ellipsis.circle")
-//                                .resizable()
-//                                .frame(width: 20, height: 20)
-//                        }
-//
-//                        Spacer()
-//
-//                        Button(action: {
-//                            print("Share")
-//                        }) {
-//                            Image(systemName: "square.and.arrow.up")
-//                                .resizable()
-//                                .frame(width: 20, height: 20)
-//                        }
-//
-//                        Spacer()
-//                    }
                 }
                 .foregroundColor(.primary)
             }
