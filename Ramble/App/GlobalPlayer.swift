@@ -16,29 +16,27 @@ class GlobalPlayer: ObservableObject {
     @Published var playingRamb: Ramb2 = testRamb
     @Published var globalRambPlayer: AVPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)
     @Published var isPlaying = false
-    @Published var didSet = false
+    @Published var value : Float = 0
     
     let session = AVAudioSession.sharedInstance()
             
     func setGlobalPlayer(ramb: Ramb2) {
-        do {
-            try session.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longFormAudio, options: [])
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch let error {
-            fatalError("*** Unable to set up the audio session: \(error.localizedDescription) ***")
-        }
         let url = URL(string: "\(ramb.rambUrl)")
         self.globalRambPlayer = AVPlayer(url: url!)
-        self.didSet = true
         return
     }
     
-//    func play() {
-//        globalRambPlayer.play()
-//        isPlaying = true
-//        setupNowPlaying()
-//        setupRemoteTransportControls()
-//    }
+    func play() {
+        globalRambPlayer.play()
+        isPlaying = true
+        setupNowPlaying()
+        setupRemoteTransportControls()
+    }
+    
+    func pause() {
+        globalRambPlayer.pause()
+        isPlaying = false
+    }
 
     func setupNowPlaying( ) {
 // Define Now Playing Info

@@ -17,12 +17,8 @@ struct RecordPlayerView: View {
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
         
-    @State private var animateRecording = false
     @State var openAudioUpload = false
-    @State var animateUploading = false
     @State var txt = ""
-    
-    @State var player: AVPlayer
     @State var rambUrl: String?
     
     @Binding var viewControl: ViewControl
@@ -32,7 +28,6 @@ struct RecordPlayerView: View {
     var buttonSize: CGFloat {
         80
     }
-    
     var body: some View {
         ZStack {
             if viewControl == .create {
@@ -42,11 +37,7 @@ struct RecordPlayerView: View {
                 playerView
             }
         }
-        .onAppear {
-            animateUploading = false
-        }
     }
-    
     func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double) {
             let timestamp = Int(NSDate().timeIntervalSince1970) * -1
             let length = length
@@ -67,10 +58,6 @@ struct RecordPlayerView: View {
 private extension RecordPlayerView {
     var recordView: some View {
         ZStack {
-//            Circle()
-//                .stroke(lineWidth: 4)
-//                .foregroundColor(Color.accent3)
-//                .frame(width: buttonSize + 10, height: buttonSize + 10)
             Text(String(format: "%.1f", timerManager.secondsElapsed))
                 .font(.system(size: 16, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
@@ -120,7 +107,7 @@ private extension RecordPlayerView {
                 }.frame(width: UIScreen.main.bounds.width - 50)
             }.padding(.vertical)
             
-            AudioControlView(player: player)
+            Controls()
             
 //            HStack {
 //                Spacer()
@@ -158,7 +145,7 @@ private extension RecordPlayerView {
 
 struct RecordPlayer_Previews: PreviewProvider {
     static var previews: some View {
-        RecordPlayerView(player: testPlayer, viewControl: .constant(.create), user: testUser)
+        RecordPlayerView(viewControl: .constant(.create), user: testUser)
     }
 }
 

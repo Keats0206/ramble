@@ -42,7 +42,6 @@ private extension RambRow {
                             .destructive(Text("Cancel"))
             ])
         }
-    
     var recordingRowBottom: some View {
         HStack {
             Button(action: {
@@ -76,7 +75,6 @@ private extension RambRow {
         }.font(.title)
         .buttonStyle(BorderlessButtonStyle())
     }
-    
     func shareToIG(){
         print("Hello")
 //        ShareService.shared.createVideoWithAudio(

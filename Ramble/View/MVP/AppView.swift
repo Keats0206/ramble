@@ -57,7 +57,6 @@ struct AppView: View {
         }
         .onAppear {
             self.getUser()
-            viewModel.setUp(globalPlayer: self.globalPlayer)
         }
     }
 }

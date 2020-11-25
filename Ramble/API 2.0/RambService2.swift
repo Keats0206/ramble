@@ -10,21 +10,12 @@ import Firebase
 import Combine
 
 class RambService2: ObservableObject {
-    @Published var globalPlayer = GlobalPlayer()
     static let shared = RambService2()
     
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
     @Published var userRambs = [Ramb2]()
     @Published var initialRamb : Ramb2?
-    
-    init() {
-        fetchRambs(isInitialFetch: true)
-    }
-    
-    func setUp(globalPlayer: GlobalPlayer) {
-        self.globalPlayer = globalPlayer
-    }
     
     //  This function is working!
     func addRamb(_ ramb: Ramb2) {
@@ -42,20 +33,11 @@ class RambService2: ObservableObject {
     }
     
 //  Fetch all rambs for the for you page
-    func fetchRambs(isInitialFetch : Bool = false) {
+    func fetchRambs() {
         FBRefRambs.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
             if let querySnapshot = querySnapshot {
                 self.allRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                     try? document.data(as: Ramb2.self) // (4)
-                }
-                if isInitialFetch {
-                    self.allRambs.sort(by: { $0.plays > $1.plays })
-
-                    if let ramb = self.allRambs.first {
-                        self.globalPlayer.playingRamb = ramb
-                        self.globalPlayer.setGlobalPlayer(ramb: ramb)
-                        
-                    }
                 }
             }
         }
@@ -114,8 +96,6 @@ class RambService2: ObservableObject {
     func deleteRamb(ramb: Ramb2){
         // Delete from rambs
         let rambId = ramb.id
-        print(rambId)
-        
         FBRefRambs.document("\(rambId)").delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")

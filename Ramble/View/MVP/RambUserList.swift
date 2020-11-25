@@ -11,7 +11,7 @@ import AVKit
 import SDWebImageSwiftUI
 
 struct RambUserList: View {
-    @EnvironmentObject var globalPLayer: GlobalPlayer
+    @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var viewModel = RambService2()
 
     var user: User
@@ -27,8 +27,10 @@ struct RambUserList: View {
             List{
                 ForEach(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })) { ramb in
                     RambRow(ramb: ramb)
-                        .onTapGesture{
-                            globalPLayer.playingRamb = ramb
+                        .onTapGesture {
+                            globalPlayer.playingRamb = ramb
+                            globalPlayer.setGlobalPlayer(ramb: ramb)
+                            globalPlayer.isPlaying = false
                         }
                 }.onDelete(perform: delete)
                 .modifier(ClearCell())

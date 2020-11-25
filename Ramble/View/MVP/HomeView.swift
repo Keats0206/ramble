@@ -42,7 +42,6 @@ struct HomeView: View {
                                             .font(.title)
                                             .bold()
                                             .foregroundColor(.white)
-                                        
                                         Spacer()
                                     }
                                     Spacer()
@@ -54,7 +53,7 @@ struct HomeView: View {
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
 //                  AudioRecodView
                         VStack(alignment: .center){
-                            RecordPlayerView(player: globalPlayer.globalRambPlayer, viewControl: $viewControl, user: user)
+                            RecordPlayerView(viewControl: $viewControl, user: user)
                         }
                         .frame(height: UIScreen.main.bounds.height / 5)
                     }
