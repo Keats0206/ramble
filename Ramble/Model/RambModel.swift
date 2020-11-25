@@ -20,7 +20,6 @@ struct Ramb2: Codable, Identifiable, Hashable {
     var plays: Int
     var user: User
     var uid: String
-    var isSelected: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,6 +31,5 @@ struct Ramb2: Codable, Identifiable, Hashable {
         case plays
         case user
         case uid
-        case isSelected
     }
 }

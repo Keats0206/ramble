@@ -34,7 +34,7 @@ class RambService2: ObservableObject {
         
         do {
             let _ = try newRamb.setData(from: ramb)
-            FBRefUserRambs.document(userId!).setData(["rambId":rambId], merge: true)
+            FBRefUserRambs.document(userId!).setData(["rambId": rambId], merge: true)
         }
         catch {
             print("There was an error while trying to save a ramb \(error.localizedDescription).")
@@ -60,7 +60,6 @@ class RambService2: ObservableObject {
             }
         }
     }
-
 //  Fetch user rambs
     func fetchUserRambs(user: User) {
         let userId = user.uid
@@ -108,5 +107,25 @@ class RambService2: ObservableObject {
                 print("Document successfully updated")
             }
         }
+    }
+    
+    //  Delete rambs
+    
+    func deleteRamb(ramb: Ramb2){
+        // Delete from rambs
+        let rambId = ramb.id
+        print(rambId)
+        
+        FBRefRambs.document("\(rambId)").delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        // Delete from user rambs
+        
+        // Delete from storage rambs
+                
     }
 }

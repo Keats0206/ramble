@@ -42,8 +42,16 @@ struct RambUserList: View {
     }
     
     func delete(at offsets: IndexSet) {
+//      Deleting from the view:
         viewModel.userRambs.remove(atOffsets: offsets)
-//      Add function for deleting ramble
+
+//      Only works on the first delete then stops:
+        print(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[offsets.first! - 1])
+
+//      Setting the rmab
+//      Let ramb = viewModel.userRambs[offsets.first! - 1]
+//      Seleting from database
+//      viewModel.deleteRamb(ramb: ramb)
     }
 }
 

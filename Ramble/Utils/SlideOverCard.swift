@@ -31,7 +31,6 @@ public enum BackgroundStyle {
 }
 
 public enum CardPosition: CGFloat {
-    
     case bottom, middle, top
     
     func offsetFromTop() -> CGFloat {
@@ -47,7 +46,6 @@ public enum CardPosition: CGFloat {
 }
 
 enum DragState {
-    
     case inactive
     case dragging(translation: CGSize)
     
@@ -69,8 +67,6 @@ enum DragState {
         }
     }
 }
-
-
 
 struct Card: ViewModifier {
     @Environment(\.colorScheme) var colorScheme: ColorScheme

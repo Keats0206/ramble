@@ -50,8 +50,7 @@ let testRamb = Ramb2(id: "1",
                    timestamp: -1601176781,
                    plays: 23023,
                    user: testUser,
-                   uid: testUser.id!,
-                   isSelected: false
+                   uid: testUser.id!
 )
 
 let testPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 import AVKit
 
 struct RecordPlayerView: View {
@@ -22,13 +23,14 @@ struct RecordPlayerView: View {
     @State var txt = ""
     
     @State var player: AVPlayer
+    @State var rambUrl: String?
     
     @Binding var viewControl: ViewControl
     
     var user: User
         
     var buttonSize: CGFloat {
-        130
+        80
     }
     
     var body: some View {
@@ -40,24 +42,39 @@ struct RecordPlayerView: View {
                 playerView
             }
         }
-        .animation(.interactiveSpring())
         .onAppear {
             animateUploading = false
         }
+    }
+    
+    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double) {
+            let timestamp = Int(NSDate().timeIntervalSince1970) * -1
+            let length = length
+            let uid = user.id!
+            let ramb = Ramb2(
+                caption: caption,
+                length: length,
+                rambUrl: rambUrl,
+                fileId: fileId,
+                timestamp: timestamp,
+                plays: 0,
+                user: user,
+                uid: uid)
+        RambService2().addRamb(ramb)
     }
 }
 
 private extension RecordPlayerView {
     var recordView: some View {
         ZStack {
-            Circle()
-                .stroke(lineWidth: 4)
-                .foregroundColor(Color.accent3)
-                .frame(width: buttonSize + 10, height: buttonSize + 10)
-            
+//            Circle()
+//                .stroke(lineWidth: 4)
+//                .foregroundColor(Color.accent3)
+//                .frame(width: buttonSize + 10, height: buttonSize + 10)
             Text(String(format: "%.1f", timerManager.secondsElapsed))
                 .font(.system(size: 16, weight: .bold, design: .rounded))
-                .offset(y: -100)
+                .foregroundColor(.white)
+                .offset(y: -50)
             
                 switch audioRecorder.recorderState {
                 case .ready:
@@ -82,11 +99,14 @@ private extension RecordPlayerView {
                 case.uploaded:
                     Spacer()
                         .onAppear {
+                            rambUrl = audioRecorder.rambUrl
+                            uploadRamb2(user: user, caption: "Untitled Recording", rambUrl: rambUrl!, fileId: "z", length: 0)
                             viewControl = .recordings
                     }
                 }
             }
     }
+    
     var playerView: some View {
         VStack {
             HStack(alignment: .top) {

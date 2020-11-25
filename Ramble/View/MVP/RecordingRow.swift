@@ -18,12 +18,12 @@ struct RambRow: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .center){
                     VStack(alignment: .leading){
+                        Text("\(ramb.caption)")
+                            .font(.headline)
                         Text("\(formatDate(timestamp: ramb.timestamp)) ago")
                             .font(.subheadline)
                             .bold()
                             .opacity(0.5)
-                        Text("\(ramb.caption)")
-                            .font(.headline)
                     }
                     Spacer()
                     Text("\(TimeHelper.formatSecondsToHMS(ramb.length))")

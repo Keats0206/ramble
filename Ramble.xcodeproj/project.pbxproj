@@ -38,7 +38,6 @@
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
 		4070B85125674F34006D6630 /* RambUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85025674F34006D6630 /* RambUserList.swift */; };
 		4070B85325675207006D6630 /* RecordPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85225675207006D6630 /* RecordPlayerView.swift */; };
-		4070B85525675605006D6630 /* RecordPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85425675605006D6630 /* RecordPostView.swift */; };
 		407A4B5E256AE42C008F475B /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EA6CB02568D5AB00772353 /* RecordingsList.swift */; };
 		407A4B60256AE71A008F475B /* PopOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407A4B5F256AE71A008F475B /* PopOverCard.swift */; };
 		408BA722256C874D0060265F /* RecordingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BA721256C874D0060265F /* RecordingRow.swift */; };
@@ -135,7 +134,6 @@
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		4070B85025674F34006D6630 /* RambUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserList.swift; sourceTree = "<group>"; };
 		4070B85225675207006D6630 /* RecordPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayerView.swift; sourceTree = "<group>"; };
-		4070B85425675605006D6630 /* RecordPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPostView.swift; sourceTree = "<group>"; };
 		407A4B5F256AE71A008F475B /* PopOverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverCard.swift; sourceTree = "<group>"; };
 		408BA721256C874D0060265F /* RecordingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingRow.swift; sourceTree = "<group>"; };
 		408BA725256C8A270060265F /* ramble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ramble.png; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				4014BE3C25674CA7009D9823 /* HomeView.swift */,
 				4070B85225675207006D6630 /* RecordPlayerView.swift */,
-				4070B85425675605006D6630 /* RecordPostView.swift */,
 				408BA721256C874D0060265F /* RecordingRow.swift */,
 				4070B85025674F34006D6630 /* RambUserList.swift */,
 				40E56A0E255B508100BEA192 /* AudioControlView.swift */,
@@ -530,7 +527,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4070B85125674F34006D6630 /* RambUserList.swift in Sources */,
-				4070B85525675605006D6630 /* RecordPostView.swift in Sources */,
 				EE1E0DC6255E5B4400DCA17C /* SwiftUI+Validation.swift in Sources */,
 				4014BE3D25674CA7009D9823 /* HomeView.swift in Sources */,
 				400A706B251E43A300A0DD8D /* GlobalPlayer.swift in Sources */,

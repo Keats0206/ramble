@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct HomeView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
+    
+    @State private var keyboardHeight: CGFloat = 0
     
     @State var user: User
     @State var showProfile: Bool = false
@@ -18,8 +21,8 @@ struct HomeView: View {
     @State var viewControl: ViewControl = .create
     
     var body: some View {
-        NavigationView{
-            ZStack{
+        NavigationView {
+            ZStack {
                 GeometryReader { geometry in
                     Image("gradient")
                         .resizable()
@@ -28,31 +31,33 @@ struct HomeView: View {
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
                     VStack{
+                    VStack{
 //                  UpperView
-                    HStack{
-                        switch viewControl
-                        {
-                        case .create:
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text("Untitled Record #1")
-                                        .font(.title)
-                                        .bold()
+                        HStack {
+                            switch viewControl {
+                            case .create:
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("Untitled Record #1")
+                                            .font(.title)
+                                            .bold()
+                                            .foregroundColor(.white)
+                                        
+                                        Spacer()
+                                    }
                                     Spacer()
-                                }
-                                Spacer()
-                            }.padding()
-                        case .recordings:
-                            RambUserList(user: user)
+                                }.padding()
+                            case .recordings:
+                                RambUserList(user: user)
+                            }
                         }
-                    }
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
 //                  AudioRecodView
-                    HStack {
-                        RecordPlayerView(player: globalPlayer.globalRambPlayer, viewControl: $viewControl, user: user)
+                        VStack(alignment: .center){
+                            RecordPlayerView(player: globalPlayer.globalRambPlayer, viewControl: $viewControl, user: user)
+                        }
+                        .frame(height: UIScreen.main.bounds.height / 5)
                     }
-                    .frame(height: UIScreen.main.bounds.height / 5)
-                        
 //                  TabView
                     HStack {
                         Spacer()
@@ -78,11 +83,11 @@ struct HomeView: View {
                         Spacer()
                     }
                         .padding(.top)
+                    }.keyboardAdaptive()
                 }
             }
-        }
-        .background(Blur())
-        .navigationBarItems(leading:
+            .background(Blur())
+            .navigationBarItems(leading:
                     Button(action: {
                         self.showProfile.toggle()
                     }) {
@@ -110,3 +115,40 @@ enum ViewControl {
     case recordings
 }
 
+extension Notification {
+    var keyboardHeight: CGFloat {
+        return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
+    }
+}
+
+extension Publishers {
+    // 1.
+    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
+        // 2.
+        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
+            .map { $0.keyboardHeight }
+        
+        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
+            .map { _ in CGFloat(0) }
+        
+        // 3.
+        return MergeMany(willShow, willHide)
+            .eraseToAnyPublisher()
+    }
+}
+
+struct KeyboardAdaptive: ViewModifier {
+    @State private var keyboardHeight: CGFloat = 0
+
+    func body(content: Content) -> some View {
+        content
+            .offset(y: -keyboardHeight / 2)
+            .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
+    }
+}
+
+extension View {
+    func keyboardAdaptive() -> some View {
+        ModifiedContent(content: self, modifier: KeyboardAdaptive())
+    }
+}
