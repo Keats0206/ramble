@@ -34,7 +34,9 @@ class TimerManager: ObservableObject {
     }
     func stop() {
         timer.invalidate()
-        secondsElapsed = 0
         mode = .stopped
+    }
+    func reset(){
+        secondsElapsed = 0
     }
 }

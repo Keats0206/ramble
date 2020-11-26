@@ -17,12 +17,15 @@ class GlobalPlayer: ObservableObject {
     @Published var globalRambPlayer: AVPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)
     @Published var isPlaying = false
     @Published var value : Float = 0
+    @Published var caption = "Untitled \(Date().toString(dateFormat: "MMM d"))"
+
     
     let session = AVAudioSession.sharedInstance()
             
     func setGlobalPlayer(ramb: Ramb2) {
         let url = URL(string: "\(ramb.rambUrl)")
         self.globalRambPlayer = AVPlayer(url: url!)
+        self.caption = ramb.caption
         return
     }
     

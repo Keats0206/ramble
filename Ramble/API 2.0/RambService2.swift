@@ -45,7 +45,6 @@ class RambService2: ObservableObject {
 //  Fetch user rambs
     func fetchUserRambs(user: User) {
         let userId = user.uid
-        
         FBRefRambs.whereField("uid", isEqualTo: userId)
             .addSnapshotListener { (querySnapshot, error) in // (2)
                 if let querySnapshot = querySnapshot {
@@ -55,7 +54,6 @@ class RambService2: ObservableObject {
             }
         }
     }
-    
     func updateUserData(user: User) {
         let dict = [
             "bio" : user.bio,
@@ -90,22 +88,17 @@ class RambService2: ObservableObject {
             }
         }
     }
-    
     //  Delete rambs
-    
-    func deleteRamb(ramb: Ramb2){
-        // Delete from rambs
-        let rambId = ramb.id
-        FBRefRambs.document("\(rambId)").delete() { err in
+    func deleteRamb(ramb: Ramb2) {
+        FBRefRambs.document(ramb.id!).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
             }
         }
-        // Delete from user rambs
-        
-        // Delete from storage rambs
-                
     }
+        // Delete from rambs
+        // Delete from user rambs
+        // Delete from storage rambs
 }

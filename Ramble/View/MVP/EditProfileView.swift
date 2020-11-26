@@ -56,36 +56,46 @@ struct EditProfileView : View {
                 .destructive(Text("Remove"), action: {
                     self.showAction = false
                     self.profileImage = nil
-                })
-            ])
+            })
+        ])
     }
     
     var body : some View {
         NavigationView {
-            LoadingView(isShowing: $loading, content: {
-                ZStack {
+            ZStack {
+                GeometryReader { geometry in
+                    Image("gradient")
+                        .resizable()
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    Blur(style: .dark)
+                        .edgesIgnoringSafeArea(.all)
                     VStack(spacing: 20) {
-//                      changeProfileImage
-                        editUserInfo
-                        settingsLinks
-                        Spacer()
-                        logoutDelete
-                            .font(.system(.subheadline, design: .rounded))
+    //                      changeProfileImage
+                            editUserInfo
+                            settingsLinks
+                            Spacer()
+                            logoutDelete
+                                .font(.system(.subheadline, design: .rounded))
                     }
-                    .font(.system(.headline, design: .rounded))
-                    .padding()
-                }
-            })
+                        .font(.system(.headline, design: .rounded))
+                        .padding()
+                    }
+            }
             .navigationBarItems(leading:
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                         }) {
                     Text("Cancel")
+                        .foregroundColor(.white)
+                        .opacity(0.7)
                 }, trailing:
                 Button(action: {
                     self.saveProfile()
                 }) {
                     Text("Save")
+                        .foregroundColor(.white)
+                        .bold()
                 }
             )
             .font(.system(.headline, design: .rounded))
@@ -101,14 +111,16 @@ private extension EditProfileView {
                 .frame(width: 200, height: 200)
                 .cornerRadius(10)
                 .shadow(radius: 10)
-                
+
             Button(action: {
                 self.showImagePicker = true
             }) {
+                
                 Text("Change Photo")
                     .foregroundColor(.primary)
                     .padding(5)
                     .padding([.trailing,.leading])
+                
             }.sheet(isPresented: $showImagePicker, onDismiss: {
             self.showImagePicker = false
                 }, content: {
@@ -118,11 +130,11 @@ private extension EditProfileView {
             }
         }
     }
-    var editUserInfo: some View {
+        var editUserInfo: some View {
         VStack(spacing: 20){
             VStack(alignment: .leading, spacing: 5) {
                 Text("Username")
-                TextField(self.user.username, text: $user.username)
+                TextField(user.username, text: $user.username)
                     .padding(5)
                     .opacity(0.5)
                 Divider()
@@ -130,21 +142,20 @@ private extension EditProfileView {
         
             VStack(alignment: .leading, spacing: 5) {
                 Text("Fullname")
-                TextField(self.user.displayname, text: $user.displayname)
+                TextField(user.displayname, text: $user.displayname)
                     .padding(5)
                     .opacity(0.5)
                 Divider()
             }
             VStack(alignment: .leading, spacing: 5) {
                 Text("Bio")
-                TextField(self.user.bio, text: $user.bio)
+                TextField(user.bio, text: $user.bio)
                     .padding(5)
                     .opacity(0.5)
                 Divider()
             }
-        }.foregroundColor(.primary)
+        }.foregroundColor(.white)
     }
-    
     var settingsLinks: some View {
         VStack(spacing: 20) {
             HStack {
@@ -173,24 +184,39 @@ private extension EditProfileView {
             }
         }.foregroundColor(Color.accent3)
     }
-    
     var logoutDelete: some View {
         HStack {
             Spacer()
+            
                 Button(action: {
                     self.session.signOut()
                 }) {
-                    Text("Logout")
+                    HStack{
+                        Image(systemName: "arrow.right.fill")
+                            .font(.caption)
+                        Text("LOGOUT")
+                            .font(.caption)
+                    }
                 }
+            
             Spacer()
+                
                 Button(action: {
-                    print("")
+                    print("Button Tapped")
                 }) {
-                    Text("Delete")
+                    HStack{
+                        Image(systemName: "trash.circle")
+                            .font(.caption)
+                        Text("Delete")
+                            .font(.caption)
+                    }
                 }
+            
             Spacer()
             
-        }.foregroundColor(Color.red)
+        }
+        .foregroundColor(.white)
+        .opacity(0.5)
     }
 }
 struct EditProfileView_Previews: PreviewProvider {

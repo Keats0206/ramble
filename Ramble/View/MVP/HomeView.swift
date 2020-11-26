@@ -9,16 +9,47 @@
 import SwiftUI
 import Combine
 
+@available(iOS 14.0, *)
 struct HomeView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var globalPlayer: GlobalPlayer
+
+    @ObservedObject var viewModel = RambService2()
+    @ObservedObject var timerManager = TimerManager()
+    @ObservedObject var audioRecorder = AudioRecorder()
     
     @State private var keyboardHeight: CGFloat = 0
+    @State var legnth: Double = 0
     
     @State var user: User
+    
     @State var showProfile: Bool = false
     @State var showList: Bool = false
+    @State var openAudioUpload = false
+    
+    @State var rambUrl: String?
     
     @State var viewControl: ViewControl = .create
+                    
+    var buttonSize: CGFloat {
+        80
+    }
+    
+    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double) {
+            let timestamp = Int(NSDate().timeIntervalSince1970) * -1
+            let length = length
+            let uid = user.id!
+            let ramb = Ramb2(
+                caption: caption,
+                length: length,
+                rambUrl: rambUrl,
+                fileId: fileId,
+                timestamp: timestamp,
+                plays: 0,
+                user: user,
+                uid: uid)
+        RambService2().addRamb(ramb)
+    }
     
     var body: some View {
         NavigationView {
@@ -30,58 +61,42 @@ struct HomeView: View {
                         .edgesIgnoringSafeArea(.all)
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
+                    
                     VStack{
-                    VStack{
-//                  UpperView
+                        
+    //                  UpperView
                         HStack {
                             switch viewControl {
-                            case .create:
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Untitled Record #1")
-                                            .font(.title)
-                                            .bold()
-                                            .foregroundColor(.white)
+                                case .create:
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Text("Share your voice with the world")
+                                                .font(.title)
+                                                .foregroundColor(.white)
+                                            Spacer()
+                                        }
                                         Spacer()
-                                    }
-                                    Spacer()
-                                }.padding()
-                            case .recordings:
-                                RambUserList(user: user)
+                                    }.padding()
+                                case .recordings:
+                                    RambUserList(user: user)
+                                }
                             }
-                        }
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-//                  AudioRecodView
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                            
+    //                  AudioRecodView
                         VStack(alignment: .center){
-                            RecordPlayerView(viewControl: $viewControl, user: user)
-                        }
-                        .frame(height: UIScreen.main.bounds.height / 5)
-                    }
-//                  TabView
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            self.viewControl = .create
-                        }){
-                            Image(systemName: "music.mic")
-                                .font(.title)
-                        }.padding(5)
-                        .foregroundColor(viewControl == .create ? .gray : .white)
-                        .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
-                        .cornerRadius(8.0)
-                        Spacer()
-                        Button(action: {
-                            self.viewControl = .recordings
-                        }){
-                            Image(systemName: "music.note.list")
-                                .font(.title)
-                        }.padding(5)
-                        .foregroundColor(viewControl == .recordings ? .gray : .white)
-                        .background(Color.white.opacity(viewControl == .recordings ? 0.2 : 0.0))
-                        .cornerRadius(8.0)
-                        Spacer()
-                    }
-                        .padding(.top)
+                                ZStack {
+                                    if viewControl == .create {
+                                        createView
+                                    }
+                                    if viewControl == .recordings {
+                                        recordingsView
+                                    }
+                                }
+                            }
+                            .frame(height: UIScreen.main.bounds.height / 5)
+    //                  TabView
+                        tabControl
                     }.keyboardAdaptive()
                 }
             }
@@ -90,18 +105,122 @@ struct HomeView: View {
                     Button(action: {
                         self.showProfile.toggle()
                     }) {
-                        Image(systemName: "person.circle.fill")
-                            .font(.title)
-                    }.sheet(isPresented: $showProfile, onDismiss: {
-                        print("Modal dismisses")
-                    }) {
-                        EditProfileView(user: $user)
+                    Image(systemName: "person.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.white)
+                    }
+            .sheet(isPresented: $showProfile, onDismiss: {
+                print("Modal dismisses")
+            }) {
+                    EditProfileView(user: $user)
                 }
             )
         }
     }
+    func setGlobalPlayer() {
+        print(viewModel.userRambs)
+        let ramb = testRamb
+        globalPlayer.setGlobalPlayer(ramb: ramb)
+        globalPlayer.playingRamb = ramb
+    }
 }
 
+@available(iOS 14.0, *)
+private extension HomeView {
+    var createView: some View {
+        ZStack {
+            Text(String(format: "%.1f", timerManager.secondsElapsed))
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundColor(.white).opacity(0.5)
+                .offset(y: 60)
+                switch audioRecorder.recorderState {
+                case .ready:
+                    Button(action: {
+                        audioRecorder.startRecording()
+                        timerManager.start()
+                    }) {
+                        Image(systemName: "mic.circle")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                    }.buttonStyle(PlayerButtonStyle())
+                case .started:
+                    Button(action: {
+                        audioRecorder.stopRecording()
+                        timerManager.stop()
+                    }) {
+                        Image(systemName: "stop.circle.fill")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                    }
+                case .stopped:
+                    LoadingAnimation()
+                case.uploaded:
+                    Spacer()
+                        .onAppear {
+                            rambUrl = audioRecorder.rambUrl
+                            uploadRamb2(
+                                user: user,
+                                caption: globalPlayer.caption,
+                                rambUrl: rambUrl!,
+                                fileId: "fileId",
+                                length: timerManager.secondsElapsed)
+                            viewControl = .recordings
+                            timerManager.reset()
+                            setGlobalPlayer()
+                    }
+                }
+            }
+            .foregroundColor(.white)
+    }
+    var recordingsView: some View {
+        VStack {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    TextField("\(globalPlayer.playingRamb.caption)", text: $globalPlayer.caption)
+                        .font(.title)
+                        .foregroundColor(.white)
+                    Text("\(formatDate(timestamp: globalPlayer.playingRamb.timestamp)) ago")
+                        .font(.system(size: 18, weight: .bold))
+                        .bold()
+                        .opacity(0.5)
+                }.frame(width: UIScreen.main.bounds.width - 50)
+            }
+            .padding(.vertical)
+            Controls()
+        }
+    }
+    var tabControl: some View{
+        HStack {
+            Spacer()
+            Button(action: {
+                self.viewControl = .create
+            }){
+                Image(systemName: "music.mic")
+                    .font(.title)
+            }
+            .padding(5)
+            .foregroundColor(viewControl == .create ? .gray : .white)
+            .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
+            .cornerRadius(8.0)
+            .buttonStyle(ScaleButtonStyle())
+            Spacer()
+            Button(action: {
+                self.viewControl = .recordings
+            }){
+                Image(systemName: "music.note.list")
+                    .font(.title)
+            }
+            .padding(5)
+            .foregroundColor(viewControl == .recordings ? .gray : .white)
+            .background(Color.white.opacity(viewControl == .recordings ? 0.2 : 0.0))
+            .cornerRadius(8.0)
+            .buttonStyle(ScaleButtonStyle())
+            Spacer()
+        }.padding(.top)
+    }
+}
+
+@available(iOS 14.0, *)
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(user: testUser)

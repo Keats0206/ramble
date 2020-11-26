@@ -13,6 +13,8 @@
 		4014BE3D25674CA7009D9823 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BE3C25674CA7009D9823 /* HomeView.swift */; };
 		40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D112498654D00B2E8A9 /* InlineAlert.swift */; };
 		40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40150D1524986CB800B2E8A9 /* FeedView.swift */; };
+		4027A684256EE98F0064B639 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4027A683256EE98F0064B639 /* Styling.swift */; };
+		4027A686257008D10064B639 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4027A685257008D10064B639 /* LoadingView.swift */; };
 		402F5491244F91A900FD899F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F5490244F91A900FD899F /* AppDelegate.swift */; };
 		402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F5492244F91A900FD899F /* SceneDelegate.swift */; };
 		402F5497244F91AA00FD899F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5496244F91AA00FD899F /* Assets.xcassets */; };
@@ -68,7 +70,6 @@
 		EE1E0DCC255E5B7600DCA17C /* ErrorBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DCB255E5B7600DCA17C /* ErrorBubbleView.swift */; };
 		EE1E0DCE255E5C9400DCA17C /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E0DCD255E5C9400DCA17C /* RegisterModel.swift */; };
 		EEBC15EE2536CB9B0076318F /* RecorderPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */; };
-		EEC8DDF5255BD8A00050E9DF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */; };
 		EEFCE0FD255EDC2E002EF077 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,8 @@
 		4014BE3C25674CA7009D9823 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		40150D112498654D00B2E8A9 /* InlineAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		40150D1524986CB800B2E8A9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		4027A683256EE98F0064B639 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
+		4027A685257008D10064B639 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		402F548D244F91A900FD899F /* Ramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ramble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402F5490244F91A900FD899F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		402F5492244F91A900FD899F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,7 +168,6 @@
 		EE1E0DCB255E5B7600DCA17C /* ErrorBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBubbleView.swift; sourceTree = "<group>"; };
 		EE1E0DCD255E5C9400DCA17C /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderPostView.swift; sourceTree = "<group>"; };
-		EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,17 +280,16 @@
 			children = (
 				40EA6CB22568D7C900772353 /* MVP */,
 				40150D1524986CB800B2E8A9 /* FeedView.swift */,
+				4027A685257008D10064B639 /* LoadingView.swift */,
 				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
 				40EA6CB02568D5AB00772353 /* RecordingsList.swift */,
 				40B1474A25016C5F00A2781A /* ProfileView.swift */,
 				405A5DE1250802F4009F9C6B /* SearchView.swift */,
 				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
 				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
-				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
 				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
 				40FFDF06251BFC100025799C /* RambUserCell.swift */,
-				EEC8DDF4255BD8A00050E9DF /* LoadingView.swift */,
 				405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */,
 			);
 			path = View;
@@ -322,6 +323,8 @@
 				4070B85025674F34006D6630 /* RambUserList.swift */,
 				408BA721256C874D0060265F /* RecordingRow.swift */,
 				40E56A0E255B508100BEA192 /* AudioControlView.swift */,
+				40353C82249282BB00C0C39A /* EditProfileView.swift */,
+				4027A683256EE98F0064B639 /* Styling.swift */,
 			);
 			path = MVP;
 			sourceTree = "<group>";
@@ -533,7 +536,6 @@
 				402F5491244F91A900FD899F /* AppDelegate.swift in Sources */,
 				405EBBB625657A7200FB0B97 /* SlideOverCard.swift in Sources */,
 				40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */,
-				EEC8DDF5255BD8A00050E9DF /* LoadingView.swift in Sources */,
 				404821D624A3BB7200BD63A3 /* RambUserFeed.swift in Sources */,
 				40B3389025268E0A009321F2 /* RambListViewModel.swift in Sources */,
 				402F5493244F91A900FD899F /* SceneDelegate.swift in Sources */,
@@ -542,6 +544,7 @@
 				406FAD09244FF15D00223873 /* Helpers.swift in Sources */,
 				EE1E0DCA255E5B6700DCA17C /* ValidationPublishers.swift in Sources */,
 				40ECF89E2564B5760090F618 /* LoadingAnimation.swift in Sources */,
+				4027A686257008D10064B639 /* LoadingView.swift in Sources */,
 				EE1E0DC8255E5B5400DCA17C /* Validation.swift in Sources */,
 				40150D1624986CB800B2E8A9 /* FeedView.swift in Sources */,
 				40B1474B25016C5F00A2781A /* ProfileView.swift in Sources */,
@@ -553,6 +556,7 @@
 				40FFDF07251BFC100025799C /* RambUserCell.swift in Sources */,
 				EE1E0DC4255E5B3400DCA17C /* Publisher+Validation.swift in Sources */,
 				40B3388E25268D2A009321F2 /* RambCellViewModel.swift in Sources */,
+				4027A684256EE98F0064B639 /* Styling.swift in Sources */,
 				40B3385E25267F54009321F2 /* RambService2.swift in Sources */,
 				40F3FA30248EA0F100F3CE02 /* RambModel.swift in Sources */,
 				407A4B5E256AE42C008F475B /* RecordingsList.swift in Sources */,

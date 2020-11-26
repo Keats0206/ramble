@@ -23,8 +23,8 @@ struct RambUserList: View {
     }
     
     var body: some View {
-        ZStack(alignment: .leading){
-            List{
+        ZStack(alignment: .leading) {
+            List {
                 ForEach(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })) { ramb in
                     RambRow(ramb: ramb)
                         .onTapGesture {
@@ -32,7 +32,7 @@ struct RambUserList: View {
                             globalPlayer.setGlobalPlayer(ramb: ramb)
                             globalPlayer.isPlaying = false
                         }
-                }.onDelete(perform: delete)
+                }.onDelete(perform: remove)
                 .modifier(ClearCell())
             }
             Spacer()
@@ -43,33 +43,27 @@ struct RambUserList: View {
         }
     }
     
-    func delete(at offsets: IndexSet) {
-//      Deleting from the view:
+    func remove(at offsets: IndexSet) {
         viewModel.userRambs.remove(atOffsets: offsets)
-
-//      Only works on the first delete then stops:
-        print(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[offsets.first! - 1])
-
-//      Setting the rmab
-//      Let ramb = viewModel.userRambs[offsets.first! - 1]
-//      Seleting from database
-//      viewModel.deleteRamb(ramb: ramb)
+        for index in offsets {
+            let ramb = viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[index]
+            viewModel.deleteRamb(ramb: ramb)
+//            print("delete this \(ramb.id!)")
+        }
     }
 }
+    
+//    func delete(at offsets: IndexSet) {
+//        viewModel.userRambs.remove(atOffsets: offsets)
+//        for id in offsets {
+//            print(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[0])
+//        }
+//        viewModel.deleteRamb(atOffsets: offsets)
+//    }
+//}
 
 struct RambUserList_Previews: PreviewProvider {
     static var previews: some View {
         RambUserList(user: testUser)
     }
 }
-
-struct ClearCell: ViewModifier {
-      func body(content: Content) -> some View {
-          content
-              .offset(x: -20)
-              .padding(.horizontal)
-              .font(.system(size: 18, weight: .bold, design: .rounded))
-              .foregroundColor(.white)
-              .listRowBackground(Color.clear)
-      }
-  }
