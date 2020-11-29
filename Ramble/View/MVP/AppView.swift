@@ -16,9 +16,7 @@ struct AppView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var viewModel = RambService2()
-    
-    @ObservedObject var shared = ShareService()
-        
+            
     @State var user: User    
     @State var hidNav = false
     @State var recordingModalShown = false

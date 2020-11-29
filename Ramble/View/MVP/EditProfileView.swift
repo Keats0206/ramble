@@ -130,31 +130,30 @@ private extension EditProfileView {
             }
         }
     }
-        var editUserInfo: some View {
-        VStack(spacing: 20){
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Username")
-                TextField(user.username, text: $user.username)
-                    .padding(5)
-                    .opacity(0.5)
-                Divider()
-            }
-        
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Fullname")
-                TextField(user.displayname, text: $user.displayname)
-                    .padding(5)
-                    .opacity(0.5)
-                Divider()
-            }
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Bio")
-                TextField(user.bio, text: $user.bio)
-                    .padding(5)
-                    .opacity(0.5)
-                Divider()
-            }
-        }.foregroundColor(.white)
+    var editUserInfo: some View {
+        VStack(spacing: 20) {
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Username")
+            TextField(user.username, text: $user.username)
+                .padding(5)
+                .opacity(0.5)
+            Divider()
+        }
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Fullname")
+            TextField(user.displayname, text: $user.displayname)
+                .padding(5)
+                .opacity(0.5)
+            Divider()
+        }
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Bio")
+            TextField(user.bio, text: $user.bio)
+                .padding(5)
+                .opacity(0.5)
+            Divider()
+        }
+    }.foregroundColor(.white)
     }
     var settingsLinks: some View {
         VStack(spacing: 20) {
@@ -182,38 +181,34 @@ private extension EditProfileView {
                 }
                 Spacer()
             }
-        }.foregroundColor(Color.accent3)
+        }
+        .foregroundColor(Color.accent3)
     }
     var logoutDelete: some View {
         HStack {
             Spacer()
-            
                 Button(action: {
                     self.session.signOut()
                 }) {
-                    HStack{
-                        Image(systemName: "arrow.right.fill")
-                            .font(.caption)
-                        Text("LOGOUT")
-                            .font(.caption)
+                HStack {
+                    Image(systemName: "arrow.right.fill")
+                        .font(.caption)
+                    Text("LOGOUT")
+                        .font(.caption)
                     }
                 }
-            
             Spacer()
-                
                 Button(action: {
                     print("Button Tapped")
                 }) {
-                    HStack{
+                    HStack {
                         Image(systemName: "trash.circle")
                             .font(.caption)
                         Text("Delete")
                             .font(.caption)
                     }
                 }
-            
             Spacer()
-            
         }
         .foregroundColor(.white)
         .opacity(0.5)

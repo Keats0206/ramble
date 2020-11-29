@@ -17,8 +17,12 @@ struct HomeView: View {
     @ObservedObject var viewModel = RambService2()
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
+    @ObservedObject var shareService = ShareService()
+    
+    @State var showShareMenu: Bool = false
     
     @State private var keyboardHeight: CGFloat = 0
+    
     @State var legnth: Double = 0
     
     @State var user: User
@@ -28,12 +32,14 @@ struct HomeView: View {
     @State var openAudioUpload = false
     
     @State var rambUrl: String?
-    
     @State var viewControl: ViewControl = .create
+    
+//    @State var newCaption: String = ""
                     
     var buttonSize: CGFloat {
         80
     }
+    
     
     func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double) {
             let timestamp = Int(NSDate().timeIntervalSince1970) * -1
@@ -62,8 +68,7 @@ struct HomeView: View {
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
                     
-                    VStack{
-                        
+                    VStack {
     //                  UpperView
                         HStack {
                             switch viewControl {
@@ -80,11 +85,11 @@ struct HomeView: View {
                                 case .recordings:
                                     RambUserList(user: user)
                                 }
-                            }
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
                             
     //                  AudioRecodView
-                        VStack(alignment: .center){
+                        VStack(alignment: .center) {
                                 ZStack {
                                     if viewControl == .create {
                                         createView
@@ -122,6 +127,15 @@ struct HomeView: View {
         let ramb = testRamb
         globalPlayer.setGlobalPlayer(ramb: ramb)
         globalPlayer.playingRamb = ramb
+    }
+    
+    func updateCaption(ramb: Ramb2, caption: String) {
+        viewModel.updateCaption(ramb: ramb, caption: caption)
+    }
+    func shareToIG(ramb: Ramb2) {
+        ShareService.shared.downloadAudio(
+            ramb: ramb
+        )
     }
 }
 
@@ -176,20 +190,44 @@ private extension HomeView {
         VStack {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    TextField("\(globalPlayer.playingRamb.caption)", text: $globalPlayer.caption)
+                    TextField("\(globalPlayer.playingRamb.caption)", text: $globalPlayer.caption, onCommit: {
+                        updateCaption(ramb: globalPlayer.playingRamb, caption: globalPlayer.caption)
+                      })
                         .font(.title)
                         .foregroundColor(.white)
+                    
                     Text("\(formatDate(timestamp: globalPlayer.playingRamb.timestamp)) ago")
                         .font(.system(size: 18, weight: .bold))
                         .bold()
                         .opacity(0.5)
                 }.frame(width: UIScreen.main.bounds.width - 50)
+                
+                Button(action: {
+                    self.showShareMenu.toggle()
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                    
+                }.actionSheet(isPresented: $showShareMenu, content: {
+                            self.actionSheet })
+
             }
-            .padding(.vertical)
+            .padding()
             Controls()
         }
     }
-    var tabControl: some View{
+    var actionSheet: ActionSheet {
+            ActionSheet(title: Text("Share Menu"),
+                        buttons: [
+                            .default(Text("IG Stories")) {
+                                self.shareToIG(ramb: globalPlayer.playingRamb)
+                            },
+                            .destructive(Text("Cancel"))
+            ])
+        }
+    
+    var tabControl: some View {
         HStack {
             Spacer()
             Button(action: {

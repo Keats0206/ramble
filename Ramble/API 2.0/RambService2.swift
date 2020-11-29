@@ -14,7 +14,10 @@ class RambService2: ObservableObject {
     
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
+    
+//  Sorted array of user rambs
     @Published var userRambs = [Ramb2]()
+    
     @Published var initialRamb : Ramb2?
     
     //  This function is working!
@@ -54,6 +57,7 @@ class RambService2: ObservableObject {
             }
         }
     }
+    
     func updateUserData(user: User) {
         let dict = [
             "bio" : user.bio,
@@ -88,6 +92,18 @@ class RambService2: ObservableObject {
             }
         }
     }
+    
+    func updateCaption(ramb: Ramb2, caption: String) {
+        let rambRef = FBRefRambs.document(ramb.id!)
+        rambRef.updateData(["caption": caption]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
     //  Delete rambs
     func deleteRamb(ramb: Ramb2) {
         FBRefRambs.document(ramb.id!).delete() { err in

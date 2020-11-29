@@ -11,9 +11,10 @@ import Photos
 import SwiftUI
 import UIKit
 import SwiftVideoGenerator
+import Firebase
 
 
-public class ShareService: ObservableObject {
+class ShareService: ObservableObject {
     static let shared = ShareService()
 //    func instagramStoriesPhoto() {
 //        if let urlScheme = URL(string: "instagram-stories://share") {
@@ -32,21 +33,36 @@ public class ShareService: ObservableObject {
 //        }
 //    }
     
-// Concert this to accept a video url
-    func createVideoWithAudio(fileName: String, image: UIImage, audio: URL) {
-          VideoGenerator.fileName = "filename"
-          VideoGenerator.shouldOptimiseImageForVideo = false
-          VideoGenerator.current.generate(withImages: [image], andAudios: [audio], andType: .single, { (progress) in
-            print(progress)
-          }, outcome: { (url) in
-            switch url {
-            case .success(let url):
-                self.instagramStoriesVideo(url: url)
-            case .failure(let error):
+    func downloadAudio(ramb: Ramb2) {
+        let imageData = UIImage(imageLiteralResourceName: "ramble")
+        let id = "05F6A6BD-921E-427F-BC50-A7E1C0D7F53C"
+        let tmporaryDirectoryURL = FileManager.default.temporaryDirectory
+        // Create a reference to the file you want to download
+        let rambStorageRef = Storage.storage().reference(forURL: ramb.rambUrl)
+        // Create local filesystem URL
+        let localURL = tmporaryDirectoryURL.appendingPathComponent("\(ramb.id).m4a")
+        // Download to the local filesystem
+        let downloadTask = rambStorageRef.write(toFile: localURL) { url, error in
+            if let error = error {
                 print(error.localizedDescription)
+        // Uh-oh, an error occurred!
+            } else {
+                VideoGenerator.current.generate(withImages: [imageData], andAudios: [localURL], andType: .single, { (progress) in
+                    print(progress)
+                }, outcome: { (url) in
+                    switch url {
+                    case .success(let url):
+        //      Video generated succesfully share to IG
+                        self.instagramStoriesVideo(url: url)
+                        print("Video generated succesfully")
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                })
             }
-          })
+        }
     }
+//      Create a video with the audio and an image
     
 // swiftlint:disable all
         func instagramStoriesVideo(url: URL) {
@@ -64,6 +80,7 @@ public class ShareService: ObservableObject {
         }
     }
 }
+    
 // swiftlint:enable all
 
 extension Result {

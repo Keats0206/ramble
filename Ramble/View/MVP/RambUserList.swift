@@ -13,7 +13,7 @@ import SDWebImageSwiftUI
 struct RambUserList: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     @ObservedObject var viewModel = RambService2()
-
+    
     var user: User
 
     init(user: User){
@@ -32,7 +32,7 @@ struct RambUserList: View {
                             globalPlayer.setGlobalPlayer(ramb: ramb)
                             globalPlayer.isPlaying = false
                         }
-                }.onDelete(perform: remove)
+                }.onDelete(perform: delete)
                 .modifier(ClearCell())
             }
             Spacer()
@@ -43,12 +43,12 @@ struct RambUserList: View {
         }
     }
     
-    func remove(at offsets: IndexSet) {
-        viewModel.userRambs.remove(atOffsets: offsets)
+    
+    func delete(at offsets: IndexSet) {
         for index in offsets {
             let ramb = viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[index]
             viewModel.deleteRamb(ramb: ramb)
-//            print("delete this \(ramb.id!)")
+            print("delete this \(ramb.id!)")
         }
     }
 }

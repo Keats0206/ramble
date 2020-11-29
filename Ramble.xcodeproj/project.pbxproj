@@ -219,7 +219,6 @@
 				40F3FA32248EA15B00F3CE02 /* Utils */,
 				40B3388C25268D05009321F2 /* ViewModel */,
 				40B3385A25267E6B009321F2 /* API 2.0 */,
-				40EA6C4B2568742000772353 /* ShareService.swift */,
 				408E258124849FF100C0C6A5 /* App */,
 				408E25832484A01F00C0C6A5 /* View */,
 				408E258224849FF800C0C6A5 /* Model */,
@@ -301,6 +300,7 @@
 				40B3385B25267E90009321F2 /* Constants2.0.swift */,
 				40B3385D25267F54009321F2 /* RambService2.swift */,
 				40B3385F25267F64009321F2 /* UserService2.swift */,
+				40EA6C4B2568742000772353 /* ShareService.swift */,
 			);
 			path = "API 2.0";
 			sourceTree = "<group>";

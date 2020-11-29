@@ -35,22 +35,9 @@ struct RambRow: View {
 }
 
 private extension RambRow {
-    var actionSheet: ActionSheet {
-            ActionSheet(title: Text("Share Menu"),
-                        buttons: [
-                            .default(Text("IG Stories")) { self.shareToIG() },
-                            .destructive(Text("Cancel"))
-            ])
-        }
     var recordingRowBottom: some View {
         HStack {
-            Button(action: {
-                self.showShareMenu.toggle()
-            }) {
-                Image(systemName: "square.and.arrow.up")
-            }.actionSheet(isPresented: $showShareMenu, content: {
-                            self.actionSheet })
-            
+                        
             Spacer()
             
             HStack(spacing: 20) {
@@ -74,12 +61,5 @@ private extension RambRow {
             
         }.font(.title)
         .buttonStyle(BorderlessButtonStyle())
-    }
-    func shareToIG(){
-        print("Hello")
-//        ShareService.shared.createVideoWithAudio(
-//            fileName: "FileName",
-//            image: UIImage(imageLiteralResourceName: "ramble"),
-//            audio: recording.fileUrl)
     }
 }

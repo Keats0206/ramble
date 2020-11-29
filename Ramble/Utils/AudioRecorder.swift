@@ -47,26 +47,21 @@ class AudioRecorder: NSObject, ObservableObject {
     // Starting recording locally
     
     func startRecording() {
-        
         let recordingSession = AVAudioSession.sharedInstance()
-        
         do {
             try recordingSession.setCategory(.playAndRecord, mode: .default)
             try recordingSession.setActive(true)
         } catch {
             print("Failed to set up recording session")
         }
-        
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
-                
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
-        
         do {
 //      start recorder
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
@@ -78,9 +73,7 @@ class AudioRecorder: NSObject, ObservableObject {
             print("Could not start recording")
         }
     }
-    
     // Stop recording locally
-    
     func stopRecording() {
 //      stop recorder
         audioRecorder.stop()
@@ -89,9 +82,7 @@ class AudioRecorder: NSObject, ObservableObject {
         recorderState = .stopped
         print("3 \(self.recorderState)")
     }
-    
     // store file locally and sort the latest local recordings so newest is at the top
-    
     func sortLatestRecordings() {
         recordings.removeAll()
         let fileManager = FileManager.default
@@ -123,7 +114,6 @@ class AudioRecorder: NSObject, ObservableObject {
                     rambsRef.downloadURL(completion: { [self] (url, error) in
                         rambUrl = (url?.absoluteString)!
                         recorderState = .uploaded
-                        print(rambUrl)
                         return
                 })
             }
