@@ -188,7 +188,7 @@ private extension HomeView {
     }
     var recordingsView: some View {
         VStack {
-            HStack(alignment: .top) {
+            HStack(alignment: .center) {
                 VStack(alignment: .leading) {
                     TextField("\(globalPlayer.playingRamb.caption)", text: $globalPlayer.caption, onCommit: {
                         updateCaption(ramb: globalPlayer.playingRamb, caption: globalPlayer.caption)
@@ -200,15 +200,13 @@ private extension HomeView {
                         .font(.system(size: 18, weight: .bold))
                         .bold()
                         .opacity(0.5)
-                }.frame(width: UIScreen.main.bounds.width - 50)
+                }
                 
                 Button(action: {
                     self.showShareMenu.toggle()
                 }) {
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                    
+                   Text("Share")
+                        .font(.headline)
                 }.actionSheet(isPresented: $showShareMenu, content: {
                             self.actionSheet })
 
@@ -218,15 +216,14 @@ private extension HomeView {
         }
     }
     var actionSheet: ActionSheet {
-            ActionSheet(title: Text("Share Menu"),
-                        buttons: [
-                            .default(Text("IG Stories")) {
-                                self.shareToIG(ramb: globalPlayer.playingRamb)
-                            },
-                            .destructive(Text("Cancel"))
-            ])
-        }
-    
+        ActionSheet(title: Text("Share Menu"),
+                    buttons: [
+                        .default(Text("Instagram Stories")) {
+                            self.shareToIG(ramb: globalPlayer.playingRamb)
+                        },
+                        .destructive(Text("Cancel"))
+                    ])
+    }
     var tabControl: some View {
         HStack {
             Spacer()
@@ -264,7 +261,6 @@ struct HomeView_Previews: PreviewProvider {
         HomeView(user: testUser)
     }
 }
-
 
 enum ViewControl {
     case create

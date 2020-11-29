@@ -16,6 +16,8 @@ import Firebase
 
 class ShareService: ObservableObject {
     static let shared = ShareService()
+    
+    @Published var shareState: ShareState = .ready
 //    func instagramStoriesPhoto() {
 //        if let urlScheme = URL(string: "instagram-stories://share") {
 //            // 2
@@ -92,4 +94,10 @@ extension Result {
             throw error
         }
     }
+}
+
+enum ShareState{
+    case ready
+    case uploading
+    case successful
 }
