@@ -111,19 +111,20 @@ struct HomeView: View {
         }
     }
     func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double, fileUrl: URL) {
-            let timestamp = Int(NSDate().timeIntervalSince1970) * -1
-            let length = length
-            let uid = user.id!
-            let ramb = Ramb2(
-                caption: caption,
-                length: length,
-                rambUrl: rambUrl,
-                fileId: fileId,
-                timestamp: timestamp,
-                plays: 0,
-                user: user,
-                uid: uid,
-                fileUrl: fileUrl)
+        let timestamp = Int(NSDate().timeIntervalSince1970) * -1
+        let length = length
+        let uid = user.id!
+        let ramb = Ramb2(
+            caption: caption,
+            length: length,
+            rambUrl: rambUrl,
+            fileId: fileId,
+            timestamp: timestamp,
+            plays: 0,
+            user: user,
+            uid: uid,
+            fileUrl: fileUrl)
+        globalPlayer.setGlobalPlayer(ramb: ramb)
         RambService2().addRamb(ramb)
     }
     func updateCaption(ramb: Ramb2, caption: String) {

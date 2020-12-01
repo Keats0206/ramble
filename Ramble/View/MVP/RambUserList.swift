@@ -16,12 +16,11 @@ struct RambUserList: View {
     
     var user: User
 
-    init(user: User){
+    init(user: User) {
         self.user = user
         viewModel.fetchUserRambs(user: user)
         return
     }
-    
     var body: some View {
         ZStack(alignment: .leading) {
             List {
@@ -36,15 +35,12 @@ struct RambUserList: View {
                 .modifier(ClearCell())
             }
             Spacer()
-        }.onAppear{
+        }.onAppear {
             viewModel.fetchUserRambs(user: user)
-//            globalPlayer.setGlobalPlayer(ramb: ramb)
-//            globalPlayer.playingRamb = ramb
             UITableView.appearance().backgroundColor = UIColor.clear
             UITableViewCell.appearance().backgroundColor = UIColor.clear
         }
     }
-    
     func delete(at offsets: IndexSet) {
         for index in offsets {
             let ramb = viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[index]
@@ -53,15 +49,6 @@ struct RambUserList: View {
         }
     }
 }
-    
-//    func delete(at offsets: IndexSet) {
-//        viewModel.userRambs.remove(atOffsets: offsets)
-//        for id in offsets {
-//            print(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[0])
-//        }
-//        viewModel.deleteRamb(atOffsets: offsets)
-//    }
-//}
 
 struct RambUserList_Previews: PreviewProvider {
     static var previews: some View {

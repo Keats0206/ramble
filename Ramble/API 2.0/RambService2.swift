@@ -15,10 +15,8 @@ class RambService2: ObservableObject {
         
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
-    
 //  Sorted array of user rambs
     @Published var userRambs = [Ramb2]()
-    
     @Published var initialRamb : Ramb2?
     
     func setUp(globalPlayer: GlobalPlayer) {
@@ -54,11 +52,6 @@ class RambService2: ObservableObject {
                     self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                         try? document.data(as: Ramb2.self) // (4)
                 }
-                    
-                let ramb = self.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[0]
-                    self.globalPlayer?.playingRamb = ramb
-                    self.globalPlayer?.setGlobalPlayer(ramb: ramb)
-                    print("set global ramb \(ramb)")
             }
         }
     }
@@ -105,6 +98,7 @@ class RambService2: ObservableObject {
             }
         }
     }
+    
     func deleteRamb(ramb: Ramb2) {
         FBRefRambs.document(ramb.id!).delete() { err in
             if let err = err {
