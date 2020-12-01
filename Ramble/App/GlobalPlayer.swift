@@ -13,11 +13,11 @@ import MinimizableView
 import SwimplyPlayIndicator
 
 class GlobalPlayer: ObservableObject {
-    @Published var playingRamb: Ramb2 = testRamb
-    @Published var globalRambPlayer: AVPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)
+    @Published var playingRamb: Ramb2?
+    @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
     @Published var value : Float = 0
-    @Published var caption = "Untitled \(Date().toString(dateFormat: "MMM d"))"
+    @Published var caption = ""
 
     let session = AVAudioSession.sharedInstance()
             
@@ -30,24 +30,24 @@ class GlobalPlayer: ObservableObject {
     }
     
     func play() {
-        globalRambPlayer.play()
+        globalRambPlayer?.play()
         isPlaying = true
         setupNowPlaying()
         setupRemoteTransportControls()
     }
     
     func pause() {
-        globalRambPlayer.pause()
+        globalRambPlayer?.pause()
         isPlaying = false
     }
 
     func setupNowPlaying( ) {
 // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = playingRamb.caption
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = globalRambPlayer.currentItem?.currentTime().seconds
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = globalRambPlayer.currentItem?.asset.duration.seconds
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = globalRambPlayer.rate
+        nowPlayingInfo[MPMediaItemPropertyTitle] = playingRamb?.caption
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = globalRambPlayer?.currentItem?.currentTime().seconds
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = globalRambPlayer?.currentItem?.asset.duration.seconds
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = globalRambPlayer?.rate
         // Set the metadata
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
@@ -57,16 +57,16 @@ class GlobalPlayer: ObservableObject {
         let commandCenter = MPRemoteCommandCenter.shared()
         // Add handler for Play Command
         commandCenter.playCommand.addTarget { [unowned self] event in
-            if self.globalRambPlayer.rate == 0.0 {
-                self.globalRambPlayer.play()
+            if self.globalRambPlayer?.rate == 0.0 {
+                self.globalRambPlayer?.play()
                 return .success
             }
             return .commandFailed
         }
         // Add handler for Pause Command
         commandCenter.pauseCommand.addTarget { [unowned self] event in
-            if self.globalRambPlayer.rate == 1.0 {
-                self.globalRambPlayer.pause()
+            if self.globalRambPlayer?.rate == 1.0 {
+                self.globalRambPlayer?.pause()
                 return .success
             }
             return .commandFailed

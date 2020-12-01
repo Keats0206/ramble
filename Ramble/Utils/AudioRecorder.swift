@@ -14,13 +14,10 @@ import Firebase
 import FirebaseStorage
 
 class AudioRecorder: NSObject, ObservableObject {
-    
     override init() {
         self.recorderState = .ready
     }
-    
 //  Currently unused!
-
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
     var timer = Timer()

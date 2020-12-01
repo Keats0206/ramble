@@ -19,11 +19,10 @@ struct Controls : View {
         
         ZStack {
             VStack {
-//                CustomProgressBar(value: $globalPlayer.value, player: $globalPlayer.globalRambPlayer, isplaying: $globalPlayer.isPlaying)
                 HStack {
                     Spacer()
                     Button(action: {
-                        self.globalPlayer.globalRambPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+                        self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                     }) {
                         Image(systemName: "backward.end.fill")
                             .font(.system(size: 30))
@@ -31,7 +30,7 @@ struct Controls : View {
                     Spacer()
                     Button(action: {
                         if self.globalPlayer.isPlaying {
-                            self.globalPlayer.globalRambPlayer.pause()
+                            self.globalPlayer.globalRambPlayer?.pause()
                             self.globalPlayer.isPlaying = false
                         } else {
                             self.globalPlayer.play()
@@ -43,8 +42,7 @@ struct Controls : View {
                     }.buttonStyle(PlayerButtonStyle())
                     Spacer()
                     Button(action: {
-                        print(globalPlayer.playingRamb)
-                        self.globalPlayer.globalRambPlayer.seek(to: CMTime(seconds: getSeconds() + 15, preferredTimescale: 1))
+                        self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: getSeconds() + 15, preferredTimescale: 1))
                     }) {
                         Image(systemName: "goforward.15")
                             .font(.system(size: 30))
@@ -54,11 +52,11 @@ struct Controls : View {
             }
         }
         .onAppear {
-            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: globalPlayer.globalRambPlayer.currentItem!, queue: .main) { (_) in
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: globalPlayer.globalRambPlayer!.currentItem!, queue: .main) { (_) in
                 print("did finish playing")
             }
             
-            self.globalPlayer.globalRambPlayer.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
+            self.globalPlayer.globalRambPlayer?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
                 self.globalPlayer.value = self.getSliderValue()
                 if self.globalPlayer.value == 1.0 {
                     self.globalPlayer.isPlaying = false
@@ -72,11 +70,11 @@ struct Controls : View {
     }
     
     func getSliderValue() -> Float {
-        return Float(self.globalPlayer.globalRambPlayer.currentTime().seconds / (self.globalPlayer.globalRambPlayer.currentItem?.duration.seconds)!)
+        return Float((self.globalPlayer.globalRambPlayer?.currentTime().seconds)! / (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
     }
         
     func getSeconds() -> Double {
-        return Double(Double(self.globalPlayer.value) * (self.globalPlayer.globalRambPlayer.currentItem?.duration.seconds)!)
+        return Double(Double(self.globalPlayer.value) * (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
     }
 }
 

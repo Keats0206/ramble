@@ -114,6 +114,7 @@ struct HomeView: View {
         let timestamp = Int(NSDate().timeIntervalSince1970) * -1
         let length = length
         let uid = user.id!
+        let caption = "Untitled \(Date().toString(dateFormat: "MMM d"))"
         let ramb = Ramb2(
             caption: caption,
             length: length,
@@ -186,29 +187,34 @@ private extension HomeView {
     }
     var recordingsView: some View {
         VStack {
-            HStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    TextField("\(globalPlayer.playingRamb.caption)", text: $globalPlayer.caption, onCommit: {
-                        updateCaption(ramb: globalPlayer.playingRamb, caption: globalPlayer.caption)
-                      })
-                        .font(.title)
-                        .foregroundColor(.white)
-                    Text("\(formatDate(timestamp: globalPlayer.playingRamb.timestamp)) ago")
-                        .font(.system(size: 18, weight: .bold))
-                        .bold()
-                        .opacity(0.5)
-                }
-                Button(action: {
-                    self.showShareMenu.toggle()
-                }) {
-                   Text("Share")
-                        .font(.headline)
-                }
-                .actionSheet(isPresented: $showShareMenu, content: {
-                    self.actionSheet })
+            if globalPlayer.playingRamb == nil {
+                Text("Nothing playing")
+                    .font(.headline)
+            } else {
+                HStack(alignment: .center) {
+                        VStack(alignment: .leading) {
+                            TextField("\(globalPlayer.playingRamb!.caption)", text: $globalPlayer.caption, onCommit: {
+                                updateCaption(ramb: globalPlayer.playingRamb!, caption: globalPlayer.caption)
+                              })
+                                .font(.title)
+                                .foregroundColor(.white)
+                            Text("\(formatDate(timestamp: globalPlayer.playingRamb!.timestamp)) ago")
+                                .font(.system(size: 18, weight: .bold))
+                                .bold()
+                                .opacity(0.5)
+                        }
+                        Button(action: {
+                            self.showShareMenu.toggle()
+                        }) {
+                           Text("Share")
+                                .font(.headline)
+                        }
+                        .actionSheet(isPresented: $showShareMenu, content: {
+                            self.actionSheet })
+                    }
+                    .padding()
+                Controls()
             }
-            .padding()
-            Controls()
         }
     }
     var actionSheet: ActionSheet {
@@ -216,7 +222,7 @@ private extension HomeView {
                 buttons: [
                     .default(Text("Instagram Stories")) {
                     shareService.shareState = true
-                    self.shareToIG(ramb: globalPlayer.playingRamb)
+                    self.shareToIG(ramb: globalPlayer.playingRamb!)
                 },
                     .destructive(Text("Cancel"))
                 ])
