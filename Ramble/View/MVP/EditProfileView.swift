@@ -82,6 +82,9 @@ struct EditProfileView : View {
                         .padding()
                     }
             }
+            .onAppear {
+                print(user)
+            }
             .navigationBarItems(leading:
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
@@ -134,23 +137,21 @@ private extension EditProfileView {
         VStack(spacing: 20) {
         VStack(alignment: .leading, spacing: 5) {
             Text("Username")
+            Text(user.username)
             TextField(user.username, text: $user.username)
                 .padding(5)
-                .opacity(0.5)
             Divider()
         }
         VStack(alignment: .leading, spacing: 5) {
             Text("Fullname")
             TextField(user.displayname, text: $user.displayname)
                 .padding(5)
-                .opacity(0.5)
             Divider()
         }
         VStack(alignment: .leading, spacing: 5) {
             Text("Bio")
             TextField(user.bio, text: $user.bio)
                 .padding(5)
-                .opacity(0.5)
             Divider()
         }
     }.foregroundColor(.white)
@@ -220,6 +221,7 @@ struct EditProfileView_Previews: PreviewProvider {
             .environment(\.colorScheme, .dark)
     }
 }
+
 struct NetworkImage: View {
     let url: URL?
     let image: UIImage?

@@ -43,14 +43,15 @@ let testUser = User(id: "1",
 //])
 
 let testRamb = Ramb2(id: "1",
-                   caption: "I love music wow this is so fun",
+                   caption: "FUCK YEA",
                    length: 30,
                    rambUrl: "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/profile-images%2F0AD6665D-F43D-423E-A511-231958E68A7A?alt=media&token=a7070624-8714-4e80-bc89-f6785ce21465",
                    fileId: "257671983",
                    timestamp: -1601176781,
                    plays: 23023,
                    user: testUser,
-                   uid: testUser.id!
+                   uid: testUser.id!,
+                   fileUrl: URL(string: "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/profile-images%2F0AD6665D-F43D-423E-A511-231958E68A7A?alt=media&token=a7070624-8714-4e80-bc89-f6785ce21465")!
 )
 
 let testPlayer = AVPlayer(url: URL(string: "\(testRamb.rambUrl)")!)

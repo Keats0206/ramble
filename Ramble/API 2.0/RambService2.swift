@@ -10,8 +10,9 @@ import Firebase
 import Combine
 
 class RambService2: ObservableObject {
+    @Published var globalPlayer: GlobalPlayer?
     static let shared = RambService2()
-    
+        
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
     
@@ -20,7 +21,9 @@ class RambService2: ObservableObject {
     
     @Published var initialRamb : Ramb2?
     
-    //  This function is working!
+    func setUp(globalPlayer: GlobalPlayer) {
+        self.globalPlayer = globalPlayer
+    }
     func addRamb(_ ramb: Ramb2) {
         let newRamb = FBRefRambs.document()
         let userId = ramb.user.id
@@ -34,8 +37,6 @@ class RambService2: ObservableObject {
             print("There was an error while trying to save a ramb \(error.localizedDescription).")
         }
     }
-    
-//  Fetch all rambs for the for you page
     func fetchRambs() {
         FBRefRambs.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
             if let querySnapshot = querySnapshot {
@@ -45,19 +46,22 @@ class RambService2: ObservableObject {
             }
         }
     }
-//  Fetch user rambs
     func fetchUserRambs(user: User) {
         let userId = user.uid
         FBRefRambs.whereField("uid", isEqualTo: userId)
-            .addSnapshotListener { (querySnapshot, error) in // (2)
+            .addSnapshotListener { [self] (querySnapshot, error) in // (2)
                 if let querySnapshot = querySnapshot {
                     self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                         try? document.data(as: Ramb2.self) // (4)
                 }
+                    
+                let ramb = self.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[0]
+                    self.globalPlayer?.playingRamb = ramb
+                    self.globalPlayer?.setGlobalPlayer(ramb: ramb)
+                    print("set global ramb \(ramb)")
             }
         }
     }
-    
     func updateUserData(user: User) {
         let dict = [
             "bio" : user.bio,
@@ -80,7 +84,6 @@ class RambService2: ObservableObject {
             }
         })
     }
-    
     func addPlay(ramb: Ramb2) {
         let plays = ramb.plays + 1
         
@@ -92,7 +95,6 @@ class RambService2: ObservableObject {
             }
         }
     }
-    
     func updateCaption(ramb: Ramb2, caption: String) {
         let rambRef = FBRefRambs.document(ramb.id!)
         rambRef.updateData(["caption": caption]) { err in
@@ -103,8 +105,6 @@ class RambService2: ObservableObject {
             }
         }
     }
-    
-    //  Delete rambs
     func deleteRamb(ramb: Ramb2) {
         FBRefRambs.document(ramb.id!).delete() { err in
             if let err = err {

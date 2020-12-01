@@ -20,43 +20,18 @@ struct HomeView: View {
     @ObservedObject var shareService = ShareService()
     
     @State var showShareMenu: Bool = false
-    
     @State private var keyboardHeight: CGFloat = 0
-    
-    @State var legnth: Double = 0
-    
+    @State var length: Double = 0
     @State var user: User
-    
     @State var showProfile: Bool = false
     @State var showList: Bool = false
     @State var openAudioUpload = false
-    
     @State var rambUrl: String?
     @State var viewControl: ViewControl = .create
     
-//    @State var newCaption: String = ""
-                    
     var buttonSize: CGFloat {
         80
     }
-    
-    
-    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double) {
-            let timestamp = Int(NSDate().timeIntervalSince1970) * -1
-            let length = length
-            let uid = user.id!
-            let ramb = Ramb2(
-                caption: caption,
-                length: length,
-                rambUrl: rambUrl,
-                fileId: fileId,
-                timestamp: timestamp,
-                plays: 0,
-                user: user,
-                uid: uid)
-        RambService2().addRamb(ramb)
-    }
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -65,6 +40,7 @@ struct HomeView: View {
                         .resizable()
                         .aspectRatio(geometry.size, contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
+                    
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
                     
@@ -103,6 +79,18 @@ struct HomeView: View {
     //                  TabView
                         tabControl
                     }.keyboardAdaptive()
+                    
+                    if shareService.shareState == true {
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                LoadingAnimation()
+                                Spacer()
+                            }
+                            Spacer()
+                        }
+                    }
                 }
             }
             .background(Blur())
@@ -117,23 +105,32 @@ struct HomeView: View {
             .sheet(isPresented: $showProfile, onDismiss: {
                 print("Modal dismisses")
             }) {
-                    EditProfileView(user: $user)
+                EditProfileView(user: $user)
                 }
             )
         }
     }
-    func setGlobalPlayer() {
-        print(viewModel.userRambs)
-        let ramb = testRamb
-        globalPlayer.setGlobalPlayer(ramb: ramb)
-        globalPlayer.playingRamb = ramb
+    func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double, fileUrl: URL) {
+            let timestamp = Int(NSDate().timeIntervalSince1970) * -1
+            let length = length
+            let uid = user.id!
+            let ramb = Ramb2(
+                caption: caption,
+                length: length,
+                rambUrl: rambUrl,
+                fileId: fileId,
+                timestamp: timestamp,
+                plays: 0,
+                user: user,
+                uid: uid,
+                fileUrl: fileUrl)
+        RambService2().addRamb(ramb)
     }
-    
     func updateCaption(ramb: Ramb2, caption: String) {
         viewModel.updateCaption(ramb: ramb, caption: caption)
     }
     func shareToIG(ramb: Ramb2) {
-        ShareService.shared.downloadAudio(
+        ShareService.shared.shareToIGLocal(
             ramb: ramb
         )
     }
@@ -177,14 +174,14 @@ private extension HomeView {
                                 caption: globalPlayer.caption,
                                 rambUrl: rambUrl!,
                                 fileId: "fileId",
-                                length: timerManager.secondsElapsed)
+                                length: timerManager.secondsElapsed,
+                                fileUrl: audioRecorder.recordings[0].fileUrl
+                            )
                             viewControl = .recordings
                             timerManager.reset()
-                            setGlobalPlayer()
                     }
                 }
-            }
-            .foregroundColor(.white)
+            }.foregroundColor(.white)
     }
     var recordingsView: some View {
         VStack {
@@ -195,21 +192,19 @@ private extension HomeView {
                       })
                         .font(.title)
                         .foregroundColor(.white)
-                    
                     Text("\(formatDate(timestamp: globalPlayer.playingRamb.timestamp)) ago")
                         .font(.system(size: 18, weight: .bold))
                         .bold()
                         .opacity(0.5)
                 }
-                
                 Button(action: {
                     self.showShareMenu.toggle()
                 }) {
                    Text("Share")
                         .font(.headline)
-                }.actionSheet(isPresented: $showShareMenu, content: {
-                            self.actionSheet })
-
+                }
+                .actionSheet(isPresented: $showShareMenu, content: {
+                    self.actionSheet })
             }
             .padding()
             Controls()
@@ -217,19 +212,20 @@ private extension HomeView {
     }
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Share Menu"),
-                    buttons: [
-                        .default(Text("Instagram Stories")) {
-                            self.shareToIG(ramb: globalPlayer.playingRamb)
-                        },
-                        .destructive(Text("Cancel"))
-                    ])
+                buttons: [
+                    .default(Text("Instagram Stories")) {
+                    shareService.shareState = true
+                    self.shareToIG(ramb: globalPlayer.playingRamb)
+                },
+                    .destructive(Text("Cancel"))
+                ])
     }
     var tabControl: some View {
         HStack {
             Spacer()
             Button(action: {
                 self.viewControl = .create
-            }){
+            }) {
                 Image(systemName: "music.mic")
                     .font(.title)
             }
@@ -241,7 +237,7 @@ private extension HomeView {
             Spacer()
             Button(action: {
                 self.viewControl = .recordings
-            }){
+            }) {
                 Image(systemName: "music.note.list")
                     .font(.title)
             }
@@ -253,6 +249,7 @@ private extension HomeView {
             Spacer()
         }.padding(.top)
     }
+    
 }
 
 @available(iOS 14.0, *)

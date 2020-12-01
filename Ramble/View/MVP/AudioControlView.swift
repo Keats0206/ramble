@@ -12,7 +12,6 @@ import AVKit
 import Foundation
 import Combine
 
-
 struct Controls : View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     

@@ -193,6 +193,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4027A6A52575CFFB0064B639 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */,
+				4070B85225675207006D6630 /* RecordPlayerView.swift */,
+				40150D1524986CB800B2E8A9 /* FeedView.swift */,
+				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
+				40B1474A25016C5F00A2781A /* ProfileView.swift */,
+				405A5DE1250802F4009F9C6B /* SearchView.swift */,
+				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
+				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
+				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
+				40EA6CB02568D5AB00772353 /* RecordingsList.swift */,
+				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
+				40FFDF06251BFC100025799C /* RambUserCell.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
 		402F5484244F91A900FD899F = {
 			isa = PBXGroup;
 			children = (
@@ -278,18 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				40EA6CB22568D7C900772353 /* MVP */,
-				40150D1524986CB800B2E8A9 /* FeedView.swift */,
-				4027A685257008D10064B639 /* LoadingView.swift */,
-				404821D524A3BB7200BD63A3 /* RambUserFeed.swift */,
-				40EA6CB02568D5AB00772353 /* RecordingsList.swift */,
-				40B1474A25016C5F00A2781A /* ProfileView.swift */,
-				405A5DE1250802F4009F9C6B /* SearchView.swift */,
-				40122F6E251FB0E100A3BDD6 /* RecorderView.swift */,
-				EEBC15ED2536CB9B0076318F /* RecorderPostView.swift */,
-				402F54C2244F9ACC00FD899F /* RambFeed.swift */,
-				40F3FA53248EB86900F3CE02 /* RambCell.swift */,
-				40FFDF06251BFC100025799C /* RambUserCell.swift */,
-				405EBBB725657E3F00FB0B97 /* NowPlayingCard.swift */,
+				4027A6A52575CFFB0064B639 /* Unused */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,12 +327,12 @@
 			children = (
 				406FAD202450D7FA00223873 /* AppView.swift */,
 				4014BE3C25674CA7009D9823 /* HomeView.swift */,
-				4070B85225675207006D6630 /* RecordPlayerView.swift */,
 				4070B85025674F34006D6630 /* RambUserList.swift */,
 				408BA721256C874D0060265F /* RecordingRow.swift */,
 				40E56A0E255B508100BEA192 /* AudioControlView.swift */,
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				4027A683256EE98F0064B639 /* Styling.swift */,
+				4027A685257008D10064B639 /* LoadingView.swift */,
 			);
 			path = MVP;
 			sourceTree = "<group>";

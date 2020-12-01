@@ -38,11 +38,12 @@ struct RambUserList: View {
             Spacer()
         }.onAppear{
             viewModel.fetchUserRambs(user: user)
+//            globalPlayer.setGlobalPlayer(ramb: ramb)
+//            globalPlayer.playingRamb = ramb
             UITableView.appearance().backgroundColor = UIColor.clear
             UITableViewCell.appearance().backgroundColor = UIColor.clear
         }
     }
-    
     
     func delete(at offsets: IndexSet) {
         for index in offsets {

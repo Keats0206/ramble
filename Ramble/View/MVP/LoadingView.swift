@@ -4,8 +4,8 @@
 //
 //  Created by P..D..! on 11/11/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
+////
 //
-
 import SwiftUI
 
 struct LoadingView<Content>: View where Content: View {
@@ -18,7 +18,7 @@ struct LoadingView<Content>: View where Content: View {
                 self.content()
                     .disabled(self.isShowing)
                     .blur(radius: self.isShowing ? 3 : 0)
-                
+
                 if isShowing {
                     LoadingAnimation()
                 }

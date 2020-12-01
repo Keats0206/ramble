@@ -37,9 +37,7 @@ struct RambRow: View {
 private extension RambRow {
     var recordingRowBottom: some View {
         HStack {
-                        
             Spacer()
-            
             HStack(spacing: 20) {
                 Button(action: {
                     print("Show share to IG menu")
@@ -60,6 +58,6 @@ private extension RambRow {
             .foregroundColor(Color.primary)
             
         }.font(.title)
-        .buttonStyle(BorderlessButtonStyle())
+            .buttonStyle(BorderlessButtonStyle())
     }
 }

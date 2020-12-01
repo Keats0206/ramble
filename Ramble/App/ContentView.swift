@@ -11,6 +11,7 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct ContentView : View {
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var globalPlayer: GlobalPlayer
 
     func getUser () {
         session.listen()

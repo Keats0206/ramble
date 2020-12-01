@@ -26,6 +26,7 @@ class UserService2: ObservableObject {
             case .success(let user):
                 if let user = user {
                     completion(user)
+                    print("DEBUG: got user \(user)")
                 } else {
                     print("DEBUG: Document does not exist")
                 }

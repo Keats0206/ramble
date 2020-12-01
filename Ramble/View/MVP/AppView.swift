@@ -45,6 +45,7 @@ struct AppView: View {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
+            print(user)
             return
         }
     }
@@ -55,6 +56,7 @@ struct AppView: View {
         }
         .onAppear {
             self.getUser()
+            viewModel.setUp(globalPlayer: self.globalPlayer)
         }
     }
 }
