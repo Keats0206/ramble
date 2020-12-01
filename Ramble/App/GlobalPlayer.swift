@@ -26,6 +26,7 @@ class GlobalPlayer: ObservableObject {
         let url = URL(string: "\(ramb.rambUrl)")
         self.globalRambPlayer = AVPlayer(url: url!)
         self.caption = ramb.caption
+        print("DEBUG: Global player did set \(ramb)")
         return
     }
     

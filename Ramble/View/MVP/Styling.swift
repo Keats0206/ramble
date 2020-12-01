@@ -19,6 +19,20 @@ struct ClearCell: ViewModifier {
       }
   }
 
+struct OutlineButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding(10.0)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10.0)
+                    .stroke(lineWidth: 2.0)
+                    .foregroundColor(.white)
+                    
+            )
+            .scaleEffect(configuration.isPressed ? 1.3 : 1.0)
+    }
+}
 
 struct PlayerButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {

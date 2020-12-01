@@ -33,7 +33,13 @@ struct SignInView : View {
     var body: some View {
         LoadingView(isShowing: $loading) {
             ZStack {
-                Color.accent3.edgesIgnoringSafeArea(.all)
+                GeometryReader { geometry in
+                Image("gradient2")
+                    .resizable()
+                    .aspectRatio(geometry.size, contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+                Blur(style: .dark)
+                    .edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer()
                     Image(systemName: "music.mic")
@@ -41,7 +47,6 @@ struct SignInView : View {
                         .scaledToFit()
                         .frame(width: 100)
                         .foregroundColor(.white)
-                    
                     VStack {
                         TextField("Email Addesss", text: $email)
                             .font(.system(size: 18, weight: .bold))
@@ -57,7 +62,6 @@ struct SignInView : View {
                             Text("ahhh crap")
                         }
                     }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
-                    
                     Button(action: signIn) {
                         Text("Sign In")
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -65,9 +69,7 @@ struct SignInView : View {
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
-                    
                     Spacer()
-                    
                     NavigationLink(destination: SignUpView()) {
                         HStack {
                             Text("Create Account")
@@ -77,6 +79,7 @@ struct SignInView : View {
                     }
                 }
             }
+        }
         }
     }
 }

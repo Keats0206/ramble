@@ -19,10 +19,11 @@ struct HomeView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var shareService = ShareService()
     
+    @Binding var user: User
+        
     @State var showShareMenu: Bool = false
     @State private var keyboardHeight: CGFloat = 0
     @State var length: Double = 0
-    @State var user: User
     @State var showProfile: Bool = false
     @State var showList: Bool = false
     @State var openAudioUpload = false
@@ -31,84 +32,6 @@ struct HomeView: View {
     
     var buttonSize: CGFloat {
         80
-    }
-    var body: some View {
-        NavigationView {
-            ZStack {
-                GeometryReader { geometry in
-                    Image("gradient")
-                        .resizable()
-                        .aspectRatio(geometry.size, contentMode: .fill)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    Blur(style: .dark)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack {
-    //                  UpperView
-                        HStack {
-                            switch viewControl {
-                                case .create:
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Text("Share your voice with the world")
-                                                .font(.title)
-                                                .foregroundColor(.white)
-                                            Spacer()
-                                        }
-                                        Spacer()
-                                    }.padding()
-                                case .recordings:
-                                    RambUserList(user: user)
-                                }
-                        }
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-                            
-    //                  AudioRecodView
-                        VStack(alignment: .center) {
-                                ZStack {
-                                    if viewControl == .create {
-                                        createView
-                                    }
-                                    if viewControl == .recordings {
-                                        recordingsView
-                                    }
-                                }
-                            }
-                            .frame(height: UIScreen.main.bounds.height / 5)
-    //                  TabView
-                        tabControl
-                    }.keyboardAdaptive()
-                    
-                    if shareService.shareState == true {
-                        VStack {
-                            Spacer()
-                            HStack {
-                                Spacer()
-                                LoadingAnimation()
-                                Spacer()
-                            }
-                            Spacer()
-                        }
-                    }
-                }
-            }
-            .background(Blur())
-            .navigationBarItems(leading:
-                    Button(action: {
-                        self.showProfile.toggle()
-                    }) {
-                    Image(systemName: "person.circle.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                    }
-            .sheet(isPresented: $showProfile, onDismiss: {
-                print("Modal dismisses")
-            }) {
-                EditProfileView(user: $user)
-                }
-            )
-        }
     }
     func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double, fileUrl: URL) {
         let timestamp = Int(NSDate().timeIntervalSince1970) * -1
@@ -125,8 +48,8 @@ struct HomeView: View {
             user: user,
             uid: uid,
             fileUrl: fileUrl)
-        globalPlayer.setGlobalPlayer(ramb: ramb)
         RambService2().addRamb(ramb)
+        RambService2().fetchUserRambs(user: user, newRecording: true)
     }
     func updateCaption(ramb: Ramb2, caption: String) {
         viewModel.updateCaption(ramb: ramb, caption: caption)
@@ -136,16 +59,81 @@ struct HomeView: View {
             ramb: ramb
         )
     }
+    
+    var body: some View {
+        LoadingView(isShowing: $shareService.isLoading) {
+            NavigationView {
+            ZStack {
+                GeometryReader { geometry in
+                    Image("gradient2")
+                        .resizable()
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    Blur(style: .dark)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack {
+                        //                  UpperView
+                        HStack {
+                            switch viewControl {
+                            case .create:
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("Share your voice with the world")
+                                            .font(.title)
+                                            .foregroundColor(.white)
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                }.padding()
+                            case .recordings:
+                                RambUserList(user: user)
+                            }
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                        
+                        //                  AudioRecodView
+                        VStack(alignment: .center) {
+                            ZStack {
+                                if viewControl == .create {
+                                    createView
+                                }
+                                if viewControl == .recordings {
+                                    recordingsView
+                                }
+                            }
+                        }
+                        .frame(height: UIScreen.main.bounds.height / 5)
+                        //                  TabView
+                        tabControl
+                    }.keyboardAdaptive()
+                }
+            }
+            .background(Blur())
+            .navigationBarItems(leading:
+                                    Button(action: {
+                                        self.showProfile.toggle()
+                                    }) {
+                                        Image(systemName: "person.circle.fill")
+                                            .font(.title)
+                                            .foregroundColor(.white)
+                                    }
+                .sheet(isPresented: $showProfile, onDismiss: {
+                    print("Modal dismisses")
+                }) {
+                    EditProfileView(user: $user)
+                }
+            )
+        }
+    }
+}
 }
 
 @available(iOS 14.0, *)
 private extension HomeView {
     var createView: some View {
         ZStack {
-            Text(String(format: "%.1f", timerManager.secondsElapsed))
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-                .foregroundColor(.white).opacity(0.5)
-                .offset(y: 60)
                 switch audioRecorder.recorderState {
                 case .ready:
                     Button(action: {
@@ -157,6 +145,10 @@ private extension HomeView {
                             .frame(width: 80, height: 80)
                     }.buttonStyle(PlayerButtonStyle())
                 case .started:
+                    Text(String(format: "%.1f", timerManager.secondsElapsed))
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundColor(.white).opacity(0.5)
+                        .offset(y: 60)
                     Button(action: {
                         audioRecorder.stopRecording()
                         timerManager.stop()
@@ -190,6 +182,7 @@ private extension HomeView {
             if globalPlayer.playingRamb == nil {
                 Text("Nothing playing")
                     .font(.headline)
+                    .foregroundColor(.white)
             } else {
                 HStack(alignment: .center) {
                         VStack(alignment: .leading) {
@@ -209,6 +202,7 @@ private extension HomeView {
                            Text("Share")
                                 .font(.headline)
                         }
+                        .buttonStyle(OutlineButtonStyle())
                         .actionSheet(isPresented: $showShareMenu, content: {
                             self.actionSheet })
                     }
@@ -221,8 +215,8 @@ private extension HomeView {
         ActionSheet(title: Text("Share Menu"),
                 buttons: [
                     .default(Text("Instagram Stories")) {
-                    shareService.shareState = true
                     self.shareToIG(ramb: globalPlayer.playingRamb!)
+                    shareService.isLoading = true
                 },
                     .destructive(Text("Cancel"))
                 ])
@@ -256,15 +250,14 @@ private extension HomeView {
             Spacer()
         }.padding(.top)
     }
-    
 }
 
 @available(iOS 14.0, *)
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(user: testUser)
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(user: testUser)
+//    }
+//}
 
 enum ViewControl {
     case create

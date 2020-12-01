@@ -17,7 +17,7 @@ import Firebase
 class ShareService: ObservableObject {
     static let shared = ShareService()
     
-    @Published var shareState: Bool = false
+    @Published var isLoading: Bool = false
     
 //    func instagramStoriesPhoto() {
 //        if let urlScheme = URL(string: "instagram-stories://share") {
@@ -76,31 +76,27 @@ class ShareService: ObservableObject {
         }, outcome: { [self] (url) in
             switch url {
             case .success(let url):
-//      Video generated succesfully share to IG
                 self.instagramStoriesVideo(url: url)
-                print("\(self.shareState) pre IG share")
                 print("Share to IG success")
             case .failure(let error):
                 print(error.localizedDescription)
                 print("Share to IG failure")
+                isLoading = false
+                print(isLoading)
             }
         })
     }
 //      Create a video with the audio and an image
     
 // swiftlint:disable all
-        func instagramStoriesVideo(url: URL) {
-            self.shareState = false
-            print("\(self.shareState) IG share")
+    func instagramStoriesVideo(url: URL) {
             if let urlScheme = URL(string: "instagram-stories://share") {
                 if UIApplication.shared.canOpenURL(urlScheme) {
                     let videoData: Data = try! Data(contentsOf: url)
                     let items = [["com.instagram.sharedSticker.backgroundVideo": videoData]]
                     let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(60*5)]
-                // 5
-                UIPasteboard.general.setItems(items, options: pasteboardOptions)
-                // 6
-                UIApplication.shared.open(urlScheme, options: [:], completionHandler: nil)
+                    UIPasteboard.general.setItems(items, options: pasteboardOptions)
+                    UIApplication.shared.open(urlScheme, options: [:], completionHandler: nil)
             }
         }
     }

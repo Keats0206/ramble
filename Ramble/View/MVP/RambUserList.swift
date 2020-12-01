@@ -18,7 +18,7 @@ struct RambUserList: View {
 
     init(user: User) {
         self.user = user
-        viewModel.fetchUserRambs(user: user)
+        viewModel.fetchUserRambs(user: user, newRecording: false)
         return
     }
     var body: some View {
@@ -36,7 +36,7 @@ struct RambUserList: View {
             }
             Spacer()
         }.onAppear {
-            viewModel.fetchUserRambs(user: user)
+            viewModel.fetchUserRambs(user: user, newRecording: false)
             UITableView.appearance().backgroundColor = UIColor.clear
             UITableViewCell.appearance().backgroundColor = UIColor.clear
         }
