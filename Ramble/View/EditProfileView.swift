@@ -193,7 +193,7 @@ private extension EditProfileView {
             Spacer()
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
-//                self.session.signOut()
+                self.session.signOut()
             }) {
                 HStack {
                     Image(systemName: "arrow.right.circle.fill")

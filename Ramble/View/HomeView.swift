@@ -25,7 +25,6 @@ struct HomeView: View {
     @State var length: Double = 0
     @State var showProfile: Bool = false
     @State var showList: Bool = false
-    @State var openAudioUpload = false
     @State var rambUrl: String?
     @State var viewControl: ViewControl = .create
     
@@ -51,9 +50,9 @@ struct HomeView: View {
         viewModel.fetchRamb(rambId: rambId)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             globalPlayer.setGlobalPlayer(ramb: viewModel.lastUploadRamb)
+            viewControl = .recordings
         }
     }
-    
     func updateCaption(ramb: Ramb2, caption: String) {
         viewModel.updateCaption(ramb: ramb, caption: caption)
     }
@@ -116,13 +115,13 @@ struct HomeView: View {
                 }
                 .background(Blur())
                 .navigationBarItems(leading:
-                                        Button(action: {
-                                            self.showProfile.toggle()
-                                        }) {
-                                            Image(systemName: "person.circle.fill")
-                                                .font(.title)
-                                                .foregroundColor(.white)
-                                        }
+                        Button(action: {
+                            self.showProfile.toggle()
+                        }) {
+                            Image(systemName: "person.circle.fill")
+                                .font(.title)
+                                .foregroundColor(.white)
+                        }
                     .sheet(isPresented: $showProfile, onDismiss: {
                         print("Modal dismisses")
                     }) {
@@ -174,7 +173,6 @@ private extension HomeView {
                                 length: timerManager.secondsElapsed,
                                 fileUrl: audioRecorder.recordings[0].fileUrl
                             )
-                            viewControl = .recordings
                             timerManager.reset()
                     }
                 }
