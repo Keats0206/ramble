@@ -52,17 +52,17 @@ struct Controls : View {
             }
         }
         .onAppear {
+//          Checks if player did finish
             self.globalPlayer.globalRambPlayer?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
                 self.globalPlayer.value = self.getSliderValue()
                 if self.globalPlayer.value == 1.0 {
+//                  Set now playing to false
                     self.globalPlayer.isPlaying = false
+//                  Seek back to time zero
+                    self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                 }
             }
         }
-    }
-    func donePlaying(notification:NSNotification) {
-         //Dismiss AVPlayerViewController
-        print("did finish playing")
     }
     func getSliderValue() -> Float {
         return Float((self.globalPlayer.globalRambPlayer?.currentTime().seconds)! / (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)

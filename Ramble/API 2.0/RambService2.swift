@@ -29,7 +29,6 @@ class RambService2: ObservableObject {
                 case .success(let ramb):
                 if let ramb = ramb {
                     self.lastUploadRamb = ramb
-                    print("DEBUG: Last upload \(self.lastUploadRamb)")
                 } else {
                     print("Document does not exist")
                 }

@@ -22,11 +22,7 @@ class GlobalPlayer: ObservableObject {
     @Published var caption = ""
 
     let session = AVAudioSession.sharedInstance()
-    
-    func testFunc(){
-        print("DEBUG: global player callllll")
-    }
-    
+        
     func setGlobalPlayer(ramb: Ramb2) {
         do {
             try session.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longFormAudio, options: [])
@@ -38,7 +34,6 @@ class GlobalPlayer: ObservableObject {
         let url = URL(string: "\(ramb.rambUrl)")
         globalRambPlayer = AVPlayer(url: url!)
         caption = ramb.caption
-        print("DEBUG: Did set global player")
         return
     }
     func play() {

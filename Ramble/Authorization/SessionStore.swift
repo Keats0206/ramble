@@ -70,18 +70,14 @@ class SessionStore : ObservableObject {
                 } else {
                     guard let profileImageUrl = url?.absoluteString else { return }
                     print(profileImageUrl)
-                    
-                    
                     Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                         if let error = error {
                             print("DEBUG: Error is \(error.localizedDescription)")
                             return
                         }
-                        
                         let uid = result?.user.uid
                         let userRef = FBRefUsers.document(uid!)
                         let user = User(id: uid, uid: uid!, email: email, username: username, displayname: fullname, profileImageUrl: profileImageUrl, bio: "", isFollowed: false)
- 
                         do {
                             let _ = try userRef.setData(from: user)
                         }
