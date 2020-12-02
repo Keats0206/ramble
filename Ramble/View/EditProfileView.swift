@@ -160,30 +160,37 @@ private extension EditProfileView {
     }
     var settingsLinks: some View {
         VStack(spacing: 20) {
+//            HStack {
+//                Button(action: {
+//                    UIApplication.shared.open(URL(string: "https://www.rambleon.app/")!)
+//                }) {
+//                    Text("Privacy & Terms")
+//                }
+//                Spacer()
+//            }
             HStack {
                 Button(action: {
-                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
-                }) {
-                    Text("Privacy & Terms")
-                }
-                Spacer()
-            }
-            HStack {
-                Button(action: {
-                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+                    let email = "pete@pekeating.com"
+                    if let url = URL(string: "mailto:\(email)") {
+                      if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url)
+                      } else {
+                        UIApplication.shared.openURL(url)
+                      }
+                    }
                 }) {
                     Text("Give Feedback")
                 }
                 Spacer()
             }
-            HStack {
-                Button(action: {
-                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
-                }) {
-                    Text("Rate Us")
-                }
-                Spacer()
-            }
+//            HStack {
+//                Button(action: {
+//                    UIApplication.shared.open(URL(string:"https://www.rambleon.app/")!)
+//                }) {
+//                    Text("Rate Us")
+//                }
+//                Spacer()
+//            }
         }
         .font(.largeTitle)
         .foregroundColor(.white)
@@ -198,15 +205,6 @@ private extension EditProfileView {
                 HStack {
                     Image(systemName: "arrow.right.circle.fill")
                     Text("LOGOUT")
-                }
-            }
-            Spacer()
-            Button(action: {
-                print("Button Tapped")
-            }) {
-                HStack {
-                    Image(systemName: "trash.circle")
-                    Text("DELETE")
                 }
             }
             Spacer()
