@@ -18,7 +18,55 @@ class ShareService: ObservableObject {
     static let shared = ShareService()
     
     @Published var isLoading: Bool = false
+    @Published var wasError: Bool = false
     
+    func shareToIGLocal(ramb: Ramb2) {
+        isLoading.toggle()
+        let imageData = UIImage(imageLiteralResourceName: "rambleexport")
+        let audioData = ramb.fileUrl
+        VideoGenerator.current.generate(withImages: [imageData], andAudios: [audioData], andType: .single, { (progress) in
+            print(progress)
+        }, outcome: { [self] (url) in
+            switch url {
+            case .success(let url):
+                self.instagramStoriesVideo(url: url)
+                isLoading = false
+                print("Share to IG success")
+            case .failure(let error):
+                print(error.localizedDescription)
+                isLoading = false
+                print("Share to IG failure")
+            }
+        })
+    }
+//      Create a video with the audio and an image
+// swiftlint:disable all
+    func instagramStoriesVideo(url: URL) {
+            if let urlScheme = URL(string: "instagram-stories://share") {
+                if UIApplication.shared.canOpenURL(urlScheme) {
+                    let videoData: Data = try! Data(contentsOf: url)
+                    let items = [["com.instagram.sharedSticker.backgroundVideo": videoData]]
+                    let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(60*5)]
+                    UIPasteboard.general.setItems(items, options: pasteboardOptions)
+                    UIApplication.shared.open(urlScheme, options: [:], completionHandler: nil)
+            }
+        }
+    }
+}
+    
+// swiftlint:enable all
+
+extension Result {
+    func get() throws -> Success {
+        switch self {
+        case .success(let value):
+            return value
+        case .failure(let error):
+            throw error
+        }
+    }
+}
+
 //    func instagramStoriesPhoto() {
 //        if let urlScheme = URL(string: "instagram-stories://share") {
 //            // 2
@@ -35,7 +83,6 @@ class ShareService: ObservableObject {
 //            }
 //        }
 //    }
-    
 //    func downloadAudio(ramb: Ramb2) {
 //        print(self.shareState)
 //        let imageData = UIImage(imageLiteralResourceName: "ramble")
@@ -67,50 +114,3 @@ class ShareService: ObservableObject {
 //            }
 //        }
 //    }
-    
-    func shareToIGLocal(ramb: Ramb2) {
-        let imageData = UIImage(imageLiteralResourceName: "ramble")
-        let audioData = ramb.fileUrl
-        VideoGenerator.current.generate(withImages: [imageData], andAudios: [audioData], andType: .single, { (progress) in
-            print(progress)
-        }, outcome: { [self] (url) in
-            switch url {
-            case .success(let url):
-                self.instagramStoriesVideo(url: url)
-                print("Share to IG success")
-            case .failure(let error):
-                print(error.localizedDescription)
-                print("Share to IG failure")
-                isLoading = false
-                print(isLoading)
-            }
-        })
-    }
-//      Create a video with the audio and an image
-    
-// swiftlint:disable all
-    func instagramStoriesVideo(url: URL) {
-            if let urlScheme = URL(string: "instagram-stories://share") {
-                if UIApplication.shared.canOpenURL(urlScheme) {
-                    let videoData: Data = try! Data(contentsOf: url)
-                    let items = [["com.instagram.sharedSticker.backgroundVideo": videoData]]
-                    let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(60*5)]
-                    UIPasteboard.general.setItems(items, options: pasteboardOptions)
-                    UIApplication.shared.open(urlScheme, options: [:], completionHandler: nil)
-            }
-        }
-    }
-}
-    
-// swiftlint:enable all
-
-extension Result {
-    func get() throws -> Success {
-        switch self {
-        case .success(let value):
-            return value
-        case .failure(let error):
-            throw error
-        }
-    }
-}

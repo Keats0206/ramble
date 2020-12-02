@@ -75,11 +75,9 @@ class RambService2: ObservableObject {
                         try? document.data(as: Ramb2.self) // (4)
                     }
                 if newRecording {
-                    print("DEBUG: new recording")
                     self.userRambs.sort(by: { $0.timestamp < $1.timestamp })
                     if let ramb = self.userRambs.first {
                         self.globalPlayer?.setGlobalPlayer(ramb: ramb)
-                        print("DEBUG: tried to set global ramb \(ramb)")
                     }
                 }
             }

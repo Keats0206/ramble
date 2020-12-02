@@ -9,7 +9,6 @@
 import SwiftUI
 import Combine
 
-@available(iOS 14.0, *)
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var globalPlayer: GlobalPlayer
@@ -54,11 +53,6 @@ struct HomeView: View {
     func updateCaption(ramb: Ramb2, caption: String) {
         viewModel.updateCaption(ramb: ramb, caption: caption)
     }
-    func shareToIG(ramb: Ramb2) {
-        ShareService.shared.shareToIGLocal(
-            ramb: ramb
-        )
-    }
     
     var body: some View {
         LoadingView(isShowing: $shareService.isLoading) {
@@ -78,22 +72,23 @@ struct HomeView: View {
                         HStack {
                             switch viewControl {
                             case .create:
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Share your voice with the world")
-                                            .font(.title)
-                                            .foregroundColor(.white)
-                                        Spacer()
-                                    }
-                                    Spacer()
-                                }.padding()
+                                EmptyView()
+//                                VStack(alignment: .leading) {
+//                                    HStack {
+//                                        Text("Share your voice with the world")
+//                                            .font(.title)
+//                                            .foregroundColor(.white)
+//                                        Spacer()
+//                                    }
+//                                    Spacer()
+//                                }.padding()
                             case .recordings:
                                 RambUserList(user: user)
                             }
                         }
+                        .innerShadow(color: Color.white.opacity(viewControl == .recordings ? 0.1 : 0.0 ), radius: 0.07)
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-                        
-                        //                  AudioRecodView
+//                  AudioRecodView
                         VStack(alignment: .center) {
                             ZStack {
                                 if viewControl == .create {
@@ -109,6 +104,9 @@ struct HomeView: View {
                         tabControl
                     }.keyboardAdaptive()
                 }
+            }
+            .alert(isPresented: $shareService.wasError) {
+                Alert(title: Text("Error sharing to Instagram"), message: Text("Try again, sorry!"), dismissButton: .default(Text("Got it!")))
             }
             .background(Blur())
             .navigationBarItems(leading:
@@ -130,10 +128,9 @@ struct HomeView: View {
 }
 }
 
-@available(iOS 14.0, *)
 private extension HomeView {
     var createView: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
                 switch audioRecorder.recorderState {
                 case .ready:
                     Button(action: {
@@ -175,7 +172,8 @@ private extension HomeView {
                             timerManager.reset()
                     }
                 }
-            }.foregroundColor(.white)
+            }
+            .foregroundColor(.white)
     }
     var recordingsView: some View {
         VStack {
@@ -190,7 +188,6 @@ private extension HomeView {
                                 updateCaption(ramb: globalPlayer.playingRamb!, caption: globalPlayer.caption)
                               })
                                 .font(.title)
-                                .foregroundColor(.white)
                             Text("\(formatDate(timestamp: globalPlayer.playingRamb!.timestamp)) ago")
                                 .font(.system(size: 18, weight: .bold))
                                 .bold()
@@ -205,7 +202,7 @@ private extension HomeView {
                         .buttonStyle(OutlineButtonStyle())
                         .actionSheet(isPresented: $showShareMenu, content: {
                             self.actionSheet })
-                    }
+                    }.foregroundColor(.white)
                     .padding()
                 Controls()
             }
@@ -215,8 +212,7 @@ private extension HomeView {
         ActionSheet(title: Text("Share Menu"),
                 buttons: [
                     .default(Text("Instagram Stories")) {
-                    self.shareToIG(ramb: globalPlayer.playingRamb!)
-                    shareService.isLoading = true
+                        shareService.shareToIGLocal(ramb: globalPlayer.playingRamb!)
                 },
                     .destructive(Text("Cancel"))
                 ])
@@ -251,8 +247,6 @@ private extension HomeView {
         }.padding(.top)
     }
 }
-
-@available(iOS 14.0, *)
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        HomeView(user: testUser)
@@ -299,5 +293,34 @@ struct KeyboardAdaptive: ViewModifier {
 extension View {
     func keyboardAdaptive() -> some View {
         ModifiedContent(content: self, modifier: KeyboardAdaptive())
+    }
+}
+
+
+extension View {
+    func innerShadow(color: Color, radius: CGFloat = 0.1) -> some View {
+        modifier(InnerShadow(color: color, radius: min(max(0, radius), 1)))
+    }
+}
+
+private struct InnerShadow: ViewModifier {
+    var color: Color = .gray
+    var radius: CGFloat = 0.1
+
+    private var colors: [Color] {
+        [color.opacity(0.60), color.opacity(0.0), .clear]
+    }
+
+    func body(content: Content) -> some View {
+        GeometryReader { geo in
+            content
+                .overlay(LinearGradient(gradient: Gradient(colors: self.colors), startPoint: .bottom, endPoint: .top)
+                    .frame(height: self.radius * self.minSide(geo)),
+                         alignment: .bottom)
+        }
+    }
+
+    func minSide(_ geo: GeometryProxy) -> CGFloat {
+        CGFloat(3) * min(geo.size.width, geo.size.height) / 2
     }
 }
