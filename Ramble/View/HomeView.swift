@@ -12,14 +12,14 @@ import Combine
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var globalPlayer: GlobalPlayer
-
+    
     @ObservedObject var viewModel = RambService2()
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var shareService = ShareService()
     
     @Binding var user: User
-        
+    
     @State var showShareMenu: Bool = false
     @State private var keyboardHeight: CGFloat = 0
     @State var length: Double = 0
@@ -61,75 +61,77 @@ struct HomeView: View {
     var body: some View {
         LoadingView(isShowing: $shareService.isLoading) {
             NavigationView {
-            ZStack {
-                GeometryReader { geometry in
-                    Image("gradient2")
-                        .resizable()
-                        .aspectRatio(geometry.size, contentMode: .fill)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    Blur(style: .dark)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack {
-                        //                  UpperView
-                        HStack {
-                            switch viewControl {
-                            case .create:
-                                EmptyView()
-//                                VStack(alignment: .leading) {
-//                                    HStack {
-//                                        Text("Share your voice with the world")
-//                                            .font(.title)
-//                                            .foregroundColor(.white)
-//                                        Spacer()
-//                                    }
-//                                    Spacer()
-//                                }.padding()
-                            case .recordings:
-                                RambUserList(user: user)
-                            }
-                        }
-                        .innerShadow(color: Color.white.opacity(viewControl == .recordings ? 0.1 : 0.0 ), radius: 0.07)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-//                  AudioRecodView
-                        VStack(alignment: .center) {
-                            ZStack {
-                                if viewControl == .create {
-                                    createView
-                                }
-                                if viewControl == .recordings {
-                                    recordingsView
+                ZStack {
+                    GeometryReader { geometry in
+                        Image("gradient2")
+                            .resizable()
+                            .aspectRatio(geometry.size, contentMode: .fill)
+                            .edgesIgnoringSafeArea(.all)
+                        
+                        Blur(style: .dark)
+                            .edgesIgnoringSafeArea(.all)
+                        
+                        VStack {
+                            //                  UpperView
+                            HStack {
+                                switch viewControl {
+                                case .create:
+                                    EmptyView()
+                                //                                VStack(alignment: .leading) {
+                                //                                    HStack {
+                                //                                        Text("Share your voice with the world")
+                                //                                            .font(.title)
+                                //                                            .foregroundColor(.white)
+                                //                                        Spacer()
+                                //                                    }
+                                //                                    Spacer()
+                                //                                }.padding()
+                                case .recordings:
+                                    RambUserList(user: user)
                                 }
                             }
-                        }
-                        .frame(height: UIScreen.main.bounds.height / 5)
-                        //                  TabView
-                        tabControl
-                    }.keyboardAdaptive()
-                }
-            }
-            .alert(isPresented: $shareService.wasError) {
-                Alert(title: Text("Error sharing to Instagram"), message: Text("Try again, sorry!"), dismissButton: .default(Text("Got it!")))
-            }
-            .background(Blur())
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                        self.showProfile.toggle()
-                                    }) {
-                                        Image(systemName: "person.circle.fill")
-                                            .font(.title)
-                                            .foregroundColor(.white)
+                            .innerShadow(color: Color.white.opacity(viewControl == .recordings ? 0.1 : 0.0 ), radius: 0.07)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                            //                  AudioRecodView
+                            VStack(alignment: .center) {
+                                ZStack {
+                                    if viewControl == .create {
+                                        createView
                                     }
-                .sheet(isPresented: $showProfile, onDismiss: {
-                    print("Modal dismisses")
-                }) {
-                    EditProfileView(user: $user)
+                                    if viewControl == .recordings {
+                                        recordingsView
+                                    }
+                                }
+                            }
+                            .frame(height: UIScreen.main.bounds.height / 5)
+                            //                  TabView
+                            tabControl
+                        }.keyboardAdaptive()
+                    }
                 }
-            )
+                .alert(isPresented: $shareService.wasError) {
+                    Alert(title: Text("Error sharing to Instagram"),
+                          message: Text("Try again, sorry!"),
+                          dismissButton: .default(Text("Got it!")))
+                }
+                .background(Blur())
+                .navigationBarItems(leading:
+                                        Button(action: {
+                                            self.showProfile.toggle()
+                                        }) {
+                                            Image(systemName: "person.circle.fill")
+                                                .font(.title)
+                                                .foregroundColor(.white)
+                                        }
+                    .sheet(isPresented: $showProfile, onDismiss: {
+                        print("Modal dismisses")
+                    }) {
+                        EditProfileView(user: $user)
+                    }
+                )
+            }
         }
     }
-}
 }
 
 private extension HomeView {

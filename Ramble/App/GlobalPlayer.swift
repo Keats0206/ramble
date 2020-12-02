@@ -28,6 +28,12 @@ class GlobalPlayer: ObservableObject {
     }
     
     func setGlobalPlayer(ramb: Ramb2) {
+        do {
+            try session.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longFormAudio, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let error {
+            fatalError("*** Unable to set up the audio session: \(error.localizedDescription) ***")
+        }
         playingRamb = ramb
         let url = URL(string: "\(ramb.rambUrl)")
         globalRambPlayer = AVPlayer(url: url!)

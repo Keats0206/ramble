@@ -52,10 +52,6 @@ struct Controls : View {
             }
         }
         .onAppear {
-            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: globalPlayer.globalRambPlayer!.currentItem!, queue: .main) { (_) in
-                print("did finish playing")
-            }
-            
             self.globalPlayer.globalRambPlayer?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
                 self.globalPlayer.value = self.getSliderValue()
                 if self.globalPlayer.value == 1.0 {
@@ -68,16 +64,13 @@ struct Controls : View {
          //Dismiss AVPlayerViewController
         print("did finish playing")
     }
-    
     func getSliderValue() -> Float {
         return Float((self.globalPlayer.globalRambPlayer?.currentTime().seconds)! / (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
     }
-        
     func getSeconds() -> Double {
         return Double(Double(self.globalPlayer.value) * (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
     }
 }
-
 struct CustomProgressBar : UIViewRepresentable {
       func makeCoordinator() -> CustomProgressBar.Coordinator {
           return CustomProgressBar.Coordinator(parent1: self)
@@ -143,7 +136,6 @@ struct CustomProgressBar : UIViewRepresentable {
 
 struct AudioPlayer : UIViewControllerRepresentable {
     @Binding var player : AVPlayer
-
     func makeUIViewController(context: UIViewControllerRepresentableContext<AudioPlayer>) -> AVPlayerViewController {
         let controller = AVPlayerViewController()
         controller.player = player
@@ -151,7 +143,6 @@ struct AudioPlayer : UIViewControllerRepresentable {
         return controller
     }
     func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<AudioPlayer>) {
-
     }
 }
 

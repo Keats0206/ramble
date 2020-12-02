@@ -35,6 +35,7 @@ class ShareService: ObservableObject {
             case .failure(let error):
                 print(error.localizedDescription)
                 isLoading = false
+                wasError = true
                 print("Share to IG failure")
             }
         })
