@@ -47,9 +47,13 @@ struct HomeView: View {
             user: user,
             uid: uid,
             fileUrl: fileUrl)
-        RambService2().addRamb(ramb)
-        RambService2().fetchUserRambs(user: user, newRecording: true)
+        let rambId = viewModel.addRamb(ramb)
+        viewModel.fetchRamb(rambId: rambId)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            globalPlayer.setGlobalPlayer(ramb: viewModel.lastUploadRamb)
+        }
     }
+    
     func updateCaption(ramb: Ramb2, caption: String) {
         viewModel.updateCaption(ramb: ramb, caption: caption)
     }

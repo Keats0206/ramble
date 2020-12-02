@@ -157,7 +157,13 @@ struct SignUpView : View {
     var body : some View {
         LoadingView(isShowing: $loading) {
             ZStack {
-                Color.accent3.edgesIgnoringSafeArea(.all)
+                GeometryReader { geometry in
+                Image("gradient2")
+                    .resizable()
+                    .aspectRatio(geometry.size, contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+                Blur(style: .dark)
+                    .edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer()
                     VStack {
@@ -239,6 +245,7 @@ struct SignUpView : View {
                             }
                         }
                     }
+                }
                 }
             }
         }

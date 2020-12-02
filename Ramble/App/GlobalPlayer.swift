@@ -13,6 +13,8 @@ import MinimizableView
 import SwimplyPlayIndicator
 
 class GlobalPlayer: ObservableObject {
+    static let shared = GlobalPlayer()
+    
     @Published var playingRamb: Ramb2?
     @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
@@ -20,28 +22,29 @@ class GlobalPlayer: ObservableObject {
     @Published var caption = ""
 
     let session = AVAudioSession.sharedInstance()
-            
-    func setGlobalPlayer(ramb: Ramb2) {
-        self.playingRamb = ramb
-        let url = URL(string: "\(ramb.rambUrl)")
-        self.globalRambPlayer = AVPlayer(url: url!)
-        self.caption = ramb.caption
-        print("DEBUG: Global player did set \(ramb)")
-        return
+    
+    func testFunc(){
+        print("DEBUG: global player callllll")
     }
     
+    func setGlobalPlayer(ramb: Ramb2) {
+        playingRamb = ramb
+        let url = URL(string: "\(ramb.rambUrl)")
+        globalRambPlayer = AVPlayer(url: url!)
+        caption = ramb.caption
+        print("DEBUG: Did set global player")
+        return
+    }
     func play() {
         globalRambPlayer?.play()
         isPlaying = true
         setupNowPlaying()
         setupRemoteTransportControls()
     }
-    
     func pause() {
         globalRambPlayer?.pause()
         isPlaying = false
     }
-
     func setupNowPlaying( ) {
 // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
@@ -52,7 +55,6 @@ class GlobalPlayer: ObservableObject {
         // Set the metadata
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
-    
     func setupRemoteTransportControls() {
         // Get the shared MPRemoteCommandCenter
         let commandCenter = MPRemoteCommandCenter.shared()

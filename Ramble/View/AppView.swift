@@ -23,8 +23,6 @@ struct AppView: View {
     @State var hidNav = false
     @State var recordingModalShown = false
     @State private var selection = 0
-    @State private var position = CardPosition.bottom
-    @State private var background = BackgroundStyle.blur
     @State var actionState: Int? = 0
         
     @State var rambUrl: String = ""
@@ -55,7 +53,6 @@ struct AppView: View {
         }
         .onAppear {
             self.getUser()
-            viewModel.setUp(globalPlayer: self.globalPlayer)
         }
     }
 }

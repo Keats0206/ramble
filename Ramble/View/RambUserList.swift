@@ -27,9 +27,7 @@ struct RambUserList: View {
                 ForEach(viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })) { ramb in
                     RambRow(ramb: ramb)
                         .onTapGesture {
-                            globalPlayer.playingRamb = ramb
                             globalPlayer.setGlobalPlayer(ramb: ramb)
-                            globalPlayer.isPlaying = false
                         }
                 }.onDelete(perform: delete)
                 .modifier(ClearCell())

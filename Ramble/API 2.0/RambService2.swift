@@ -10,42 +10,36 @@ import Firebase
 import Combine
 
 class RambService2: ObservableObject {
-    @Published var globalPlayer: GlobalPlayer?
     static let shared = RambService2()
         
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
     @Published var userRambs = [Ramb2]()
-    @Published var initialRamb : Ramb2?
     
-    @Published var lastUploadRambID: String = ""
+    @Published var lastUploadRamb: Ramb2 = testRamb
     
-    func setUp(globalPlayer: GlobalPlayer) {
-        self.globalPlayer = globalPlayer
-    }
-    func fetchRamb(rambId: String){
+    func fetchRamb(rambId: String) {
         let docRef = FBRefRambs.document(rambId)
+        
         docRef.getDocument { (document, error) in
             let result = Result {
               try document?.data(as: Ramb2.self)
             }
             switch result {
-            case .success(let ramb):
+                case .success(let ramb):
                 if let ramb = ramb {
-                    // A `City` value was successfully initialized from the DocumentSnapshot.
-                    print("City: \(ramb)")
+                    self.lastUploadRamb = ramb
+                    print("DEBUG: Last upload \(self.lastUploadRamb)")
                 } else {
-                    // A nil value was successfully initialized from the DocumentSnapshot,
-                    // or the DocumentSnapshot was nil.
                     print("Document does not exist")
                 }
-            case .failure(let error):
-                // A `City` value could not be initialized from the DocumentSnapshot.
+                case .failure(let error):
                 print("Error decoding city: \(error)")
             }
         }
     }
-    func addRamb(_ ramb: Ramb2) {
+    
+    func addRamb(_ ramb: Ramb2) -> String {
         let newRamb = FBRefRambs.document()
         let userId = ramb.user.id
         let rambId = newRamb.documentID
@@ -56,6 +50,7 @@ class RambService2: ObservableObject {
         catch {
             print("There was an error while trying to save a ramb \(error.localizedDescription).")
         }
+        return rambId
     }
     func fetchRambs() {
         FBRefRambs.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
@@ -74,12 +69,12 @@ class RambService2: ObservableObject {
                     self.userRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
                         try? document.data(as: Ramb2.self) // (4)
                     }
-                if newRecording {
-                    self.userRambs.sort(by: { $0.timestamp < $1.timestamp })
-                    if let ramb = self.userRambs.first {
-                        self.globalPlayer?.setGlobalPlayer(ramb: ramb)
-                    }
-                }
+//                if newRecording {
+//                    self.userRambs.sort(by: { $0.timestamp < $1.timestamp })
+//                    if let ramb = self.userRambs.first {
+//                        GlobalPlayer.shared.setGlobalPlayer(ramb: ramb)
+//                    }
+//                }
             }
         }
     }
