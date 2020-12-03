@@ -9,8 +9,6 @@
 import Foundation
 import AVKit
 import MediaPlayer
-import MinimizableView
-import SwimplyPlayIndicator
 
 class GlobalPlayer: ObservableObject {
     static let shared = GlobalPlayer()

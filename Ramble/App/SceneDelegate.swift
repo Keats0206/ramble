@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftUI
-import MinimizableView
 
 @available(iOS 14.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

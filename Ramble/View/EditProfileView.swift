@@ -38,9 +38,6 @@ struct EditProfileView : View {
         UserService2.shared.saveUserProfile(user: user)
         RambService2.shared.updateUserData(user: user)
     }
-    func openThing() {
-        print("Open link to review")
-    }
     var sheet: ActionSheet {
         ActionSheet(
             title: Text("Action"),
@@ -59,7 +56,6 @@ struct EditProfileView : View {
             })
         ])
     }
-    
     var body : some View {
         NavigationView {
             ZStack {
@@ -120,7 +116,7 @@ private extension EditProfileView {
                 Text("Change Photo")
                     .foregroundColor(.primary)
                     .padding(5)
-                    .padding([.trailing,.leading])
+                    .padding([.trailing, .leading])
                 
             }.sheet(isPresented: $showImagePicker, onDismiss: {
             self.showImagePicker = false
@@ -213,7 +209,6 @@ private extension EditProfileView {
         .foregroundColor(.white)
     }
 }
-
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView(user: .constant(testUser))

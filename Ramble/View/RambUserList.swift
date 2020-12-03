@@ -43,7 +43,6 @@ struct RambUserList: View {
         for index in offsets {
             let ramb = viewModel.userRambs.sorted(by: { $0.timestamp < $1.timestamp })[index]
             viewModel.deleteRamb(ramb: ramb)
-            print("delete this \(ramb.id!)")
         }
     }
 }

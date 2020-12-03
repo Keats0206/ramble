@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Foundation
-import MinimizableView
 import UIKit
 
 @available(iOS 14.0, *)

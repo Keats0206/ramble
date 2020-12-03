@@ -40,28 +40,35 @@ struct SignInView : View {
                     .edgesIgnoringSafeArea(.all)
                 Blur(style: .dark)
                     .edgesIgnoringSafeArea(.all)
-                VStack {
+                
+                VStack{
+                    
                     Spacer()
+                    
                     Image(systemName: "music.mic")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100)
                         .foregroundColor(.white)
+                    
                     VStack {
                         TextField("Email Addesss", text: $email)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            .background(Color(.white))
                         
                         SecureField("Password", text: $password)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            .background(Color(.white))
                         
                         if (error) {
                             Text("ahhh crap")
                         }
-                    }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
+                    }.foregroundColor(.white)
+                    .padding(.vertical, 64)
+                    .multilineTextAlignment(TextAlignment.center)
+                    
+                    Spacer()
+                    
                     Button(action: signIn) {
                         Text("Sign In")
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -69,7 +76,6 @@ struct SignInView : View {
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
-                    Spacer()
                     NavigationLink(destination: SignUpView()) {
                         HStack {
                             Text("Create Account")
@@ -80,7 +86,7 @@ struct SignInView : View {
                 }
             }
         }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
@@ -164,61 +170,37 @@ struct SignUpView : View {
                     .edgesIgnoringSafeArea(.all)
                 Blur(style: .dark)
                     .edgesIgnoringSafeArea(.all)
-                VStack {
-                    Spacer()
-                    VStack {
-                        if (profileImage == nil) {
-                            VStack{
-                                Image(systemName: "camera.on.rectangle")
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(6)
-                                
-                                Text("Add a profile pic").font(.system(size: 18, weight: .bold))
-                            }.onTapGesture {
-                                    self.showImagePicker = true
-                            }
-                        } else {
-                            Image(uiImage: profileImage!)
-                                .resizable()
-                                .frame(width: 200, height: 200)
-                                .cornerRadius(200 / 2)
-                                .onTapGesture {
-                                        self.showAction = true
-                                }
-                            }
-                    }.foregroundColor(.white)
-                        
-                    .sheet(isPresented: $showImagePicker, onDismiss: {
-                        self.showImagePicker = false
-                    }, content: {
-                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                    })
-                        .actionSheet(isPresented: $showAction) {
-                            sheet
-                    }
+                
                     
-                    VStack{
+                VStack {
+                    
+                    Spacer()
+                    
+                    VStack {
+                        
                         TextField("Email", text: $email)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            .background(Color(.white))
                         
                         TextField("Display Name", text: $displayname)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            .background(Color(.white))
+                            
                         
                         TextField("Username", text: $username)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            .background(Color(.white))
                         
                         SecureField("Password", text: $password)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            .background(Color(.white))
                         
-                    }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
+                    }
+                    .foregroundColor(.white)
+                    .padding(.vertical, 64)
+                    .multilineTextAlignment(TextAlignment.center)
+                    
+                    Spacer()
                     
                     if (error) {
                         
@@ -228,7 +210,10 @@ struct SignUpView : View {
                         ).padding([.horizontal, .top])
                     }
                     
-                    VStack{
+                    Spacer()
+                    
+                    VStack {
+                        
                         Button(action: signUp) {
                             Text("Sign up")
                                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -248,7 +233,7 @@ struct SignUpView : View {
                 }
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

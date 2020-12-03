@@ -18,10 +18,10 @@
 		402F5497244F91AA00FD899F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5496244F91AA00FD899F /* Assets.xcassets */; };
 		402F549A244F91AA00FD899F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5499244F91AA00FD899F /* Preview Assets.xcassets */; };
 		402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402F549B244F91AA00FD899F /* LaunchScreen.storyboard */; };
-		402F54C8244F9E4E00FD899F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */; };
 		40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* EditProfileView.swift */; };
 		40531BFF2555A927005FEBE3 /* SwimplyPlayIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */; };
 		4056E9A4252404E10004E598 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056E9A3252404E10004E598 /* Extensions.swift */; };
+		406DE6B625793D4900B5F12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 406DE6B525793D4900B5F12F /* GoogleService-Info.plist */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
 		406FAD09244FF15D00223873 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD08244FF15D00223873 /* Helpers.swift */; };
 		406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0A244FF17600223873 /* RecordingModel.swift */; };
@@ -94,9 +94,9 @@
 		402F5499244F91AA00FD899F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		402F549C244F91AA00FD899F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		402F549E244F91AA00FD899F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40353C82249282BB00C0C39A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		4056E9A3252404E10004E598 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		406DE6B525793D4900B5F12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		406FAD08244FF15D00223873 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		406FAD0A244FF17600223873 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				402F5496244F91AA00FD899F /* Assets.xcassets */,
 				402F549B244F91AA00FD899F /* LaunchScreen.storyboard */,
 				402F549E244F91AA00FD899F /* Info.plist */,
-				402F54C7244F9E4E00FD899F /* GoogleService-Info.plist */,
+				406DE6B525793D4900B5F12F /* GoogleService-Info.plist */,
 				18260E38251A67E0004FFF9B /* Ramble-Bridging-Header.h */,
 				402F5498244F91AA00FD899F /* Preview Content */,
 			);
@@ -362,8 +362,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */,
+				406DE6B625793D4900B5F12F /* GoogleService-Info.plist in Resources */,
 				402F549A244F91AA00FD899F /* Preview Assets.xcassets in Resources */,
-				402F54C8244F9E4E00FD899F /* GoogleService-Info.plist in Resources */,
 				402F5497244F91AA00FD899F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,7 +677,7 @@
 					"\"nanopb\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Peter-Keating.Ramble";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rly.ramble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ramble/Ramble-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -758,7 +758,7 @@
 					"\"nanopb\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Peter-Keating.Ramble";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rly.ramble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ramble/Ramble-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
