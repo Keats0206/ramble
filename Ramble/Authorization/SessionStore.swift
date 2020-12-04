@@ -26,7 +26,7 @@ class SessionStore : ObservableObject {
             if let user = user {
                     let uid = user.uid
                     let email = user.email
-                self.session = User(id: uid, uid: uid, email: email!, username: "", displayname: "", profileImageUrl: "", bio: "", isFollowed: false)
+                self.session = User(id: uid, uid: uid, email: email!, username: "", displayname: "", bio: "", isFollowed: false)
             } else {
                 self.session = nil
             }
@@ -50,43 +50,22 @@ class SessionStore : ObservableObject {
         password: String,
         fullname: String,
         username: String,
-        profileImage: UIImage,
         handler: @escaping AuthDataResultCallback
     ){
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
-        let filename = NSUUID().uuidString
-        let storageRef = FBStorageProfileImages.child(filename)
-        
-        storageRef.putData(imageData, metadata: nil) { (meta, error) in
-            if error != nil {
-                print("Don't put image")
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("DEBUG: Error is \(error.localizedDescription)")
                 return
             }
-            print("put image on firebase storage")
-            storageRef.downloadURL(completion: { (url, error) in
-                if error != nil {
-                    print("Failed to download url:", error!)
-                    return
-                } else {
-                    guard let profileImageUrl = url?.absoluteString else { return }
-                    print(profileImageUrl)
-                    Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                        if let error = error {
-                            print("DEBUG: Error is \(error.localizedDescription)")
-                            return
-                        }
-                        let uid = result?.user.uid
-                        let userRef = FBRefUsers.document(uid!)
-                        let user = User(id: uid, uid: uid!, email: email, username: username, displayname: fullname, profileImageUrl: profileImageUrl, bio: "", isFollowed: false)
-                        do {
-                            let _ = try userRef.setData(from: user)
-                        }
-                        catch {
-                            print("There was an error while trying to create the user \(error.localizedDescription).")
-                        }
-                    }
-                }
-            })
+            let uid = result?.user.uid
+            let userRef = FBRefUsers.document(uid!)
+            let user = User(id: uid, uid: uid!, email: email, username: username, displayname: fullname, bio: "", isFollowed: false)
+            do {
+                let _ = try userRef.setData(from: user)
+            }
+            catch {
+                print("There was an error while trying to create the user \(error.localizedDescription).")
+            }
         }
     }
     

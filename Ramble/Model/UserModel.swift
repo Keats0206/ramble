@@ -43,7 +43,6 @@ struct User: Identifiable, Codable, Hashable{
     var email: String
     var username: String
     var displayname: String
-    var profileImageUrl: String
     var bio: String
     var isFollowed: Bool
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
@@ -54,7 +53,6 @@ struct User: Identifiable, Codable, Hashable{
         case email
         case username
         case displayname
-        case profileImageUrl
         case bio
         case isFollowed
     }

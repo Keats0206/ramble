@@ -53,7 +53,6 @@ class UserService2: ObservableObject {
             email: user.email,
             username: user.username,
             displayname: user.displayname,
-            profileImageUrl: user.profileImageUrl,
             bio: user.bio, isFollowed:
             user.isFollowed)
         do {

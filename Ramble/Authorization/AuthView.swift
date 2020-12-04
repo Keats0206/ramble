@@ -90,15 +90,11 @@ struct SignInView : View {
     }
 }
 
-//To do - figure out how to upload a fucking photo
-
 struct SignUpView : View {
     @State var email: String = ""
     @State var password: String = ""
     @State var username: String = ""
     @State var displayname: String = ""
-    @State var profileImage: UIImage?
-    
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
     
@@ -108,17 +104,14 @@ struct SignUpView : View {
     @EnvironmentObject var session: SessionStore
     
     func signUp () {
-        
         guard AppHelper.isValidEmail(email) else {
             AppHelper.alert(title: "Please enter valid email!")
             return
         }
-        
         guard username.count > 3 && username.count < 13 else {
             AppHelper.alert(title: "Username must be of 4 - 12 characters!")
             return
         }
-        
         loading = true
         error = false
         
@@ -127,7 +120,7 @@ struct SignUpView : View {
                 AppHelper.alert(title: "This username is already take, please enter unique username!")
                 loading = false
             } else {
-                self.session.signUp(email: email, password: password, fullname: displayname, username: username, profileImage: profileImage!) { (result, error) in
+                self.session.signUp(email: email, password: password, fullname: displayname, username: username) { (result, error) in
                     self.loading = false
                     if error != nil {
                         print("Oops")
@@ -155,7 +148,6 @@ struct SignUpView : View {
                 }),
                 .destructive(Text("Remove"), action: {
                     self.showAction = false
-                    self.profileImage = nil
             })
         ])
     }

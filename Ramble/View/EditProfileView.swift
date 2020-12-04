@@ -25,7 +25,6 @@ struct EditProfileView : View {
             self.loading = true
             UserService2.shared.updateProfileImage(image: image) { url in
                 self.loading = false
-                self.user.profileImageUrl = url
                 self.updateUserData()
                 self.presentationMode.wrappedValue.dismiss()
             }
@@ -102,31 +101,6 @@ struct EditProfileView : View {
 }
 
 private extension EditProfileView {
-    var changeProfileImage: some View {
-        VStack {
-            NetworkImage(url: URL(string: user.profileImageUrl), image: profileImage)
-                .frame(width: 200, height: 200)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-
-            Button(action: {
-                self.showImagePicker = true
-            }) {
-                
-                Text("Change Photo")
-                    .foregroundColor(.primary)
-                    .padding(5)
-                    .padding([.trailing, .leading])
-                
-            }.sheet(isPresented: $showImagePicker, onDismiss: {
-            self.showImagePicker = false
-                }, content: {
-                ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                }).actionSheet(isPresented: $showAction) {
-                    sheet
-            }
-        }
-    }
     var editUserInfo: some View {
         VStack(spacing: 20) {
         VStack(alignment: .leading, spacing: 5) {

@@ -107,6 +107,7 @@
 		4070B85025674F34006D6630 /* RambUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserList.swift; sourceTree = "<group>"; };
 		408BA721256C874D0060265F /* RecordingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingRow.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		40AE563D2579E1F6007D5675 /* Ramble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ramble.entitlements; sourceTree = "<group>"; };
 		40B3385B25267E90009321F2 /* Constants2.0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants2.0.swift; sourceTree = "<group>"; };
 		40B3385D25267F54009321F2 /* RambService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService2.swift; sourceTree = "<group>"; };
 		40B3385F25267F64009321F2 /* UserService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService2.swift; sourceTree = "<group>"; };
@@ -170,6 +171,7 @@
 		402F548F244F91A900FD899F /* Ramble */ = {
 			isa = PBXGroup;
 			children = (
+				40AE563D2579E1F6007D5675 /* Ramble.entitlements */,
 				40F3FA6E248ED3DE00F3CE02 /* Authorization */,
 				40F3FA32248EA15B00F3CE02 /* Utils */,
 				40B3385A25267E6B009321F2 /* API 2.0 */,
@@ -609,6 +611,7 @@
 			baseConfigurationReference = 49DCF38C8F46BD21CC27C541 /* Pods-Ramble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Ramble/Ramble.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Ramble/Preview Content\"";
 				DEVELOPMENT_TEAM = VU9FW6DFBM;
@@ -681,7 +684,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ramble/Ramble-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -690,6 +693,7 @@
 			baseConfigurationReference = 3CD168CAB85F0D360A7E797B /* Pods-Ramble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Ramble/Ramble.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Ramble/Preview Content\"";
 				DEVELOPMENT_TEAM = VU9FW6DFBM;
@@ -762,7 +766,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ramble/Ramble-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

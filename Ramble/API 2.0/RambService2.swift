@@ -83,7 +83,6 @@ class RambService2: ObservableObject {
             "displayname" : user.displayname,
             "email" : user.email,
             "isFollowed" : user.isFollowed,
-            "profileImageUrl" : user.profileImageUrl,
             "uid" : user.uid,
             "username" : user.username
         ] as [String : Any]

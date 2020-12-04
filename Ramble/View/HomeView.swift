@@ -105,6 +105,7 @@ struct HomeView: View {
                             .frame(height: UIScreen.main.bounds.height / 5)
                             //                  TabView
                             tabControl
+        
                         }.keyboardAdaptive()
                     }
                 }

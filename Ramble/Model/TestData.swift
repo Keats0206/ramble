@@ -25,7 +25,6 @@ let testUser = User(id: "1",
                   email: "testing@gmail.com",
                   username: "Testuser",
                   displayname: "Testuser",
-                  profileImageUrl: "https://electrek.co/wp-content/uploads/sites/3/2020/08/Tesla-Elon-Musk.jpg?quality=82&strip=all",
                   bio: "Hey, I'm a test user this my bio",
                   isFollowed: true
 )
