@@ -137,7 +137,7 @@ private extension EditProfileView {
             Divider()
         }
         VStack(alignment: .leading, spacing: 5) {
-            Text("Fullname")
+            Text("Display Name")
             TextField(user.displayname, text: $user.displayname)
                 .padding(5)
                 .opacity(0.5)
@@ -151,8 +151,8 @@ private extension EditProfileView {
             Divider()
         }
     }
-        .font(.title)
-        .foregroundColor(.white)
+    .font(.title)
+    .foregroundColor(.white)
     }
     var settingsLinks: some View {
         VStack(spacing: 20) {
