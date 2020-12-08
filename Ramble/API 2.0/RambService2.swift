@@ -11,11 +11,9 @@ import Combine
 
 class RambService2: ObservableObject {
     static let shared = RambService2()
-        
     @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
     @Published var userRambs = [Ramb2]()
-    
     @Published var lastUploadRamb: Ramb2 = testRamb
     
     func fetchRamb(rambId: String) {
@@ -37,7 +35,6 @@ class RambService2: ObservableObject {
             }
         }
     }
-    
     func addRamb(_ ramb: Ramb2) -> String {
         let newRamb = FBRefRambs.document()
         let userId = ramb.user.id

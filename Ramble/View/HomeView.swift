@@ -76,15 +76,6 @@ struct HomeView: View {
                                 switch viewControl {
                                 case .create:
                                     EmptyView()
-                                //                                VStack(alignment: .leading) {
-                                //                                    HStack {
-                                //                                        Text("Share your voice with the world")
-                                //                                            .font(.title)
-                                //                                            .foregroundColor(.white)
-                                //                                        Spacer()
-                                //                                    }
-                                //                                    Spacer()
-                                //                                }.padding()
                                 case .recordings:
                                     RambUserList(user: user)
                                 }
