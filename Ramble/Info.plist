@@ -21,6 +21,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram-stories</string>
+		<string>snapchat</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -70,5 +71,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>SCSDKClientId</key>
+	<string>be856552-8b0b-4c7c-a83c-f707e121125b</string>
 </dict>
 </plist>

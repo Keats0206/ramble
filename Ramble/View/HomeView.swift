@@ -139,18 +139,20 @@ private extension HomeView {
                             .frame(width: 80, height: 80)
                     }.buttonStyle(PlayerButtonStyle())
                 case .started:
-                    Text(String(format: "%.1f", timerManager.secondsElapsed))
-                        .font(.system(size: 16, weight: .bold, design: .rounded))
-                        .foregroundColor(.white).opacity(0.5)
-                        .offset(y: 60)
-                    Button(action: {
-                        audioRecorder.stopRecording()
-                        timerManager.stop()
-                    }) {
-                        Image(systemName: "stop.circle.fill")
-                            .resizable()
-                            .frame(width: 80, height: 80)
-                    }
+                    ZStack {
+                        
+                        RecordingAnimation()
+                                                
+                        Button(action: {
+                            audioRecorder.stopRecording()
+                            timerManager.stop()
+                        }) {
+                            Image(systemName: "stop.circle.fill")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                        }
+                }
+                    
                 case .stopped:
                     LoadingAnimation()
                 case.uploaded:

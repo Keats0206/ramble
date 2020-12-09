@@ -13,13 +13,12 @@ import UIKit
 import SwiftVideoGenerator
 import Firebase
 
-
 class ShareService: ObservableObject {
     static let shared = ShareService()
     
     @Published var isLoading: Bool = false
     @Published var wasError: Bool = false
-    
+
     func shareToIGLocal(ramb: Ramb2) {
         isLoading.toggle()
         let imageData = UIImage(imageLiteralResourceName: "rambleexport")
@@ -53,6 +52,31 @@ class ShareService: ObservableObject {
             }
         }
     }
+    
+//  func snapStoriesVideo(url: URL) {
+//        let videoUrl = url
+//        let video = SCSDKSnapVideo(videoUrl: videoUrl)
+//        let videoContent = SCSDKSnapVideoContent(snapVideo: video)
+//
+//        let api = SCSDKSnapAPI(content: snap)
+//        api.startSnapping { error in
+//
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//                // success
+//
+//            }
+//        }
+//    }
+    
+//  func facebookStoriesVideo(url: URL) {
+//
+//    }
+    
+//  func facebookStoriesVideo(url: URL) {
+//
+//    }
 }
     
 // swiftlint:enable all

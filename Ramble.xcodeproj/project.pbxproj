@@ -19,7 +19,6 @@
 		402F549A244F91AA00FD899F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 402F5499244F91AA00FD899F /* Preview Assets.xcassets */; };
 		402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402F549B244F91AA00FD899F /* LaunchScreen.storyboard */; };
 		40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* EditProfileView.swift */; };
-		40531BFF2555A927005FEBE3 /* SwimplyPlayIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */; };
 		4056E9A4252404E10004E598 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056E9A3252404E10004E598 /* Extensions.swift */; };
 		406DE6B625793D4900B5F12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 406DE6B525793D4900B5F12F /* GoogleService-Info.plist */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
@@ -30,6 +29,7 @@
 		406FAD1F2450D6D200223873 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD1E2450D6D200223873 /* AuthView.swift */; };
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
 		4070B85125674F34006D6630 /* RambUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85025674F34006D6630 /* RambUserList.swift */; };
+		4086902F2580893F000A91B4 /* RecordingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086902E2580893F000A91B4 /* RecordingAnimation.swift */; };
 		408BA722256C874D0060265F /* RecordingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BA721256C874D0060265F /* RecordingRow.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
@@ -105,6 +105,7 @@
 		406FAD1E2450D6D200223873 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		4070B85025674F34006D6630 /* RambUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserList.swift; sourceTree = "<group>"; };
+		4086902E2580893F000A91B4 /* RecordingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAnimation.swift; sourceTree = "<group>"; };
 		408BA721256C874D0060265F /* RecordingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingRow.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40AE563D2579E1F6007D5675 /* Ramble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ramble.entitlements; sourceTree = "<group>"; };
@@ -133,7 +134,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40531BFF2555A927005FEBE3 /* SwimplyPlayIndicator in Frameworks */,
 				DFF310CE52592EC77392BA41 /* Pods_Ramble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +229,7 @@
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				4027A683256EE98F0064B639 /* Styling.swift */,
 				4027A685257008D10064B639 /* LoadingView.swift */,
+				4086902E2580893F000A91B4 /* RecordingAnimation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,7 +313,6 @@
 			);
 			name = Ramble;
 			packageProductDependencies = (
-				40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */,
 			);
 			productName = Ramble;
 			productReference = 402F548D244F91A900FD899F /* Ramble.app */;
@@ -451,6 +451,7 @@
 				4027A686257008D10064B639 /* LoadingView.swift in Sources */,
 				EE1E0DC8255E5B5400DCA17C /* Validation.swift in Sources */,
 				406FAD172450B55200223873 /* ContentView.swift in Sources */,
+				4086902F2580893F000A91B4 /* RecordingAnimation.swift in Sources */,
 				406FAD0B244FF17600223873 /* RecordingModel.swift in Sources */,
 				EE1E0DCE255E5C9400DCA17C /* RegisterModel.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
@@ -829,14 +830,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		40531BFE2555A927005FEBE3 /* SwimplyPlayIndicator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 40531BFD2555A927005FEBE3 /* XCRemoteSwiftPackageReference "SwimplyPlayIndicator" */;
-			productName = SwimplyPlayIndicator;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 402F5485244F91A900FD899F /* Project object */;
 }
