@@ -225,7 +225,7 @@ private extension HomeView {
                     .font(.title)
             }
             .padding(5)
-            .foregroundColor(viewControl == .create ? .gray : .white)
+            .foregroundColor(viewControl == .create ? .white : .gray)
             .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
             .cornerRadius(8.0)
             .buttonStyle(ScaleButtonStyle())
@@ -237,7 +237,7 @@ private extension HomeView {
                     .font(.title)
             }
             .padding(5)
-            .foregroundColor(viewControl == .recordings ? .gray : .white)
+            .foregroundColor(viewControl == .recordings ? .white : .gray)
             .background(Color.white.opacity(viewControl == .recordings ? 0.2 : 0.0))
             .cornerRadius(8.0)
             .buttonStyle(ScaleButtonStyle())
