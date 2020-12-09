@@ -30,15 +30,15 @@
 		406FAD212450D7FA00223873 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD202450D7FA00223873 /* AppView.swift */; };
 		4070B85125674F34006D6630 /* RambUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B85025674F34006D6630 /* RambUserList.swift */; };
 		4086902F2580893F000A91B4 /* RecordingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086902E2580893F000A91B4 /* RecordingAnimation.swift */; };
-		4086903225808FD5000A91B4 /* AudioSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086903125808FD5000A91B4 /* AudioSlider.swift */; };
 		408690342580902F000A91B4 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408690332580902F000A91B4 /* Utility.swift */; };
+		4086903625815EB1000A91B4 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086903525815EB1000A91B4 /* ProgressBarView.swift */; };
 		408BA722256C874D0060265F /* RecordingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BA721256C874D0060265F /* RecordingRow.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
 		40B3385E25267F54009321F2 /* RambService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385D25267F54009321F2 /* RambService2.swift */; };
 		40B3386025267F64009321F2 /* UserService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385F25267F64009321F2 /* UserService2.swift */; };
 		40BFA9F22547AD1D00423320 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BFA9F12547AD1D00423320 /* Timer.swift */; };
-		40E56A0F255B508100BEA192 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E56A0E255B508100BEA192 /* Controls.swift */; };
+		40E56A0F255B508100BEA192 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E56A0E255B508100BEA192 /* ControlsView.swift */; };
 		40EA6C4C2568742000772353 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EA6C4B2568742000772353 /* ShareService.swift */; };
 		40EB296D24ABAFAB00359BA3 /* MultilineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */; };
 		40ECF89E2564B5760090F618 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ECF89D2564B5760090F618 /* LoadingAnimation.swift */; };
@@ -108,8 +108,8 @@
 		406FAD202450D7FA00223873 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		4070B85025674F34006D6630 /* RambUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambUserList.swift; sourceTree = "<group>"; };
 		4086902E2580893F000A91B4 /* RecordingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAnimation.swift; sourceTree = "<group>"; };
-		4086903125808FD5000A91B4 /* AudioSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSlider.swift; sourceTree = "<group>"; };
 		408690332580902F000A91B4 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		4086903525815EB1000A91B4 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		408BA721256C874D0060265F /* RecordingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingRow.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40AE563D2579E1F6007D5675 /* Ramble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ramble.entitlements; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		40B3385D25267F54009321F2 /* RambService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService2.swift; sourceTree = "<group>"; };
 		40B3385F25267F64009321F2 /* UserService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService2.swift; sourceTree = "<group>"; };
 		40BFA9F12547AD1D00423320 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
-		40E56A0E255B508100BEA192 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		40E56A0E255B508100BEA192 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		40EA6C4B2568742000772353 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
 		40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTF.swift; sourceTree = "<group>"; };
 		40ECF89D2564B5760090F618 /* LoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
@@ -229,12 +229,12 @@
 				4014BE3C25674CA7009D9823 /* HomeView.swift */,
 				4070B85025674F34006D6630 /* RambUserList.swift */,
 				408BA721256C874D0060265F /* RecordingRow.swift */,
-				40E56A0E255B508100BEA192 /* Controls.swift */,
+				40E56A0E255B508100BEA192 /* ControlsView.swift */,
+				4086903525815EB1000A91B4 /* ProgressBarView.swift */,
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
 				4027A683256EE98F0064B639 /* Styling.swift */,
 				4027A685257008D10064B639 /* LoadingView.swift */,
 				4086902E2580893F000A91B4 /* RecordingAnimation.swift */,
-				4086903125808FD5000A91B4 /* AudioSlider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -473,10 +473,10 @@
 				EEFCE0FD255EDC2E002EF077 /* AppHelper.swift in Sources */,
 				408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */,
 				40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */,
+				4086903625815EB1000A91B4 /* ProgressBarView.swift in Sources */,
 				40BFA9F22547AD1D00423320 /* Timer.swift in Sources */,
 				40150D122498654D00B2E8A9 /* InlineAlert.swift in Sources */,
-				40E56A0F255B508100BEA192 /* Controls.swift in Sources */,
-				4086903225808FD5000A91B4 /* AudioSlider.swift in Sources */,
+				40E56A0F255B508100BEA192 /* ControlsView.swift in Sources */,
 				40EA6C4C2568742000772353 /* ShareService.swift in Sources */,
 				406FAD132450ABF300223873 /* SessionStore.swift in Sources */,
 				406FAD1F2450D6D200223873 /* AuthView.swift in Sources */,

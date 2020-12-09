@@ -9,27 +9,33 @@
 import SwiftUI
 import Foundation
 import AVKit
-import Foundation
 import Combine
 
-struct Controls : View {
+struct ControlsView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    
     var body : some View {
-        
         ZStack {
+            
             VStack {
-                CustomProgressBar(value: $globalPlayer.value, player: $globalPlayer.globalRambPlayer, isplaying: $globalPlayer.isPlaying)
-                    .padding(.horizontal)
+                
+                ProgressBarView(player: globalPlayer.globalRambPlayer!,
+                                        timeObserver: PlayerTimeObserver(player: globalPlayer.globalRambPlayer!),
+                                        durationObserver: PlayerDurationObserver(player: globalPlayer.globalRambPlayer!),
+                                        itemObserver: PlayerItemObserver(player: globalPlayer.globalRambPlayer!))
+                
                 HStack {
+                    
                     Spacer()
+                    
                     Button(action: {
                         self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                     }) {
                         Image(systemName: "backward.end.fill")
                             .font(.system(size: 25))
                     }.buttonStyle(PlayerButtonStyle())
+                    
                     Spacer()
+                    
                     Button(action: {
                         if self.globalPlayer.isPlaying {
                             self.globalPlayer.globalRambPlayer?.pause()
@@ -42,27 +48,30 @@ struct Controls : View {
                         Image(systemName: self.globalPlayer.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 40))
                     }.buttonStyle(PlayerButtonStyle())
+                    
                     Spacer()
+                    
                     Button(action: {
                         self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: getSeconds() + 15, preferredTimescale: 1))
                     }) {
                         Image(systemName: "goforward.15")
                             .font(.system(size: 25))
                     }.buttonStyle(PlayerButtonStyle())
+                    
                     Spacer()
                 }
                     .foregroundColor(.primary)
             }
         }
         .onAppear {
-//          Checks if player did finish
-            self.globalPlayer.globalRambPlayer?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
-                self.globalPlayer.value = self.getSliderValue()
-                if self.globalPlayer.value == 1.0 {
-//                  Set now playing to false
-                    self.globalPlayer.isPlaying = false
-//                  Seek back to time zero
-                    self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+    //          Checks if player did finish
+                self.globalPlayer.globalRambPlayer?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { (_) in
+                    self.globalPlayer.value = self.getSliderValue()
+                    if self.globalPlayer.value == 1.0 {
+    //                  Set now playing to false
+                        self.globalPlayer.isPlaying = false
+    //                  Seek back to time zero
+                        self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                 }
             }
         }
@@ -74,7 +83,8 @@ struct Controls : View {
         return Double(Double(self.globalPlayer.value) * (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
     }
 }
-struct CustomProgressBar : UIViewRepresentable {
+
+struct CustomProgressBar: UIViewRepresentable {
       func makeCoordinator() -> CustomProgressBar.Coordinator {
           return CustomProgressBar.Coordinator(parent1: self)
       }
@@ -92,26 +102,23 @@ struct CustomProgressBar : UIViewRepresentable {
           slider.addTarget(context.coordinator, action: #selector(context.coordinator.changed(slider:)), for: .valueChanged)
           return slider
       }
-      
       func updateUIView(_ uiView: UISlider, context: UIViewRepresentableContext<CustomProgressBar>) {
           uiView.value = value
       }
-      
       class Coordinator : NSObject {
           var parent : CustomProgressBar
           init(parent1 : CustomProgressBar) {
                 parent = parent1
           }
-          
           @objc func changed(slider : UISlider) {
-              if slider.isTracking{
+              if slider.isTracking {
                   parent.player?.pause()
                   let sec = Double(slider.value * Float((parent.player?.currentItem?.duration.seconds)!))
-                  parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 1))
+                  parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 100))
               }
               else{
                   let sec = Double(slider.value * Float((parent.player?.currentItem?.duration.seconds)!))
-                  parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 1))
+                  parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 100))
                   if parent.isplaying{
                       parent.player?.play()
                   }
@@ -120,14 +127,14 @@ struct CustomProgressBar : UIViewRepresentable {
       }
   }
 
-class Host : UIHostingController<ContentView> {
-    override var preferredStatusBarStyle: UIStatusBarStyle{
+class Host: UIHostingController<ContentView> {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 }
 
-struct AudioPlayer : UIViewControllerRepresentable {
-    @Binding var player : AVPlayer
+struct AudioPlayer: UIViewControllerRepresentable {
+    @Binding var player: AVPlayer
     func makeUIViewController(context: UIViewControllerRepresentableContext<AudioPlayer>) -> AVPlayerViewController {
         let controller = AVPlayerViewController()
         controller.player = player
@@ -137,5 +144,3 @@ struct AudioPlayer : UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<AudioPlayer>) {
     }
 }
-
-

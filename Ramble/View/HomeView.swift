@@ -182,13 +182,14 @@ private extension HomeView {
                         VStack(alignment: .leading) {
                             TextField("\(globalPlayer.playingRamb!.caption)", text: $globalPlayer.caption, onCommit: {
                                 updateCaption(ramb: globalPlayer.playingRamb!, caption: globalPlayer.caption)
-                              })
-                                .font(.title)
+                              }).font(.headline)
+                            
                             Text("\(formatDate(timestamp: globalPlayer.playingRamb!.timestamp)) ago")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.system(size: 16, weight: .bold))
                                 .bold()
                                 .opacity(0.5)
                         }
+                    
                         Button(action: {
                             self.showShareMenu.toggle()
                         }) {
@@ -200,16 +201,19 @@ private extension HomeView {
                             self.actionSheet })
                     }.foregroundColor(.white)
                     .padding()
-                Controls()
+        
+                ControlsView()
+                
             }
         }
     }
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Share Menu"),
                 buttons: [
-                    .default(Text("Instagram Stories")) {
-                        shareService.shareToIGLocal(ramb: globalPlayer.playingRamb!)
-                },
+                    .default(
+                        Text("Instagram Stories")) {
+                            shareService.shareToIGLocal(ramb: globalPlayer.playingRamb!)
+                    },
                     .destructive(Text("Cancel"))
                 ])
     }
