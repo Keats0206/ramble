@@ -140,17 +140,15 @@ private extension HomeView {
                     }.buttonStyle(PlayerButtonStyle())
                 case .started:
                     ZStack {
-                        
                         RecordingAnimation()
-                                                
                         Button(action: {
                             audioRecorder.stopRecording()
                             timerManager.stop()
                         }) {
-                            Image(systemName: "stop.circle.fill")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                        }
+                        Image(systemName: "stop.circle.fill")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                    }
                 }
                     
                 case .stopped:
@@ -176,7 +174,7 @@ private extension HomeView {
     var recordingsView: some View {
         VStack {
             if globalPlayer.playingRamb == nil {
-                Text("Nothing playing")
+                Text("Nothing playing, select a ramble above!")
                     .font(.headline)
                     .foregroundColor(.white)
             } else {
@@ -224,11 +222,11 @@ private extension HomeView {
                 Image(systemName: "music.mic")
                     .font(.title)
             }
-            .padding(5)
-            .foregroundColor(viewControl == .create ? .white : .gray)
-            .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
-            .cornerRadius(8.0)
-            .buttonStyle(ScaleButtonStyle())
+                .padding(5)
+                .foregroundColor(viewControl == .create ? .white : .gray)
+                .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
+                .cornerRadius(8.0)
+                .buttonStyle(ScaleButtonStyle())
             Spacer()
             Button(action: {
                 self.viewControl = .recordings
@@ -236,11 +234,11 @@ private extension HomeView {
                 Image(systemName: "music.note.list")
                     .font(.title)
             }
-            .padding(5)
-            .foregroundColor(viewControl == .recordings ? .white : .gray)
-            .background(Color.white.opacity(viewControl == .recordings ? 0.2 : 0.0))
-            .cornerRadius(8.0)
-            .buttonStyle(ScaleButtonStyle())
+                .padding(5)
+                .foregroundColor(viewControl == .recordings ? .white : .gray)
+                .background(Color.white.opacity(viewControl == .recordings ? 0.2 : 0.0))
+                .cornerRadius(8.0)
+                .buttonStyle(ScaleButtonStyle())
             Spacer()
         }.padding(.top)
     }

@@ -9,7 +9,6 @@ import SwiftUI
 import Foundation
 import UIKit
 
-@available(iOS 14.0, *)
 struct AppView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer

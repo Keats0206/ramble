@@ -1,51 +1,73 @@
 //
-//  AudioPlayer.swift
+//  AudioSlider.swift
 //  Ramble
 //
-//  Created by Peter Keating on 9/23/20.
+//  Created by Peter Keating on 12/8/20.
 //  Copyright © 2020 Peter Keating. All rights reserved.
 //
 
 import SwiftUI
 import AVKit
 import Combine
-import AVFoundation
 
 struct AudioSlider: View {
+    private enum PlaybackState: Int {
+        case waitingForSelection
+        case buffering
+        case playing
+    }
+    
     let player: AVPlayer
-//  Observing the time / duration of the current audio player
     let timeObserver: PlayerTimeObserver
     let durationObserver: PlayerDurationObserver
+    let itemObserver: PlayerItemObserver
     @State private var currentTime: TimeInterval = 0
     @State private var currentDuration: TimeInterval = 0
-    @State private var finished = false
-
+    @State private var state = PlaybackState.waitingForSelection
+    
     var body: some View {
         VStack {
             Slider(value: $currentTime,
                    in: 0...currentDuration,
                    onEditingChanged: sliderEditingChanged,
-                   minimumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentTime))"),
-                   maximumValueLabel: Text("\(TimeHelper.formatSecondsToHMS(currentDuration))")) {
-// This seems to be required but not sure when it would ever show in the UI
-                    Text("Duration")
+                   minimumValueLabel: Text("\(Utility.formatSecondsToHMS(currentTime))"),
+                   maximumValueLabel: Text("\(Utility.formatSecondsToHMS(currentDuration))")) {
+                    // I have no idea in what scenario this View is shown...
+                    Text("seek/progress slider")
             }
-            .font(.caption)
-            .foregroundColor(.primary)
+            .disabled(state != .playing)
         }
-// Listen out for the time observer publishing changes to the player's time
+        .padding()
+        // Listen out for the time observer publishing changes to the player's time
         .onReceive(timeObserver.publisher) { time in
             // Update the local var
             self.currentTime = time
+            // And flag that we've started playback
+            if time > 0 {
+                self.state = .playing
+            }
         }
-// Listen out for the duration observer publishing changes to the player's item duration
+        // Listen out for the duration observer publishing changes to the player's item duration
         .onReceive(durationObserver.publisher) { duration in
             // Update the local var
             self.currentDuration = duration
         }
+        // Listen out for the item observer publishing a change to whether the player has an item
+        .onReceive(itemObserver.publisher) { hasItem in
+            self.state = hasItem ? .buffering : .waitingForSelection
+            self.currentTime = 0
+            self.currentDuration = 0
+        }
+        // TODO the below could replace the above but causes a crash
+//        // Listen out for the player's item changing
+//        .onReceive(player.publisher(for: \.currentItem)) { item in
+//            self.state = item != nil ? .buffering : .waitingForSelection
+//            self.currentTime = 0
+//            self.currentDuration = 0
+//        }
     }
-
-// MARK: Private functions
+    
+    // MARK: Private functions
     private func sliderEditingChanged(editingStarted: Bool) {
         if editingStarted {
             // Tell the PlayerTimeObserver to stop publishing updates while the user is interacting
@@ -54,12 +76,14 @@ struct AudioSlider: View {
             timeObserver.pause(true)
         }
         else {
-// Start the seek
+            // Editing finished, start the seek
+            state = .buffering
             let targetTime = CMTime(seconds: currentTime,
                                     preferredTimescale: 600)
             player.seek(to: targetTime) { _ in
-// Now the (async) seek is completed, resume normal operation
+                // Now the (async) seek is completed, resume normal operation
                 self.timeObserver.pause(false)
+                self.state = .playing
             }
         }
     }
@@ -77,28 +101,42 @@ class PlayerTimeObserver {
         // Periodically observe the player's current time, whilst playing
         timeObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600), queue: nil) { [weak self] time in
             guard let self = self else { return }
-            
             // If we've not been told to pause our updates
             guard !self.paused else { return }
-            
             // Publish the new player time
             self.publisher.send(time.seconds)
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         }
     }
-        
+    
     deinit {
-        player?.removeTimeObserver(timeObservation as Any)
+        if let player = player,
+            let observer = timeObservation {
+            player.removeTimeObserver(observer)
+        }
     }
     
     func pause(_ pause: Bool) {
         paused = pause
     }
-    
-    // Check if player finished
+}
 
-    @objc func playerDidFinishPlaying(note: NSNotification) {
+class PlayerItemObserver {
+    let publisher = PassthroughSubject<Bool, Never>()
+    private var itemObservation: NSKeyValueObservation?
+    
+    init(player: AVPlayer) {
+        // Observe the current item changing
+        itemObservation = player.observe(\.currentItem) { [weak self] player, change in
+            guard let self = self else { return }
+            // Publish whether the player has an item or not
+            self.publisher.send(player.currentItem != nil)
+        }
+    }
+    
+    deinit {
+        if let observer = itemObservation {
+            observer.invalidate()
+        }
     }
 }
 
@@ -114,10 +152,8 @@ class PlayerDurationObserver {
             self.publisher.send(duration.seconds)
         }
     }
+    
     deinit {
         cancellable?.cancel()
     }
 }
-
-
-

@@ -19,13 +19,15 @@ struct Controls : View {
         
         ZStack {
             VStack {
+                CustomProgressBar(value: $globalPlayer.value, player: $globalPlayer.globalRambPlayer, isplaying: $globalPlayer.isPlaying)
+                    .padding(.horizontal)
                 HStack {
                     Spacer()
                     Button(action: {
                         self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                     }) {
                         Image(systemName: "backward.end.fill")
-                            .font(.system(size: 30))
+                            .font(.system(size: 25))
                     }.buttonStyle(PlayerButtonStyle())
                     Spacer()
                     Button(action: {
@@ -38,17 +40,18 @@ struct Controls : View {
                         }
                     }) {
                         Image(systemName: self.globalPlayer.isPlaying ? "pause.fill" : "play.fill")
-                            .font(.system(size: 50))
+                            .font(.system(size: 40))
                     }.buttonStyle(PlayerButtonStyle())
                     Spacer()
                     Button(action: {
                         self.globalPlayer.globalRambPlayer?.seek(to: CMTime(seconds: getSeconds() + 15, preferredTimescale: 1))
                     }) {
                         Image(systemName: "goforward.15")
-                            .font(.system(size: 30))
+                            .font(.system(size: 25))
                     }.buttonStyle(PlayerButtonStyle())
                     Spacer()
-                }.foregroundColor(.primary)
+                }
+                    .foregroundColor(.primary)
             }
         }
         .onAppear {
@@ -75,16 +78,15 @@ struct CustomProgressBar : UIViewRepresentable {
       func makeCoordinator() -> CustomProgressBar.Coordinator {
           return CustomProgressBar.Coordinator(parent1: self)
       }
-      @Binding var value : Float
-      @Binding var player : AVPlayer
-      @Binding var isplaying : Bool
+      @Binding var value: Float
+      @Binding var player: AVPlayer?
+      @Binding var isplaying: Bool
       
       func makeUIView(context: UIViewRepresentableContext<CustomProgressBar>) -> UISlider {
-       
           let slider = UISlider()
-          slider.minimumTrackTintColor = .red
+          slider.minimumTrackTintColor = .white
           slider.maximumTrackTintColor = .gray
-          slider.thumbTintColor = .red
+          slider.thumbTintColor = .white
           slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
           slider.value = value
           slider.addTarget(context.coordinator, action: #selector(context.coordinator.changed(slider:)), for: .valueChanged)
@@ -92,7 +94,6 @@ struct CustomProgressBar : UIViewRepresentable {
       }
       
       func updateUIView(_ uiView: UISlider, context: UIViewRepresentableContext<CustomProgressBar>) {
-          
           uiView.value = value
       }
       
@@ -102,37 +103,28 @@ struct CustomProgressBar : UIViewRepresentable {
                 parent = parent1
           }
           
-          @objc func changed(slider : UISlider){
-              
+          @objc func changed(slider : UISlider) {
               if slider.isTracking{
-                  
-                  parent.player.pause()
-                  
-                  let sec = Double(slider.value * Float((parent.player.currentItem?.duration.seconds)!))
-                  
-                  parent.player.seek(to: CMTime(seconds: sec, preferredTimescale: 1))
+                  parent.player?.pause()
+                  let sec = Double(slider.value * Float((parent.player?.currentItem?.duration.seconds)!))
+                  parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 1))
               }
               else{
-                  
-                  let sec = Double(slider.value * Float((parent.player.currentItem?.duration.seconds)!))
-                    
-                  parent.player.seek(to: CMTime(seconds: sec, preferredTimescale: 1))
-                  
+                  let sec = Double(slider.value * Float((parent.player?.currentItem?.duration.seconds)!))
+                  parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 1))
                   if parent.isplaying{
-                      
-                      parent.player.play()
+                      parent.player?.play()
                   }
               }
           }
       }
   }
 
-@available(iOS 14.0, *)
-  class Host : UIHostingController<ContentView>{
-      override var preferredStatusBarStyle: UIStatusBarStyle{
-          return .lightContent
-      }
-  }
+class Host : UIHostingController<ContentView> {
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
+}
 
 struct AudioPlayer : UIViewControllerRepresentable {
     @Binding var player : AVPlayer
