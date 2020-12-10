@@ -22,6 +22,7 @@
 	<array>
 		<string>instagram-stories</string>
 		<string>snapchat</string>
+		<string>facebook-stories://</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -73,5 +74,16 @@
 	</array>
 	<key>SCSDKClientId</key>
 	<string>be856552-8b0b-4c7c-a83c-f707e121125b</string>
+	<key>FacebookAppID</key>
+	<string>149345683211517</string>
+	<key>FacebookDisplayName</key>
+	<string>Ramble</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>fb149345683211517</string>
+		</dict>
+	</array>
 </dict>
 </plist>

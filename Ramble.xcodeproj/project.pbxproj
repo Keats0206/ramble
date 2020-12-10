@@ -234,7 +234,6 @@
 				40E56A0E255B508100BEA192 /* ControlsView.swift */,
 				4086903525815EB1000A91B4 /* ProgressBarView.swift */,
 				40353C82249282BB00C0C39A /* EditProfileView.swift */,
-				4027A683256EE98F0064B639 /* Styling.swift */,
 				4027A685257008D10064B639 /* LoadingView.swift */,
 				4086902E2580893F000A91B4 /* RecordingAnimation.swift */,
 				40869039258169C9000A91B4 /* ShareView.swift */,
@@ -265,6 +264,7 @@
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
 				40BFA9F12547AD1D00423320 /* Timer.swift */,
 				40ECF89D2564B5760090F618 /* LoadingAnimation.swift */,
+				4027A683256EE98F0064B639 /* Styling.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

@@ -12,6 +12,7 @@ import SwiftUI
 import UIKit
 import SwiftVideoGenerator
 import Firebase
+import FacebookShare
 
 class ShareService: ObservableObject {
     static let shared = ShareService()
@@ -19,7 +20,7 @@ class ShareService: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var wasError: Bool = false
 
-    func shareToIGLocal(ramb: Ramb2) {
+    func shareToInstagramStories(ramb: Ramb2) {
         isLoading.toggle()
         let imageData = UIImage(imageLiteralResourceName: "rambleexport")
         let audioData = ramb.fileUrl
@@ -39,6 +40,28 @@ class ShareService: ObservableObject {
             }
         })
     }
+    
+    func shareToFacebookStories(ramb: Ramb2) {
+//        let photo = SharePhoto(image: image!, userGenerated: true)
+//        let content = SharePhotoContent()
+//        content.photos = [photo]
+//        let showDialog = ShareDialog(fromViewController: self, content: content, delegate: self)
+//
+//        if (showDialog.canShow) {
+//            showDialog.show()
+//        } else {
+//            self.view.makeToast("It looks like you don't have the Facebook mobile app on your phone.")
+//        }
+    }
+    
+    func shareToTwitterStories(ramb: Ramb2) {
+        print("Shared to Twitter")
+    }
+    
+    func shareToSnapStories(ramb: Ramb2) {
+        print("Shared to Snapchat")
+    }
+    
 //      Create a video with the audio and an image
 // swiftlint:disable all
     func instagramStoriesVideo(url: URL) {

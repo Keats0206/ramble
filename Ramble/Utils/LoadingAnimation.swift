@@ -35,7 +35,6 @@ struct LoadingAnimation: View {
     }
 }
 
-
 struct LoadingAnimation_Previews: PreviewProvider {
     static var previews: some View {
         LoadingAnimation()

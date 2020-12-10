@@ -210,10 +210,10 @@ private extension HomeView {
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Share Menu"),
                 buttons: [
-                    .default(
-                        Text("Instagram Stories")) {
-                            shareService.shareToIGLocal(ramb: globalPlayer.playingRamb!)
-                    },
+                    .default(Text("Instagram Stories")) { shareService.shareToInstagramStories(ramb: globalPlayer.playingRamb!)},
+                    .default(Text("Facebook Stories")) { shareService.shareToFacebookStories(ramb: globalPlayer.playingRamb!)},
+                    .default(Text("Snap Stories")) { shareService.shareToSnapStories(ramb: globalPlayer.playingRamb!)},
+                    .default(Text("Twitter Stories")) { shareService.shareToTwitterStories(ramb: globalPlayer.playingRamb!)},
                     .destructive(Text("Cancel"))
                 ])
     }
