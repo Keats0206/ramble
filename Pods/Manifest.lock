@@ -351,6 +351,7 @@ PODS:
   - SwiftUIRefresh (0.0.3):
     - Introspect (~> 0.1.0)
   - SwiftVideoGenerator (1.4.0)
+  - UIImageColors (2.1.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -362,6 +363,7 @@ DEPENDENCIES:
   - SDWebImageSwiftUI
   - SwiftUIRefresh
   - SwiftVideoGenerator
+  - UIImageColors
 
 SPEC REPOS:
   trunk:
@@ -392,6 +394,7 @@ SPEC REPOS:
     - SDWebImageSwiftUI
     - SwiftUIRefresh
     - SwiftVideoGenerator
+    - UIImageColors
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -421,7 +424,8 @@ SPEC CHECKSUMS:
   SDWebImageSwiftUI: 43687ffe232ddd33fe0659498b7ca9884fdd6b35
   SwiftUIRefresh: ca6ae2718d25aad5dd68bbf5d2ae36ef6ade98bf
   SwiftVideoGenerator: 804637c18f68a4f205d806e305ebceb4adcf3d25
+  UIImageColors: d2ef3b0877d203cbb06489eeb78ea8b7788caabe
 
-PODFILE CHECKSUM: a35eb584bf78c27daaf307f563fc8e3baef82b40
+PODFILE CHECKSUM: ee24d0efb0ffa78d5c6b7fb72942de539619f82b
 
 COCOAPODS: 1.10.0.beta.2

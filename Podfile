@@ -15,5 +15,6 @@ target 'Ramble' do
 	pod 'SDWebImageSwiftUI'
 	pod 'SwiftUIRefresh'
 	pod 'SwiftVideoGenerator'
+	pod 'UIImageColors'
 
 end
