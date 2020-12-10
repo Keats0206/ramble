@@ -66,10 +66,8 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(geometry.size, contentMode: .fill)
                             .edgesIgnoringSafeArea(.all)
-                        
                         Blur(style: .dark)
                             .edgesIgnoringSafeArea(.all)
-                        
                         VStack {
                             //                  UpperView
                             HStack {
@@ -96,9 +94,12 @@ struct HomeView: View {
                             .frame(height: UIScreen.main.bounds.height / 5)
                             //                  TabView
                             tabControl
-        
+                            
                         }.keyboardAdaptive()
                     }
+                    .actionSheet(isPresented: $showShareMenu, content: {
+                        self.actionSheet
+                    })
                 }
                 .alert(isPresented: $shareService.wasError) {
                     Alert(title: Text("Error sharing to Instagram"),
@@ -107,13 +108,13 @@ struct HomeView: View {
                 }
                 .background(Blur())
                 .navigationBarItems(leading:
-                        Button(action: {
-                            self.showProfile.toggle()
-                        }) {
-                            Image(systemName: "person.circle.fill")
-                                .font(.title)
-                                .foregroundColor(.white)
-                        }
+                    Button(action: {
+                        self.showProfile.toggle()
+                    }) {
+                        Image(systemName: "person.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                    }
                     .sheet(isPresented: $showProfile, onDismiss: {
                         print("Modal dismisses")
                     }) {
@@ -189,16 +190,17 @@ private extension HomeView {
                                 .bold()
                                 .opacity(0.5)
                         }
-                    
-                        Button(action: {
-                            self.showShareMenu.toggle()
-                        }) {
-                           Text("Share")
-                                .font(.headline)
+                        NavigationLink(destination: ShareView(ramb: globalPlayer.playingRamb!)){
+                            Text("Share")
+                                 .font(.headline)
                         }
-                        .buttonStyle(OutlineButtonStyle())
-                        .actionSheet(isPresented: $showShareMenu, content: {
-                            self.actionSheet })
+//                        Button(action: {
+//                            self.showShareMenu.toggle()
+//                        }) {
+//                           Text("Share")
+//                                .font(.headline)
+//                        }
+//                        .buttonStyle(OutlineButtonStyle())
                     }.foregroundColor(.white)
                     .padding()
         
@@ -210,10 +212,10 @@ private extension HomeView {
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Share Menu"),
                 buttons: [
-                    .default(Text("Instagram Stories")) { shareService.shareToInstagramStories(ramb: globalPlayer.playingRamb!)},
-                    .default(Text("Facebook Stories")) { shareService.shareToFacebookStories(ramb: globalPlayer.playingRamb!)},
-                    .default(Text("Snap Stories")) { shareService.shareToSnapStories(ramb: globalPlayer.playingRamb!)},
-                    .default(Text("Twitter Stories")) { shareService.shareToTwitterStories(ramb: globalPlayer.playingRamb!)},
+                    .default(Text("Instagram Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!, social: SocialPlatform.instagram)},
+//                    .default(Text("Facebook Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
+//                    .default(Text("Snap Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
+//                    .default(Text("Twitter Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
                     .destructive(Text("Cancel"))
                 ])
     }

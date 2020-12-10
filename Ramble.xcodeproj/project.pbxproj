@@ -20,6 +20,7 @@
 		402F549D244F91AA00FD899F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402F549B244F91AA00FD899F /* LaunchScreen.storyboard */; };
 		40353C83249282BB00C0C39A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40353C82249282BB00C0C39A /* EditProfileView.swift */; };
 		4056E9A4252404E10004E598 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056E9A3252404E10004E598 /* Extensions.swift */; };
+		4067E2F325828E8B00DB56D8 /* ImageFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4067E2F225828E8B00DB56D8 /* ImageFormatting.swift */; };
 		406DE6B625793D4900B5F12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 406DE6B525793D4900B5F12F /* GoogleService-Info.plist */; };
 		406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD04244FF10E00223873 /* AudioRecorder.swift */; };
 		406FAD09244FF15D00223873 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD08244FF15D00223873 /* Helpers.swift */; };
@@ -99,6 +100,7 @@
 		402F549E244F91AA00FD899F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40353C82249282BB00C0C39A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		4056E9A3252404E10004E598 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4067E2F225828E8B00DB56D8 /* ImageFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormatting.swift; sourceTree = "<group>"; };
 		406DE6B525793D4900B5F12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		406FAD04244FF10E00223873 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		406FAD08244FF15D00223873 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				40BFA9F12547AD1D00423320 /* Timer.swift */,
 				40ECF89D2564B5760090F618 /* LoadingAnimation.swift */,
 				4027A683256EE98F0064B639 /* Styling.swift */,
+				4067E2F225828E8B00DB56D8 /* ImageFormatting.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				EE1E0DCE255E5C9400DCA17C /* RegisterModel.swift in Sources */,
 				406FAD05244FF10E00223873 /* AudioRecorder.swift in Sources */,
 				EE1E0DC4255E5B3400DCA17C /* Publisher+Validation.swift in Sources */,
+				4067E2F325828E8B00DB56D8 /* ImageFormatting.swift in Sources */,
 				408690342580902F000A91B4 /* Utility.swift in Sources */,
 				4027A684256EE98F0064B639 /* Styling.swift in Sources */,
 				40B3385E25267F54009321F2 /* RambService2.swift in Sources */,
