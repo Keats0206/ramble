@@ -32,6 +32,7 @@
 		4086902F2580893F000A91B4 /* RecordingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086902E2580893F000A91B4 /* RecordingAnimation.swift */; };
 		408690342580902F000A91B4 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408690332580902F000A91B4 /* Utility.swift */; };
 		4086903625815EB1000A91B4 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086903525815EB1000A91B4 /* ProgressBarView.swift */; };
+		4086903A258169C9000A91B4 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40869039258169C9000A91B4 /* ShareView.swift */; };
 		408BA722256C874D0060265F /* RecordingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BA721256C874D0060265F /* RecordingRow.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
@@ -110,6 +111,7 @@
 		4086902E2580893F000A91B4 /* RecordingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAnimation.swift; sourceTree = "<group>"; };
 		408690332580902F000A91B4 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		4086903525815EB1000A91B4 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		40869039258169C9000A91B4 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		408BA721256C874D0060265F /* RecordingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingRow.swift; sourceTree = "<group>"; };
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40AE563D2579E1F6007D5675 /* Ramble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ramble.entitlements; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				4027A683256EE98F0064B639 /* Styling.swift */,
 				4027A685257008D10064B639 /* LoadingView.swift */,
 				4086902E2580893F000A91B4 /* RecordingAnimation.swift */,
+				40869039258169C9000A91B4 /* ShareView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,13 +257,13 @@
 			isa = PBXGroup;
 			children = (
 				EE1E0DC2255E5B2900DCA17C /* validations */,
+				EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */,
 				4056E9A3252404E10004E598 /* Extensions.swift */,
 				406FAD08244FF15D00223873 /* Helpers.swift */,
 				40150D112498654D00B2E8A9 /* InlineAlert.swift */,
 				40EB296C24ABAFAB00359BA3 /* MultilineTF.swift */,
 				406FAD04244FF10E00223873 /* AudioRecorder.swift */,
 				40BFA9F12547AD1D00423320 /* Timer.swift */,
-				EEFCE0FC255EDC2E002EF077 /* AppHelper.swift */,
 				40ECF89D2564B5760090F618 /* LoadingAnimation.swift */,
 			);
 			path = Utils;
@@ -442,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4086903A258169C9000A91B4 /* ShareView.swift in Sources */,
 				4070B85125674F34006D6630 /* RambUserList.swift in Sources */,
 				EE1E0DC6255E5B4400DCA17C /* SwiftUI+Validation.swift in Sources */,
 				4014BE3D25674CA7009D9823 /* HomeView.swift in Sources */,

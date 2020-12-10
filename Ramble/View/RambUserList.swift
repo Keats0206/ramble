@@ -33,8 +33,8 @@ struct RambUserList: View {
                 .modifier(ClearCell())
             }
             Spacer()
-        }.onAppear {
-            viewModel.fetchUserRambs(user: user, newRecording: false)
+        }
+        .onAppear {
             UITableView.appearance().backgroundColor = UIColor.clear
             UITableViewCell.appearance().backgroundColor = UIColor.clear
         }

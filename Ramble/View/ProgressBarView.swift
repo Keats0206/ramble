@@ -12,7 +12,6 @@ import Combine
 
 struct ProgressBarView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    
     let player: AVPlayer
     let timeObserver: PlayerTimeObserver
     let durationObserver: PlayerDurationObserver

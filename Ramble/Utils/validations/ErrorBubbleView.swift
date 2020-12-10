@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ErrorBubbleView: View {
-    var error: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac pulvinar leo. Mauris finibus ultricies purus tempus lacinia. Nulla in pretium diam. Nulla facilisi."
+    var error: String = "Lorem ipsum"
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
             chatBubbleTriange(width: 7, height: 12, isIncoming: true)

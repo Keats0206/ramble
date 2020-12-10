@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SignInView : View {
+struct SignInView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var loading = false
@@ -41,7 +41,7 @@ struct SignInView : View {
                 Blur(style: .dark)
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack{
+                VStack {
                     
                     Spacer()
                     
@@ -163,7 +163,6 @@ struct SignUpView : View {
                 Blur(style: .dark)
                     .edgesIgnoringSafeArea(.all)
                 
-                    
                 VStack {
                     
                     Spacer()
@@ -178,7 +177,6 @@ struct SignUpView : View {
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
                             
-                        
                         TextField("Username", text: $username)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
@@ -195,7 +193,6 @@ struct SignUpView : View {
                     Spacer()
                     
                     if (error) {
-                        
                         InlineAlert(
                             title: "Hmm... That didn't work.",
                             subtitle: "Are you sure you don't already have an account with that email address?"
@@ -228,7 +225,6 @@ struct SignUpView : View {
         }.navigationBarBackButtonHidden(true)
     }
 }
-
 
 struct AuthView: View {
     var body: some View {

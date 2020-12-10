@@ -15,14 +15,11 @@ struct ControlsView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     var body : some View {
         ZStack {
-            
             VStack {
-                
                 ProgressBarView(player: globalPlayer.globalRambPlayer!,
                                         timeObserver: PlayerTimeObserver(player: globalPlayer.globalRambPlayer!),
                                         durationObserver: PlayerDurationObserver(player: globalPlayer.globalRambPlayer!),
                                         itemObserver: PlayerItemObserver(player: globalPlayer.globalRambPlayer!))
-                
                 HStack {
                     
                     Spacer()
@@ -77,7 +74,10 @@ struct ControlsView: View {
         }
     }
     func getSliderValue() -> Float {
-        return Float((self.globalPlayer.globalRambPlayer?.currentTime().seconds)! / (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
+        return Float(
+            (self.globalPlayer.globalRambPlayer?.currentTime().seconds)!
+                /
+            (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
     }
     func getSeconds() -> Double {
         return Double(Double(self.globalPlayer.value) * (self.globalPlayer.globalRambPlayer?.currentItem?.duration.seconds)!)
@@ -105,21 +105,20 @@ struct CustomProgressBar: UIViewRepresentable {
       func updateUIView(_ uiView: UISlider, context: UIViewRepresentableContext<CustomProgressBar>) {
           uiView.value = value
       }
-      class Coordinator : NSObject {
-          var parent : CustomProgressBar
-          init(parent1 : CustomProgressBar) {
+      class Coordinator: NSObject {
+          var parent: CustomProgressBar
+          init(parent1: CustomProgressBar) {
                 parent = parent1
           }
-          @objc func changed(slider : UISlider) {
+          @objc func changed(slider: UISlider) {
               if slider.isTracking {
                   parent.player?.pause()
                   let sec = Double(slider.value * Float((parent.player?.currentItem?.duration.seconds)!))
                   parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 100))
-              }
-              else{
+              } else {
                   let sec = Double(slider.value * Float((parent.player?.currentItem?.duration.seconds)!))
                   parent.player?.seek(to: CMTime(seconds: sec, preferredTimescale: 100))
-                  if parent.isplaying{
+                  if parent.isplaying {
                       parent.player?.play()
                   }
               }

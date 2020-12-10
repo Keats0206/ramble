@@ -16,7 +16,7 @@ class GlobalPlayer: ObservableObject {
     @Published var playingRamb: Ramb2?
     @Published var globalRambPlayer: AVPlayer?
     @Published var isPlaying = false
-    @Published var value : Float = 0
+    @Published var value: Float = 0
     @Published var caption = ""
 
     let session = AVAudioSession.sharedInstance()
@@ -46,7 +46,7 @@ class GlobalPlayer: ObservableObject {
     }
     func setupNowPlaying( ) {
 // Define Now Playing Info
-        var nowPlayingInfo = [String : Any]()
+        var nowPlayingInfo = [String: Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = playingRamb?.caption
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = globalRambPlayer?.currentItem?.currentTime().seconds
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = globalRambPlayer?.currentItem?.asset.duration.seconds

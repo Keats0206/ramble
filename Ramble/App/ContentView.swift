@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentView : View {
+struct ContentView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
 
@@ -28,7 +28,7 @@ struct ContentView : View {
 
 #if DEBUG
 
-struct ContentView_Previews : PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(SessionStore())

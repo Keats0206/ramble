@@ -171,7 +171,7 @@ private extension EditProfileView {
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
                 self.session.signOut()
-            }) {
+            }){
                 HStack {
                     Image(systemName: "arrow.right.circle.fill")
                     Text("LOGOUT")
