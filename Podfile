@@ -15,8 +15,5 @@ target 'Ramble' do
 	pod 'SDWebImageSwiftUI'
 	pod 'SwiftUIRefresh'
 	pod 'SwiftVideoGenerator'
-	pod 'FacebookCore'
-	pod 'FacebookLogin'
-	pod 'FacebookShare'
 
 end

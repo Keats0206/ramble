@@ -12,7 +12,6 @@ import SwiftUI
 import UIKit
 import SwiftVideoGenerator
 import Firebase
-import FacebookShare
 
 class ShareService: ObservableObject {
     static let shared = ShareService()
@@ -59,7 +58,7 @@ class ShareService: ObservableObject {
     }
     
     func shareToSnapStories(ramb: Ramb2) {
-        print("Shared to Snapchat")
+        print("Shared to Twitter")
     }
     
 //      Create a video with the audio and an image
