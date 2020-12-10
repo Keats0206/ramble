@@ -16,8 +16,8 @@ struct RambRow: View {
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .leading) {
-                HStack(alignment: .center){
-                    VStack(alignment: .leading){
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading) {
                         Text("\(ramb.caption)")
                             .font(.headline)
                         Text("\(formatDate(timestamp: ramb.timestamp)) ago")

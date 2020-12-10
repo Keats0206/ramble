@@ -66,7 +66,6 @@ struct EditProfileView : View {
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
                     VStack(spacing: 20) {
-    //                      changeProfileImage
                             editUserInfo
                             Spacer()
                             settingsLinks
@@ -210,4 +209,3 @@ struct NetworkImage: View {
         }
     }
 }
-
