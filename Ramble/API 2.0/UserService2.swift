@@ -54,7 +54,8 @@ class UserService2: ObservableObject {
             username: user.username,
             displayname: user.displayname,
             bio: user.bio, isFollowed:
-            user.isFollowed)
+            user.isFollowed,
+            profileImageUrl: user.profileImageUrl)
         do {
             try userRef.setData(from: newUser)
         } catch let error {

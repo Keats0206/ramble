@@ -12,31 +12,34 @@ import SDWebImageSwiftUI
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
     @Environment(\.presentationMode) var presentationMode
+
     @State var profileImage: UIImage?
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
     @State var loading = false
     @State var error = false
-    
+        
     @Binding var user: User
 
     func saveProfile() {
-        if let image = profileImage {
-            self.loading = true
-            UserService2.shared.updateProfileImage(image: image) { url in
-                self.loading = false
-                self.updateUserData()
-                self.presentationMode.wrappedValue.dismiss()
+            if let image = profileImage {
+                self.loading = true
+                UserService2.shared.updateProfileImage(image: image) { url in
+                    self.loading = false
+                    self.user.profileImageUrl = url
+                    self.updateUserData()
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            } else {
+                updateUserData()
+                presentationMode.wrappedValue.dismiss()
             }
-        } else {
-            updateUserData()
-            presentationMode.wrappedValue.dismiss()
         }
-    }
     func updateUserData() {
         UserService2.shared.saveUserProfile(user: user)
         RambService2.shared.updateUserData(user: user)
     }
+    
     var sheet: ActionSheet {
         ActionSheet(
             title: Text("Action"),
@@ -55,6 +58,7 @@ struct EditProfileView : View {
             })
         ])
     }
+    
     var body : some View {
         NavigationView {
             ZStack {
@@ -66,6 +70,7 @@ struct EditProfileView : View {
                     Blur(style: .dark)
                         .edgesIgnoringSafeArea(.all)
                     VStack(spacing: 20) {
+                            changeProfileImage
                             editUserInfo
                             Spacer()
                             settingsLinks
@@ -100,6 +105,29 @@ struct EditProfileView : View {
 }
 
 private extension EditProfileView {
+    var changeProfileImage: some View {
+            VStack {
+                NetworkImage(url: URL(string: user.profileImageUrl), image: profileImage)
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+                    
+                Button(action: {
+                    self.showImagePicker = true
+                }) {
+                    Text("Change Photo")
+                        .foregroundColor(.primary)
+                        .padding(5)
+                        .padding([.trailing,.leading])
+                }.sheet(isPresented: $showImagePicker, onDismiss: {
+                self.showImagePicker = false
+                    }, content: {
+                    ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                    }).actionSheet(isPresented: $showAction) {
+                        sheet
+                }
+            }
+        }
     var editUserInfo: some View {
         VStack(spacing: 20) {
         VStack(alignment: .leading, spacing: 5) {

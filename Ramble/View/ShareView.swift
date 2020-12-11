@@ -11,7 +11,7 @@ import UIKit
 import UIImageColors
 
 struct ShareView: View {
-    @State var image: Image? = Image("swift")
+    @State var image: Image? = Image("experienced")
     
     @State private var firstColor: Color = .white
     @State private var secondColor: Color = .black
@@ -67,40 +67,41 @@ struct ShareView: View {
                             .font(.caption)
                             .opacity(0.5)
                     }.padding()
-                    .foregroundColor(.white)
+                        .foregroundColor(.white)
                 }
-                    .background(
-                        RadialGradient(
-                            gradient: Gradient(colors: [firstColor, secondColor]),
-                            center: .center,
-                            startRadius: 2,
-                            endRadius: 650)
-                    )
-                    .frame(width: shareWidth, height: shareHeight)
-                    .cornerRadius(20)
+                .background(
+                    RadialGradient(
+                        gradient: Gradient(colors: [firstColor, secondColor]),
+                        center: .center,
+                        startRadius: 2,
+                        endRadius: 650)
+                )
+                .frame(width: shareWidth, height: shareHeight)
+                .cornerRadius(20)
+            Spacer()
+            Divider()
+            HStack {
+                Text("Instagram Stories")
                 Spacer()
-                Divider()
-                HStack {
-                    Text("Instagram Stories")
-                    Spacer()
-                    Button(action: {
-                        print("Share to IG")
-                    }) {
-                        Text("Share")
-                            .font(.headline)
-                    }
-                    .buttonStyle(OutlineButtonStyle())
+                Button(action: {
+                    print("Share to IG")
+                }) {
+                    Text("Share")
+                        .font(.headline)
                 }
-                    .padding()
-            }.padding()
-        }.onAppear {
+                .buttonStyle(OutlineButtonStyle())
+            }
+                .padding()
+            }
+            .padding()
+        }
+        .onAppear {
             self.setAverageColor()
         }
     }
-    
 //  Set these colors when the user logs on?
     func setAverageColor() {
-        let image = UIImage(named: "swift")!
+        let image = UIImage(named: "experienced")!
         image.getColors { colors in
             firstColor = Color((colors?.background)!)
             secondColor  = Color((colors?.primary)!)
@@ -108,7 +109,6 @@ struct ShareView: View {
             fourthColor = Color((colors?.detail)!)
         }
     }
-
 }
 
 

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SignInView: View {
+struct SignInView : View {
     @State var email: String = ""
     @State var password: String = ""
     @State var loading = false
@@ -33,18 +33,9 @@ struct SignInView: View {
     var body: some View {
         LoadingView(isShowing: $loading) {
             ZStack {
-                GeometryReader { geometry in
-                Image("gradient2")
-                    .resizable()
-                    .aspectRatio(geometry.size, contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
-                Blur(style: .dark)
-                    .edgesIgnoringSafeArea(.all)
-                
+                Color.accent3.edgesIgnoringSafeArea(.all)
                 VStack {
-                    
                     Spacer()
-                    
                     Image(systemName: "music.mic")
                         .resizable()
                         .scaledToFit()
@@ -55,19 +46,17 @@ struct SignInView: View {
                         TextField("Email Addesss", text: $email)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
+                            .background(Color(.white))
                         
                         SecureField("Password", text: $password)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
+                            .background(Color(.white))
                         
                         if (error) {
                             Text("ahhh crap")
                         }
-                    }.foregroundColor(.white)
-                    .padding(.vertical, 64)
-                    .multilineTextAlignment(TextAlignment.center)
-                    
-                    Spacer()
+                    }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
                     
                     Button(action: signIn) {
                         Text("Sign In")
@@ -76,6 +65,9 @@ struct SignInView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
+                    
+                    Spacer()
+                    
                     NavigationLink(destination: SignUpView()) {
                         HStack {
                             Text("Create Account")
@@ -86,15 +78,17 @@ struct SignInView: View {
                 }
             }
         }
-        }.navigationBarBackButtonHidden(true)
     }
 }
 
+//To do - figure out how to upload a fucking photo
 struct SignUpView : View {
     @State var email: String = ""
     @State var password: String = ""
     @State var username: String = ""
     @State var displayname: String = ""
+    @State var profileImage: UIImage?
+    
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
     
@@ -104,14 +98,17 @@ struct SignUpView : View {
     @EnvironmentObject var session: SessionStore
     
     func signUp () {
+        
         guard AppHelper.isValidEmail(email) else {
             AppHelper.alert(title: "Please enter valid email!")
             return
         }
+        
         guard username.count > 3 && username.count < 13 else {
             AppHelper.alert(title: "Username must be of 4 - 12 characters!")
             return
         }
+        
         loading = true
         error = false
         
@@ -120,7 +117,7 @@ struct SignUpView : View {
                 AppHelper.alert(title: "This username is already take, please enter unique username!")
                 loading = false
             } else {
-                self.session.signUp(email: email, password: password, fullname: displayname, username: username) { (result, error) in
+                self.session.signUp(email: email, password: password, fullname: displayname, username: username, profileImage: profileImage!) { (result, error) in
                     self.loading = false
                     if error != nil {
                         print("Oops")
@@ -148,6 +145,7 @@ struct SignUpView : View {
                 }),
                 .destructive(Text("Remove"), action: {
                     self.showAction = false
+                    self.profileImage = nil
             })
         ])
     }
@@ -155,54 +153,72 @@ struct SignUpView : View {
     var body : some View {
         LoadingView(isShowing: $loading) {
             ZStack {
-                GeometryReader { geometry in
-                Image("gradient2")
-                    .resizable()
-                    .aspectRatio(geometry.size, contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
-                Blur(style: .dark)
-                    .edgesIgnoringSafeArea(.all)
-                
+                Color.accent3.edgesIgnoringSafeArea(.all)
                 VStack {
-                    
                     Spacer()
-                    
                     VStack {
+                        if (profileImage == nil) {
+                            VStack{
+                                Image(systemName: "camera.on.rectangle")
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(6)
+                                
+                                Text("Add a profile pic").font(.system(size: 18, weight: .bold))
+                            }.onTapGesture {
+                                    self.showImagePicker = true
+                            }
+                        } else {
+                            Image(uiImage: profileImage!)
+                                .resizable()
+                                .frame(width: 200, height: 200)
+                                .cornerRadius(200 / 2)
+                                .onTapGesture {
+                                        self.showAction = true
+                                }
+                            }
+                    }.foregroundColor(.white)
                         
+                    .sheet(isPresented: $showImagePicker, onDismiss: {
+                        self.showImagePicker = false
+                    }, content: {
+                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                    })
+                        .actionSheet(isPresented: $showAction) {
+                            sheet
+                    }
+                    
+                    VStack{
                         TextField("Email", text: $email)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
+                            .background(Color(.white))
                         
                         TextField("Display Name", text: $displayname)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
-                            
+                            .background(Color(.white))
+                        
                         TextField("Username", text: $username)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
+                            .background(Color(.white))
                         
                         SecureField("Password", text: $password)
                             .font(.system(size: 18, weight: .bold))
                             .padding(12)
+                            .background(Color(.white))
                         
-                    }
-                    .foregroundColor(.white)
-                    .padding(.vertical, 64)
-                    .multilineTextAlignment(TextAlignment.center)
-                    
-                    Spacer()
+                    }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
                     
                     if (error) {
+                        
                         InlineAlert(
                             title: "Hmm... That didn't work.",
                             subtitle: "Are you sure you don't already have an account with that email address?"
                         ).padding([.horizontal, .top])
                     }
                     
-                    Spacer()
-                    
-                    VStack {
-                        
+                    VStack{
                         Button(action: signUp) {
                             Text("Sign up")
                                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -220,11 +236,11 @@ struct SignUpView : View {
                         }
                     }
                 }
-                }
             }
-        }.navigationBarBackButtonHidden(true)
+        }
     }
 }
+
 
 struct AuthView: View {
     var body: some View {
