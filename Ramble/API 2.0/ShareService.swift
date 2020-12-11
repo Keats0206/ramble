@@ -27,14 +27,12 @@ class ShareService: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var wasError: Bool = false
 
-    func shareToSocial(ramb: Ramb2, social: SocialPlatform) {
+    func shareToSocial(ramb: Ramb2, image: UIImage, social: SocialPlatform) {
         isLoading.toggle()
-        let inImage = UIImage(imageLiteralResourceName: "shareimage")
-//        let textImage = textToImage(inImage: inImage, ramb: ramb)
-//        let finalImage = cropToBounds(image: textImage, width: 100, height: 100)
+        let image = image
         let audioData = ramb.fileUrl
         
-        VideoGenerator.current.generate(withImages: [inImage], andAudios: [audioData], andType: .single, { (progress) in
+        VideoGenerator.current.generate(withImages: [image], andAudios: [audioData], andType: .single, { (progress) in
             print(progress)
         }, outcome: { [self] (url) in
             switch url {
@@ -49,30 +47,7 @@ class ShareService: ObservableObject {
             }
         })
     }
-    
-    func shareToFacebookStories(ramb: Ramb2) {
-//        let photo = SharePhoto(image: image!, userGenerated: true)
-//        let content = SharePhotoContent()
-//        content.photos = [photo]
-//        let showDialog = ShareDialog(fromViewController: self, content: content, delegate: self)
-//
-//        if (showDialog.canShow) {
-//            showDialog.show()
-//        } else {
-//            self.view.makeToast("It looks like you don't have the Facebook mobile app on your phone.")
-//        }
-    }
-    
-    func shareToTwitterStories(ramb: Ramb2) {
-        print("Shared to Twitter")
-    }
-    
-    func shareToSnapStories(ramb: Ramb2) {
-        print("Shared to Twitter")
-    }
-    
 //      Create a video with the audio and an image
-    
     func instagramStoriesVideo(url: URL) {
         if let urlScheme = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(urlScheme) {

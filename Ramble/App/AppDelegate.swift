@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-
 //import UIKit
 //import FBSDKCoreKit
 //

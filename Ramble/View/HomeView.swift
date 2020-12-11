@@ -59,7 +59,6 @@ struct HomeView: View {
     }
     
     var body: some View {
-        LoadingView(isShowing: $shareService.isLoading) {
             NavigationView {
                 ZStack {
                     GeometryReader { geometry in
@@ -98,9 +97,9 @@ struct HomeView: View {
                             
                         }.keyboardAdaptive()
                     }
-                    .actionSheet(isPresented: $showShareMenu, content: {
-                        self.actionSheet
-                    })
+//                    .actionSheet(isPresented: $showShareMenu, content: {
+//                        self.actionSheet
+//                    })
                 }
                 .alert(isPresented: $shareService.wasError) {
                     Alert(title: Text("Error sharing to Instagram"),
@@ -123,7 +122,6 @@ struct HomeView: View {
                     }
                 )
             }
-        }
     }
 }
 
@@ -195,13 +193,6 @@ private extension HomeView {
                             Text("Share")
                                  .font(.headline)
                         }
-//                        Button(action: {
-//                            self.showShareMenu.toggle()
-//                        }) {
-//                           Text("Share")
-//                                .font(.headline)
-//                        }
-//                        .buttonStyle(OutlineButtonStyle())
                     }.foregroundColor(.white)
                     .padding()
         
@@ -210,16 +201,16 @@ private extension HomeView {
             }
         }
     }
-    var actionSheet: ActionSheet {
-        ActionSheet(title: Text("Share Menu"),
-                buttons: [
-                    .default(Text("Instagram Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!, social: SocialPlatform.instagram)},
-//                    .default(Text("Facebook Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
-//                    .default(Text("Snap Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
-//                    .default(Text("Twitter Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
-                    .destructive(Text("Cancel"))
-                ])
-    }
+//    var actionSheet: ActionSheet {
+//        ActionSheet(title: Text("Share Menu"),
+//                buttons: [
+//                    .default(Text("Instagram Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!, social: SocialPlatform.instagram)},
+////                    .default(Text("Facebook Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
+////                    .default(Text("Snap Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
+////                    .default(Text("Twitter Stories")) { shareService.shareToSocial(ramb: globalPlayer.playingRamb!)},
+//                    .destructive(Text("Cancel"))
+//                ])
+//    }
     var tabControl: some View {
         HStack {
             Spacer()
