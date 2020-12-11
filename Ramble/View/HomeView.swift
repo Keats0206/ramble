@@ -11,6 +11,7 @@ import Combine
 
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var sessions: SessionSettings
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @ObservedObject var viewModel = RambService2()
@@ -190,7 +191,7 @@ private extension HomeView {
                                 .bold()
                                 .opacity(0.5)
                         }
-                        NavigationLink(destination: ShareView(ramb: globalPlayer.playingRamb!)){
+                        NavigationLink(destination: ShareView(ramb: globalPlayer.playingRamb!, user: user)){
                             Text("Share")
                                  .font(.headline)
                         }
@@ -249,23 +250,15 @@ private extension HomeView {
         }.padding(.top)
     }
 }
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(user: testUser)
-//    }
-//}
-
 enum ViewControl {
     case create
     case recordings
 }
-
 extension Notification {
     var keyboardHeight: CGFloat {
         return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
     }
 }
-
 extension Publishers {
     // 1.
     static var keyboardHeight: AnyPublisher<CGFloat, Never> {
@@ -281,7 +274,6 @@ extension Publishers {
             .eraseToAnyPublisher()
     }
 }
-
 struct KeyboardAdaptive: ViewModifier {
     @State private var keyboardHeight: CGFloat = 0
 

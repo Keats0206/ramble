@@ -13,10 +13,8 @@ import Combine
 import CoreLocation
 
 class SessionStore : ObservableObject {
-    var didChange = PassthroughSubject<SessionStore, Never>()
-    
+    var didChange = PassthroughSubject<SessionStore, Never>()    
     @Published var session: User? {didSet {self.didChange.send(self) }}
-//    @ObservedObject var locationManager = LocationManager()
     
     var handle: AuthStateDidChangeListenerHandle?
     func listen() {

@@ -58,7 +58,6 @@ struct EditProfileView : View {
             })
         ])
     }
-    
     var body : some View {
         NavigationView {
             ZStack {

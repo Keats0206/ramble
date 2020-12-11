@@ -11,6 +11,7 @@ import UIKit
 
 struct AppView: View {
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var settings: SessionSettings
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @ObservedObject var audioRecorder = AudioRecorder()
@@ -42,6 +43,7 @@ struct AppView: View {
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
             print("DEBUG: App View \(user)")
+            settings.setSettings(user: user)
             return
         }
     }
