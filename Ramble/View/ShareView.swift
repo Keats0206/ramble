@@ -11,6 +11,7 @@ import UIKit
 import UIImageColors
 
 struct ShareView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var settings: SessionSettings
     @ObservedObject var shareService = ShareService()
 
@@ -21,6 +22,18 @@ struct ShareView: View {
     
     var ramb: Ramb2
     var user: User
+    
+    var btnBack : some View {
+        Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "arrowshape.turn.up.left.circle") // set image here
+                        .font(.title)
+                        .foregroundColor(.white)
+                }
+            }
+        }
     
     func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
             let cgimage = image.cgImage!
@@ -52,7 +65,6 @@ struct ShareView: View {
 
             return image
         }
-    
     
     func createShareImage(ramb: Ramb2) -> UIImage {
         let inImage = UIImage(named: "ramble")!
@@ -133,9 +145,7 @@ struct ShareView: View {
     var body: some View {
         LoadingView(isShowing: $shareService.isLoading) {
             ZStack(alignment: .top) {
-                
                 Color.black.edgesIgnoringSafeArea(.all)
-                
                 VStack {
                     VStack {
                         HStack {
@@ -180,6 +190,7 @@ struct ShareView: View {
                     Divider()
                     HStack {
                         Text("Instagram Stories")
+                            .foregroundColor(.white)
                         Spacer()
                         Button(action: {
                             shareService.shareToSocial(
@@ -192,43 +203,14 @@ struct ShareView: View {
                         }
                         .buttonStyle(OutlineButtonStyle())
                     }
-                    .padding()
-                }
-                    .padding()
+                        .padding()
+                }.padding()
             }
-        }
+        }.navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
-//            swiftlint:disable large_tuple
-//            swiftlint:disable identifier_name
-extension Color {
-    func uiColor() -> UIColor {
-        if #available(iOS 14.0, *) {
-            return UIColor(self)
-        }
-        let components = self.components()
-        return UIColor(red: components.r, green: components.g, blue: components.b, alpha: components.a)
-    }
-    private func components() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
-        let scanner = Scanner(string: self.description.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
-        var hexNumber: UInt64 = 0
-        var r: CGFloat = 0.0,
-            g: CGFloat = 0.0,
-            b: CGFloat = 0.0,
-            a: CGFloat = 0.0
 
-        let result = scanner.scanHexInt64(&hexNumber)
-        if result {
-            r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
-            g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
-            b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
-            a = CGFloat(hexNumber & 0x000000ff) / 255
-        }
-        return (r, g, b, a)
-    }
-}
-//            swiftlint:enable large_tuple
-//            swiftlint:enable identifier_name
 struct ShareView_Previews: PreviewProvider {
     static var previews: some View {
         ShareView(ramb: testRamb, user: testUser)

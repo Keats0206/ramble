@@ -115,9 +115,9 @@ private extension EditProfileView {
                     self.showImagePicker = true
                 }) {
                     Text("Change Photo")
-                        .foregroundColor(.primary)
+                        .foregroundColor(.white)
                         .padding(5)
-                        .padding([.trailing,.leading])
+                        .padding([.trailing, .leading])
                 }.sheet(isPresented: $showImagePicker, onDismiss: {
                 self.showImagePicker = false
                     }, content: {
@@ -188,7 +188,7 @@ private extension EditProfileView {
 //                Spacer()
 //            }
         }
-        .font(.largeTitle)
+        .font(.headline)
         .foregroundColor(.white)
     }
     var logoutDelete: some View {

@@ -34,7 +34,6 @@ func formatDate(timestamp: Int) -> String {
 }
 
 class TimeHelper: NSObject {
-    
     private static var timeHMSFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
@@ -42,7 +41,6 @@ class TimeHelper: NSObject {
         formatter.zeroFormattingBehavior = [.pad]
         return formatter
     }()
-    
     static func formatSecondsToHMS(_ seconds: Double) -> String {
         guard !seconds.isNaN,
             let text = timeHMSFormatter.string(from: seconds) else {
@@ -51,9 +49,7 @@ class TimeHelper: NSObject {
          
         return text
     }
-    
 }
-
 extension Date
 {
     func toString( dateFormat format  : String ) -> String
@@ -63,7 +59,6 @@ extension Date
         return dateFormatter.string(from: self)
     }
 }
-
 extension UIApplication {
     var currentWindow: UIWindow? {
         connectedScenes
@@ -74,4 +69,3 @@ extension UIApplication {
         .filter({$0.isKeyWindow}).first
     }
 }
-
