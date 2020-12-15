@@ -10,6 +10,70 @@ import Foundation
 import SwiftUI
 import UIKit
 
+
+extension UIImage {
+        // image with rounded corners
+        public func withRoundedCorners(radius: CGFloat? = 0) -> UIImage? {
+            let maxRadius = min(size.width, size.height) / 2
+            let cornerRadius: CGFloat
+            if let radius = radius, radius > 0 && radius <= maxRadius {
+                cornerRadius = radius
+            } else {
+                cornerRadius = maxRadius
+            }
+            UIGraphicsBeginImageContextWithOptions(size, false, scale)
+            let rect = CGRect(origin: .zero, size: size)
+            UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
+            draw(in: rect)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+    }
+
+extension UIImage {
+    /// Returns a new image with the specified shadow properties.
+    /// This will increase the size of the image to fit the shadow and the original image.
+    func withShadow(blur: CGFloat = 6, offset: CGSize = .zero, color: UIColor = UIColor(white: 0, alpha: 0.8)) -> UIImage {
+
+        let shadowRect = CGRect(
+            x: offset.width - blur,
+            y: offset.height - blur,
+            width: size.width + blur * 2,
+            height: size.height + blur * 2
+        )
+        
+        UIGraphicsBeginImageContextWithOptions(
+            CGSize(
+                width: max(shadowRect.maxX, size.width) - min(shadowRect.minX, 0),
+                height: max(shadowRect.maxY, size.height) - min(shadowRect.minY, 0)
+            ),
+            false, 0
+        )
+        
+        let context = UIGraphicsGetCurrentContext()!
+
+        context.setShadow(
+            offset: offset,
+            blur: blur,
+            color: color.cgColor
+        )
+        
+        draw(
+            in: CGRect(
+                x: max(0, -shadowRect.origin.x),
+                y: max(0, -shadowRect.origin.y),
+                width: size.width,
+                height: size.height
+            )
+        )
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
 extension Color {
     static let primaryBackground = Color(red: 25/255, green: 21/255, blue: 22/255) /* #191516 */
     static let secondaryBackground = Color(red: 85/255, green: 83/255, blue: 88/255) /* #555358 */
@@ -25,17 +89,13 @@ extension Color {
 // swiftlint:disable large_tuple
     
     func ToUIColor() -> UIColor {
-
         let components = self.components()
         return UIColor(red: components.r, green: components.g, blue: components.b, alpha: components.a)
     }
-
     private func components() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
-
         let scanner = Scanner(string: self.description.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
         var hexNumber: UInt64 = 0
         var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
-
         let result = scanner.scanHexInt64(&hexNumber)
         if result {
             r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
@@ -62,7 +122,6 @@ extension UINavigationController {
         navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrowshape.up.and.left")
     }
 }
-
 struct CornerShape: Shape {
     var corner: UIRectCorner
     var size: CGSize
@@ -71,7 +130,6 @@ struct CornerShape: Shape {
         return Path(path.cgPath)
     }
 }
-
 struct Blur: UIViewRepresentable {
     var style: UIBlurEffect.Style = .systemChromeMaterial
     

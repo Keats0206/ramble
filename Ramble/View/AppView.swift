@@ -42,7 +42,7 @@ struct AppView: View {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
             self.user = user
-            print("DEBUG: App View \(user)")
+            print("DEBUG: Setting up settings for \(user)")
             settings.setSettings(user: user)
             return
         }

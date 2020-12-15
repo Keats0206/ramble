@@ -16,18 +16,21 @@ class SessionSettings: ObservableObject {
     @Published var thirdColor: Color = .clear
     @Published var fourthColor: Color = .clear
     
-    @State var userUIImage: UIImage = UIImage(named: "experienced")!
+    @Published var userUIImage: UIImage = UIImage(named: "experienced")!
     
-    func setSettings(user: User){
+    func setSettings(user: User) {
         setUserImage(profileImageURL: user.profileImageUrl)
     }
+    
     func setUserImage(profileImageURL: String) {
         let url = URL(string: profileImageURL)!
         if let imageData = try? Data(contentsOf: url) {
             let image = UIImage(data: imageData)!
             self.setAverageColor(image: image)
+            self.userUIImage = image
         }
     }
+    
     func setAverageColor(image: UIImage) {
         image.getColors { colors in
             self.firstColor = Color((colors?.background)!)

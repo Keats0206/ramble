@@ -11,7 +11,7 @@ import Combine
 
 class RambService2: ObservableObject {
     static let shared = RambService2()
-    @Published var allRambs = [Ramb2]()
+//    @Published var allRambs = [Ramb2]()
     @Published var followingRambs = [Ramb2]()
     @Published var userRambs = [Ramb2]()
     @Published var lastUploadRamb: Ramb2 = testRamb
@@ -48,15 +48,17 @@ class RambService2: ObservableObject {
         }
         return rambId
     }
-    func fetchRambs() {
-        FBRefRambs.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
-            if let querySnapshot = querySnapshot {
-                self.allRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
-                    try? document.data(as: Ramb2.self) // (4)
-                }
-            }
-        }
-    }
+    
+//    func fetchRambs() {
+//        FBRefRambs.order(by: "timestamp").addSnapshotListener { (querySnapshot, error) in // (2)
+//            if let querySnapshot = querySnapshot {
+//                self.allRambs = querySnapshot.documents.compactMap { document -> Ramb2? in // (3)
+//                    try? document.data(as: Ramb2.self) // (4)
+//                }
+//            }
+//        }
+//    }
+    
     func fetchUserRambs(user: User, newRecording: Bool) {
         let userId = user.uid
         FBRefRambs.whereField("uid", isEqualTo: userId)

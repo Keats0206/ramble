@@ -29,6 +29,7 @@ struct ProgressBarView: View {
                     // I have no idea in what scenario this View is shown...
                     Text("seek/progress slider")
             }.accentColor(.white)
+            .foregroundColor(.white)
         }
         .padding(.horizontal)
         // Listen out for the time observer publishing changes to the player's time

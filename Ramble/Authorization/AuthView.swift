@@ -33,46 +33,53 @@ struct SignInView : View {
     var body: some View {
         LoadingView(isShowing: $loading) {
             ZStack {
-                Color.accent3.edgesIgnoringSafeArea(.all)
-                VStack {
-                    Spacer()
-                    Image(systemName: "music.mic")
+                GeometryReader { geometry in
+                    Image("gradient2")
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 100)
-                        .foregroundColor(.white)
-                    
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    Blur(style: .dark)
+                        .edgesIgnoringSafeArea(.all)
                     VStack {
-                        TextField("Email Addesss", text: $email)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                            .background(Color(.white))
-                        
-                        SecureField("Password", text: $password)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                            .background(Color(.white))
-                        
-                        if (error) {
-                            Text("ahhh crap")
-                        }
-                    }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
-                    
-                    Button(action: signIn) {
-                        Text("Sign In")
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .frame(height: 50)
+                        Spacer()
+                        Image(systemName: "music.mic")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100)
                             .foregroundColor(.white)
-                            .font(.system(size: 18, weight: .bold))
-                    }
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: SignUpView()) {
-                        HStack {
-                            Text("Create Account")
-                                .font(.system(size: 14))
+                        
+                        VStack {
+                            TextField("Email Addesss", text: $email)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(12)
+                                .background(Color(.white))
+                            
+                            SecureField("Password", text: $password)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(12)
+                                .background(Color(.white))
+                            
+                            if (error) {
+                                Text("ahhh crap")
+                            }
+                        }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
+                        
+                        Button(action: signIn) {
+                            Text("Sign In")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .frame(height: 50)
                                 .foregroundColor(.white)
+                                .font(.system(size: 18, weight: .bold))
+                        }
+                        
+                        Spacer()
+                        
+                        NavigationLink(destination: SignUpView()) {
+                            HStack {
+                                Text("Create Account")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                 }
@@ -153,85 +160,91 @@ struct SignUpView : View {
     var body : some View {
         LoadingView(isShowing: $loading) {
             ZStack {
-                Color.accent3.edgesIgnoringSafeArea(.all)
-                VStack {
-                    Spacer()
+                GeometryReader { geometry in
+                    Image("gradient2")
+                        .resizable()
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    Blur(style: .dark)
+                        .edgesIgnoringSafeArea(.all)
                     VStack {
-                        if (profileImage == nil) {
-                            VStack{
-                                Image(systemName: "camera.on.rectangle")
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(6)
-                                
-                                Text("Add a profile pic").font(.system(size: 18, weight: .bold))
-                            }.onTapGesture {
+                        Spacer()
+                        VStack {
+                            if (profileImage == nil) {
+                                VStack{
+                                    Image(systemName: "camera.on.rectangle")
+                                        .frame(width: 100, height: 100)
+                                        .cornerRadius(6)
+                                    
+                                    Text("Add a profile pic").font(.system(size: 18, weight: .bold))
+                                }.onTapGesture {
                                     self.showImagePicker = true
-                            }
-                        } else {
-                            Image(uiImage: profileImage!)
-                                .resizable()
-                                .frame(width: 200, height: 200)
-                                .cornerRadius(200 / 2)
-                                .onTapGesture {
-                                        self.showAction = true
                                 }
+                            } else {
+                                Image(uiImage: profileImage!)
+                                    .resizable()
+                                    .frame(width: 200, height: 200)
+                                    .cornerRadius(200 / 2)
+                                    .onTapGesture {
+                                        self.showAction = true
+                                    }
                             }
-                    }.foregroundColor(.white)
-                        
-                    .sheet(isPresented: $showImagePicker, onDismiss: {
-                        self.showImagePicker = false
-                    }, content: {
-                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
-                    })
+                        }.foregroundColor(.white)
+                        .sheet(isPresented: $showImagePicker, onDismiss: {
+                            self.showImagePicker = false
+                        }, content: {
+                            ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                        })
                         .actionSheet(isPresented: $showAction) {
                             sheet
-                    }
-                    
-                    VStack{
-                        TextField("Email", text: $email)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                            .background(Color(.white))
-                        
-                        TextField("Display Name", text: $displayname)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                            .background(Color(.white))
-                        
-                        TextField("Username", text: $username)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                            .background(Color(.white))
-                        
-                        SecureField("Password", text: $password)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(12)
-                            .background(Color(.white))
-                        
-                    }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
-                    
-                    if (error) {
-                        
-                        InlineAlert(
-                            title: "Hmm... That didn't work.",
-                            subtitle: "Are you sure you don't already have an account with that email address?"
-                        ).padding([.horizontal, .top])
-                    }
-                    
-                    VStack{
-                        Button(action: signUp) {
-                            Text("Sign up")
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .frame(height: 50)
-                                .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .bold))
-                                .disabled(loading)
                         }
-                        NavigationLink(destination: SignInView()) {
-                            HStack {
-                                Text("Already have an account? Sign In")
-                                    .font(.system(size: 14))
+                        
+                        VStack{
+                            TextField("Email", text: $email)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(12)
+                                .background(Color(.white))
+                            
+                            TextField("Display Name", text: $displayname)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(12)
+                                .background(Color(.white))
+                            
+                            TextField("Username", text: $username)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(12)
+                                .background(Color(.white))
+                            
+                            SecureField("Password", text: $password)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(12)
+                                .background(Color(.white))
+                            
+                        }.padding(.vertical, 64).multilineTextAlignment(TextAlignment.center)
+                        
+                        if (error) {
+                            
+                            InlineAlert(
+                                title: "Hmm... That didn't work.",
+                                subtitle: "Are you sure you don't already have an account with that email address?"
+                            ).padding([.horizontal, .top])
+                        }
+                        
+                        VStack{
+                            Button(action: signUp) {
+                                Text("Sign up")
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .frame(height: 50)
                                     .foregroundColor(.white)
+                                    .font(.system(size: 18, weight: .bold))
+                                    .disabled(loading)
+                            }
+                            NavigationLink(destination: SignInView()) {
+                                HStack {
+                                    Text("Already have an account? Sign In")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.white)
+                                }
                             }
                         }
                     }

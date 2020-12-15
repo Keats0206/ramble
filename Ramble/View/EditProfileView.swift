@@ -151,9 +151,9 @@ private extension EditProfileView {
             Divider()
         }
     }
-    .font(.title)
-    .foregroundColor(.white)
-    }
+            .font(.headline)
+            .foregroundColor(.white)
+        }
     var settingsLinks: some View {
         VStack(spacing: 20) {
 //            HStack {
