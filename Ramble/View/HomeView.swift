@@ -32,6 +32,7 @@ struct HomeView: View {
     var buttonSize: CGFloat {
         80
     }
+    
     func uploadRamb2(user: User, caption: String, rambUrl: String, fileId: String, length: Double, fileUrl: URL) {
         let timestamp = Int(NSDate().timeIntervalSince1970) * -1
         let length = length
@@ -274,20 +275,16 @@ struct KeyboardAdaptive: ViewModifier {
             .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
     }
 }
-
 extension View {
     func keyboardAdaptive() -> some View {
         ModifiedContent(content: self, modifier: KeyboardAdaptive())
     }
 }
-
-
 extension View {
     func innerShadow(color: Color, radius: CGFloat = 0.1) -> some View {
         modifier(InnerShadow(color: color, radius: min(max(0, radius), 1)))
     }
 }
-
 private struct InnerShadow: ViewModifier {
     var color: Color = .gray
     var radius: CGFloat = 0.1

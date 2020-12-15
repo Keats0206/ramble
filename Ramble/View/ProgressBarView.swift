@@ -19,8 +19,26 @@ struct ProgressBarView: View {
     @State private var currentTime: TimeInterval = 0
     @State private var currentDuration: TimeInterval = 0
     
+    @State var width : CGFloat = 0
+
     var body: some View {
         VStack {
+            //          Custom slider
+//            ZStack(alignment: .leading) {
+//                Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
+//                Capsule().fill(Color.red).frame(width: self.width, height: 8)
+//                    .gesture(DragGesture()
+//                                .onChanged({ (value) in
+//                                    let position = value.location.x
+//                                    self.width = position
+//                                }).onEnded({ (value) in
+//                                    let position = value.location.x
+//                                    let screen = UIScreen.main.bounds.width - 30
+//                                    let percent = position / screen
+//                                    currentTime = Double(percent) * currentDuration
+//                                }))
+//            }.padding(.top)
+            
             Slider(value: $currentTime,
                    in: 0...currentDuration,
                    onEditingChanged: sliderEditingChanged,
@@ -36,6 +54,12 @@ struct ProgressBarView: View {
         .onReceive(timeObserver.publisher) { time in
             // Update the local var
             self.currentTime = time
+//          Use with custom slider
+//            if self.globalPlayer.isPlaying {
+//                let screen = UIScreen.main.bounds.width - 30
+//                let value = currentTime / currentDuration
+//                self.width = screen * CGFloat(value)
+//            }
         }
         // Listen out for the duration observer publishing changes to the player's item duration
         .onReceive(durationObserver.publisher) { duration in
@@ -47,7 +71,7 @@ struct ProgressBarView: View {
             self.currentTime = 0
             self.currentDuration = 0
         }
-        // TODO the below could replace the above but causes a crash
+        // ToD the below could replace the above but causes a crash
 //        // Listen out for the player's item changing
 //        .onReceive(player.publisher(for: \.currentItem)) { item in
 //            self.state = item != nil ? .buffering : .waitingForSelection
@@ -63,8 +87,7 @@ struct ProgressBarView: View {
             // with the slider (otherwise it would keep jumping from where they've moved it to, back
             // to where the player is currently at)
             timeObserver.pause(true)
-        }
-        else {
+        } else {
             // Editing finished, start the seek
             let targetTime = CMTime(seconds: currentTime,
                                     preferredTimescale: 600)
@@ -73,6 +96,12 @@ struct ProgressBarView: View {
                 self.timeObserver.pause(false)
             }
         }
+    }
+}
+
+class AVdelegate : NSObject,AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVPlayer, successfully flag: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("Finish"), object: nil)
     }
 }
 class PlayerTimeObserver {

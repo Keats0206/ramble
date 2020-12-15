@@ -12,15 +12,11 @@ import SDWebImageSwiftUI
 
 struct RambUserList: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    @ObservedObject var viewModel = RambService2()
+    @StateObject var viewModel = RambService2()
+//  https://dev.to/waj/stateobject-alternative-for-ios-13-2271
     
     var user: User
 
-    init(user: User) {
-        self.user = user
-        viewModel.fetchUserRambs(user: user, newRecording: false)
-        return
-    }
     var body: some View {
         ZStack(alignment: .leading) {
             List {
@@ -35,6 +31,7 @@ struct RambUserList: View {
             Spacer()
         }
         .onAppear {
+            viewModel.fetchUserRambs(user: user, newRecording: false)
             UITableView.appearance().backgroundColor = UIColor.clear
             UITableViewCell.appearance().backgroundColor = UIColor.clear
         }
@@ -52,3 +49,26 @@ struct RambUserList_Previews: PreviewProvider {
         RambUserList(user: testUser)
     }
 }
+//
+//struct Observer<Obs, Content>: View where Obs: ObservableObject, Content: View {
+//    @State private var obs: Obs?
+//    private var content: Content
+//    private var initializer: () -> Obs
+//
+//    init(_ initializer: @autoclosure @escaping () -> Obs, @ViewBuilder content: () -> Content) {
+//        self.content = content()
+//        self.initializer = initializer
+//    }
+//
+//    var body: some View {
+//        if let obs = obs {
+//            content.environmentObject(obs)
+//        } else {
+//            Color.clear.onAppear(perform: initialize)
+//        }
+//    }
+//
+//    private func initialize() {
+//        obs = initializer()
+//    }
+//}

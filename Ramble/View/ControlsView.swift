@@ -13,6 +13,7 @@ import Combine
 
 struct ControlsView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
+    
     var body : some View {
         ZStack {
             VStack {
@@ -20,6 +21,7 @@ struct ControlsView: View {
                                         timeObserver: PlayerTimeObserver(player: globalPlayer.globalRambPlayer!),
                                         durationObserver: PlayerDurationObserver(player: globalPlayer.globalRambPlayer!),
                                         itemObserver: PlayerItemObserver(player: globalPlayer.globalRambPlayer!))
+    
                 HStack {
                     
                     Spacer()

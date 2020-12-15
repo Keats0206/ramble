@@ -183,9 +183,9 @@ struct ShareView: View {
                         }.padding()
                             .foregroundColor(.white)
                     }
-                    .background(LinearGradient(gradient: Gradient(colors: [settings.firstColor, settings.secondColor]), startPoint: .top, endPoint: .bottom))
-                    .frame(width: shareWidth, height: shareHeight)
-                    .cornerRadius(20)
+                        .background(LinearGradient(gradient: Gradient(colors: [settings.firstColor, settings.secondColor]), startPoint: .top, endPoint: .bottom))
+                        .frame(width: shareWidth, height: shareHeight)
+                        .cornerRadius(20)
                     Spacer()
                     Divider()
                     HStack {
