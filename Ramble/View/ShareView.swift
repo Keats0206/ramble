@@ -210,7 +210,6 @@ struct ShareView: View {
         .navigationBarItems(leading: btnBack)
     }
 }
-
 struct ShareView_Previews: PreviewProvider {
     static var previews: some View {
         ShareView(ramb: testRamb, user: testUser)
