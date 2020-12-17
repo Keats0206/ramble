@@ -15,7 +15,7 @@ struct AppView: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @ObservedObject var audioRecorder = AudioRecorder()
-    @ObservedObject var viewModel = RambService2()
+    @ObservedObject var viewModel = RambService2.shared
             
     @State var user: User
     
@@ -38,6 +38,7 @@ struct AppView: View {
             }
         }
     }
+    
     func getUser() {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
@@ -45,7 +46,9 @@ struct AppView: View {
             settings.setSettings(user: user)
             return
         }
+        RambService2.shared.fetchUserRambs(user: self.user)
     }
+    
     var body: some View {
         ZStack {
             HomeView(user: $user)

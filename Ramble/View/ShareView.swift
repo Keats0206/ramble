@@ -154,10 +154,11 @@ struct ShareView: View {
 //                                .font(.body)
 //                                .foregroundColor(.white)
 //                                .opacity(0.5)
-                        }.padding()
+                        }
+                        .padding()
                         HStack {
                             Spacer()
-                            NetworkImage(url: URL(string: user.profileImageUrl), image: profileImage)
+                            NetworkImage(url: URL(string: user.profileImageUrl!), image: profileImage)
                                 .frame(width: 200, height: 200)
                                 .cornerRadius(10)
                                 .shadow(radius: 10)
@@ -180,15 +181,20 @@ struct ShareView: View {
                             Text("www.useramble.com")
                                 .font(.caption)
                                 .opacity(0.5)
-                        }.padding()
+                        }
+                        .padding()
                             .foregroundColor(.white)
                     }
-                        .background(LinearGradient(gradient: Gradient(colors: [settings.firstColor, settings.secondColor]), startPoint: .top, endPoint: .bottom))
-                        .frame(width: shareWidth, height: shareHeight)
-                        .cornerRadius(20)
+                    .background(LinearGradient(gradient: Gradient(colors: [settings.firstColor, settings.secondColor]), startPoint: .top, endPoint: .bottom))
+                    .frame(width: shareWidth, height: shareHeight)
+                    .cornerRadius(20)
                     Spacer()
                     Divider()
                     HStack {
+                        Image("instagramlogo")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                        
                         Text("Instagram Stories")
                             .foregroundColor(.white)
                         Spacer()
@@ -203,8 +209,9 @@ struct ShareView: View {
                         }
                         .buttonStyle(OutlineButtonStyle())
                     }
-                        .padding()
-                }.padding()
+                    .padding()
+                }
+                    .padding()
             }
         }.navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)

@@ -11,7 +11,12 @@ import SDWebImageSwiftUI
 
 struct EditProfileView : View {
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var settings: SessionSettings
     @Environment(\.presentationMode) var presentationMode
+    
+    @ObservedObject var userModel = UserService2.shared
+    @ObservedObject var rambModel = RambService2.shared
+
 
     @State var profileImage: UIImage?
     @State var showAction: Bool = false
@@ -22,22 +27,26 @@ struct EditProfileView : View {
     @Binding var user: User
 
     func saveProfile() {
-            if let image = profileImage {
-                self.loading = true
-                UserService2.shared.updateProfileImage(image: image) { url in
-                    self.loading = false
-                    self.user.profileImageUrl = url
-                    self.updateUserData()
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            } else {
-                updateUserData()
-                presentationMode.wrappedValue.dismiss()
+        if let image = profileImage {
+            self.loading = true
+            UserService2.shared.updateProfileImage(image: image) { url in
+                self.loading = false
+                self.user.profileImageUrl = url
+                self.updateUserData()
+                settings.setAverageColor(image: image)
+                settings.setSettings(user: user)
+                self.presentationMode.wrappedValue.dismiss()
             }
+        } else {
+            updateUserData()
+            settings.setSettings(user: user)
+            presentationMode.wrappedValue.dismiss()
         }
+    }
+    
     func updateUserData() {
-        UserService2.shared.saveUserProfile(user: user)
-        RambService2.shared.updateUserData(user: user)
+        userModel.saveUserProfile(user: user)
+        rambModel.updateUserData(user: user)
     }
     
     var sheet: ActionSheet {
@@ -58,6 +67,7 @@ struct EditProfileView : View {
             })
         ])
     }
+    
     var body : some View {
         NavigationView {
             ZStack {
@@ -79,9 +89,6 @@ struct EditProfileView : View {
                     .padding()
                 }
             }
-            .onAppear {
-                print(user)
-            }
             .navigationBarItems(leading:
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
@@ -101,12 +108,13 @@ struct EditProfileView : View {
             .foregroundColor(.white)
         }
     }
+    
 }
 
 private extension EditProfileView {
     var changeProfileImage: some View {
             VStack {
-                NetworkImage(url: URL(string: user.profileImageUrl), image: profileImage)
+                NetworkImage(url: URL(string: user.profileImageUrl!), image: profileImage)
                     .frame(width: 200, height: 200)
                     .cornerRadius(10)
                     .shadow(radius: 10)

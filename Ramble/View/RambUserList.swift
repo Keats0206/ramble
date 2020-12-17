@@ -12,11 +12,11 @@ import SDWebImageSwiftUI
 
 struct RambUserList: View {
     @EnvironmentObject var globalPlayer: GlobalPlayer
-    @StateObject var viewModel = RambService2()
+    @ObservedObject var viewModel = RambService2.shared
 //  https://dev.to/waj/stateobject-alternative-for-ios-13-2271
     
-    var user: User
-
+    @State var user: User
+    
     var body: some View {
         ZStack(alignment: .leading) {
             List {
@@ -31,7 +31,7 @@ struct RambUserList: View {
             Spacer()
         }
         .onAppear {
-            viewModel.fetchUserRambs(user: user, newRecording: false)
+            viewModel.fetchUserRambs(user: user)
             UITableView.appearance().backgroundColor = UIColor.clear
             UITableViewCell.appearance().backgroundColor = UIColor.clear
         }
@@ -49,6 +49,7 @@ struct RambUserList_Previews: PreviewProvider {
         RambUserList(user: testUser)
     }
 }
+
 //
 //struct Observer<Obs, Content>: View where Obs: ObservableObject, Content: View {
 //    @State private var obs: Obs?

@@ -45,7 +45,7 @@ struct User: Identifiable, Codable, Hashable {
     var displayname: String
     var bio: String = ""
     var isFollowed: Bool
-    var profileImageUrl: String = "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/profileImage-aNPWqgCxeuhVGnft9ccQWIqTzNk1?alt=media&token=774c7a68-02e1-47a5-9245-edccd9f331b0"
+    var profileImageUrl: String?// = "https://firebasestorage.googleapis.com/v0/b/ramb-ecce1.appspot.com/o/profileImage-aNPWqgCxeuhVGnft9ccQWIqTzNk1?alt=media&token=774c7a68-02e1-47a5-9245-edccd9f331b0"
 
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
 

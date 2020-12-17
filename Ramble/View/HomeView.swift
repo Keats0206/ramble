@@ -14,7 +14,7 @@ struct HomeView: View {
     @EnvironmentObject var sessions: SessionSettings
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
-    @ObservedObject var viewModel = RambService2()
+    @ObservedObject var viewModel = RambService2.shared
     @ObservedObject var timerManager = TimerManager()
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var shareService = ShareService()
@@ -55,6 +55,7 @@ struct HomeView: View {
             viewControl = .recordings
         }
     }
+    
     func updateCaption(ramb: Ramb2, caption: String) {
         viewModel.updateCaption(ramb: ramb, caption: caption)
     }
