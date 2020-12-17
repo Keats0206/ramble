@@ -12,6 +12,7 @@ import Combine
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessions: SessionSettings
+    @EnvironmentObject var settings: SessionSettings
     @EnvironmentObject var globalPlayer: GlobalPlayer
     
     @ObservedObject var viewModel = RambService2.shared
@@ -64,12 +65,11 @@ struct HomeView: View {
             NavigationView {
                 ZStack {
                     GeometryReader { geometry in
-                        Image("gradient2")
-                            .resizable()
-                            .aspectRatio(geometry.size, contentMode: .fill)
-                            .edgesIgnoringSafeArea(.all)
-                        Blur(style: .dark)
-                            .edgesIgnoringSafeArea(.all)
+                        GradientView()
+                        
+//                        Blur(style: .extraLight)
+//                            .edgesIgnoringSafeArea(.all)
+                        
                         VStack {
                             //                  UpperView
                             HStack {
@@ -99,9 +99,6 @@ struct HomeView: View {
                             
                         }.keyboardAdaptive()
                     }
-//                    .actionSheet(isPresented: $showShareMenu, content: {
-//                        self.actionSheet
-//                    })
                 }
                 .alert(isPresented: $shareService.wasError) {
                     Alert(title: Text("Error sharing to Instagram"),
@@ -121,6 +118,7 @@ struct HomeView: View {
                         print("Modal dismisses")
                     }) {
                         EditProfileView(user: $user)
+                            .environmentObject(self.settings)
                     }
                 )
             }

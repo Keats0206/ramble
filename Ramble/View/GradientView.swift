@@ -12,8 +12,10 @@ struct GradientView: View {
     @EnvironmentObject var settings: SessionSettings
 
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [settings.firstColor, settings.secondColor]), startPoint: .top, endPoint: .bottom)
-            .edgesIgnoringSafeArea(.all)
+        ZStack{
+            LinearGradient(gradient: Gradient(colors: [settings.firstColor, settings.secondColor]), startPoint: .top, endPoint: .bottom)
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

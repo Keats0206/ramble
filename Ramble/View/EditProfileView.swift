@@ -29,6 +29,7 @@ struct EditProfileView : View {
     func saveProfile() {
         if let image = profileImage {
             self.loading = true
+            settings.setAverageColor(image: image)
             UserService2.shared.updateProfileImage(image: image) { url in
                 self.loading = false
                 self.user.profileImageUrl = url
@@ -69,15 +70,17 @@ struct EditProfileView : View {
     }
     
     var body : some View {
-        NavigationView {
+        LoadingView(isShowing: self.$loading) {
+            NavigationView {
             ZStack {
                 GeometryReader { geometry in
-                    Image("gradient2")
-                        .resizable()
-                        .aspectRatio(geometry.size, contentMode: .fill)
-                        .edgesIgnoringSafeArea(.all)
-                    Blur(style: .dark)
-                        .edgesIgnoringSafeArea(.all)
+//                    Image("gradient2")
+//                        .resizable()
+//                        .aspectRatio(geometry.size, contentMode: .fill)
+//                        .edgesIgnoringSafeArea(.all)
+//                    Blur(style: .dark)
+//                        .edgesIgnoringSafeArea(.all)
+                    GradientView()
                     VStack(spacing: 20) {
                             changeProfileImage
                             editUserInfo
@@ -85,7 +88,8 @@ struct EditProfileView : View {
                             settingsLinks
                                 .padding(.bottom, 20)
                             logoutDelete
-                    }.font(.system(.headline, design: .rounded))
+                    }
+                    .font(.system(.headline, design: .rounded))
                     .padding()
                 }
             }
@@ -106,6 +110,7 @@ struct EditProfileView : View {
             )
             .font(.system(.headline, design: .rounded))
             .foregroundColor(.white)
+        }
         }
     }
     
@@ -129,7 +134,7 @@ private extension EditProfileView {
                 }.sheet(isPresented: $showImagePicker, onDismiss: {
                 self.showImagePicker = false
                     }, content: {
-                    ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
+                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$profileImage)
                     }).actionSheet(isPresented: $showAction) {
                         sheet
                 }
