@@ -16,6 +16,8 @@ struct AppView: View {
     
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var viewModel = RambService2.shared
+    
+    @State var showSplash = true
             
     @State var user: User
     
@@ -38,7 +40,6 @@ struct AppView: View {
             }
         }
     }
-    
     func getUser() {
         let uid = session.session!.id!
         UserService2.shared.fetchUser(uid: uid) { user in
@@ -57,4 +58,5 @@ struct AppView: View {
             self.getUser()
         }
     }
+    
 }

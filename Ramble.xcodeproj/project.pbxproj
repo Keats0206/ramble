@@ -38,6 +38,7 @@
 		408BA722256C874D0060265F /* RecordingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BA721256C874D0060265F /* RecordingRow.swift */; };
 		408E25862484A3DE00C0C6A5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E25852484A3DE00C0C6A5 /* UserModel.swift */; };
 		40AF801F258C11210081F308 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AF801E258C11210081F308 /* GradientView.swift */; };
+		40AF8022258C33E90081F308 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AF8021258C33E90081F308 /* SplashView.swift */; };
 		40B3385C25267E90009321F2 /* Constants2.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385B25267E90009321F2 /* Constants2.0.swift */; };
 		40B3385E25267F54009321F2 /* RambService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385D25267F54009321F2 /* RambService2.swift */; };
 		40B3386025267F64009321F2 /* UserService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3385F25267F64009321F2 /* UserService2.swift */; };
@@ -121,6 +122,7 @@
 		408E25852484A3DE00C0C6A5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40AE563D2579E1F6007D5675 /* Ramble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ramble.entitlements; sourceTree = "<group>"; };
 		40AF801E258C11210081F308 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		40AF8021258C33E90081F308 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		40B3385B25267E90009321F2 /* Constants2.0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants2.0.swift; sourceTree = "<group>"; };
 		40B3385D25267F54009321F2 /* RambService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambService2.swift; sourceTree = "<group>"; };
 		40B3385F25267F64009321F2 /* UserService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService2.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				4086902E2580893F000A91B4 /* RecordingAnimation.swift */,
 				40869039258169C9000A91B4 /* ShareView.swift */,
 				40AF801E258C11210081F308 /* GradientView.swift */,
+				40AF8021258C33E90081F308 /* SplashView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4086903A258169C9000A91B4 /* ShareView.swift in Sources */,
+				40AF8022258C33E90081F308 /* SplashView.swift in Sources */,
 				4070B85125674F34006D6630 /* RambUserList.swift in Sources */,
 				40AF801F258C11210081F308 /* GradientView.swift in Sources */,
 				EE1E0DC6255E5B4400DCA17C /* SwiftUI+Validation.swift in Sources */,

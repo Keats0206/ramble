@@ -18,7 +18,6 @@ struct LoadingView<Content>: View where Content: View {
                 self.content()
                     .disabled(self.isShowing)
                     .blur(radius: self.isShowing ? 3 : 0)
-
                 if isShowing {
                     LoadingAnimation()
                 }

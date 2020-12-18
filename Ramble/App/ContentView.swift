@@ -12,6 +12,8 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var globalPlayer: GlobalPlayer
+    
+    @State var showSplash = true
 
     func getUser () {
         session.listen()
@@ -19,7 +21,18 @@ struct ContentView: View {
     var body: some View {
         Group {
             if (session.session != nil) {
-                AppView(user: session.session!)
+                ZStack{
+                    AppView(user: session.session!)
+                    SplashScreen()
+                      .opacity(showSplash ? 1 : 0)
+                      .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                          withAnimation() {
+                            self.showSplash = false
+                          }
+                        }
+                    }
+                }
             } else {
                 AuthView()
             }

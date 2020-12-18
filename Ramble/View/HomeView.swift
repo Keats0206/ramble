@@ -30,6 +30,8 @@ struct HomeView: View {
     @State var rambUrl: String?
     @State var viewControl: ViewControl = .create
     
+    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+    
     var buttonSize: CGFloat {
         80
     }
@@ -63,7 +65,7 @@ struct HomeView: View {
     
     var body: some View {
             NavigationView {
-                ZStack {
+                ZStack{
                     GeometryReader { geometry in
                         GradientView()
                         
@@ -109,6 +111,7 @@ struct HomeView: View {
                 .navigationBarItems(leading:
                     Button(action: {
                         self.showProfile.toggle()
+                        impactMed.impactOccurred()
                     }) {
                         Image(systemName: "person.circle.fill")
                             .font(.title)
@@ -216,18 +219,21 @@ private extension HomeView {
             Spacer()
             Button(action: {
                 self.viewControl = .create
+                impactMed.impactOccurred()
             }) {
                 Image(systemName: "music.mic")
                     .font(.title)
             }
-                .padding(5)
-                .foregroundColor(viewControl == .create ? .white : .gray)
-                .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
-                .cornerRadius(8.0)
-                .buttonStyle(ScaleButtonStyle())
+            .padding(5)
+            .foregroundColor(viewControl == .create ? .white : .gray)
+            .background(Color.white.opacity(viewControl == .create ? 0.2 : 0.0))
+            .cornerRadius(8.0)
+            .buttonStyle(ScaleButtonStyle())
+            
             Spacer()
             Button(action: {
                 self.viewControl = .recordings
+                impactMed.impactOccurred()
             }) {
                 Image(systemName: "music.note.list")
                     .font(.title)
